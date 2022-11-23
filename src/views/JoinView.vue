@@ -1,12 +1,15 @@
 <template>
 <body>
+  <section>
+    <div id="top"> </div>
   <div id="joinQuiz">
-    <label>
-    Write poll id: 
+   <p> <label>
+    Write quiz id: 
     <input type="text" v-model="id">
   </label>
-  <router-link v-bind:to="'/poll/'+lang">Join Quiz</router-link>
+  <router-link id="joinbutton" v-bind:to="'/poll/'+lang">Join Quiz</router-link> </p>
   </div>
+</section>
 
 </body>
 
@@ -34,14 +37,42 @@ export default {
 <style scoped>
   body {
     margin: 0;
+    height: 46.5em;
+
     background-color: #BCD8C1;
   }
+  section {
+    
+  }
   #joinQuiz {
+    font-size:1.5em;
     margin: auto;
-    margin-top: 15em;
-    background-color: red;
+    background-color: #007991;
     height: 10em;
     width: 30em;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3em;
+    border-style:outset;
+    border-color: #0079918f;
+  }
+  #top {
+    height: 15em;
+  }
+
+  #joinbutton {
+    margin: 1em;
+    text-decoration: none; 
+    background-color: rgb(235, 209, 106);
+    padding: 0.5em;
+    border-radius: 3em;
+    border-style: outset;
+    border-color: rgba(235, 209, 106, 0.689);
+  }
+
+  #joinbutton:hover {
+    box-shadow: 0 5px 15px black;
   }
   
 </style>
