@@ -7,11 +7,12 @@
       Create poll
     </button>
     </div>
-    <div class="question">
+    <div class="question" v-for="(_,i) in questions" v-bind:key="'question' + i">
       <div >
         {{uiLabels.question}}:
-        <input type="text" v-model="question">
+        <input type="text" v-model="question[i]">
         <br>
+      </div>
         Answers:
         <div id="ansBox">
           
@@ -23,18 +24,19 @@
           </div>
           <button v-on:click="addAnswer">
             Add answer alternative
+           
           </button>
 
         </div>
-      </div>
+     
 
       <div id="buttons">
       <button v-on:click="addQuestion">
         Add question
       </button>
       <input type="number" v-model="questionNumber">
-      <button v-on:click="runQuestion">
-        Run question
+      <button v-on:click="deleteQuestion">
+        Delete question
       </button>
       {{data}}
       <router-link v-bind:to="'/result/'+pollId">Check result</router-link>
@@ -56,6 +58,7 @@ export default {
       pollId: "",
       question: "",
       answers: ["", ""],
+      questions:[""],
       questionNumber: 0,
       data: {},
       uiLabels: {},
@@ -79,13 +82,17 @@ export default {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
     },
     addQuestion: function () {
-      socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
+      //socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
+      this.questions.push("")
     },
     addAnswer: function () {
       this.answers.push("");
     },
     runQuestion: function () {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
+    },
+    deleteQuestion: function () {
+      
     }
   }
 }
@@ -116,12 +123,15 @@ button:hover {
   column-gap: 30px;
   background-color:lightblue;
   border-radius: 2em;
+  padding: 1em;
+  row-gap: 2em;
 }
 
 .answer {
   
   background-color:blueviolet;
   border-radius: 1em;
+  padding-top: 1em;
   
 }
 #ansBox {
@@ -131,10 +141,11 @@ button:hover {
   column-gap: 2em;
   row-gap: 2em;
   padding: 1em;
-  grid-auto-rows: 100px;
+  grid-auto-rows: 4em;
 }
 #buttons{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 2em;
 }
 </style>
