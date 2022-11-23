@@ -115,12 +115,14 @@ button:hover {
   row-gap: 50px;
   column-gap: 30px;
   background-color:lightblue;
+  border-radius: 2em;
 }
 
 .answer {
   
   background-color:blueviolet;
   border-radius: 1em;
+  
 }
 #ansBox {
   display: grid;
