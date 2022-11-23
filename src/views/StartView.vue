@@ -3,20 +3,28 @@
     <div v-bind:class="['hamburger', {'close': !hideNav}]" 
          v-on:click="toggleNav">
     </div>
-    <div class="logo"><img src="/img/logo.png">Polly polling tool</div>
+    <div class="logo">My super quiz</div>
   </header>
   <ResponsiveNav v-bind:hideNav="hideNav">
-    <button v-on:click="switchLanguage">{{uiLabels.changeLanguage}}</button>
-    <router-link v-bind:to="'/create/'+lang">{{uiLabels.createPoll}}</router-link>
-    <a href="">Pricing</a>
-    <a href="">About</a>
-    <a href="">FAQ</a>
+    <button id="language" v-on:click="switchLanguage">{{uiLabels.changeLanguage}}</button>
   </ResponsiveNav>
-  <label>
+  <div class="wrapper">
+  <div class="startchoice a">
+    <label>
     Write poll id: 
     <input type="text" v-model="id">
   </label>
   <router-link v-bind:to="'/poll/'+id">{{uiLabels.participatePoll}}</router-link>
+  </div>
+  <router-link class="startchoice b" v-bind:to="'/create/'+lang">{{uiLabels.createPoll}}</router-link>
+
+  <div class="startchoice c" id="smallerbuttons">
+    Host quiz
+  </div>
+  <div class="startchoice d" id="smallerbuttons">
+    My quizzes
+  </div>
+</div>
 </template>
 
 <script>
@@ -53,6 +61,7 @@ export default {
     toggleNav: function () {
       this.hideNav = ! this.hideNav;
     }
+
   }
 }
 </script>
@@ -88,6 +97,49 @@ export default {
     cursor: pointer;
     font-size: 1.5rem;
   }
+  .wrapper {
+    margin: 10em;
+    display: grid;
+    grid-gap: 1.2em;
+    grid-template-columns: 15em 15em 15em 15em;
+    grid-template-rows: 5em 5em 5em 5em;
+  }
+  .startchoice {
+    color: black;
+    text-decoration: none; 
+    padding: 2em;
+    background-color: lightblue;
+    border-radius: 3em;
+    font-size: 2em;
+  }
+  .a {
+    grid-column-start: 1 ;
+    grid-column-end: 3;
+    grid-row: 1 / span 2;
+  }
+
+  .b {
+    grid-column-start: 3;
+    grid-column-end: 5;
+    grid-row: 1 /span 2;
+  }
+
+  .c { 
+    grid-column-start: 2 ;
+    grid-column-end: 4;
+    grid-row: 3;
+  }
+
+  .d {
+    grid-column-start: 2 ;
+    grid-column-end: 4;
+    grid-row: 4;
+  }
+
+  #smallerbuttons {
+    padding: 0.8em;
+    background-color: green;
+  }
 
 @media screen and (max-width:50em) {
   .logo {
@@ -105,5 +157,8 @@ export default {
   .hide {
     left:-12em;
   }
+}
+#language {
+
 }
 </style>
