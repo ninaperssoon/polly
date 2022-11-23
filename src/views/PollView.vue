@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ReorderQuestion />
+    <!-- <ReorderQuestion /> -->
     {{pollId}}
     <QuestionComponent v-bind:question="question"
               v-on:answer="submitAnswer"/>
@@ -10,7 +10,7 @@
 <script>
 // @ is an alias to /src
 import QuestionComponent from '@/components/QuestionComponent.vue';
-import ReorderQuestion from '@/components/ReorderQuestion.vue';
+// import ReorderQuestion from '@/components/ReorderQuestion.vue';
 import io from 'socket.io-client';
 const socket = io();
 
@@ -18,7 +18,7 @@ export default {
   name: 'PollView',
   components: {
     QuestionComponent,
-    ReorderQuestion
+    // ReorderQuestion
   },
   data: function () {
     return {
