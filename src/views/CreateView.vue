@@ -28,6 +28,7 @@
         </div>
       </div>
 
+      <div id="buttons">
       <button v-on:click="addQuestion">
         Add question
       </button>
@@ -37,6 +38,8 @@
       </button>
       {{data}}
       <router-link v-bind:to="'/result/'+pollId">Check result</router-link>
+    </div>
+
   </div>
   </div>
 </template>
@@ -109,22 +112,29 @@ button:hover {
   margin: 1em;
   display: grid;
   grid-template-columns: 1fr ;
- 
+  row-gap: 50px;
   column-gap: 30px;
   background-color:lightblue;
+  border-radius: 2em;
 }
 
 .answer {
   
   background-color:blueviolet;
+  border-radius: 1em;
+  
 }
 #ansBox {
   display: grid;
-  background-color: blue;
+  
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  column-gap: 30px;
-  row-gap: 30px;
+  column-gap: 2em;
+  row-gap: 2em;
   padding: 1em;
   grid-auto-rows: 100px;
+}
+#buttons{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 </style>

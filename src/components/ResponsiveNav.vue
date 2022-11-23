@@ -1,6 +1,6 @@
 <template>
   <nav v-bind:class="{'hide': hideNav}">
-    <slot>
+    <slot> 
     </slot>
   </nav>
 </template>
