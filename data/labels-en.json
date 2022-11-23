@@ -4,5 +4,9 @@
 	"createQuiz": "Create quiz",
 	"participatePoll": "Participate in poll",
 	"question": "Question",
-	"changeLanguage": "Byt till svenska"
+	"changeLanguage": "Byt till svenska",
+	"languageFlag": "https://vectorflags.s3-us-west-2.amazonaws.com/flags/se-circle-01.png",
+	"hostQuiz": "Host Quiz",
+	"myQuizzes": "My quizzes",
+	"joinQuiz": "Join Quiz"
 }

@@ -1,4 +1,6 @@
 <template>
+  <body>
+    
   <header>
     <div v-bind:class="['hamburger', {'close': !hideNav}]" 
          v-on:click="toggleNav">
@@ -6,25 +8,33 @@
     <div class="logo">My super quiz</div>
   </header>
   <ResponsiveNav v-bind:hideNav="hideNav">
-    <button id="language" v-on:click="switchLanguage">{{uiLabels.changeLanguage}}</button>
+    <img id="flag" v-bind:src=uiLabels.languageFlag v-on:click="switchLanguage">
+
   </ResponsiveNav>
+  <section>
   <div class="wrapper">
-  <div class="startchoice a">
-    <label>
+  
+  <router-link class="startchoice a" v-bind:to="'/join/'+lang">{{uiLabels.joinQuiz}}</router-link>
+
+  <!-- <label>
     Write poll id: 
     <input type="text" v-model="id">
   </label>
-  <router-link v-bind:to="'/poll/'+id">{{uiLabels.participatePoll}}</router-link>
-  </div>
-  <router-link class="startchoice b" v-bind:to="'/create/'+lang">{{uiLabels.createPoll}}</router-link>
+  <router-link v-bind:to="'/poll/'+id">{{uiLabels.participatePoll}}</router-link> -->
+  <router-link class="startchoice b" v-bind:to="'/create/'+lang">{{uiLabels.createQuiz}}</router-link>
 
-  <div class="startchoice c" id="smallerbuttons">
-    Host quiz
-  </div>
-  <div class="startchoice d" id="smallerbuttons">
-    My quizzes
-  </div>
+  <router-link class="startchoice c" id="smallerbuttons" v-bind:to="'/host/'+lang">{{uiLabels.hostQuiz}}</router-link>
+
+  <router-link class="startchoice d" id="smallerbuttons" v-bind:to="'/myquizzes/'+lang"> {{uiLabels.myQuizzes}}</router-link>
+   
+  
 </div>
+</section>
+<footer> 
+  
+</footer>
+</body>
+
 </template>
 
 <script>
@@ -66,17 +76,25 @@ export default {
 }
 </script>
 <style scoped>
+  body {
+    margin: 0;
+    background-color: #BCD8C1;
+  }
   header {
-    background-color: gray;
     width: 100%;
     display: grid;
     grid-template-columns: 2em auto;
   }
+  footer {
+    height: 8.6em;
+    width: 100%;
+  }
+
   .logo {
+    color: black;
     text-transform: uppercase;
     letter-spacing: 0.25em;
     font-size: 2.5rem;
-    color: white;
     padding-top:0.2em;
   }
   .logo img {
@@ -85,7 +103,6 @@ export default {
     margin-right: 0.5rem; 
   }
   .hamburger {
-    color:white;
     width:1em;
     display: flex;
     align-items: center;
@@ -98,7 +115,8 @@ export default {
     font-size: 1.5rem;
   }
   .wrapper {
-    margin: 10em;
+    margin-top: 7em;
+    margin-left: 17em;
     display: grid;
     grid-gap: 1.2em;
     grid-template-columns: 15em 15em 15em 15em;
@@ -108,9 +126,15 @@ export default {
     color: black;
     text-decoration: none; 
     padding: 2em;
-    background-color: lightblue;
+    background-color: #007991;
     border-radius: 3em;
     font-size: 2em;
+    border-style: outset;
+    border-color: #0079918f;
+  }
+  .startchoice:hover {
+    box-shadow: 0 5px 15px #439A86;
+
   }
   .a {
     grid-column-start: 1 ;
@@ -138,7 +162,8 @@ export default {
 
   #smallerbuttons {
     padding: 0.8em;
-    background-color: green;
+    background-color: #FFF1AD;
+    border-color: #fff1adbd;
   }
 
 @media screen and (max-width:50em) {
@@ -158,7 +183,10 @@ export default {
     left:-12em;
   }
 }
-#language {
-
+#flag {
+  margin: 2em;
+  width: 3em;
+  height: 3em;
+  cursor: pointer;
 }
 </style>
