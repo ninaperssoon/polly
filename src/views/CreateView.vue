@@ -17,9 +17,9 @@
           
 
           <div class="answer" v-for="(_, i) in answers" v-bind:key="'answer'+i">
-            <input v-model="answers[i]" >
+            <input v-model="answers[i]">
             
-            <input type="checkbox" id="checked" v-bind:value="answers[i]" v-model="selectedAnswers">{{checked}}
+            <input type="checkbox" id="checked" value:answer v-model="selectedAnswers">Correct
           </div>
           <button v-on:click="addAnswer">
             Add answer alternative
