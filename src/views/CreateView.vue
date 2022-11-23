@@ -1,49 +1,55 @@
 <template>
-  <div class="wrapper">
-    <div id="pollLink">
-    Poll link: 
-    <input type="text" v-model="pollId">
-    <button v-on:click="createPoll">
-      Create poll
-    </button>
+  <div class="pollLink">
+      Poll link: 
+      <input type="text" v-model="pollId">
+      <button v-on:click="createPoll" id="pollButton">
+       Create poll
+      </button>
     </div>
-    <div class="question" v-for="(_,i) in questions" v-bind:key="'question' + i">
-      <div >
-        {{uiLabels.question}}:
-        <input type="text" v-model="question[i]">
+  <div v-for="(_,i) in questions" v-bind:key="'question' + i">
+    
+    <div id="question" >
+      <div id="inputQuestion">
+        {{uiLabels.question}}: {{i}}
+        <input type="text" v-model="question[i]" class="input" placeholder="Write your question here...">
+
         <br>
       </div>
-        Answers:
-        <div id="ansBox">
-          
-
+        <div id="ansBox" v-for="(_, i) in ansBox" v-bind:key="'ansBox'+i">
+        
           <div class="answer" v-for="(_, i) in answers" v-bind:key="'answer'+i">
-            <input v-model="answers[i]">
+            <input id="option" value:options v-model="answers[i]" placeholder="Write your answer alternatives here...">
             
-            <input type="checkbox" id="checked" value:answer v-model="selectedAnswers">Correct
+            <input type="checkbox" id="checked" value:answer v-model="selectedAnswers" class="input">
+
+            <button v-on:click="deleteAnswers" class="deleteB">
+              -
+            </button>
           </div>
-          <button v-on:click="addAnswer">
-            Add answer alternative
-           
+          <button v-on:click="addAnswer" id="addAnswerButton">
+            +
           </button>
 
         </div>
      
 
       <div id="buttons">
-      <button v-on:click="addQuestion">
-        Add question
-      </button>
-      <input type="number" v-model="questionNumber">
-      <button v-on:click="deleteQuestion">
+      
+      <!--<input type="number" v-model="questionNumber">-->
+      <button v-on:click="deleteQuestion" class="deleteB" id="deleteQ">
         Delete question
       </button>
-      {{data}}
-      <router-link v-bind:to="'/result/'+pollId">Check result</router-link>
+      <!--{{data}}
+      <router-link v-bind:to="'/result/'+pollId">Check result</router-link>-->
     </div>
 
+
   </div>
+  
   </div>
+  <button v-on:click="addQuestion">
+        Add question
+  </button>
 </template>
 
 <script>
@@ -62,7 +68,9 @@ export default {
       questionNumber: 0,
       data: {},
       uiLabels: {},
-      selectedAnswers: []
+      selectedAnswers: [],
+      ansBox: [""],
+      text: ""
     }
   },
   created: function () {
@@ -88,11 +96,14 @@ export default {
     addAnswer: function () {
       this.answers.push("");
     },
+    deleteAnswers: function() {
+      this.answers.pop("");
+    },
     runQuestion: function () {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
     },
     deleteQuestion: function () {
-      
+      this.questions.pop("") //pop = delete/pull
     }
   }
 }
@@ -104,41 +115,47 @@ button:hover {
   cursor:pointer;
 }
 
-.wrapper {
-  background-color: aquamarine;
-  margin: 1em ;
+/*.wrapper {
+  /*background-color: aquamarine;
+  margin: auto ;
   padding: 1em;
-  border:solid;
-}
-
-#pollLink {
-  margin: 1em;
-}
-
-.question {
-  margin: 1em;
   display: grid;
   grid-template-columns: 1fr ;
-  row-gap: 50px;
-  column-gap: 30px;
+  grid-template-rows: 1fr;
+  border-radius: 1em;
+
+}*/
+
+.pollLink {
+  margin: 1em 2em 1em 70em;
+  background-color:coral;
+  border-radius: 2em;
+  padding: 2em;
+
+}
+
+#question {
+  margin: 2em 8em 2em 8em;
+  display: grid;
+  /*grid-template-columns: 1fr ;*/
+  /*row-gap: 50px;
+  column-gap: 30px;*/
   background-color:lightblue;
   border-radius: 2em;
   padding: 1em;
-  row-gap: 2em;
 }
 
 .answer {
   
-  background-color:blueviolet;
+  /*background-color:blueviolet;
   border-radius: 1em;
-  padding-top: 1em;
+  padding-top: 1em;*/
   
 }
 #ansBox {
   display: grid;
-  
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  column-gap: 2em;
+  column-gap: 0em;
   row-gap: 2em;
   padding: 1em;
   grid-auto-rows: 4em;
@@ -147,5 +164,56 @@ button:hover {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 2em;
+}
+
+.deleteB:hover {
+  background-color: salmon;
+}
+
+#deleteQ {
+  width: 5em;
+  height: 5em;
+  margin-left: 80em;
+  border-radius: 2em;
+  border-radius: 1em;
+}
+
+#pollButton {
+  margin-top: 1em;
+  border-radius: 1em;
+}
+
+.input {
+  border-radius: 1em;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+#option {
+  border-radius: 1em;
+  width: 15em;
+  height: 5em;
+  padding: 0px 0px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+#inputQuestion {
+  margin: 2em 2em 2em 2em;
+  padding-right: 2em;
+}
+
+#addAnswerButton {
+  width: 3.5em;
+  height: 3.5em;
+  border-radius: 50%;
+  margin: 18px 0;
+}
+
+#checked {
+  padding: 20em;
+
 }
 </style>
