@@ -36,7 +36,7 @@
       <div id="buttons">
       
       <!--<input type="number" v-model="questionNumber">-->
-      <button v-on:click="deleteQuestion" class="deleteB" id="deleteQ">
+      <button v-on:click="deleteQuestion" class="deleteB" id="deleteQuestions">
         Delete question
       </button>
       <!--{{data}}
@@ -168,9 +168,10 @@ button:hover {
 
 .deleteB:hover {
   background-color: salmon;
+  cursor:pointer;
 }
 
-#deleteQ {
+#deleteQuestions {
   width: 5em;
   height: 5em;
   margin-left: 80em;
