@@ -5,7 +5,7 @@
     <div id="top"> </div>
   <div id="joinQuiz">
    <p> <label>
-    Write quiz id: 
+    {{uiLabels.writeQuizId}}: 
     <input type="text" v-model="id">
   </label>
   <router-link id="joinbutton" v-bind:to="'/poll/'+id">{{uiLabels.joinQuiz}}</router-link> </p>
@@ -35,11 +35,14 @@ export default {
     return {
       uiLabels: {},
       id: "",
+      lang: "",
       // lang: lang,
     }
   },
   created: function () {
-    socket.on("init", (labels) => {
+     this.lang = this.$route.params.lang;
+     socket.emit("pageLoaded", this.lang);
+     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
   },
