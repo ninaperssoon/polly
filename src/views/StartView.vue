@@ -9,27 +9,20 @@
   </header>
   <ResponsiveNav v-bind:hideNav="hideNav">
     <img id="flag" v-bind:src=uiLabels.languageFlag v-on:click="switchLanguage">
-
   </ResponsiveNav>
   <section>
-  <div class="wrapper">
+    <div class="wrapper">
   
-  <router-link class="startchoice a" v-bind:to="'/join/'+lang">{{uiLabels.joinQuiz}}</router-link>
+      <router-link class="startchoice a" v-bind:to="'/join/'+lang">{{uiLabels.joinQuiz}}</router-link>
 
-  <!-- <label>
-    Write poll id: 
-    <input type="text" v-model="id">
-  </label>
-  <router-link v-bind:to="'/poll/'+id">{{uiLabels.participatePoll}}</router-link> -->
-  <router-link class="startchoice b" v-bind:to="'/create/'+lang">{{uiLabels.createQuiz}}</router-link>
+      <router-link class="startchoice b" v-bind:to="'/create/'+lang">{{uiLabels.createQuiz}}</router-link>
 
-  <router-link class="startchoice c" id="smallerbuttons" v-bind:to="'/host/'+lang">{{uiLabels.hostQuiz}}</router-link>
+      <router-link class="startchoice c" id="smallerbuttons" v-bind:to="'/host/'+lang">{{uiLabels.hostQuiz}}</router-link>
 
-  <router-link class="startchoice d" id="smallerbuttons" v-bind:to="'/myquizzes/'+lang"> {{uiLabels.myQuizzes}}</router-link>
+      <router-link class="startchoice d" id="smallerbuttons" v-bind:to="'/myquizzes/'+lang"> {{uiLabels.myQuizzes}}</router-link>
    
-  
-</div>
-</section>
+    </div>
+  </section>
 <footer> 
   
 </footer>
@@ -45,7 +38,7 @@ const socket = io();
 export default {
   name: 'StartView',
   components: {
-    ResponsiveNav
+    ResponsiveNav,
   },
   data: function () {
     return {

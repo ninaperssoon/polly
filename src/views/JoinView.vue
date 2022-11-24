@@ -1,5 +1,6 @@
 <template>
 <body>
+  <homeButton></homeButton>
   <section>
     <div id="top"> </div>
   <div id="joinQuiz">
@@ -7,8 +8,9 @@
     Write quiz id: 
     <input type="text" v-model="id">
   </label>
-  <router-link id="joinbutton" v-bind:to="'/poll/'+lang">Join Quiz</router-link> </p>
+  <router-link id="joinbutton" v-bind:to="'/poll/'+id">{{uiLabels.joinQuiz}}</router-link> </p>
   </div>
+
 </section>
 
 </body>
@@ -18,18 +20,29 @@
 <script>
 // import io from 'socket.io-client';
 // const socket = io();
+import homeButton from '@/components/HomeComponent.vue';
+import io from 'socket.io-client';
+// import lang from '@/views/StartView.vue'
+const socket = io();
+
 
 export default {
   name: 'JoinView',
+  components: {
+    homeButton
+  },
   data: function () {
     return {
       uiLabels: {},
       id: "",
-      lang: "en",
-      hideNav: true
+      // lang: lang,
     }
   },
-  
+  created: function () {
+    socket.on("init", (labels) => {
+      this.uiLabels = labels
+    })
+  },
 
 }
 </script>
@@ -58,7 +71,7 @@ export default {
     border-color: #0079918f;
   }
   #top {
-    height: 15em;
+    height: 12em;
   }
 
   #joinbutton {
@@ -74,5 +87,8 @@ export default {
   #joinbutton:hover {
     box-shadow: 0 5px 15px black;
   }
+
+
+  
   
 </style>
