@@ -12,17 +12,37 @@
       <div id="inputQuestion">
         {{uiLabels.question}}: {{i}}
         <input type="text" v-model="question[i]" class="input" placeholder="Write your question here...">
-
         <br>
       </div>
-        <div id="ansBox" v-for="(_, i) in ansBox" v-bind:key="'ansBox'+i">
+      
+
+      <div id="inputAnswer" v-for="(_,i) in ansBox" v-bind:key="'ansBox' + i">
+        <div v-for="(_,i) in answers" v-bind:key="'answer' + i">
+
+          <input type="text" v-model="question[i]" class="input" id="option" placeholder="Write your answers here...">
+          <button v-on:click="deleteAnswers" class="deleteB" id="deleteAnswerButton">
+              -
+          </button>
+
+          <input type="checkbox" id="checked" value:answer v-model="selectedAnswers">
+          <br>
+        </div>
+
+        <button v-on:click="addAnswer" id="addAnswerButton" value:answer>
+            +
+        </button>
+
+      </div>
+
+        <!--<div v-for="(_, i) in ansBox" v-bind:key="'ansBox'+i">
+          <div id="ansBox">
+            <input type="text" v-model="ansBox[i]" class="input" id="option" placeholder="Write your answes here...">
+          </div>
         
           <div class="answer" v-for="(_, i) in answers" v-bind:key="'answer'+i">
-            <input id="option" value:options v-model="answers[i]" placeholder="Write your answer alternatives here...">
             
-            <input type="checkbox" id="checked" value:answer v-model="selectedAnswers" class="input">
-
-            <button v-on:click="deleteAnswers" class="deleteB">
+              <input type="checkbox" id="checked" value:answer v-model="selectedAnswers">
+            <button v-on:click="deleteAnswers" class="deleteB" id="deleteAnswerButton">
               -
             </button>
           </div>
@@ -30,10 +50,9 @@
             +
           </button>
 
-        </div>
-     
+        </div>-->
 
-      <div id="buttons">
+      <div>
       
       <!--<input type="number" v-model="questionNumber">-->
       <button v-on:click="deleteQuestion" class="deleteB" id="deleteQuestions">
@@ -56,6 +75,7 @@
 import io from 'socket.io-client';
 const socket = io();
 
+
 export default {
   name: 'CreateView',
   data: function () {
@@ -70,7 +90,7 @@ export default {
       uiLabels: {},
       selectedAnswers: [],
       ansBox: [""],
-      text: ""
+      text: "",
     }
   },
   created: function () {
@@ -98,6 +118,7 @@ export default {
     },
     deleteAnswers: function() {
       this.answers.pop("");
+      
     },
     runQuestion: function () {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
@@ -146,13 +167,10 @@ button:hover {
 }
 
 .answer {
-  
-  /*background-color:blueviolet;
-  border-radius: 1em;
-  padding-top: 1em;*/
+  display: grid;
   
 }
-#ansBox {
+#inputAnswer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   column-gap: 0em;
@@ -160,11 +178,8 @@ button:hover {
   padding: 1em;
   grid-auto-rows: 4em;
 }
-#buttons{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 2em;
-}
+
+
 
 .deleteB:hover {
   background-color: salmon;
@@ -192,14 +207,7 @@ button:hover {
   box-sizing: border-box;
 }
 
-#option {
-  border-radius: 1em;
-  width: 15em;
-  height: 5em;
-  padding: 0px 0px;
-  margin: 8px 0;
-  box-sizing: border-box;
-}
+
 
 #inputQuestion {
   margin: 2em 2em 2em 2em;
@@ -213,8 +221,33 @@ button:hover {
   margin: 18px 0;
 }
 
+#option {
+  border-radius: 1em;
+  width: 20em;
+  height: auto;
+  padding: 1em 1em;
+  margin: 0 2em 0 0;
+  /*grid-column: 1 / span 2;
+  grid-row: 1 / span 2;*/
+
+  box-sizing:border-box;
+} 
+
 #checked {
-  padding: 20em;
+  height: 2em;
+  width: 2em;
+  /*grid-column: 2;
+  grid-row: 1;*/
+  
 
 }
+
+#deleteAnswerButton {
+  height: 2em;
+  width: 2em;
+  grid-column: 2;
+  grid-row: 2;
+  
+}
+
 </style>
