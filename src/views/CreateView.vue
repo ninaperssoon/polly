@@ -69,6 +69,11 @@
   <button v-on:click="addQuestion">
         Add question
   </button>
+<div id="nextButton">
+    
+  <router-link v-bind:to="'/createq/ '+lang"><img id="nextPic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcMPs6LqvZihgtDeHWZ95Q0mEyUCRo5H5aJA&usqp=CAU"/></router-link>
+  </div>
+  
 </template>
 
 <script>
@@ -247,6 +252,17 @@ button:hover {
   width: 2em;
   grid-column: 2;
   grid-row: 2;
+  
+}
+#nextPic {
+  height: 3em;
+  width: 3em;
+  cursor: pointer;
+}
+#nextButton{
+  
+  margin-left: 85%;
+  padding: 20 em;
   
 }
 
