@@ -26,7 +26,7 @@
 </div>
 
 
-</div>
+
 </template>
 
 <script>
@@ -47,9 +47,7 @@ const socket = io();
 export default {
   name: 'CreateView',
   components: {
-    homeButton
-  },
-  components:{
+    homeButton,
     Question,
   },
   data: function () {
