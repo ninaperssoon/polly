@@ -1,4 +1,5 @@
 <template>
+    <homeButton></homeButton>
   <div class="pollLink">
       Poll link: 
       <input type="text" v-model="pollId">
@@ -78,11 +79,15 @@
 
 <script>
 import io from 'socket.io-client';
+import homeButton from '@/components/HomeComponent.vue';
 const socket = io();
 
 
 export default {
   name: 'CreateView',
+  components: {
+    homeButton
+  },
   data: function () {
     return {
       lang: "",

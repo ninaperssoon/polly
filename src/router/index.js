@@ -47,7 +47,12 @@ const routes = [
     name:'CreaterewardView',
     component: () => import('../views/CreaterewardView.vue')
 
-  }
+  },
+  { path: '/creater/:lang',
+  name:'CreatequestionView',
+  component: () => import('../views/CreateView.vue')
+
+}
 ]
 
 const router = createRouter({
