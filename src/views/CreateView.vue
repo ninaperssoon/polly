@@ -18,6 +18,12 @@
   <button v-on:click="newQuestion">
         Add question
   </button>
+
+  <div id="backButton">
+    
+    <router-link v-bind:to="'/start/ '+lang"><img id="backPic" src="https://freesvg.org/img/pitr_green_arrows_set_4.png"/></router-link>
+    </div>
+
 <div id="nextButton">
     
   <router-link v-bind:to="'/createq/ '+lang"><img id="nextPic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcMPs6LqvZihgtDeHWZ95Q0mEyUCRo5H5aJA&usqp=CAU"/></router-link>
@@ -153,6 +159,20 @@ button:hover {
   grid-row: 2;
   
 }
+
+#backButton{
+  
+  margin-right: 85%;
+  padding: 20 em;
+  
+}
+
+#backPic {
+  height: 3em;
+  width: 3em;
+  cursor: pointer;
+}
+
 #nextPic {
   height: 3em;
   width: 3em;
@@ -164,5 +184,7 @@ button:hover {
   padding: 20 em;
   
 }
+
+
 
 </style>

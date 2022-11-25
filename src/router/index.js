@@ -52,6 +52,11 @@ const routes = [
   name:'CreatequestionView',
   component: () => import('../views/CreateView.vue')
 
+},
+{ path: '/start/:lang',
+  name:'StartView',
+  component:StartView
+
 }
 ]
 
