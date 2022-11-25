@@ -32,7 +32,7 @@
 <script>
 import io from 'socket.io-client';
 import homeButton from '@/components/HomeComponent.vue';
-import Question from '/Users/jason/Documents/github/polly/src/components/EditableQuestion.vue';
+import Question from '@/components/EditableQuestion.vue';
 
 const socket = io();
 
