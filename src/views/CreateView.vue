@@ -1,6 +1,5 @@
 <template>
-  <div>
-
+    <homeButton></homeButton>
   <div class="pollLink">
       Poll link: 
       <input type="text" v-model="pollId">
@@ -19,6 +18,11 @@
   <button v-on:click="newQuestion">
         Add question
   </button>
+<div id="nextButton">
+    
+  <router-link v-bind:to="'/createq/ '+lang"><img id="nextPic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcMPs6LqvZihgtDeHWZ95Q0mEyUCRo5H5aJA&usqp=CAU"/></router-link>
+  </div>
+  
 </div>
 
 
@@ -27,6 +31,7 @@
 
 <script>
 import io from 'socket.io-client';
+import homeButton from '@/components/HomeComponent.vue';
 import Question from '/Users/jason/Documents/github/polly/src/components/EditableQuestion.vue';
 
 const socket = io();
@@ -41,6 +46,9 @@ const socket = io();
 
 export default {
   name: 'CreateView',
+  components: {
+    homeButton
+  },
   components:{
     Question,
   },
@@ -140,6 +148,23 @@ button:hover {
 
 
 
-
+#deleteAnswerButton {
+  height: 2em;
+  width: 2em;
+  grid-column: 2;
+  grid-row: 2;
+  
+}
+#nextPic {
+  height: 3em;
+  width: 3em;
+  cursor: pointer;
+}
+#nextButton{
+  
+  margin-left: 85%;
+  padding: 20 em;
+  
+}
 
 </style>

@@ -8,5 +8,12 @@
 	"languageFlag": "https://vectorflags.s3-us-west-2.amazonaws.com/flags/se-circle-01.png",
 	"hostQuiz": "Host Quiz",
 	"myQuizzes": "My quizzes",
-	"joinQuiz": "Join Quiz"
+	"joinQuiz": "Join Quiz",
+	"writeQuizId": "Write quiz id",
+	"writeQuestion" : "Write your question here...",
+	"addQuestion": "Write your answer alternatives here...",
+	"deleteQuestion" : "Delete Question",
+	"startQuiz" : "Start Quiz",
+	"saveQuiz" : "Save Quiz"
+
 }

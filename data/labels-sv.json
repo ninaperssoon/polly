@@ -8,5 +8,12 @@
 	"languageFlag": "https://vectorflags.s3-us-west-2.amazonaws.com/flags/uk-circle-01.png",
 	"hostQuiz": "Anordna ett quiz",
 	"myQuizzes": "Mina quiz",
-	"joinQuiz": "Delta i quiz"
+	"joinQuiz": "Delta i quiz",
+	"writeQuizId": "Skriv quiz id",
+	"writeQuestion" : "Skriv din fråga här...",
+	"addQuestion": "Skriv dina svarsalternativ här...",
+	"deleteQuestion" : "Radera Fråga",
+	"startQuiz" : "Starta Quiz",
+	"saveQuiz" : "Spara Quiz"
+
 }

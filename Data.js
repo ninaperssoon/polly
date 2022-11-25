@@ -13,9 +13,16 @@ prototype of the Data object/class
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
 ***********************************************/
 
-Data.prototype.getUILabels = function (lang = "en") {
+Data.prototype.getUILabels = function (lang="en") {
+
+  if (lang !=="en") {
+    lang = "en"
+  }
+  else {
   const ui = require("./data/labels-" + lang + ".json");
   return ui;
+  }
+  
 }
 
 Data.prototype.createPoll = function(pollId, lang="en") {

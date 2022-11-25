@@ -3,7 +3,7 @@
     <homeButton></homeButton>
     <section>
       <div>
-      <h1>My quizzes</h1>
+      <h1>{{uiLabels.myQuizzes}}</h1>
       </div>
       <div id="myQuizzes">
         här dyker mina quizzes upp när jag faktiskt  har skapat dom...
@@ -36,6 +36,8 @@ export default {
     }
   },
   created: function () {
+    this.lang = this.$route.params.lang;
+    socket.emit("pageLoaded", this.lang);
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })

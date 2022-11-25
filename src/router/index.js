@@ -42,7 +42,17 @@ const routes = [
     path: '/myquizzes/:lang',
     name: 'MyquizzesView',
     component: () => import('../views/MyquizzesView.vue')
-  }
+  },
+  { path: '/createq/:lang',
+    name:'CreaterewardView',
+    component: () => import('../views/CreaterewardView.vue')
+
+  },
+  { path: '/creater/:lang',
+  name:'CreatequestionView',
+  component: () => import('../views/CreateView.vue')
+
+}
 ]
 
 const router = createRouter({
