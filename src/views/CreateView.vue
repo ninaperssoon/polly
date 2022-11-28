@@ -12,8 +12,10 @@
  <div>
    <Question v-for="question in questions" 
   v-bind:question="question"
-  v-bind:key="question.name"
-  v-on:myquestion="saveQuestion($event)"/>
+  v-bind:key="question.index"
+  v-on:myquestion="saveQuestion($event)"
+  v-on:deleteIndex="deleteQuestion($event)"
+  />
     
   <button v-on:click="newQuestion">
         Add question
@@ -106,6 +108,14 @@ export default {
       this.addQuestion();
       console.log(this.question) 
       console.log(this.answers);
+    },
+    deleteQuestion: function(event){
+      console.log(event.element);
+      console.log(this.questions);
+      var deleteIndex = this.questions.indexOf(event);
+      console.log(deleteIndex);
+      this.questions.splice(0,1);
+       
     }
    
   }

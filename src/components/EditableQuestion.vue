@@ -14,7 +14,7 @@
       <div v-for="(_,i) in answers" v-bind:key="'answer' + i">
 
         <input type="text" v-model="answers[i]" class="input" id="option" placeholder="Write your answers here...">
-        <button v-on:click="deleteAnswers" class="deleteB" id="deleteAnswerButton">
+        <button v-on:click="deleteAnswers(i)" class="deleteB" id="deleteAnswerButton">
             -
         </button>
 
@@ -94,13 +94,14 @@ props: {
      addAnswer: function () {
       this.answers.push("");
     },
-      deleteAnswers: function() {
-      this.answers.pop("");
+      deleteAnswers: function(i) {
+        console.log(i)
+      this.answers.splice(i,1);
       
     },
     deleteQuestion: function () {
-      console.log()
-      this.questions.pop("") //pop = delete/pull
+      console.log();
+      this.$emit('deleteIndex', {element: this.name, answer: this.answers}) //pop = delete/pull
     },
     sendQuestion: function(){
       this.$emit('myquestion',{name: this.name, answer: this.answers})
