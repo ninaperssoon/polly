@@ -40,12 +40,31 @@ Data.prototype.createPoll = function(pollId, lang="en") {
   return this.polls[pollId];
 }
 
-Data.prototype.addQuestion = function(pollId, q) {
+Data.prototype.addQuestion = function(pollId, index, q) {
   const poll = this.polls[pollId];
   console.log("question added to", pollId, q);
+ const hej = "jag är här";
   if (typeof poll !== 'undefined') {
-    poll.questions.push(q);
+    console.log(hej);
+      poll.questions[index]=q;
+
+    
+    
   }
+  console.log("lista med frågor: ", poll.questions);
+}
+Data.prototype.deleteQuestion = function(pollId, index, q) {
+  const poll = this.polls[pollId];
+  console.log("question deleted", pollId, q);
+ const hej = "jag är här";
+  if (typeof poll !== 'undefined') {
+    console.log(hej);
+      poll.questions.splice(index,1);
+
+    
+    
+  }
+  console.log("lista efter delete: ", this.polls[pollId].questions);
 }
 
 Data.prototype.editQuestion = function(pollId, index, newQuestion) {
@@ -53,6 +72,7 @@ Data.prototype.editQuestion = function(pollId, index, newQuestion) {
   if (typeof poll !== 'undefined') {
     poll.questions[index] = newQuestion;
   }
+  console.log("änrdad quiz: ", poll.questions);
 }
 
 Data.prototype.getQuestion = function(pollId, qId=null) {

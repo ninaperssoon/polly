@@ -4,7 +4,7 @@
     <div>
 <div id="question" >
     <div id="inputQuestion">
-       {{question.number}}
+      <h2>Fråga: {{questionNumber +1}}</h2> 
       <input type="text" v-model="name" class="input" placeholder="Write your question here...">
       <br>
     </div>
@@ -68,12 +68,17 @@
 
 <script>
 
+
+
 export default{
 name : 'editableQuestion',
 props: { 
-    question: Object
+  question: Object,
+  questionNumber: Number,
+    
 
 },
+
 
     data: function(){
         return{
@@ -81,7 +86,9 @@ props: {
             answeralt: [],
             name: "",
             ansBox: [""],
-            answers: ["",""]
+            answers: ["",""],
+            
+                     
 
 
 
@@ -97,11 +104,15 @@ props: {
       deleteAnswers: function(i) {
         console.log(i)
       this.answers.splice(i,1);
+      this.index=(i);
+      
+      
+      this.$emit('deleteAnswer', { name: this.name, answer: this.answers})
       
     },
     deleteQuestion: function () {
       console.log();
-      this.$emit('deleteIndex', {element: this.name, answer: this.answers}) //pop = delete/pull
+      this.$emit('deleteIndex', {name: this.name, answer: this.answers}) //pop = delete/pull
     },
     sendQuestion: function(){
       this.$emit('myquestion',{name: this.name, answer: this.answers})

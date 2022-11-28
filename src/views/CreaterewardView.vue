@@ -20,6 +20,9 @@
   <button v-on:click="addReward" class="addButton">
         +
    </button> Add Reward
+   <button v-on:click="sendReward" class="addButton">
+        +
+   </button> Save Reward
 </div>
 
   
@@ -42,6 +45,9 @@
    <button v-on:click="addPunishment" class="addButton">
         +
     </button> Add Punishment
+    <button v-on:click="sendPunishment" class="addButton">
+        +
+    </button> Save Punishment
   </div>
   </div>
   <div id="backButton">
@@ -105,13 +111,14 @@ export default {
       this.punishments.push("")
     },
     sendReward: function () {
+      console.log("reward: ", this.reward)
       socket.emit("sendReward", {pollId: this.pollId, r: this.rewards } )
       
     },
     sendPunishment: function () {
       socket.emit("sendPunishment", {pollId: this.pollId, r: this.punishments } )
-      
-    }
+      console.log("punishment: ", this.punishment)
+    },
 
     deleteReward: function() {
       this.rewards.pop("")

@@ -10,13 +10,14 @@
 
 
  <div>
-   <Question v-for="question in questions" 
+   <Question v-for="(question,index) in questions" 
   v-bind:question="question"
-  v-bind:key="question.index"
-  v-on:myquestion="saveQuestion($event)"
-  v-on:deleteIndex="deleteQuestion($event)"
-  />
-    
+  v-bind:key="index"
+  v-on:myquestion="saveQuestion($event, index)"
+  v-on:deleteIndex="deleteQuestion($event,index)"
+  v-on:deleteAnswer="editQuestion($event, index)"
+  :questionNumber = index ></Question>
+ 
   <button v-on:click="newQuestion">
         Add question
   </button>
@@ -42,6 +43,7 @@ import io from 'socket.io-client';
 import homeButton from '@/components/HomeComponent.vue';
 import Question from '@/components/EditableQuestion.vue';
 
+
 const socket = io();
 
 //function singleQuestion (nm, alt, txt){
@@ -65,7 +67,10 @@ export default {
       questions: [],
       uiLabels:{},
       answers: {},
-      question: ""
+      question: "",
+     
+     
+      
     
       
       
@@ -89,32 +94,42 @@ export default {
     createPoll: function () {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
     },
-    addQuestion: function () {
-       socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
+    addQuestion: function (index) {
+       socket.emit("addQuestion", {pollId: this.pollId, index, q: this.question, a: this.answers } )
       
     },
     newQuestion: function(){
-      this.questions.push("")
+      this.questions.push([])
+
     },
     
-    
+  
+    editQuestion: function(event, index){
+      this.question=event.name;
+      this.answers=event.answer;
+      console.log("editQuestion index: ", index);
+      socket.emit("editQuestion", {pollId: this.pollId, index: index, q: this.question, a: this.answers})
+    }, 
    
     runQuestion: function () {
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
     },
-    saveQuestion: function (event) {
+    saveQuestion: function (event,index) {
       this.answers = event.answer;
       this.question = event.name;
-      this.addQuestion();
+      this.addQuestion(index);
       console.log(this.question) 
       console.log(this.answers);
     },
-    deleteQuestion: function(event){
+    deleteQuestion: function(event,index){
       console.log(event.element);
       console.log(this.questions);
       var deleteIndex = this.questions.indexOf(event);
       console.log(deleteIndex);
-      this.questions.splice(0,1);
+      this.question=event.name;
+      this.answers=event.answer;
+      this.questions.splice(index,1);
+      socket.emit("deleteQuestion",{pollId: this.pollId, index: index, q: this.question, a: this.answers} )
        
     }
    
