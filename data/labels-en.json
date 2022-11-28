@@ -9,11 +9,10 @@
 	"hostQuiz": "Host Quiz",
 	"myQuizzes": "My quizzes",
 	"joinQuiz": "Join Quiz",
-	"writeQuizId": "Write quiz id",
+	"writeQuizId": "Enter quiz id",
 	"writeQuestion" : "Write your question here...",
 	"addQuestion": "Write your answer alternatives here...",
 	"deleteQuestion" : "Delete Question",
 	"startQuiz" : "Start Quiz",
 	"saveQuiz" : "Save Quiz"
-
 }

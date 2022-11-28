@@ -2,13 +2,13 @@
   <body>
     <homeButton></homeButton>
     <section>
-      <h1>Host a quiz</h1>
+      <h1>{{uiLabels.hostQuiz}}</h1>
       <div id="host">
-        Enter quiz id: <input type="text" v-model="pollId">        
+        {{uiLabels.writeQuizId}}: <input type="text" v-model="pollId">        
       </div>
 
      <!-- Kom ihåg att ändra länken nedan!!!! -->
-      <router-link id="startQuiz" v-bind:to="'/poll/'+id">Start Quiz</router-link> 
+      <router-link id="startQuiz" v-bind:to="'/poll/'+id">{{uiLabels.startQuiz}}</router-link> 
    
       <div></div>
 
