@@ -31,7 +31,9 @@ Data.prototype.createPoll = function(pollId, lang="en") {
     poll.lang = lang;  
     poll.questions = [];
     poll.answers = [];
-    poll.currentQuestion = 0;              
+    poll.currentQuestion = 0;
+    poll.rewards= [];
+    poll.punishments= [];              
     this.polls[pollId] = poll;
     console.log("poll created", pollId, poll);
   }
@@ -82,7 +84,20 @@ Data.prototype.submitAnswer = function(pollId, answer) {
     console.log("answers looks like ", answers, typeof answers);
   }
 }
-
+Data.prototype.sendReward= function(pollId, r) {
+  const poll = this.polls[pollId];
+  console.log("rewards added to", pollId, r);
+  if (typeof poll !== 'undefined') {
+    poll.rewards.push(r);
+  }
+}
+Data.prototype.sendPunishment= function(pollId, p) {
+  const poll = this.polls[pollId];
+  console.log("punishments added to", pollId, p);
+  if (typeof poll !== 'undefined') {
+    poll.punishments.push(p);
+  }
+}
 Data.prototype.getAnswers = function(pollId) {
   const poll = this.polls[pollId];
   if (typeof poll !== 'undefined') {

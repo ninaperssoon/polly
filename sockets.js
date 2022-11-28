@@ -43,7 +43,19 @@ function sockets(io, socket, data) {
     data = new Data();
     data.initializeData();
   })
- 
+  socket.on('addAnswer', function(d) {
+    data.addAnswer(d.questionId, {q: d.q, a: d.a});
+    socket.emit('dataUpdate', data.getAnswers(d.pollId));
+  });
+  socket.on('sendReward', function(d) {
+    data.sendReward(d.pollId, {r: d.r});
+    socket.emit('dataUpdate', data.getAnswers(d.pollId));
+  });
+
+ socket.on('sendPunishment', function(d) {
+    data.sendPunishment(d.pollId, {p: d.p});
+    socket.emit('dataUpdate', data.getAnswers(d.pollId));
+  });
 }
 
 module.exports = sockets;

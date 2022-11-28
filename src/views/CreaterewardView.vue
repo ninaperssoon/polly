@@ -104,6 +104,14 @@ export default {
       //socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
       this.punishments.push("")
     },
+    sendReward: function () {
+      socket.emit("sendReward", {pollId: this.pollId, r: this.rewards } )
+      
+    },
+    sendPunishment: function () {
+      socket.emit("sendPunishment", {pollId: this.pollId, r: this.punishments } )
+      
+    }
 
     deleteReward: function() {
       this.rewards.pop("")
