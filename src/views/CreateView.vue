@@ -63,11 +63,7 @@ export default {
       questions: [],
       uiLabels:{},
       answers: {},
-      question: ""
-    
-      
-      
-      
+      question: ""    
       
     }
   },

@@ -100,7 +100,7 @@ props: {
     },
     deleteQuestion: function () {
       console.log()
-      this.questions.pop("") //pop = delete/pull
+      this.questions.pull("") //pop = delete/pull
     },
     sendQuestion: function(){
       this.$emit('myquestion',{name: this.name, answer: this.answers})
