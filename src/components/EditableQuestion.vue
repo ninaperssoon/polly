@@ -53,7 +53,7 @@
       Delete question
     </button >
     <button v-on:click="sendQuestion">
-    Send question
+    Save question
     </button>
     <!--{{data}}
     <router-link v-bind:to="'/result/'+pollId">Check result</router-link>-->
