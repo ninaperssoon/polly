@@ -2,20 +2,15 @@
   <homeButton></homeButton>
  <div class="wrapper">
  <div>
- <div class="innerWrapper" v-for="(_,i) in rewards" v-bind:key="'reward' + i" >
+ <div class="innerWrapper"  >
+ <consequence  v-for=" reward in rewards"
+    v-bind:reward = "reward"
+    v-bind:key="reward"
+    message ="reward"
+    class="reward"
+   />
     
-    <div id="reward" class="rewards box">
-      <div id="inputReward">
-        Reward: {{i}}
-        <div id="rewardGrid">
-          <input type="text" v-model="reward[i]" class="input" placeholder="Write your reward here...">
-          
-          <button v-on:click="deleteReward" class="delButton">
-            -
-          </button>
-      </div>
-      </div>
-   </div>
+    
   </div>
   <button v-on:click="addReward" class="addButton">
         +
@@ -28,19 +23,12 @@
   
 
   <div>
-   <div  class="innerWrapper" v-for="(_,i) in punishments" v-bind:key="'punishment' + i">
-    <div id="punishment" class="punishments box">
-      <div id="inputPunishment">
-        Punishment: {{i}}
-        <div id="punishmentGrid">
-          <input type="text" v-model="punishment[i]" class="input" placeholder="Write your punishment here...">
-          
-          <button v-on:click="deletePunishment" class="delButton">
-            -
-          </button>
-      </div>
-      </div>
-   </div>
+   <div  class="innerWrapper" >
+    <consequence v-for=" punishment in punishments"
+    v-bind:punishment = "punishment"
+    v-bind:key="punishment"
+    message = "punishment"
+    class="punishment" />
    </div>
    <button v-on:click="addPunishment" class="addButton">
         +
@@ -65,13 +53,14 @@
 <script>
 import io from 'socket.io-client';
 import homeButton from '@/components/HomeComponent.vue';
+import consequence from '@/components/consequence.vue';
 const socket = io();
 
 
 export default {
   name: 'CreaterewardView',
   components: {
-    homeButton
+    homeButton, consequence
   },
   data: function () {
     return {
@@ -120,9 +109,7 @@ export default {
       console.log("punishment: ", this.punishment)
     },
 
-    deleteReward: function() {
-      this.rewards.pop("")
-    },
+    
 
     deletePunishment: function() {
       this.punishments.pop("")
@@ -163,12 +150,17 @@ button:hover {
 .reward{
 grid-column: 1;
 grid-row: auto;
+background-color: greenyellow;
+border-radius: 1em;
+
 
 }
 .punishment{
 grid-column: 2;
 grid-row: auto;
 background-color: red;
+border-radius: 1em; 
+
 
 
 }
@@ -181,14 +173,9 @@ background-color: red;
 
 }
 
-#reward {
-  background-color:rgb(95, 212, 95);
-}
 
-#punishment {
-  background-color:rgb(238, 90, 90);
  
-}
+
 #inputPunishment {
   margin: 2em 2em 2em 2em;
   padding-right: 2em;
@@ -207,24 +194,14 @@ background-color: red;
   border-radius: 1em;
 }
 
-.input {
-  border-radius: 1em;
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  display: grid;
-}
 
-#inputReward {
-  margin: 2em 3em 2em 3em;
-  padding-right: 2em;
 
-}
 
 .innerWrapper {
 grid-template-columns: 1fr;
-padding: 40px;
+padding: 3em;
+row-gap: 1 em;
+
 }
 
 .addButton {
@@ -239,27 +216,10 @@ padding: 40px;
 
 }
 
-.delButton {
-  width: 2.5em;
-  height: 2.5em;
-  border-radius: 50%;
-  margin-top: 1em;
 
-}
 
-#rewardGrid {
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: 90% 10%;
 
-}
 
-#punishmentGrid {
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: 90% 10%;
-
-}
 
 #backButton{
   
