@@ -1,5 +1,5 @@
 <template>
-<p>{{question.q}}</p>
+<!-- <p>{{question.q}}</p> -->
 <button v-for="a in question.a" v-on:click="answer(a)" v-bind:key="a">
   {{ a }}
 </button>
