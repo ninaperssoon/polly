@@ -14,7 +14,7 @@
 
 <body>
   <div class="container">
-    <button type="button" id="flip-btn" onclick="handleFlip()">
+    <button type="button" id="flip-btn" v-on:click="handleFlip">
       Flip Card
     </button>
     <div class="card">

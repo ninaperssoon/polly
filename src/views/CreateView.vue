@@ -11,12 +11,12 @@
 
  <div>
    <Question v-for="(question,index) in questions" 
-  v-bind:question="question"
-  v-bind:key="index"
+  
+  v-bind:key="question.qId"
   v-on:myquestion="saveQuestion($event, index)"
   v-on:deleteIndex="deleteQuestion($event,index)"
   v-on:deleteAnswer="editQuestion($event, index)"
-  :questionNumber = index ></Question>
+  :questionNumber = index > {{question.qId}}</Question>
  
   <button v-on:click="newQuestion">
         Add question
@@ -46,11 +46,6 @@ import Question from '@/components/EditableQuestion.vue';
 
 const socket = io();
 
-//function singleQuestion (nm, alt, txt){
- //this.text = txt;
- //this.alternatives = alt;
-// this.number = nm;
-//}
 
 
 
@@ -64,17 +59,16 @@ export default {
     return {
       lang: "",
       pollId: "",
-      questions: [],
+      questions: [{ q: "",
+                    a: []
+
+      }],
       uiLabels:{},
       answers: {},
-      question: "",
-     
-     
-      
-    
-      
-      
-      
+      question: { qId: "", q: ""
+
+      },
+      //questionId: '',
       
     }
   },
@@ -88,18 +82,26 @@ export default {
       this.data = data
     )
     socket.on("pollCreated", (data) =>
-      this.data = data)
+      this.data = data
+    )
+    socket.on("updateQuestions", (data) =>{
+      this.questions= data }
+      
+      )
+    
   },
   methods: {
     createPoll: function () {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
     },
     addQuestion: function (index) {
+
        socket.emit("addQuestion", {pollId: this.pollId, index, q: this.question, a: this.answers } )
       
     },
     newQuestion: function(){
-      this.questions.push([])
+      this.questions.push({})
+      console.log("NewQuestion", this.questions)
 
     },
     
@@ -111,25 +113,33 @@ export default {
       socket.emit("editQuestion", {pollId: this.pollId, index: index, q: this.question, a: this.answers})
     }, 
    
-    runQuestion: function () {
-      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
-    },
+    // runQuestion: function () {
+    //   socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
+    // },
     saveQuestion: function (event,index) {
+      this.questionId = event.questionId;
+      //console.log(question.questionId)
       this.answers = event.answer;
-      this.question = event.name;
+      this.question = event.q;
+      this.questions[index]={q: this.question,
+                            a: this.answers        
+                          }
       this.addQuestion(index);
       console.log(this.question) 
       console.log(this.answers);
     },
     deleteQuestion: function(event,index){
-      console.log(event.element);
-      console.log(this.questions);
-      var deleteIndex = this.questions.indexOf(event);
-      console.log(deleteIndex);
+      // console.log(event.element);
+      // console.log(this.questions);
+      // var deleteIndex = this.questions.indexOf(event);
+      // console.log(deleteIndex);
+      console.log("det här är index: ", index);
       this.question=event.name;
       this.answers=event.answer;
-      this.questions.splice(index,1);
+      //this.$delete(this.questions, index);
+      //this.questions.splice(index, 1);
       socket.emit("deleteQuestion",{pollId: this.pollId, index: index, q: this.question, a: this.answers} )
+      console.log(this.questions);
        
     }
    

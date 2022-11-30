@@ -88,6 +88,8 @@ props: {
             ansBox: [""],
             answers: ["",""],
             
+
+            
                      
 
 
@@ -97,6 +99,9 @@ props: {
     },
 
     methods:{
+      getQuestionId: function () {
+      return Math.floor(Math.random()*100000);
+    },
   
      addAnswer: function () {
       this.answers.push("");
@@ -104,7 +109,7 @@ props: {
       deleteAnswers: function(i) {
         console.log(i)
       this.answers.splice(i,1);
-      this.index=(i);
+      //this.index=(i);
       
       
       this.$emit('deleteAnswer', { name: this.name, answer: this.answers})
@@ -112,10 +117,11 @@ props: {
     },
     deleteQuestion: function () {
       console.log();
-      this.$emit('deleteIndex', {name: this.name, answer: this.answers}) //pop = delete/pull
+      //this.questions.splice(questionNumber, 1);
+      this.$emit('deleteIndex', {name: this.name, answer: this.answers}) //pop = delete/pull'
     },
     sendQuestion: function(){
-      this.$emit('myquestion',{name: this.name, answer: this.answers})
+      this.$emit('myquestion',{q: {questionId: this.getQuestionId(), name: this.name}, answer: this.answers})
     }
     
 

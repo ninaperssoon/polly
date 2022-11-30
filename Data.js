@@ -86,6 +86,14 @@ Data.prototype.getQuestion = function(pollId, qId=null) {
   }
   return []
 }
+Data.prototype.getAllQuestions = function(pollId) {
+  const poll = this.polls[pollId];
+  if (typeof poll !== 'undefined') {
+    console.log("quiz-id and the quiz is now ", pollId, poll.questions);
+    return poll.questions;
+  }
+  return []
+}
 
 Data.prototype.submitAnswer = function(pollId, answer) {
   const poll = this.polls[pollId];

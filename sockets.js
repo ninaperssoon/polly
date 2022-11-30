@@ -20,13 +20,13 @@ function sockets(io, socket, data) {
   });
   socket.on('deleteQuestion', function(d) {
     data.deleteQuestion(d.pollId, d.index, {q: d.q, a: d.a});
-    socket.emit('dataUpdate', data.getAnswers(d.pollId));
+    socket.emit('updateQuestions', data.getAllQuestions(d.pollId));
     
   }); 
 
   socket.on('editQuestion', function(d) {
     data.editQuestion(d.pollId, d.index, {q: d.q, a: d.a});
-    //socket.emit('questionEdited', data.getAllQuestions(d.pollId));
+    socket.emit('updateQuestions', data.getAllQuestions(d.pollId));
   });
 
   socket.on('joinPoll', function(pollId) {
