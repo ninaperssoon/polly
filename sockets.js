@@ -18,6 +18,11 @@ function sockets(io, socket, data) {
     socket.emit('dataUpdate', data.getAnswers(d.pollId));
     
   });
+  socket.on('anotherQuestion', function(d) {
+    data.anotherQuestion(d.pollId);
+    socket.emit('updateQuestions', data.getAllQuestions(d.pollId));
+    
+  });
   socket.on('deleteQuestion', function(d) {
     data.deleteQuestion(d.pollId, d.index, {q: d.q, a: d.a});
     socket.emit('updateQuestions', data.getAllQuestions(d.pollId));

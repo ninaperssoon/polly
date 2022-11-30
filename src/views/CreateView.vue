@@ -12,11 +12,11 @@
  <div>
    <Question v-for="(question,index) in questions" 
   
-  v-bind:key="question.qId"
+  v-bind:key="index"
   v-on:myquestion="saveQuestion($event, index)"
   v-on:deleteIndex="deleteQuestion($event,index)"
   v-on:deleteAnswer="editQuestion($event, index)"
-  :questionNumber = index > {{question.qId}}</Question>
+  :questionNumber = index > </Question>
  
   <button v-on:click="newQuestion">
         Add question
@@ -65,9 +65,7 @@ export default {
       }],
       uiLabels:{},
       answers: {},
-      question: { qId: "", q: ""
-
-      },
+      question: "",
       //questionId: '',
       
     }
@@ -85,7 +83,10 @@ export default {
       this.data = data
     )
     socket.on("updateQuestions", (data) =>{
-      this.questions= data }
+      this.questions= data
+      this.question=this.questions.q 
+      this.answers=this.questions.a
+    }
       
       )
     
@@ -100,7 +101,7 @@ export default {
       
     },
     newQuestion: function(){
-      this.questions.push({})
+      socket.emit("anotherQuestion", {pollId: this.pollId})
       console.log("NewQuestion", this.questions)
 
     },
@@ -120,7 +121,7 @@ export default {
       this.questionId = event.questionId;
       //console.log(question.questionId)
       this.answers = event.answer;
-      this.question = event.q;
+      this.question = event.name;
       this.questions[index]={q: this.question,
                             a: this.answers        
                           }

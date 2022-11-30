@@ -121,7 +121,7 @@ props: {
       this.$emit('deleteIndex', {name: this.name, answer: this.answers}) //pop = delete/pull'
     },
     sendQuestion: function(){
-      this.$emit('myquestion',{q: {questionId: this.getQuestionId(), name: this.name}, answer: this.answers})
+      this.$emit('myquestion', {name: this.name, answer: this.answers})
     }
     
 

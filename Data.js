@@ -75,6 +75,15 @@ Data.prototype.editQuestion = function(pollId, index, newQuestion) {
   console.log("änrdad quiz: ", poll.questions);
 }
 
+Data.prototype.anotherQuestion = function(pollId) {
+  const poll = this.polls[pollId];
+  if (typeof poll !== 'undefined') {
+    poll.questions.push([]);
+    console.log("Lagt till en plats för ny fråga till quiz: ", poll.questions);
+  }
+  
+}
+
 Data.prototype.getQuestion = function(pollId, qId=null) {
   const poll = this.polls[pollId];
   console.log("question requested for ", pollId, qId);
