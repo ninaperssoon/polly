@@ -18,3 +18,21 @@ export default {
   }
 }
 </script>
+<style>
+ button {
+  color: black;
+    background-color: #FFF1AD;
+    border-radius: 1em;
+    font-size: 1.2em;
+    border-style: outset;
+    border-color: #fff1adbd;
+ }
+
+ button:hover{
+  box-shadow: 0 5px 15px #439A86;
+    transform: translateY(-2px);
+
+ }
+ 
+
+</style>

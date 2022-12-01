@@ -1,6 +1,5 @@
 <template>
   <div>
-    <ReorderQuestion />
     {{pollId}}
     
   </div>
@@ -9,20 +8,15 @@
       <div class="card" v-bind:class="{ flipme: cardOne == 'flipped' }">
       
         <div class="card__face card__face--front">
-          
-          Question 1
 
-          <p> This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....</p>
+          <p> {{this.question.q}}</p>
         </div>
-        <div class="card__face card__face--back">back</div>
+        <div class="card__face card__face--back card__face--back--incorrect">Incorrect</div>
       </div>
 
 
       <div id="buttonContainer">  
-        <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" @click="cardOne == 'start' ? (cardOne = 'flipped' ) : (cardOne = 'start' )"/>
-        <button  @click="cardOne == 'start' ? (cardOne = 'flipped' ) : (cardOne = 'start' )">hej</button>
-        <ButtonComponent v-for="a in question.a" v-bind:key="a" @click="cardOne == 'start' ? (cardOne = 'flipped' ) : (cardOne = 'start' )">{{a}}</ButtonComponent>
-      
+        <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" />      
       
     </div>
 
@@ -35,40 +29,37 @@
 <script>
 // @ is an alias to /src
 import QuestionComponent from '@/components/QuestionComponent.vue';
-// import ReorderQuestion from '@/components/ReorderQuestion.vue';
 import io from 'socket.io-client';
+
 const socket = io();
-import ButtonComponent from '@/components/ButtonComponent.vue';
 
 export default {
   name: 'PollView',
   components: {
-    QuestionComponent,
-    // ReorderQuestion
-    ButtonComponent
-    
+    QuestionComponent,    
   },
   data: function () {
     return {
       question: {
-        q: "",
-        a: ["hej","hola","ciao"]
+        q: "How do you say hi in Swedish?",
+        a: ["hej", "hola", "ciao"]
       },
       pollId: "inactive poll",
-      cardOne: "start"
+      cardOne: "start",
     }
   },
   created: function () {
     this.pollId = this.$route.params.id
     socket.emit('joinPoll', this.pollId)
-    socket.on("newQuestion", q =>
-      this.question = q
-    )
+    // socket.on("newQuestion", q =>
+    //   this.question = q
+    // )
  
   },
   methods: {
     submitAnswer: function (answer) {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
+      this.cardOne == 'start' ? (this.cardOne = 'flipped' ) : (this.cardOne = 'start' );
     },
     
   },
@@ -87,9 +78,8 @@ body {
 }
 .scene {
   width: 25em;
-  height: 30em;
-  margin: 40px 0;
-  perspective: 600px;
+  height: 26em;
+  perspective: 2000px;
 }
 
 .card {
@@ -106,27 +96,28 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-  line-height: 100px;
   color: white;
-  text-align: center;
-  font-weight: bold;
-  font-size: 40px;
   backface-visibility: hidden;
   border-radius: 2em;
-}
-p {
-  font-size: 15px;
+  font-size: 25px;
   line-height: 20px;
-
+  align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+
 .card__face--front {
   background: #007991;
 }
 
 .card__face--back {
-  background: blue;
+  background: rgba(226, 60, 60, 0.915);
   transform: rotateY(180deg);
+  
 }
+
 
 /* this style is applied when the card is clicked */
 .flipme {
@@ -134,8 +125,11 @@ p {
 }
 
 #buttonContainer {
+  margin-top: 1em;
   display: grid;
-  grid-gap: 1em;
+  grid-gap: 0.5em;
   grid-template-columns: 1fr;
 }
+
+
 </style>

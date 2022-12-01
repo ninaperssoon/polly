@@ -36,7 +36,7 @@ function sockets(io, socket, data) {
 
   socket.on('joinPoll', function(pollId) {
     socket.join(pollId);
-    socket.emit('newQuestion', data.getQuestion(pollId))
+    socket.emit('newQuestion', data.getQuestion(pollId));
     socket.emit('dataUpdate', data.getAnswers(pollId));
   });
 

@@ -8,11 +8,16 @@
       <div id="myQuizzes">
         här dyker mina quizzes upp när jag faktiskt  har skapat dom...
       </div>
-      <div id="create">
-        <router-link  v-bind:to="'/create/'+lang">{{uiLabels.createQuiz}}</router-link>
-      </div>
+    
+  
     </section>
+
+    <div>       
+         <router-link id="create" v-bind:to="'/create/'+lang">{{uiLabels.createQuiz}}</router-link>
+      </div>
+      <div></div>
   </body>
+
 
 </template>
 
@@ -47,12 +52,16 @@ export default {
 </script>
 <style scoped>
   body {
-    margin: 0;
+    margin: auto;
     background-color: #BCD8C1;
   }
   div {
     margin: auto;
     border-radius: 2em;
+    height: 3.17em;
+  }
+  section {
+    height:35em;
   }
 
   #myQuizzes {
@@ -61,22 +70,25 @@ export default {
     width: 40em;
     background-color: blue;
   }
+  
 
   #create {
+    margin-top: 100em;
     padding: 1em;
-    margin-top: 1em;
     height: 1em; 
     width: 10em;
-    text-decoration: none; 
     font-size: 2em;
     border-style: outset;
     background-color: #FFF1AD;
     border-color: #fff1adbd;
+    text-decoration: none; 
+    border-radius: 2em;
   }
 
   #create:hover {
     box-shadow: 0 5px 15px #439A86;
 
   }
+  
   
 </style>
