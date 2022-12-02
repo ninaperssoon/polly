@@ -11,7 +11,10 @@
 
           <p> {{this.question.q}}</p>
         </div>
-        <div class="card__face card__face--back card__face--back--incorrect">Incorrect</div>
+        <div class="card__face card__face--back" v-bind:class="{ correct: ans == 'correct'}">
+        <p id="correctness"> {{this.ans}}! </p>
+        <p> Your {{this.con}} is </p>
+        </div>
       </div>
 
 
@@ -30,6 +33,8 @@
 // @ is an alias to /src
 import QuestionComponent from '@/components/QuestionComponent.vue';
 import io from 'socket.io-client';
+// import rewards from '@/CreaterewardView.vue';
+// import punishments from '@/CreaterewardView.vue';
 
 const socket = io();
 
@@ -41,11 +46,13 @@ export default {
   data: function () {
     return {
       question: {
-        q: "How do you say hi in Swedish?",
+        q: "How do you say hi in Swedish?How do you say hi in Swedish?How do you say hi in Swedish?How do you say hi in Swedish?How do you say hi in Swedish?",
         a: ["hej", "hola", "ciao"]
       },
       pollId: "inactive poll",
       cardOne: "start",
+      ans: "correct",
+      con: "punishment"
     }
   },
   created: function () {
@@ -60,6 +67,9 @@ export default {
     submitAnswer: function (answer) {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
       this.cardOne == 'start' ? (this.cardOne = 'flipped' ) : (this.cardOne = 'start' );
+      if (this.ans == 'correct') {
+        this.con = 'reward'
+      }
     },
     
   },
@@ -93,6 +103,7 @@ body {
 }
 
 .card__face {
+  padding: 0.2em;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -100,7 +111,7 @@ body {
   backface-visibility: hidden;
   border-radius: 2em;
   font-size: 25px;
-  line-height: 20px;
+  line-height: 30px;
   align-items: center;
   display: flex;
   align-items: center;
@@ -131,5 +142,11 @@ body {
   grid-template-columns: 1fr;
 }
 
+.correct {
+  background-color: green;
+}
 
+#correctness {
+  font-size: 30px;
+}
 </style>
