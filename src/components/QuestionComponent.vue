@@ -26,6 +26,7 @@ export default {
     font-size: 1.2em;
     border-style: outset;
     border-color: #fff1adbd;
+    height: 2em;
  }
 
  button:hover{

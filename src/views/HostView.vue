@@ -4,11 +4,16 @@
     <section>
       <h1>{{uiLabels.hostQuiz}}</h1>
       <div id="host">
-        {{uiLabels.writeQuizId}}: <input type="text" v-model="pollId">        
+        <p> {{uiLabels.writeQuizId}}: 
+          <br>
+          <input type="text" v-bind:to="pollId">  </p>
+        
+        
+              
       </div>
 
      <!-- Kom ihåg att ändra länken nedan!!!! -->
-      <router-link id="startQuiz" v-bind:to="'/poll/'+id">{{uiLabels.startQuiz}}</router-link> 
+      <router-link id="startQuiz" v-bind:to="('/host/'+pollId+'/'+lang)">{{uiLabels.startQuiz}}</router-link> 
    
       <div></div>
 
@@ -63,7 +68,7 @@ export default {
 
   div {
     height: 4.78em;
-   
+    line-height: 3em;
   }
 
   #host {
@@ -81,6 +86,13 @@ export default {
     border-style: outset;
     border-color: #0079918f;
 
+  }
+
+  input {
+
+    font-size: 1em;
+    border-radius: 1em;
+    border-style: outset;
   }
 
   #startQuiz {

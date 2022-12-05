@@ -8,7 +8,7 @@ const routes = [
     component: StartView
   },
     {
-    path: '/poll/:id',
+    path: '/poll/:id/:lang',
     name: 'PollView',
     component: () => import(/* webpackChunkName: "about" */ '../views/PollView.vue')
   },
@@ -57,7 +57,11 @@ const routes = [
   name:'StartView',
   component:StartView
 
-}
+},
+{ path: '/host/:id/:lang',
+  name: "HostQuizView",
+  component: () => import('../views/HostQuizView.vue')
+},
 ]
 
 const router = createRouter({

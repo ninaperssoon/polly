@@ -1,8 +1,7 @@
 <template>
-  <div>
-    {{pollId}}
-    
-  </div>
+
+   <h1> {{uiLabels.yourePlaying}} {{pollId}} </h1> 
+
   <div class="container">
     <div class="scene scene--card">
       <div class="card" v-bind:class="{ flipme: cardOne == 'flipped' }">
@@ -16,8 +15,6 @@
         <p> Your {{this.con}} is </p>
         </div>
       </div>
-
-
       <div id="buttonContainer">  
         <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" />      
       
@@ -45,6 +42,8 @@ export default {
   },
   data: function () {
     return {
+      uiLabels: {},
+      lang: "",
       question: {
         q: "How do you say hi in Swedish?How do you say hi in Swedish?How do you say hi in Swedish?How do you say hi in Swedish?How do you say hi in Swedish?",
         a: ["hej", "hola", "ciao"]
@@ -52,7 +51,7 @@ export default {
       pollId: "inactive poll",
       cardOne: "start",
       ans: "correct",
-      con: "punishment"
+      con: "punishment" 
     }
   },
   created: function () {
@@ -61,6 +60,11 @@ export default {
     // socket.on("newQuestion", q =>
     //   this.question = q
     // )
+    this.lang = this.$route.params.lang;
+    socket.emit("pageLoaded", this.lang);
+    socket.on("init", (labels) => {
+      this.uiLabels = labels
+    })
  
   },
   methods: {
@@ -68,8 +72,10 @@ export default {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
       this.cardOne == 'start' ? (this.cardOne = 'flipped' ) : (this.cardOne = 'start' );
       if (this.ans == 'correct') {
-        this.con = 'reward'
+        this.con = "reward"
       }
+      const buttonContainer = document.getElementById('buttonContainer');
+      buttonContainer.remove();
     },
     
   },
@@ -77,9 +83,7 @@ export default {
 </script>
 
 <style scoped>
-body {
-  font-family: sans-serif;
-}
+
 .container{
   height: 40em;
   display: flex;
@@ -87,6 +91,7 @@ body {
   justify-content: center;
 }
 .scene {
+  margin-top: -10em;
   width: 25em;
   height: 26em;
   perspective: 2000px;
@@ -99,7 +104,6 @@ body {
   transition: transform 1s;
   transform-style: preserve-3d;
   position: relative;
- 
 }
 
 .card__face {
@@ -118,17 +122,14 @@ body {
   justify-content: center;
 }
 
-
 .card__face--front {
   background: #007991;
 }
 
 .card__face--back {
   background: rgba(226, 60, 60, 0.915);
-  transform: rotateY(180deg);
-  
+  transform: rotateY(180deg); 
 }
-
 
 /* this style is applied when the card is clicked */
 .flipme {
@@ -143,10 +144,11 @@ body {
 }
 
 .correct {
-  background-color: green;
+  background-color: rgb(63, 194, 63);
 }
 
 #correctness {
   font-size: 30px;
 }
+
 </style>

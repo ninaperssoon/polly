@@ -6,10 +6,8 @@
       <h1>{{uiLabels.myQuizzes}}</h1>
       </div>
       <div id="myQuizzes">
-        här dyker mina quizzes upp när jag faktiskt  har skapat dom...
+        här dyker mina quizzes upp när jag faktiskt  har skapat dom... i någin slags loop
       </div>
-    
-  
     </section>
 
     <div>       
@@ -75,7 +73,7 @@ export default {
   #create {
     margin-top: 100em;
     padding: 1em;
-    height: 1em; 
+    height: 0.8em; 
     width: 10em;
     font-size: 2em;
     border-style: outset;
