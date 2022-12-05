@@ -11,8 +11,8 @@
 
  <div>
    <Question v-for="(question,index) in questions" 
-  
-  v-bind:key="index"
+   v-bind:question="question"
+  v-bind:key="question.q"
   v-on:myquestion="saveQuestion($event, index)"
   v-on:deleteIndex="deleteQuestion($event,index)"
   v-on:deleteAnswer="editQuestion($event, index)"
@@ -59,13 +59,10 @@ export default {
     return {
       lang: "",
       pollId: "",
-      questions: [{ q: "",
-                    a: []
-
-      }],
+      questions: [],
       uiLabels:{},
-      answers: {},
-      question: "",
+      //answers: {},
+      //question: "",
       //questionId: '',
       
     }
@@ -84,8 +81,9 @@ export default {
     )
     socket.on("updateQuestions", (data) =>{
       this.questions= data
-      this.question=this.questions.q 
-      this.answers=this.questions.a
+      console.log("Skickade frågor från data:",data)
+      // this.question=this.questions.q 
+      // this.answers=this.questions.a
     }
       
       )
@@ -118,14 +116,15 @@ export default {
     //   socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
     // },
     saveQuestion: function (event,index) {
-      this.questionId = event.questionId;
+      //this.questionId = event.questionId;
       //console.log(question.questionId)
-      this.answers = event.answer;
-      this.question = event.name;
-      this.questions[index]={q: this.question,
-                            a: this.answers        
-                          }
-      this.addQuestion(index);
+      // this.answers = event.answer;
+      // this.question = event.q;
+      // this.questions[index]={q: this.question,
+      //                       a: this.answers        
+      //                     }
+                          socket.emit("addQuestion", {pollId: this.pollId, index, q: event.q, a: event.a } )                    
+      // this.addQuestion(index);
       console.log(this.question) 
       console.log(this.answers);
     },

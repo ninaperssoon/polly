@@ -5,12 +5,12 @@
 <div id="question" >
     <div id="inputQuestion">
       <h2>Fråga: {{questionNumber +1}}</h2> 
-      <input type="text" v-model="name" class="input" placeholder="Write your question here...">
+      <input type="text" v-model="q" class="input" placeholder="Write your question here...">
       <br>
     </div>
     
 
-    <div id="inputAnswer" v-for="(_,i) in ansBox" v-bind:key="'ansBox' + i">
+    <div id="inputAnswer" >
       <div v-for="(_,i) in answers" v-bind:key="'answer' + i">
 
         <input type="text" v-model="answers[i]" class="input" id="option" placeholder="Write your answers here...">
@@ -18,9 +18,10 @@
             -
         </button>
 
-        <input type="checkbox" id="checked" value:answer v-model="selectedAnswers">
+        <input type="checkbox" id="checked"  v-model="selectedAnswers">
         <br>
       </div>
+      Svarsalternativ: {{question}}
 
       <button v-on:click="addAnswer" id="addAnswerButton" value:answer>
           +
@@ -83,10 +84,8 @@ props: {
     data: function(){
         return{
             selectedAnswers : [],
-            answeralt: [],
-            name: "",
-            ansBox: [""],
-            answers: ["",""],
+            q: this.question.q,
+            answers: [...this.question.a],
             
 
             
@@ -97,6 +96,7 @@ props: {
         }
 
     },
+ 
 
     methods:{
       getQuestionId: function () {
@@ -121,7 +121,7 @@ props: {
       this.$emit('deleteIndex', {name: this.name, answer: this.answers}) //pop = delete/pull'
     },
     sendQuestion: function(){
-      this.$emit('myquestion', {name: this.name, answer: this.answers})
+      this.$emit('myquestion', {q: this.q, a: this.answers})
     }
     
 

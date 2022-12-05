@@ -15,7 +15,7 @@ function sockets(io, socket, data) {
 
   socket.on('addQuestion', function(d) {
     data.addQuestion(d.pollId, d.index, {q: d.q, a: d.a});
-    socket.emit('dataUpdate', data.getAnswers(d.pollId));
+    socket.emit('updateQuestions', data.getAllQuestions(d.pollId));
     
   });
   socket.on('anotherQuestion', function(d) {

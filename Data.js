@@ -42,7 +42,7 @@ Data.prototype.createPoll = function(pollId, lang="en") {
 
 Data.prototype.addQuestion = function(pollId, index, q) {
   const poll = this.polls[pollId];
-  console.log("question added to", pollId, q);
+  console.log("(addQuestion)   question added to", pollId, q);
  const hej = "jag är här";
   if (typeof poll !== 'undefined') {
     console.log(hej);
@@ -64,7 +64,7 @@ Data.prototype.deleteQuestion = function(pollId, index, q) {
     
     
   }
-  console.log("lista efter delete: ", this.polls[pollId].questions);
+  console.log("(deleteQuestion)   lista efter delete: ", this.polls[pollId].questions);
 }
 
 Data.prototype.editQuestion = function(pollId, index, newQuestion) {
@@ -78,8 +78,10 @@ Data.prototype.editQuestion = function(pollId, index, newQuestion) {
 Data.prototype.anotherQuestion = function(pollId) {
   const poll = this.polls[pollId];
   if (typeof poll !== 'undefined') {
-    poll.questions.push([]);
-    console.log("Lagt till en plats för ny fråga till quiz: ", poll.questions);
+    poll.questions.push([{ q: "",
+                           a: []
+                          }]);
+    console.log("(anotherQuestion)    Lagt till en plats för ny fråga till quiz: ", poll.questions);
   }
   
 }
@@ -98,7 +100,7 @@ Data.prototype.getQuestion = function(pollId, qId=null) {
 Data.prototype.getAllQuestions = function(pollId) {
   const poll = this.polls[pollId];
   if (typeof poll !== 'undefined') {
-    console.log("quiz-id and the quiz is now ", pollId, poll.questions);
+    console.log("(getAllQuestions)  quiz-id and the quiz is now ", pollId, poll.questions);
     return poll.questions;
   }
   return []
