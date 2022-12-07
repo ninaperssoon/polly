@@ -8,7 +8,7 @@
     {{uiLabels.writeQuizId}}: 
     <input type="text" v-model="id">
   </label>
-  <router-link id="joinbutton" v-bind:to="'/poll/'+id">{{uiLabels.joinQuiz}}</router-link> </p>
+  <router-link id="joinbutton" v-bind:to="('/poll/'+id+'/'+lang)">{{uiLabels.joinQuiz}}</router-link> </p>
   </div>
 
 </section>
@@ -18,13 +18,9 @@
 </template>
 
 <script>
-// import io from 'socket.io-client';
-// const socket = io();
 import homeButton from '@/components/HomeComponent.vue';
 import io from 'socket.io-client';
-// import lang from '@/views/StartView.vue'
 const socket = io();
-
 
 export default {
   name: 'JoinView',
@@ -36,7 +32,6 @@ export default {
       uiLabels: {},
       id: "",
       lang: "",
-      // lang: lang,
     }
   },
   created: function () {

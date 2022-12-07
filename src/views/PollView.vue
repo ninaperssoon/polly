@@ -1,28 +1,22 @@
 <template>
-  <div>
-    <ReorderQuestion />
-    {{pollId}}
-    
-  </div>
+
+   <h1> {{uiLabels.yourePlaying}} {{pollId}} </h1> 
+
   <div class="container">
     <div class="scene scene--card">
       <div class="card" v-bind:class="{ flipme: cardOne == 'flipped' }">
       
         <div class="card__face card__face--front">
-          
-          Question 1
 
-          <p> This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....This is question 1....</p>
+          <p> {{this.question.q}}</p>
         </div>
-        <div class="card__face card__face--back">back</div>
+        <div class="card__face card__face--back" v-bind:class="{ correct: ans == 'correct'}">
+        <p id="correctness"> {{this.ans}}! </p>
+        <p> Your {{this.con}} is </p>
+        </div>
       </div>
-
-
       <div id="buttonContainer">  
-        <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" @click="cardOne == 'start' ? (cardOne = 'flipped' ) : (cardOne = 'start' )"/>
-        <button  @click="cardOne == 'start' ? (cardOne = 'flipped' ) : (cardOne = 'start' )">hej</button>
-        <ButtonComponent v-for="a in question.a" v-bind:key="a" @click="cardOne == 'start' ? (cardOne = 'flipped' ) : (cardOne = 'start' )">{{a}}</ButtonComponent>
-      
+        <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" />      
       
     </div>
 
@@ -35,40 +29,53 @@
 <script>
 // @ is an alias to /src
 import QuestionComponent from '@/components/QuestionComponent.vue';
-// import ReorderQuestion from '@/components/ReorderQuestion.vue';
 import io from 'socket.io-client';
+// import rewards from '@/CreaterewardView.vue';
+// import punishments from '@/CreaterewardView.vue';
+
 const socket = io();
-import ButtonComponent from '@/components/ButtonComponent.vue';
 
 export default {
   name: 'PollView',
   components: {
-    QuestionComponent,
-    // ReorderQuestion
-    ButtonComponent
-    
+    QuestionComponent,    
   },
   data: function () {
     return {
+      uiLabels: {},
+      lang: "",
       question: {
-        q: "",
-        a: ["hej","hola","ciao"]
+        q: "How do you say hi in Swedish?How do you say hi in Swedish?How do you say hi in Swedish?How do you say hi in Swedish?How do you say hi in Swedish?",
+        a: ["hej", "hola", "ciao"]
       },
       pollId: "inactive poll",
-      cardOne: "start"
+      cardOne: "start",
+      ans: "correct",
+      con: "punishment" 
     }
   },
   created: function () {
     this.pollId = this.$route.params.id
     socket.emit('joinPoll', this.pollId)
-    socket.on("newQuestion", q =>
-      this.question = q
-    )
+    // socket.on("newQuestion", q =>
+    //   this.question = q
+    // )
+    this.lang = this.$route.params.lang;
+    socket.emit("pageLoaded", this.lang);
+    socket.on("init", (labels) => {
+      this.uiLabels = labels
+    })
  
   },
   methods: {
     submitAnswer: function (answer) {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
+      this.cardOne == 'start' ? (this.cardOne = 'flipped' ) : (this.cardOne = 'start' );
+      if (this.ans == 'correct') {
+        this.con = "reward"
+      }
+      const buttonContainer = document.getElementById('buttonContainer');
+      buttonContainer.remove();
     },
     
   },
@@ -76,9 +83,7 @@ export default {
 </script>
 
 <style scoped>
-body {
-  font-family: sans-serif;
-}
+
 .container{
   height: 40em;
   display: flex;
@@ -86,10 +91,10 @@ body {
   justify-content: center;
 }
 .scene {
+  margin-top: -10em;
   width: 25em;
-  height: 30em;
-  margin: 40px 0;
-  perspective: 600px;
+  height: 26em;
+  perspective: 2000px;
 }
 
 .card {
@@ -99,33 +104,31 @@ body {
   transition: transform 1s;
   transform-style: preserve-3d;
   position: relative;
- 
 }
 
 .card__face {
+  padding: 0.2em;
   position: absolute;
   width: 100%;
   height: 100%;
-  line-height: 100px;
   color: white;
-  text-align: center;
-  font-weight: bold;
-  font-size: 40px;
   backface-visibility: hidden;
   border-radius: 2em;
+  font-size: 25px;
+  line-height: 30px;
+  align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-p {
-  font-size: 15px;
-  line-height: 20px;
 
-}
 .card__face--front {
   background: #007991;
 }
 
 .card__face--back {
-  background: blue;
-  transform: rotateY(180deg);
+  background: rgba(226, 60, 60, 0.915);
+  transform: rotateY(180deg); 
 }
 
 /* this style is applied when the card is clicked */
@@ -134,8 +137,18 @@ p {
 }
 
 #buttonContainer {
+  margin-top: 1em;
   display: grid;
-  grid-gap: 1em;
+  grid-gap: 0.5em;
   grid-template-columns: 1fr;
 }
+
+.correct {
+  background-color: rgb(63, 194, 63);
+}
+
+#correctness {
+  font-size: 30px;
+}
+
 </style>

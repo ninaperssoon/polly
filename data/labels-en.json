@@ -14,5 +14,10 @@
 	"addQuestion": "Write your answer alternatives here...",
 	"deleteQuestion" : "Delete Question",
 	"startQuiz" : "Start Quiz",
-	"saveQuiz" : "Save Quiz"
+	"saveQuiz" : "Save Quiz",
+	"correct" : "Correct!",
+	"incorrect" : "incorrect!",
+	"reward" : "reward",
+	"punishment" : "punishment",
+	"yourePlaying" : "You're playing: "
 }

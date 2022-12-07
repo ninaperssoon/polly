@@ -14,6 +14,11 @@
 	"addQuestion": "Skriv dina svarsalternativ här...",
 	"deleteQuestion" : "Radera Fråga",
 	"startQuiz" : "Starta Quiz",
-	"saveQuiz" : "Spara Quiz"
+	"saveQuiz" : "Spara Quiz",
+	"correct" : "Korrekt!",
+	"incorrect" : "Fel!",
+	"reward" : "belöning",
+	"punishment" : "straff",
+	"yourePlaying" : "Du spelar: "
 
 }
