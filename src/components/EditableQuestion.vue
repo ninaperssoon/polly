@@ -137,13 +137,13 @@ props: {
       console.log("Edit: ",this.selectedAnswers)
     },
     setCorectAnswer: function(i){
-        this.selectedAnswers[i] = "correct";
+        this.selectedAnswers[i] = this.answers[i];
         
         this.altColor[i] = "green";
         
     },
     setWrongAnswer: function(i){
-        this.selectedAnswers[i] = "incorrect";
+        this.selectedAnswers[i] = "null";
         this.altColor[i] = "red";
         
     }
