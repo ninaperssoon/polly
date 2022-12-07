@@ -79,7 +79,8 @@ Data.prototype.anotherQuestion = function(pollId) {
   const poll = this.polls[pollId];
   if (typeof poll !== 'undefined') {
     poll.questions.push({ q: "",
-                           a: ["",""]
+                           a: ["",""],
+                           s:[]
                           });
     console.log("(anotherQuestion)    Lagt till en plats för ny fråga till quiz: ", poll.questions);
   }

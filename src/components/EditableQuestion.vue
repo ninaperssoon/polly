@@ -13,17 +13,23 @@
     <div id="inputAnswer" >
       <div v-for="(_,i) in answers" v-bind:key="'answer' + i">
 
-        <input type="text" v-model="answers[i]" class="input" id="option" placeholder="Write your answers here...">
+        <input type="text" v-model="answers[i]" class="input" id="option" placeholder="Write your answers here..." 
+        >
         <button v-on:click="deleteAnswers(i)" class="deleteB" id="deleteAnswerButton">
             -
         </button>
 
-        <input type="checkbox" id="checked"  v-model="selectedAnswers">
+        <button v-on:click="setCorectAnswer(i)"  >
+          correct answer {{selectedAnswers}}
+        </button>
+        <button v-on:click="setWrongAnswer(i)"  >
+          wrong answer {{selectedAnswers}}
+        </button>
         <br>
       </div>
       <!--Svarsalternativ: {{question}}-->
 
-      <button v-on:click="addAnswer" id="addAnswerButton" value:answer>
+      <button v-on:click="addAnswer" id="addAnswerButton">
           +
       </button>
 
@@ -83,9 +89,12 @@ props: {
 
     data: function(){
         return{
-            selectedAnswers : [],
+            selectedAnswers : [...this.question.s],
             q: this.question.q,
             answers: [...this.question.a],
+            correctClicked: false,
+            wrongClicked: false,
+
             
 
             
@@ -109,21 +118,30 @@ props: {
       deleteAnswers: function(i) {
         console.log(i)
       this.answers.splice(i,1);
+      this.selectedAnswers.splice(i,1);
       //this.index=(i);
       
       
-      this.$emit('deleteAnswer', { name: this.name, answer: this.answers})
+      this.$emit('deleteAnswer', { q: this.q, a: this.answers, selected: this.selectedAnswers})
       
     },
     deleteQuestion: function () {
       console.log();
       //this.questions.splice(questionNumber, 1);
-      this.$emit('deleteIndex', {name: this.name, answer: this.answers}) //pop = delete/pull'
+      this.$emit('deleteIndex', {q: this.q, a: this.answers, selected: this.selectedAnswers}) //pop = delete/pull'
     },
     sendQuestion: function(){
-      this.$emit('myquestion', {q: this.q, a: this.answers})
+      this.$emit('myquestion', {q: this.q, a: this.answers, selected: this.selectedAnswers})
+      console.log("Edit: ",this.selectedAnswers)
+    },
+    setCorectAnswer: function(i){
+        this.selectedAnswers[i] = "correct";
+        this.correctClicked=true;
+    },
+    setWrongAnswer: function(i){
+        this.selectedAnswers[i] = "incorrect";
+        this.wrongClicked=true;
     }
-    
 
     }
 }
@@ -222,6 +240,12 @@ props: {
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
+}
+.red{
+background-color: red;
+}
+.green{
+  background-color: green;
 }
 
 

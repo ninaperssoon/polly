@@ -14,7 +14,7 @@ function sockets(io, socket, data) {
   });
 
   socket.on('addQuestion', function(d) {
-    data.addQuestion(d.pollId, d.index, {q: d.q, a: d.a});
+    data.addQuestion(d.pollId, d.index, {q: d.q, a: d.a, s: d.s});
     socket.emit('updateQuestions', data.getAllQuestions(d.pollId));
     
   });
@@ -26,13 +26,13 @@ function sockets(io, socket, data) {
   
 
   socket.on('deleteQuestion', function(d) {
-    data.deleteQuestion(d.pollId, d.index, {q: d.q, a: d.a});
+    data.deleteQuestion(d.pollId, d.index, {q: d.q, a: d.a, s: d.s});
     socket.emit('updateQuestions', data.getAllQuestions(d.pollId));
     
   }); 
 
   socket.on('editQuestion', function(d) {
-    data.editQuestion(d.pollId, d.index, {q: d.q, a: d.a});
+    data.editQuestion(d.pollId, d.index, {q: d.q, a: d.a, s: d.s});
     socket.emit('updateQuestions', data.getAllQuestions(d.pollId));
   });
 

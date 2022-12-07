@@ -94,11 +94,11 @@ export default {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
       socket.emit("anotherQuestion", {pollId: this.pollId})
     },
-    addQuestion: function (index) {
+   // addQuestion: function (index) {
 
-       socket.emit("addQuestion", {pollId: this.pollId, index: index, q: this.question, a: this.answers } )
+       //socket.emit("addQuestion", {pollId: this.pollId, index: index, q: this.question, a: this.answers } )
       
-    },
+   // },
     newQuestion: function(){
       socket.emit("anotherQuestion", {pollId: this.pollId})
       console.log("NewQuestion", this.questions)
@@ -107,10 +107,10 @@ export default {
     
   
     editQuestion: function(event, index){
-      this.question=event.name;
-      this.answers=event.answer;
+      //this.question=event.name;
+      //this.answers=event.answer;
       console.log("editQuestion index: ", index);
-      socket.emit("editQuestion", {pollId: this.pollId, index: index, q: this.question, a: this.answers})
+      socket.emit("editQuestion", {pollId: this.pollId, index: index, q: event.q, a: event.a, s: event.selected})
     }, 
    
     // runQuestion: function () {
@@ -124,10 +124,11 @@ export default {
       // this.questions[index]={q: this.question,
       //                       a: this.answers        
       //                     }
-                          socket.emit("addQuestion", {pollId: this.pollId, index, q: event.q, a: event.a } )                    
+                          socket.emit("addQuestion", {pollId: this.pollId, index: index, q: event.q, a: event.a, s: event.selected} )                    
       // this.addQuestion(index);
       console.log(this.question) 
       console.log(this.answers);
+      console.log(event.selected)
     },
     deleteQuestion: function(event,index){
       // console.log(event.element);
@@ -135,11 +136,11 @@ export default {
       // var deleteIndex = this.questions.indexOf(event);
       // console.log(deleteIndex);
       console.log("det här är index: ", index);
-      this.question=event.name;
-      this.answers=event.answer;
+      //this.question=event.name;
+      //this.answers=event.answer;
       //this.$delete(this.questions, index);
       //this.questions.splice(index, 1);
-      socket.emit("deleteQuestion",{pollId: this.pollId, index: index, q: this.question, a: this.answers} )
+      socket.emit("deleteQuestion",{pollId: this.pollId, index: index, q: event.q, a: event.a, s: event.selected} )
       console.log(this.questions);
        
     }
