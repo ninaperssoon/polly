@@ -1,50 +1,39 @@
 <template>
   <body>
-    <homeButton></homeButton>
-    <section>
-      <h1>{{uiLabels.hostQuiz}}</h1>
-      <div id="host">
-        <p> {{uiLabels.writeQuizId}}: 
-          <br>
-          <input type="text" v-model="pollId">  </p>
-        
-        
-              
-      </div>
-
-     <!-- Kom ihåg att ändra länken nedan!!!! -->
-      <router-link id="startQuiz" v-bind:to="('/host/'+id+lang)">{{uiLabels.startQuiz}}</router-link> 
-   
-      <div></div>
-
-    </section>
+      {{this.participants}}
+    ... has joined the quiz
   
 </body>
 
 </template>
 
 <script>
-import homeButton from '@/components/HomeComponent.vue';
 import io from 'socket.io-client';
 const socket = io();
 
 export default {
   name: 'HostQuizView',
   components: {
-    homeButton,
+    
   },
   data: function () {
     return {
       uiLabels: {},
       id: "",
       lang: "en",
+      participants: [],
     }
   },
   created: function () {
     this.lang = this.$route.params.lang;
+    this.id = this.$route.params.id;
     socket.emit("pageLoaded", this.lang);
+    socket.emit("joinPoll", this.id);
     socket.on("init", (labels) => {
       this.uiLabels = labels
+    })
+    socket.on("participantUpdate", (participants) => {
+      this.participants = participants
     })
   },
   methods: {

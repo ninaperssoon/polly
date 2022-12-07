@@ -1,5 +1,5 @@
 <template>
-
+<!-- {{name}} -->
    <h1> {{uiLabels.yourePlaying}} {{pollId}} </h1> 
 
   <div class="container">
@@ -51,7 +51,8 @@ export default {
       pollId: "inactive poll",
       cardOne: "start",
       ans: "correct",
-      con: "punishment" 
+      con: "punishment" ,
+      name: "",
     }
   },
   created: function () {
@@ -62,6 +63,7 @@ export default {
     // )
     this.lang = this.$route.params.lang;
     socket.emit("pageLoaded", this.lang);
+    this.name = this.$route.params.name;
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })

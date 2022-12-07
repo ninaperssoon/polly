@@ -36,6 +36,7 @@ Data.prototype.createPoll = function(pollId, lang="en") {
     poll.punishments= [];              
     this.polls[pollId] = poll;
     console.log("poll created", pollId, poll);
+    poll.participants=[];
   }
   return this.polls[pollId];
 }
@@ -147,6 +148,19 @@ Data.prototype.getAnswers = function(pollId) {
     }
   }
   return {}
+}
+Data.prototype.getParticipants = function(pollId) {
+  const poll = this.polls[pollId];
+  if (typeof poll !== 'undefined') {
+    return poll.participants
+  }
+  return []
+}
+Data.prototype.addParticipant = function(pollId, name) {
+  const poll = this.polls[pollId];
+  if (typeof poll !== 'undefined') {
+    return poll.participants.push(name)
+  }
 }
 module.exports = Data;
 

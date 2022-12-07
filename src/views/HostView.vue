@@ -6,14 +6,14 @@
       <div id="host">
         <p> {{uiLabels.writeQuizId}}: 
           <br>
-          <input type="text" v-bind:to="pollId">  </p>
+          <input type="text" v-model="id">  </p>
         
         
               
       </div>
 
      <!-- Kom ihåg att ändra länken nedan!!!! -->
-      <router-link id="startQuiz" v-bind:to="('/host/'+pollId+'/'+lang)">{{uiLabels.startQuiz}}</router-link> 
+      <router-link id="startQuiz" v-bind:to="('/host/'+id+'/'+lang)">{{uiLabels.startQuiz}}</router-link> 
    
       <div></div>
 

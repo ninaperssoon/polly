@@ -69,6 +69,12 @@ function sockets(io, socket, data) {
     data.sendPunishment(d.pollId, {p: d.p});
     socket.emit('dataUpdate', data.getAnswers(d.pollId));
   });
+
+  socket.on('addParticipant', function(d) {
+    data.addParticipant(d.pollId, d.name);
+    io.to(d.pollId).emit('participantUpdate', data.getParticipants(d.pollId));
+   });
+  
 }
 
 module.exports = sockets;

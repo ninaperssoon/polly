@@ -3,12 +3,23 @@
   <homeButton></homeButton>
   <section>
     <div id="top"> </div>
-  <div id="joinQuiz">
+    <div id="joinQuiz">
+    <div>
+    <p> Enter your name: </p>
+    <input type="text" v-model="name">
+    </div>
+    <div>
    <p> <label>
     {{uiLabels.writeQuizId}}: 
     <input type="text" v-model="id">
   </label>
-  <router-link id="joinbutton" v-bind:to="('/poll/'+id+'/'+lang)">{{uiLabels.joinQuiz}}</router-link> </p>
+  <button id="joinbutton" v-on:click="sendName" >{{uiLabels.joinQuiz}}</button>
+  </p>
+
+
+
+  <!-- <router-link id="joinbutton" v-bind:to="('/poll/'+id+'/'+lang)" v-on:click="sendName" >{{uiLabels.joinQuiz}}</router-link> </p> -->
+  </div>
   </div>
 
 </section>
@@ -32,16 +43,26 @@ export default {
       uiLabels: {},
       id: "",
       lang: "",
+      name: "",
     }
   },
+  methods: {
+  
+  sendName: function() {
+    console.log(this.name)
+    socket.emit("addParticipant", { name: this.name,
+                            pollId: this.id }
+                 );
+    this.$router.push('/poll/'+this.id+'/'+this.lang+'/'+this.name)
+  }},
+
   created: function () {
      this.lang = this.$route.params.lang;
      socket.emit("pageLoaded", this.lang);
      socket.on("init", (labels) => {
       this.uiLabels = labels
     })
-  },
-
+  }
 }
 </script>
 
