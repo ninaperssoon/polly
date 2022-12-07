@@ -1,15 +1,12 @@
 <template>
   <body>
     <div>
-
-      hosting a quiz
+      waiting for host to start
+      other players:
       <p v-for="participant in participants" v-bind:key = "participant">
       {{participant}}
     </p>
     </div>
-
-    <button v-on:click="startQuiz"> {{uiLabels.startQuiz}}</button>
-
     
   
 </body>
@@ -21,7 +18,7 @@ import io from 'socket.io-client';
 const socket = io();
 
 export default {
-  name: 'HostQuizView',
+  name: 'WaitingView',
   components: {
     
   },
@@ -31,12 +28,13 @@ export default {
       id: "",
       lang: "en",
       participants: [],
-      name: "host"
+      name: ""
     }
   },
   created: function () {
     this.lang = this.$route.params.lang;
     this.id = this.$route.params.id;
+    this.name = this.$route.params.name;
     socket.emit("pageLoaded", this.lang);
     socket.emit("joinPoll", this.id);
     socket.on("init", (labels) => {
@@ -45,15 +43,13 @@ export default {
     socket.on("participantUpdate", (participants) => {
       this.participants = participants
     })
+
+    
+    socket.on("quizUpdate", () => {
+      this.$router.push('/poll/'+this.id+'/'+this.lang+'/'+this.name)
+    })
   },
   methods: {
-    startQuiz: function() {
-      this.$router.push('/poll/'+this.id+'/'+this.lang+'/'+this.name)
-      socket.emit("startedQuiz",{ pollId: this.id, 
-                                  participants: this.participants }
-                                );
-    },
-
     switchLanguage: function() {
       if (this.lang === "en")
         this.lang = "sv"
@@ -61,7 +57,6 @@ export default {
         this.lang = "en"
       socket.emit("switchLanguage", this.lang)
     },
-    
 
   }
 }

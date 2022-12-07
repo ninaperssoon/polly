@@ -53,7 +53,7 @@ export default {
     socket.emit("addParticipant", { name: this.name,
                             pollId: this.id }
                  );
-    this.$router.push('/poll/'+this.id+'/'+this.lang+'/'+this.name)
+    this.$router.push('/wait/'+this.id+'/'+this.lang+'/'+this.name)
   }},
 
   created: function () {

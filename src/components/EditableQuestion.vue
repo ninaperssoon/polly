@@ -13,8 +13,8 @@
     <div id="inputAnswer" >
       <div v-for="(_,i) in answers" v-bind:key="'answer' + i">
 
-        <input type="text" v-model="answers[i]" class="input" id="option" placeholder="Write your answers here..." 
-        >
+        <input type="text"  v-model="answers[i]" class="input" id="option" placeholder="Write your answers here..." 
+        v-bind:style="{'background-color':altColor[i]}">
         <button v-on:click="deleteAnswers(i)" class="deleteB" id="deleteAnswerButton">
             -
         </button>
@@ -92,8 +92,8 @@ props: {
             selectedAnswers : [...this.question.s],
             q: this.question.q,
             answers: [...this.question.a],
-            correctClicked: false,
-            wrongClicked: false,
+            
+            altColor:["white","white"],
 
             
 
@@ -114,11 +114,13 @@ props: {
   
      addAnswer: function () {
       this.answers.push("");
+      this.altColor.push("");
     },
       deleteAnswers: function(i) {
         console.log(i)
       this.answers.splice(i,1);
       this.selectedAnswers.splice(i,1);
+      this.altColor.splice(i,1);
       //this.index=(i);
       
       
@@ -135,13 +137,15 @@ props: {
       console.log("Edit: ",this.selectedAnswers)
     },
     setCorectAnswer: function(i){
-        this.selectedAnswers[i] = "correct";
-        this.correctClicked=true;
+        this.selectedAnswers[i] = this.answers[i];
+        
+        this.altColor[i] = "green";
+        
     },
     setWrongAnswer: function(i){
-        this.selectedAnswers[i] = "incorrect";
-        this.wrongClicked=true;
-        console.log(this.wrongClicked)
+        this.selectedAnswers[i] = "null";
+        this.altColor[i] = "red";
+        
     }
 
     }
