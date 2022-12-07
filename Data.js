@@ -231,7 +231,7 @@ Data.prototype.addParticipant = function(pollId, name) {
 Data.prototype.startedQuiz = function(pollId, participants) {
   const poll = this.polls[pollId];
   if (typeof poll !== 'undefined') {
-    return poll.participants
+    poll.participants = participants
   }
 }
 

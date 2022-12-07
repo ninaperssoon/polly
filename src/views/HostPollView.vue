@@ -1,5 +1,6 @@
 <template>
-   <h1> {{uiLabels.yourePlaying}} {{pollId}} </h1> 
+  
+   <h1> you're hosting {{pollId}}  </h1> 
 
   <div class="container">
     <div class="scene scene--card">
@@ -35,7 +36,7 @@ import io from 'socket.io-client';
 const socket = io();
 
 export default {
-  name: 'PollView',
+  name: 'HostPollView',
   components: {
     QuestionComponent,    
   },
@@ -72,20 +73,18 @@ export default {
   },
   methods: {
     submitAnswer: function (answer) {
-      console.log(answer)
-      socket.emit("submitAnswer", {pollId: this.pollId, answer: answer.a})
+      socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
       this.cardOne == 'start' ? (this.cardOne = 'flipped' ) : (this.cardOne = 'start' );
-      this.ans = this.question.s[answer.index];
       if (this.ans == 'correct') {
         this.con = "reward"
       }
       const buttonContainer = document.getElementById('buttonContainer');
       buttonContainer.remove();
-      
     },
-    
-  },
+   
+  }
 }
+
 </script>
 
 <style scoped>
