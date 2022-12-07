@@ -48,7 +48,6 @@ export default {
   },
   methods: {
     startQuiz: function() {
-      console.log("hej")
       this.$router.push('/poll/'+this.id+'/'+this.lang+'/'+this.name)
       socket.emit("startedQuiz",{ pollId: this.id, 
                                   participants: this.participants }

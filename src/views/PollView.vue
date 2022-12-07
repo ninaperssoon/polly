@@ -1,5 +1,5 @@
 <template>
-<!-- {{name}} -->
+
    <h1> {{uiLabels.yourePlaying}} {{pollId}} </h1> 
 
   <div class="container">
@@ -45,8 +45,9 @@ export default {
       uiLabels: {},
       lang: "",
       question: {
-        q: "How do you say hi in Swedish?How do you say hi in Swedish?How do you say hi in Swedish?How do you say hi in Swedish?How do you say hi in Swedish?",
-        a: ["hej", "hola", "ciao"]
+        q: "",
+        a: [],
+        s: []
       },
       pollId: "inactive poll",
       cardOne: "start",
@@ -58,9 +59,10 @@ export default {
   created: function () {
     this.pollId = this.$route.params.id
     socket.emit('joinPoll', this.pollId)
-    // socket.on("newQuestion", q =>
-    //   this.question = q
-    // )
+    socket.on("newQuestion", q =>
+      this.question = q
+    )
+    
     this.lang = this.$route.params.lang;
     socket.emit("pageLoaded", this.lang);
     this.name = this.$route.params.name;
@@ -78,6 +80,7 @@ export default {
       }
       const buttonContainer = document.getElementById('buttonContainer');
       buttonContainer.remove();
+      
     },
     
   },
