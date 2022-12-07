@@ -1,5 +1,6 @@
 <template>
-   <h1> {{uiLabels.yourePlaying}} {{pollId}} </h1> 
+  
+   <h1> you're hosting {{pollId}}  </h1> 
 
   <div class="container">
     <div class="scene scene--card">
@@ -35,7 +36,7 @@ import io from 'socket.io-client';
 const socket = io();
 
 export default {
-  name: 'PollView',
+  name: 'HostPollView',
   components: {
     QuestionComponent,    
   },
@@ -79,11 +80,11 @@ export default {
       }
       const buttonContainer = document.getElementById('buttonContainer');
       buttonContainer.remove();
-      
     },
-    
-  },
+   
+  }
 }
+
 </script>
 
 <style scoped>

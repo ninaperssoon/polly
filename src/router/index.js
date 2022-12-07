@@ -65,7 +65,12 @@ const routes = [
 { path: '/wait/:id/:lang/:name',
   name: "WatiView",
   component: () => import('../views/WaitView.vue')
-}
+},
+{
+  path: '/poll/:id/:lang/host',
+  name: 'HostPollView',
+  component: () => import(/* webpackChunkName: "about" */ '../views/HostPollView.vue')
+},
 ]
 
 const router = createRouter({
