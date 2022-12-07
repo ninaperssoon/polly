@@ -120,7 +120,7 @@ props: {
         console.log(i)
       this.answers.splice(i,1);
       this.selectedAnswers.splice(i,1);
-      //this.altColor.splice(i,1);
+      this.altColor.splice(i,1);
       //this.index=(i);
       
       
