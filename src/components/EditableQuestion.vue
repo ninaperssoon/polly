@@ -1,75 +1,56 @@
 
 
 <template>
-    <div>
-<div id="question" >
-    <div id="inputQuestion">
-      <h2>Fråga: {{questionNumber +1}}</h2> 
-      <input type="text" v-model="q" class="input" placeholder="Write your question here...">
-      <br>
-    </div>
-    
-
-    <div id="inputAnswer" >
-      <div v-for="(_,i) in answers" v-bind:key="'answer' + i">
-
-        <input type="text"  v-model="answers[i]" class="input" id="option" placeholder="Write your answers here..." 
-        v-bind:style="{'background-color':altColor[i]}">
-        <button v-on:click="deleteAnswers(i)" class="deleteB" id="deleteAnswerButton">
-            -
-        </button>
-
-        <button v-on:click="setCorectAnswer(i)" >
-          correct answer {{selectedAnswers}}
-        </button>
-        <button v-on:click="setWrongAnswer(i)" >
-          wrong answer {{selectedAnswers}}
-        </button>
+  <div>
+    <div id="question" >
+      <div id="inputQuestion">
+        <h2>Fråga: {{questionNumber +1}}</h2> 
+        <input type="text" v-model="q" class="input" placeholder="Write your question here...">
         <br>
       </div>
-      <!--Svarsalternativ: {{question}}-->
-
-      <button v-on:click="addAnswer" id="addAnswerButton">
-          +
-      </button>
-
-    </div>
-
-      <!--<div v-for="(_, i) in ansBox" v-bind:key="'ansBox'+i">
-        <div id="ansBox">
-          <input type="text" v-model="ansBox[i]" class="input" id="option" placeholder="Write your answes here...">
-        </div>
       
-        <div class="answer" v-for="(_, i) in answers" v-bind:key="'answer'+i">
-          
-            <input type="checkbox" id="checked" value:answer v-model="selectedAnswers">
-          <button v-on:click="deleteAnswers" class="deleteB" id="deleteAnswerButton">
-            -
+
+      <div id="inputAnswer" >
+        <div v-for="(_,i) in answers" v-bind:key="'answer' + i">
+          <input type="text"  v-model="answers[i]" class="input" id="option" placeholder="Write your answers here..." 
+          v-bind:style="{'background-color':altColor[i]}">
+
+          <button v-on:click="deleteAnswers(i)" class="deleteB" id="deleteAnswerButton">
+             -
           </button>
+
+          <button v-on:click="setCorectAnswer(i)" >
+            correct answer {{selectedAnswers}}
+          </button>
+          <button v-on:click="setWrongAnswer(i)" >
+            wrong answer {{selectedAnswers}}
+          </button>
+          <br>
         </div>
+        <!--Svarsalternativ: {{question}}-->
+
         <button v-on:click="addAnswer" id="addAnswerButton">
           +
         </button>
 
-      </div>-->
+      </div>
 
-    <div>
-    
-    <!--<input type="number" v-model="questionNumber">-->
-    <button v-on:click="deleteQuestion" class="deleteB" id="deleteQuestions">
-      Delete question
-    </button >
-    <button v-on:click="sendQuestion">
-    Save question
-    </button>
-    <!--{{data}}
-    <router-link v-bind:to="'/result/'+pollId">Check result</router-link>-->
+      <div>
+        <button v-on:click="deleteQuestion" class="deleteB" id="deleteQuestions">
+          Delete question
+        </button >
+
+        <button v-on:click="sendQuestion">
+          Save question
+        </button>
+        <!--{{data}}
+        <router-link v-bind:to="'/result/'+pollId">Check result</router-link>-->
+      </div>
+
+
+    </div>
+
   </div>
-
-
-</div>
-
-</div>
 
 </template>
 
@@ -78,77 +59,60 @@
 
 
 export default{
-name : 'editableQuestion',
-props: { 
-  question: Object,
-  questionNumber: Number,
-    
+  name : 'editableQuestion',
+  props: { 
+    question: Object,
+    questionNumber: Number,
+      
 
-},
-
-
-    data: function(){
-        return{
-            selectedAnswers : [...this.question.s],
-            q: this.question.q,
-            answers: [...this.question.a],
-            
-            altColor:["white","white"],
-
-            
-
-            
-                     
+  },
 
 
+  data: function(){
+    return{
+      selectedAnswers : [...this.question.s],
+      q: this.question.q,
+      answers: [...this.question.a],
+      
+      altColor:["white","white"],
+    }
 
-        }
-
-    },
+  },
  
 
-    methods:{
-      getQuestionId: function () {
-      return Math.floor(Math.random()*100000);
+  methods:{
+    getQuestionId: function () {
+    return Math.floor(Math.random()*100000);
     },
-  
-     addAnswer: function () {
+
+    addAnswer: function () {
       this.answers.push("");
       this.altColor.push("");
     },
-      deleteAnswers: function(i) {
-        console.log(i)
+    deleteAnswers: function(i) {
+      console.log(i)
       this.answers.splice(i,1);
       this.selectedAnswers.splice(i,1);
       this.altColor.splice(i,1);
-      //this.index=(i);
-      
-      
       this.$emit('deleteAnswer', { q: this.q, a: this.answers, selected: this.selectedAnswers})
-      
     },
     deleteQuestion: function () {
-      console.log();
-      //this.questions.splice(questionNumber, 1);
       this.$emit('deleteIndex', {q: this.q, a: this.answers, selected: this.selectedAnswers}) //pop = delete/pull'
-    },
+      },
     sendQuestion: function(){
       this.$emit('myquestion', {q: this.q, a: this.answers, selected: this.selectedAnswers})
       console.log("Edit: ",this.selectedAnswers)
     },
     setCorectAnswer: function(i){
-        this.selectedAnswers[i] = this.answers[i];
-        
-        this.altColor[i] = "green";
-        
+      this.selectedAnswers[i] = 'correct';
+      this.altColor[i] = "green";  
     },
     setWrongAnswer: function(i){
-        this.selectedAnswers[i] = "null";
-        this.altColor[i] = "red";
-        
+      this.selectedAnswers[i] = 'incorrect';
+      this.altColor[i] = "red";   
     }
 
-    }
+  }
 }
 
 </script>

@@ -1,20 +1,18 @@
 <template>
-
-<div id="consequenceBox" >
-      <div id="inputReward">
-        {{message}}
-        <div id="rewardGrid">
-          <input type="text"  class="input" placeholder="Write your reward here..." v-model="reward">
-
-
-          
-          <button v-on:click="sendRewards">
-                 Send Reward
-              </button>
-          
-          <button v-on:click="deleteReward" class="delButton">
-            -
-          </button>
+  
+  <div id="consequenceBox" >
+    <div id="inputReward">
+      {{message}}
+      <div id="rewardGrid">
+        <input type="text"  class="input" placeholder="Write your reward here..." v-model="r">
+        
+        <button v-on:click="sendRewards">
+           Send Reward
+        </button>
+        
+        <button v-on:click="deleteReward" class="delButton">
+          -
+        </button>
       </div>
       </div>
    </div>
@@ -25,9 +23,9 @@
 
 
 export default{
-name: 'PunishmentReward',
+name: 'RewardsComponent',
 props: {
-consequence: Object,
+reward: String,
 message: String,
 },
 
@@ -45,7 +43,7 @@ methods:{
     console.log("Sended reward: ", this.r)
   },
     deleteReward: function() {
-      this.rewards.pop("")
+      this.$emit('deleteReward', {r: this.r})
     },
 
 }

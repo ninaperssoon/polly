@@ -73,8 +73,10 @@ export default {
   },
   methods: {
     submitAnswer: function (answer) {
-      socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
+      console.log(answer)
+      socket.emit("submitAnswer", {pollId: this.pollId, answer: answer.a})
       this.cardOne == 'start' ? (this.cardOne = 'flipped' ) : (this.cardOne = 'start' );
+      this.ans = this.question.s[answer.index];
       if (this.ans == 'correct') {
         this.con = "reward"
       }

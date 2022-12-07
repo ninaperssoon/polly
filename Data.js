@@ -142,9 +142,20 @@ Data.prototype.sendReward= function(pollId, index, r) {
     poll.rewards[index]=r;
   }
 
-
 }
+Data.prototype.deleteReward = function(pollId, index, r) {
+  const poll = this.polls[pollId];
+  console.log("reward deleted", pollId, r);
+ const hej = "jag är här";
+  if (typeof poll !== 'undefined') {
+    console.log(hej);
+      poll.rewards.splice(index,1);
 
+    
+    
+  }
+  console.log("(deleteRewards)   lista efter delete: ", this.polls[pollId].rewards);
+}
 
 Data.prototype.getAllRewards = function(pollId) {
   const poll = this.polls[pollId];
@@ -154,13 +165,46 @@ Data.prototype.getAllRewards = function(pollId) {
   }
   return []
 }
-Data.prototype.sendPunishment= function(pollId, p) {
+Data.prototype.newPunishment = function(pollId) {
   const poll = this.polls[pollId];
-  console.log("punishments added to", pollId, p);
   if (typeof poll !== 'undefined') {
-    poll.punishments.push(p);
+    poll.punishments.push("");
+    console.log("(newPunishment)    Lagt till en plats för ett nytt punishment till quiz: ", poll.punishments);
   }
+  
 }
+
+Data.prototype.sendPunishment= function(pollId, index, p) {
+  const poll = this.polls[pollId];
+  console.log("punishments from added to", pollId, p);
+  if (typeof poll !== 'undefined') {
+    poll.punishments[index]=p;
+  }
+
+}
+Data.prototype.deletePunishment= function(pollId, index, p) {
+  const poll = this.polls[pollId];
+  console.log("punishments deleted", pollId, p);
+ const hej = "jag är här";
+  if (typeof poll !== 'undefined') {
+    console.log(hej);
+      poll.punishments.splice(index,1);
+
+    
+    
+  }
+  console.log("(deletePunishment)   lista efter delete: ", this.polls[pollId].punishments);
+}
+
+Data.prototype.getAllPunishments = function(pollId) {
+  const poll = this.polls[pollId];
+  if (typeof poll !== 'undefined') {
+    console.log("(getAllPunishments)  quiz-id and the punishments are now ", pollId, poll.punishments);
+    return poll.punishments;
+  }
+  return []
+}
+
 Data.prototype.getAnswers = function(pollId) {
   const poll = this.polls[pollId];
   if (typeof poll !== 'undefined') {

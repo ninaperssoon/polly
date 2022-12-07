@@ -69,11 +69,27 @@ function sockets(io, socket, data) {
     socket.emit('rewardUpdate', data.getAllRewards(d.pollId));
     
   });
-
- socket.on('sendPunishment', function(d) {
-    data.sendPunishment(d.pollId, {p: d.p});
-    socket.emit('dataUpdate', data.getAnswers(d.pollId));
+  socket.on('deleteReward', function(d) {
+    data.deleteReward(d.pollId, d.index, d.r);
+    socket.emit('rewardUpdate', data.getAllRewards(d.pollId));
+    
+  }); 
+  socket.on('sendPunishment', function(d) {
+    data.sendPunishment(d.pollId, d.index, d.p);
+    socket.emit('punishmentUpdate', data.getAllPunishments(d.pollId));
   });
+  socket.on('newPunishment', function(d) {
+    data.newPunishment(d.pollId);
+    socket.emit('punishmentUpdate', data.getAllPunishments(d.pollId));
+    
+  });
+  socket.on('deletePunishment', function(d) {
+    data.deletePunishment(d.pollId, d.index, d.p);
+    socket.emit('punishmentUpdate', data.getAllPunishments(d.pollId));
+    
+  }); 
+
+ 
 
   socket.on('addParticipant', function(d) {
     data.addParticipant(d.pollId, d.name);

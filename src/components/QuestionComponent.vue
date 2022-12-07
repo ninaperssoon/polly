@@ -1,6 +1,6 @@
 <template>
-<!-- <p>{{question.q}}</p> -->
-<button v-for="a in question.a" v-on:click="answer(a)" v-bind:key="a">
+<!-- <p>{{question.q}} {{question.s}}</p> -->
+<button v-for="(a,index) in question.a" v-on:click="answer(a,index)" v-bind:key="a">
   {{ a }}
 </button>
 </template>
@@ -12,8 +12,9 @@ export default {
   },
   emits: ["answer"],
   methods: {
-    answer: function (answer) {
-      this.$emit("answer", answer);
+    answer: function (answer,index) {
+      console.log(answer,index)
+      this.$emit("answer", {a: answer, index: index});
     } 
   }
 }

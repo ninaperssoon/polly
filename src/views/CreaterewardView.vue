@@ -1,49 +1,48 @@
 <template>
   <homeButton></homeButton>
   <div class="pollLink">
-      Poll link: 
-      <input type="text" v-model="pollId">
-      <button v-on:click="createPoll" id="pollButton">
-       Create poll
-      </button>
+    Poll link: 
+    <input type="text" v-model="pollId">
+    <button v-on:click="createPoll" id="pollButton">
+      Create poll
+    </button>
+  </div>
+
+  <div class="wrapper">
+ 
+    <div class="innerWrapper"  >
+
+      <Reward  v-for=" (reward, index) in rewards"
+      v-bind:reward= "reward"
+      v-bind:key="reward"
+      v-on:myReward="sendReward($event, index)"
+      v-on:deleteReward="deleteReward($event, index)"
+      message ="reward"
+      class="reward"/>
+
+      <button v-on:click="newReward" class="addButton">
+        +
+      </button> Add Reward
     </div>
 
- <div class="wrapper">
- <div>
- <div class="innerWrapper"  >
- <consequence  v-for=" (reward,index) in rewards"
-    v-bind:reward = "reward"
-    v-bind:key="reward"
-    v-on:myReward="sendReward($event, index)"
-    message ="reward"
-    class="reward"
-   />
-    
-    
-  </div>
-  <button v-on:click="newReward" class="addButton">
-        +
-   </button> Add Reward
-   <button v-on:click="sendReward" class="addButton">
-        +
-   </button> Save Reward
-</div>
 
-  
-
-  <!-- <div>
-   <div  class="innerWrapper" >
-    <consequence v-for=" punishment in punishments"
-    v-bind:punishment = "punishment"
-    v-bind:key="punishment"
-    message = "punishment"
-    class="punishment" />
-   </div>
-   <button v-on:click="addPunishment" class="addButton">
-        +
-    </button> Add Punishment
+    <div  class="innerWrapper" >
+      <Punishment v-for=" (punishment, index) in punishments"
+      v-bind:punishment = "punishment"
+      v-bind:key="punishment"
+      v-on:myPunishment="sendPunishment($event, index)"
+      v-on:deletePunishment="deletePunishment($event, index)"
+      message = "punishment"
+      class="punishment" />
     
-  </div> -->
+
+    
+      <button v-on:click="newPunishment" class="addButton">
+        +
+      </button> Add Punishment
+
+      
+    </div>
   </div>
   <div id="backButton">
     
@@ -60,27 +59,29 @@
 <script>
 import io from 'socket.io-client';
 import homeButton from '@/components/HomeComponent.vue';
-import consequence from '@/components/consequence.vue';
+//import consequence from '@/components/consequence.vue';
+import Reward from '@/components/RewardsComponent.vue';
+import Punishment from '@/components/PunishmentsComponent.vue';
 const socket = io();
 
 
 export default {
   name: 'CreaterewardView',
   components: {
-    homeButton, consequence
+    homeButton, 
+    //consequence,
+    Reward,
+    Punishment
   },
   data: function () {
     return {
       lang: "",
       pollId: "",
-      data: {},
       uiLabels: {},
       text: "",
-      consequences: {r: [], p:[]},
-      
+      //consequences: {r: [], p:[]},
       rewards: [],
-      punishment: "",
-      punishments: [""],
+      punishments: [],
     }
   },
   created: function () {
@@ -97,12 +98,15 @@ export default {
 
     socket.on("rewardUpdate", (data) =>{
       this.rewards= data
-      console.log("Skickade rewards från data:",data)
-      // this.question=this.questions.q 
-      // this.answers=this.questions.a
-    }
-      
-      )
+      console.log("Skickade rewards från data:", data)
+      console.log(this.rewards)
+    })
+    socket.on("punishmentUpdate", (data) =>{
+      this.punishments= data
+      console.log("Skickade punishments från data:", data)
+      console.log(this.punishments)
+    })
+
 
   },
   methods: {
@@ -110,98 +114,32 @@ export default {
       socket.emit("newReward", {pollId: this.pollId} )
       
     },
-    addPunishment: function () {
-      //socket.emit("addQuestion", {pollId: this.pollId, q: this.question, a: this.answers } )
-      this.punishments.push("")
-    },
     sendReward: function (event, index) {
-      console.log("reward: ", this.reward)
+      console.log("reward: ", event.r)
       socket.emit("sendReward", {pollId: this.pollId, index: index, r: event.r} )
       
     },
-    sendPunishment: function () {
-      socket.emit("sendPunishment", {pollId: this.pollId, r: this.punishments } )
-      console.log("punishment: ", this.punishment)
-    },
-    editPunishment: function(event, index){
-      //this.question=event.name;
-      //this.answers=event.answer;
-      console.log("editPunishent index: ", index);
-      socket.emit("editPunishment", {pollId: this.pollId, index: index, q: event.q, a: event.a, s: event.selected})
-    }, 
- 
 
-    
-
-    deletePunishment: function() {
-      this.punishments.pop("")
-    },
-
-     deleteAnswers: function() {
-      this.answers.pop("");
-      
-    },
-    runQuestion: function () {
-      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
-    },
-   
-    createPoll: function () {
-      socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
-      //socket.emit("anotherQuestion", {pollId: this.pollId})
-    },
-   // addQuestion: function (index) {
-
-       //socket.emit("addQuestion", {pollId: this.pollId, index: index, q: this.question, a: this.answers } )
-      
-   // },
-    newQuestion: function(){
-      socket.emit("anotherQuestion", {pollId: this.pollId})
-      console.log("NewQuestion", this.questions)
-
-    },
-    
-  
-    editQuestion: function(event, index){
-      //this.question=event.name;
-      //this.answers=event.answer;
-      console.log("editQuestion index: ", index);
-      socket.emit("editQuestion", {pollId: this.pollId, index: index, q: event.q, a: event.a, s: event.selected})
-    }, 
-   
-    // runQuestion: function () {
-    //   socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
-    // },
-    saveQuestion: function (event,index) {
-      //this.questionId = event.questionId;
-      //console.log(question.questionId)
-      // this.answers = event.answer;
-      // this.question = event.q;
-      // this.questions[index]={q: this.question,
-      //                       a: this.answers        
-      //                     }
-                          socket.emit("addQuestion", {pollId: this.pollId, index: index, q: event.q, a: event.a, s: event.selected} )                    
-      // this.addQuestion(index);
-      console.log(this.question) 
-      console.log(this.answers);
-      console.log(event.selected)
-    },
-    deleteQuestion: function(event,index){
-      // console.log(event.element);
-      // console.log(this.questions);
-      // var deleteIndex = this.questions.indexOf(event);
-      // console.log(deleteIndex);
+    deleteReward: function(event,index){
       console.log("det här är index: ", index);
-      //this.question=event.name;
-      //this.answers=event.answer;
-      //this.$delete(this.questions, index);
-      //this.questions.splice(index, 1);
-      socket.emit("deleteQuestion",{pollId: this.pollId, index: index, q: event.q, a: event.a, s: event.selected} )
-      console.log(this.questions);
+      socket.emit("deleteReward",{pollId: this.pollId, index: index, r: event.r} )
+      console.log(this.rewards);
        
-    }
-
-
-
+    },
+    newPunishment: function () {
+      socket.emit("newPunishment", {pollId: this.pollId} )
+      
+    },
+    sendPunishment: function (event, index) {
+      socket.emit("sendPunishment", {pollId: this.pollId, index: index, p: event.p } )
+      console.log("punishment: ", event.p)
+    },
+    deletePunishment: function(event,index){
+      console.log("det här är index: ", index);
+      socket.emit("deletePunishment",{pollId: this.pollId, index: index, p: event.p} )
+      console.log(this.punishments);
+       
+    },
 
   }
 }
