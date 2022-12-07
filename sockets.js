@@ -61,8 +61,13 @@ function sockets(io, socket, data) {
     socket.emit('dataUpdate', data.getAnswers(d.pollId));
   });
   socket.on('sendReward', function(d) {
-    data.sendReward(d.pollId, {r: d.r});
-    socket.emit('dataUpdate', data.getAnswers(d.pollId));
+    data.sendReward(d.pollId, d.index, d.r);
+    socket.emit('rewardUpdate', data.getAllRewards(d.pollId));
+  });
+  socket.on('newReward', function(d) {
+    data.newReward(d.pollId);
+    socket.emit('rewardUpdate', data.getAllRewards(d.pollId));
+    
   });
 
  socket.on('sendPunishment', function(d) {

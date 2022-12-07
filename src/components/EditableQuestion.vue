@@ -19,10 +19,10 @@
             -
         </button>
 
-        <button v-on:click="setCorectAnswer(i)"  >
+        <button v-on:click="setCorectAnswer(i)" >
           correct answer {{selectedAnswers}}
         </button>
-        <button v-on:click="setWrongAnswer(i)"  >
+        <button v-on:click="setWrongAnswer(i)" >
           wrong answer {{selectedAnswers}}
         </button>
         <br>
@@ -141,6 +141,7 @@ props: {
     setWrongAnswer: function(i){
         this.selectedAnswers[i] = "incorrect";
         this.wrongClicked=true;
+        console.log(this.wrongClicked)
     }
 
     }
@@ -240,6 +241,7 @@ props: {
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
+  background-color: aliceblue;
 }
 .red{
 background-color: red;

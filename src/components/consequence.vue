@@ -4,7 +4,13 @@
       <div id="inputReward">
         {{message}}
         <div id="rewardGrid">
-          <input type="text"  class="input" placeholder="Write your reward here...">
+          <input type="text"  class="input" placeholder="Write your reward here..." v-model="reward">
+
+
+          
+          <button v-on:click="sendRewards">
+                 Send Reward
+              </button>
           
           <button v-on:click="deleteReward" class="delButton">
             -
@@ -27,13 +33,17 @@ message: String,
 
 Data: function(){
     return{
-        reward :"",
+        reward : "",
         
 
     }
 
 },
 methods:{
+  sendRewards: function (){
+    this.$emit('myReward', {r: this.reward})
+    console.log("Sended reward: ",this.reward)
+  },
     deleteReward: function() {
       this.rewards.pop("")
     },

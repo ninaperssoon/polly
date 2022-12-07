@@ -125,12 +125,34 @@ Data.prototype.submitAnswer = function(pollId, answer) {
     console.log("answers looks like ", answers, typeof answers);
   }
 }
-Data.prototype.sendReward= function(pollId, r) {
+
+Data.prototype.newReward = function(pollId) {
   const poll = this.polls[pollId];
-  console.log("rewards added to", pollId, r);
   if (typeof poll !== 'undefined') {
-    poll.rewards.push(r);
+    poll.rewards.push("");
+    console.log("(newReward)    Lagt till en plats för ett nytt reward till quiz: ", poll.rewards);
   }
+  
+}
+
+Data.prototype.sendReward= function(pollId, index, r) {
+  const poll = this.polls[pollId];
+  console.log("rewards from added to", pollId, r);
+  if (typeof poll !== 'undefined') {
+    poll.rewards[index]=r;
+  }
+
+
+}
+
+
+Data.prototype.getAllRewards = function(pollId) {
+  const poll = this.polls[pollId];
+  if (typeof poll !== 'undefined') {
+    console.log("(getAllRewards)  quiz-id and the rewards are now ", pollId, poll.rewards);
+    return poll.rewards;
+  }
+  return []
 }
 Data.prototype.sendPunishment= function(pollId, p) {
   const poll = this.polls[pollId];
