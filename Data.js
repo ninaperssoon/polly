@@ -162,6 +162,20 @@ Data.prototype.addParticipant = function(pollId, name) {
     return poll.participants.push(name)
   }
 }
+Data.prototype.startedQuiz = function(pollId, participants) {
+  const poll = this.polls[pollId];
+  if (typeof poll !== 'undefined') {
+    return poll.participants
+  }
+}
+
+Data.prototype.getQuiz = function(pollId) {
+  const poll = this.polls[pollId];
+  if (typeof poll !== 'undefined') {
+    return poll.pollId
+  }
+}
+
 module.exports = Data;
 
 

@@ -74,6 +74,11 @@ function sockets(io, socket, data) {
     data.addParticipant(d.pollId, d.name);
     io.to(d.pollId).emit('participantUpdate', data.getParticipants(d.pollId));
    });
+
+  socket.on('startedQuiz', function(d) {
+    data.startedQuiz(d.pollId, d.participants);
+    io.to(d.pollId).emit('quizUpdate', data.getQuiz(d.pollId));
+   })
   
 }
 

@@ -62,6 +62,10 @@ const routes = [
   name: "HostQuizView",
   component: () => import('../views/HostQuizView.vue')
 },
+{ path: '/wait/:id/:lang/:name',
+  name: "WatiView",
+  component: () => import('../views/WaitView.vue')
+}
 ]
 
 const router = createRouter({
