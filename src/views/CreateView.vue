@@ -92,10 +92,11 @@ export default {
   methods: {
     createPoll: function () {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
+      socket.emit("anotherQuestion", {pollId: this.pollId})
     },
     addQuestion: function (index) {
 
-       socket.emit("addQuestion", {pollId: this.pollId, index, q: this.question, a: this.answers } )
+       socket.emit("addQuestion", {pollId: this.pollId, index: index, q: this.question, a: this.answers } )
       
     },
     newQuestion: function(){

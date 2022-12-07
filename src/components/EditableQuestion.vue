@@ -21,7 +21,7 @@
         <input type="checkbox" id="checked"  v-model="selectedAnswers">
         <br>
       </div>
-      Svarsalternativ: {{question}}
+      <!--Svarsalternativ: {{question}}-->
 
       <button v-on:click="addAnswer" id="addAnswerButton" value:answer>
           +

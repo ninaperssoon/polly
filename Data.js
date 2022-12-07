@@ -78,9 +78,9 @@ Data.prototype.editQuestion = function(pollId, index, newQuestion) {
 Data.prototype.anotherQuestion = function(pollId) {
   const poll = this.polls[pollId];
   if (typeof poll !== 'undefined') {
-    poll.questions.push([{ q: "",
-                           a: []
-                          }]);
+    poll.questions.push({ q: "",
+                           a: ["",""]
+                          });
     console.log("(anotherQuestion)    Lagt till en plats för ny fråga till quiz: ", poll.questions);
   }
   
