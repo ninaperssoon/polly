@@ -51,7 +51,7 @@
 
     <div id="nextButton">
     
-    <router-link v-bind:to="'/createq/'+lang"><img id="nextPic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcMPs6LqvZihgtDeHWZ95Q0mEyUCRo5H5aJA&usqp=CAU"/></router-link>
+    <router-link v-bind:to="'/createq/'+pollId+'/'+lang"><img id="nextPic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcMPs6LqvZihgtDeHWZ95Q0mEyUCRo5H5aJA&usqp=CAU"/></router-link>
     </div>
 
 </template>
@@ -85,6 +85,10 @@ export default {
     }
   },
   created: function () {
+
+    this.pollId = this.$route.params.id
+    socket.emit('joinPoll', this.pollId)
+
     this.lang = this.$route.params.lang;
     socket.emit("pageLoaded", this.lang);
     socket.on("init", (labels) => {

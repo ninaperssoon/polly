@@ -43,7 +43,7 @@ const routes = [
     name: 'MyquizzesView',
     component: () => import('../views/MyquizzesView.vue')
   },
-  { path: '/createq/:lang',
+  { path: '/createq/:id/:lang',
     name:'CreaterewardView',
     component: () => import('../views/CreaterewardView.vue')
 
