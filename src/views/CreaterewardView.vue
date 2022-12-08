@@ -46,7 +46,7 @@
   </div>
   <div id="backButton">
     
-    <router-link v-bind:to="'/creater/'+lang"><img id="backPic" src="https://freesvg.org/img/pitr_green_arrows_set_4.png"/></router-link>
+    <router-link v-bind:to="'/create/'+lang"><img id="backPic" src="https://freesvg.org/img/pitr_green_arrows_set_4.png"/></router-link>
     </div>
 
     <div id="nextButton">

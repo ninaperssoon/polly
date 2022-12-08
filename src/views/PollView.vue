@@ -29,8 +29,6 @@
 // @ is an alias to /src
 import QuestionComponent from '@/components/QuestionComponent.vue';
 import io from 'socket.io-client';
-// import rewards from '@/CreaterewardView.vue';
-// import punishments from '@/CreaterewardView.vue';
 
 const socket = io();
 
@@ -53,6 +51,8 @@ export default {
       ans: "correct",
       con: "punishment" ,
       name: "",
+      rewards: [],
+      punishments: [],
     }
   },
   created: function () {
@@ -68,7 +68,13 @@ export default {
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
- 
+
+    socket.on("getPollRewards", (data) =>
+      this.rewards = data
+    )
+    socket.on("getPollPunishments", (data) =>
+      this.punishments = data
+    )
   },
   methods: {
     submitAnswer: function (answer) {
@@ -76,11 +82,13 @@ export default {
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer.a})
       this.cardOne == 'start' ? (this.cardOne = 'flipped' ) : (this.cardOne = 'start' );
       this.ans = this.question.s[answer.index];
+
       if (this.ans == 'correct') {
         this.con = "reward"
       }
       const buttonContainer = document.getElementById('buttonContainer');
       buttonContainer.remove();
+      console.log(this.rewards)
       
     },
     
