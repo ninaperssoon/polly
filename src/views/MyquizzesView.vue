@@ -7,7 +7,9 @@
       </div>
 
         <div id="myQuizzes" v-for="(contain, id) in quizzes" v-bind:key="id">{{id}} 
-          <router-link v-bind:to="('/create/'+lang+'/'+id)"> Edit </router-link>
+          <router-link class="button" v-bind:to="('/create/'+lang+'/'+id)"> Edit </router-link>
+          <router-link class="button" v-bind:to="('/host/'+id+'/'+lang)"> Host this quiz </router-link>
+
           
         
         
@@ -65,11 +67,13 @@ export default {
   body {
     margin: auto;
     background-color: #BCD8C1;
+   
   }
   div {
     margin: auto;
     border-radius: 2em;
     height: 3.17em;
+    
   }
   section {
     height:35em;
@@ -86,6 +90,7 @@ export default {
   
 
   #create {
+    color:black;
     margin-top: 100em;
     padding: 1em;
     height: 0.8em; 
@@ -102,6 +107,21 @@ export default {
     box-shadow: 0 5px 15px #439A86;
 
   }
-  
+  .button {
+    color:black;
+    margin: 1em;
+    text-decoration: none; 
+    background-color: rgb(235, 209, 106);
+    padding: 0.5em;
+    border-radius: 3em;
+    border-style: outset;
+    border-color: rgba(235, 209, 106, 0.689);
+  }
+
+  .button:hover {
+    box-shadow: 0 5px 15px #0079918f;
+    transform: translateY(-2px);
+
+  }
   
 </style>

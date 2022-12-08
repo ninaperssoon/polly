@@ -2,7 +2,7 @@
   <body>
     <div>
 
-      hosting a quiz
+      hosting the quiz: {{id}}
       <p v-for="participant in participants" v-bind:key = "participant">
       {{participant}}
     </p>
