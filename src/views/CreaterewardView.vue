@@ -1,12 +1,6 @@
 <template>
   <homeButton></homeButton>
-  <div class="pollLink">
-    Poll link: 
-    <input type="text" v-model="pollId">
-    <button v-on:click="createPoll" id="pollButton">
-      Create poll
-    </button>
-  </div>
+  
 
   <div class="wrapper">
  
