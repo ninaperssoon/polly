@@ -242,6 +242,10 @@ Data.prototype.getQuiz = function(pollId) {
   }
 }
 
+Data.prototype.getQuizzes = function () {
+  return this.polls
+  }
+
 module.exports = Data;
 
 

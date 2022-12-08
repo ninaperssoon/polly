@@ -1,12 +1,6 @@
 <template>
   <homeButton></homeButton>
-  <div class="pollLink">
-    Poll link: 
-    <input type="text" v-model="pollId">
-    <button v-on:click="createPoll" id="pollButton">
-      Create poll
-    </button>
-    </div>
+ 
 
 
  <div>
@@ -45,9 +39,6 @@ import Question from '@/components/EditableQuestion.vue';
 
 const socket = io();
 
-
-
-
 export default {
   name: 'CreateView',
   components: {
@@ -64,6 +55,7 @@ export default {
     }
   },
   created: function () {
+    this.pollId = this.$route.params.id;
     this.lang = this.$route.params.lang;
     socket.emit("pageLoaded", this.lang);
     socket.on("init", (labels) => {
@@ -89,6 +81,7 @@ export default {
       socket.emit("anotherQuestion", {pollId: this.pollId})
     },
     newQuestion: function(){
+      console.log(this.pollId)
       socket.emit("anotherQuestion", {pollId: this.pollId})
       console.log("NewQuestion", this.questions)
 
@@ -118,7 +111,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 button:hover {
   background-color:lightgreen;
   cursor:pointer;
@@ -147,16 +140,6 @@ button:hover {
   margin-top: 1em;
   border-radius: 1em;
 }
-
-
-
-
-
-
-
-
-
-
 
 #deleteAnswerButton {
   height: 2em;

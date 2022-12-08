@@ -5,17 +5,23 @@
       <div>
       <h1>{{uiLabels.myQuizzes}}</h1>
       </div>
-      <div id="myQuizzes">
-        här dyker mina quizzes upp när jag faktiskt  har skapat dom... i någin slags loop
 
-        <!-- <button v-for="(a,index) in question.a" v-on:click="answer(a,index)" v-bind:key="a">
-        {{ a }}
-        </button> -->
-      </div>
+        <div id="myQuizzes" v-for="(contain, id) in quizzes" v-bind:key="id">{{id}} 
+          <router-link v-bind:to="('/create/'+lang+'/'+id)"> Edit </router-link>
+          
+        
+        
+        </div>
+
+      
+
+        <!-- <router-link  v-bind:to="('/create/'+lang+'/'+id)">{{uiLabels.joinQuiz}}</router-link> -->
+
+
     </section>
 
     <div>       
-         <router-link id="create" v-bind:to="'/create/'+lang">{{uiLabels.createQuiz}}</router-link>
+         <router-link id="create" v-bind:to="('/create/'+lang+'/'+id)">{{uiLabels.createQuiz}}</router-link>
       </div>
       <div></div>
   </body>
@@ -37,14 +43,17 @@ export default {
   data: function () {
     return {
       uiLabels: {},
-      id: "",
+      id: "hej",
       lang: "en",
-      hideNav: true
+      quizzes: {},
+
     }
   },
   created: function () {
     this.lang = this.$route.params.lang;
     socket.emit("pageLoaded", this.lang);
+    socket.emit("getQuizzes");
+    socket.on("sendQuizzes", (quizzes) => this.quizzes = quizzes);
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
@@ -67,8 +76,9 @@ export default {
   }
 
   #myQuizzes {
+    margin-top: 2em;
     padding: 2em;
-    height: 20em;
+    height: 2em;
     width: 40em;
     background-color:#0079918f;
 
