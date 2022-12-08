@@ -115,8 +115,11 @@ Data.prototype.submitAnswer = function(pollId, answer) {
     let answers = poll.answers[poll.currentQuestion];
     if (typeof answers !== 'object') {
       answers = {};
-      answers[answer] = 1;
-      poll.answers.push(answers);
+      console.log("ans:"+ poll.questions[0].a);
+      console.log("q" + poll.questions[0].q);
+      console.log("s"+ poll.questions[0].s);
+      
+     
     }
     else if (typeof answers[answer] === 'undefined')
       answers[answer] = 1;
