@@ -1,12 +1,15 @@
 <template>
   <body>
     <homeButton></homeButton>
+
+    
     <section>
       <h1>{{uiLabels.hostQuiz}}</h1>
       <div id="host">
         <p> {{uiLabels.writeQuizId}}: 
           <br>
           <input type="text" v-model="id">  </p>
+          
         
         
               

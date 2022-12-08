@@ -92,9 +92,10 @@ function sockets(io, socket, data) {
     
   }); 
 
- 
-
   socket.on('addParticipant', function(d) {
+    console.log("--- addParticipant i socket.js ---")
+    console.log("d: ", d)
+
     data.addParticipant(d.pollId, d.name);
     io.to(d.pollId).emit('participantUpdate', data.getParticipants(d.pollId));
    });
@@ -103,6 +104,12 @@ function sockets(io, socket, data) {
     data.startedQuiz(d.pollId, d.participants);
     io.to(d.pollId).emit('quizUpdate', data.getQuiz(d.pollId));
    })
+
+  socket.on("getQuizzes", function() {
+    
+    socket.emit("sendQuizzes", data.getQuizzes());
+
+  })
   
 }
 

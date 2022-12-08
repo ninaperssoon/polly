@@ -22,7 +22,7 @@
 
     </div>
   </div>
-  <button v-on:click="nextQuestion">
+  <button v-on:click="nextQuestion" >
     Next Question
   </button>
  

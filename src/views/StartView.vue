@@ -5,7 +5,7 @@
     <div v-bind:class="['hamburger', {'close': !hideNav}]" 
          v-on:click="toggleNav">
     </div>
-    <div class="logo">My super quiz</div>
+    <div class="logo"> punishment play: the flip </div>
   </header>
   <ResponsiveNav v-bind:hideNav="hideNav">
     <img id="flag" v-bind:src=uiLabels.languageFlag v-on:click="switchLanguage">
@@ -49,6 +49,7 @@ export default {
     }
   },
   created: function () {
+    socket.emit("pageLoaded", this.lang)
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
