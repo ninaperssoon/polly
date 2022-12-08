@@ -5,27 +5,28 @@
 
  <div>
    <Question v-for="(question,index) in questions" 
-      v-bind:question="question"
-      v-bind:key="question.q"
-      v-on:myquestion="saveQuestion($event, index)"
-      v-on:deleteIndex="deleteQuestion($event,index)"
-      v-on:deleteAnswer="editQuestion($event, index)"
-      :questionNumber = index > 
-    </Question>
+   v-bind:question="question"
+  v-bind:key="question.q"
+  v-on:myquestion="saveQuestion($event, index)"
+  v-on:deleteIndex="deleteQuestion($event,index)"
+  v-on:deleteAnswer="editQuestion($event, index)"
+  :questionNumber = index > </Question>
  
-    <button v-on:click="newQuestion">
-      Add question
-    </button>
+  <button v-on:click="newQuestion">
+        Add question
+  </button>
 
-    <div id="backButton">
-      <router-link v-bind:to="'/start/'+lang"><img id="backPic" src="https://freesvg.org/img/pitr_green_arrows_set_4.png"/></router-link>
+  <div id="backButton">
+    
+    <router-link v-bind:to="'/start/'+lang"><img id="backPic" src="https://freesvg.org/img/pitr_green_arrows_set_4.png"/></router-link>
     </div>
 
-    <div id="nextButton">
-      <router-link v-bind:to="'/createq/'+pollId+'/'+lang"><img id="nextPic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcMPs6LqvZihgtDeHWZ95Q0mEyUCRo5H5aJA&usqp=CAU"/></router-link>
-    </div>
-  
+<div id="nextButton">
+    
+  <router-link v-bind:to="'/createq/'+lang"><img id="nextPic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcMPs6LqvZihgtDeHWZ95Q0mEyUCRo5H5aJA&usqp=CAU"/></router-link>
   </div>
+  
+</div>
 
 
 
@@ -51,6 +52,9 @@ export default {
       pollId: "",
       questions: [],
       uiLabels:{},
+      //answers: {},
+      //question: "",
+      //questionId: '',
       
     }
   },
@@ -70,6 +74,8 @@ export default {
     socket.on("updateQuestions", (data) =>{
       this.questions= data
       console.log("Skickade frågor från data:",data)
+      // this.question=this.questions.q 
+      // this.answers=this.questions.a
     }
       
       )
@@ -80,6 +86,11 @@ export default {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
       socket.emit("anotherQuestion", {pollId: this.pollId})
     },
+   // addQuestion: function (index) {
+
+       //socket.emit("addQuestion", {pollId: this.pollId, index: index, q: this.question, a: this.answers } )
+      
+   // },
     newQuestion: function(){
       console.log(this.pollId)
       socket.emit("anotherQuestion", {pollId: this.pollId})
@@ -89,6 +100,8 @@ export default {
     
   
     editQuestion: function(event, index){
+      //this.question=event.name;
+      //this.answers=event.answer;
       console.log("editQuestion index: ", index);
       socket.emit("editQuestion", {pollId: this.pollId, index: index, q: event.q, a: event.a, s: event.selected})
     }, 
@@ -97,12 +110,30 @@ export default {
     //   socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
     // },
     saveQuestion: function (event,index) {
-      socket.emit("addQuestion", {pollId: this.pollId, index: index, q: event.q, a: event.a, s: event.selected} )                    
+      //this.questionId = event.questionId;
+      //console.log(question.questionId)
+      // this.answers = event.answer;
+      // this.question = event.q;
+      // this.questions[index]={q: this.question,
+      //                       a: this.answers        
+      //                     }
+                          socket.emit("addQuestion", {pollId: this.pollId, index: index, q: event.q, a: event.a, s: event.selected} )                    
+      // this.addQuestion(index);
+      console.log(this.question) 
+      console.log(this.answers);
       console.log(event.selected)
     },
     deleteQuestion: function(event,index){
+      // console.log(event.element);
+      // console.log(this.questions);
+      // var deleteIndex = this.questions.indexOf(event);
+      // console.log(deleteIndex);
       console.log("det här är index: ", index);
-      socket.emit("deleteQuestion",{pollId: this.pollId, index: index, q: event.q, a: event.a, s: event.selected} );
+      //this.question=event.name;
+      //this.answers=event.answer;
+      //this.$delete(this.questions, index);
+      //this.questions.splice(index, 1);
+      socket.emit("deleteQuestion",{pollId: this.pollId, index: index, q: event.q, a: event.a, s: event.selected} )
       console.log(this.questions);
        
     }
