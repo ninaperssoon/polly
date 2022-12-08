@@ -44,10 +44,23 @@
     </div>
 
     <div id="nextButton">
-    
-    <router-link v-bind:to="'/createq/'+pollId+'/'+lang"><img id="nextPic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcMPs6LqvZihgtDeHWZ95Q0mEyUCRo5H5aJA&usqp=CAU"/></router-link>
+      <router-link v-bind:to="'/host/'+pollId+'/'+lang" > 
+        <button id="submitButton" v-on:click="sendPollIdToH()">
+      Test Quiz
+      </button > </router-link>
+      </div>
+
+
+
+    <div id="nextButton">
+    <router-link v-bind:to="'/start/'+lang"> <button id="submitButton" >
+    Save and Quit
+    </button> </router-link>
     </div>
 
+    
+
+   
 </template>
 
 <script>
@@ -138,6 +151,9 @@ export default {
       console.log(this.punishments);
        
     },
+    sendPollIdToH: function(){
+      socket.emit("comenceQuiz",{pollId: this.pollId});
+    }
 
   }
 }
@@ -164,7 +180,7 @@ button:hover {
 .wrapper {
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 1fr 1fr;
   margin-top: 5em;
 
 }
@@ -202,23 +218,14 @@ border-radius: 1em;
 
  
 
-#inputPunishment {
-  margin: 2em 2em 2em 2em;
-  padding-right: 2em;
-}
+
 
 .deleteB:hover {
   background-color: salmon;
   cursor:pointer;
 }
 
-#deleteQuestions {
-  width: 5em;
-  height: 5em;
-  margin-left: 80em;
-  border-radius: 2em;
-  border-radius: 1em;
-}
+
 
 
 
@@ -271,5 +278,15 @@ row-gap: 1 em;
   padding: 20 em;
   
 }
+#submitButton{
+  background-color: antiquewhite;
+  color: crimson;
+  
+
+}
+#submitButton:hover{
+  background-color: brown;
+}
+
 
 </style>

@@ -64,6 +64,7 @@ height: 8em;
 }
 
 #rewardGrid {
+  
   display: grid;
   grid-gap: 10px;
   grid-template-columns: 90% 10%;
