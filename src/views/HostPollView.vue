@@ -22,6 +22,9 @@
 
     </div>
   </div>
+  <button v-on:click="nextQuestion">
+    Next Question
+  </button>
  
 
 </template>
@@ -54,6 +57,7 @@ export default {
       ans: "correct",
       con: "punishment" ,
       name: "",
+      questionNumber: 1,
     }
   },
   created: function () {
@@ -81,6 +85,10 @@ export default {
       const buttonContainer = document.getElementById('buttonContainer');
       buttonContainer.remove();
     },
+    nextQuestion: function (){
+      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber});
+      this.questionNumber= this.questionNumber +1;
+    }
    
   }
 }

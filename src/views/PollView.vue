@@ -11,7 +11,7 @@
         </div>
         <div class="card__face card__face--back" v-bind:class="{ correct: ans == 'correct'}">
         <p id="correctness"> {{this.ans}}! </p>
-        <p> Your {{this.con}} is </p>
+        <p> Your {{this.con}} is {{this.consequence}} </p>
         </div>
       </div>
       <div id="buttonContainer">  
@@ -53,6 +53,7 @@ export default {
       name: "",
       rewards: [],
       punishments: [],
+      consequence: ""
     }
   },
   created: function () {
@@ -70,7 +71,9 @@ export default {
     })
 
     socket.on("getPollRewards", (data) =>
-      this.rewards = data
+      this.rewards = data,
+      console.log(this.rewards)
+
     )
     socket.on("getPollPunishments", (data) =>
       this.punishments = data
@@ -85,6 +88,10 @@ export default {
 
       if (this.ans == 'correct') {
         this.con = "reward"
+        this.consequence = this.rewards[Math.floor(Math.random() * (this.rewards.length))]
+      }
+      else {
+        this.consequence = this.punishments[Math.floor(Math.random() * (this.punishments.length))]
       }
       const buttonContainer = document.getElementById('buttonContainer');
       buttonContainer.remove();
