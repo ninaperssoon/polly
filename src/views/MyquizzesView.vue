@@ -7,6 +7,10 @@
       </div>
       <div id="myQuizzes">
         här dyker mina quizzes upp när jag faktiskt  har skapat dom... i någin slags loop
+
+        <!-- <button v-for="(a,index) in question.a" v-on:click="answer(a,index)" v-bind:key="a">
+        {{ a }}
+        </button> -->
       </div>
     </section>
 
@@ -66,7 +70,8 @@ export default {
     padding: 2em;
     height: 20em;
     width: 40em;
-    background-color: blue;
+    background-color:#0079918f;
+
   }
   
 

@@ -4,9 +4,9 @@
   <div>
     <div id="question" >
       <div id="inputQuestion">
-        <h2>Fråga: {{questionNumber +1}}</h2> 
+        <h2>Question: {{questionNumber +1}}</h2> 
         <input type="text" v-model="q" class="input" placeholder="Write your question here...">
-        <br>
+        <br> 
       </div>
       
 
@@ -20,10 +20,10 @@
           </button>
 
           <button v-on:click="setCorectAnswer(i)" >
-            correct answer {{selectedAnswers}}
+            correct answer 
           </button>
           <button v-on:click="setWrongAnswer(i)" >
-            wrong answer {{selectedAnswers}}
+            wrong answer 
           </button>
           <br>
         </div>
@@ -105,11 +105,11 @@ export default{
     },
     setCorectAnswer: function(i){
       this.selectedAnswers[i] = 'correct';
-      this.altColor[i] = "green";  
+      this.altColor[i] = "lightgreen";  
     },
     setWrongAnswer: function(i){
       this.selectedAnswers[i] = 'incorrect';
-      this.altColor[i] = "red";   
+      this.altColor[i] = "salmon";   
     }
 
   }
@@ -210,12 +210,6 @@ export default{
   margin: 8px 0;
   box-sizing: border-box;
   background-color: aliceblue;
-}
-.red{
-background-color: red;
-}
-.green{
-  background-color: green;
 }
 
 
