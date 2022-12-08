@@ -15,15 +15,18 @@
         <p> Your {{this.con}} is </p>
         </div>
       </div>
-      <div id="buttonContainer">  
+      <!-- <div id="buttonContainer">  
         <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" />      
       
-    </div>
+    </div> -->
 
     </div>
   </div>
   <button v-on:click="nextQuestion">
     Next Question
+  </button>
+  <button v-on:click="resetQuiz">
+    resetQuiz
   </button>
  
 
@@ -31,7 +34,7 @@
 
 <script>
 // @ is an alias to /src
-import QuestionComponent from '@/components/QuestionComponent.vue';
+// import QuestionComponent from '@/components/QuestionComponent.vue';
 import io from 'socket.io-client';
 // import rewards from '@/CreaterewardView.vue';
 // import punishments from '@/CreaterewardView.vue';
@@ -41,7 +44,7 @@ const socket = io();
 export default {
   name: 'HostPollView',
   components: {
-    QuestionComponent,    
+    // QuestionComponent,    
   },
   data: function () {
     return {
@@ -88,6 +91,10 @@ export default {
     nextQuestion: function (){
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber});
       this.questionNumber= this.questionNumber +1;
+    },
+    resetQuiz: function (){
+      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: 0});
+      this.questionNumber=1;
     }
    
   }

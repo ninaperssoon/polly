@@ -15,7 +15,7 @@
         </div>
       </div>
       <div id="buttonContainer">  
-        <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" />      
+        <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" v-if="visibleButtons"/>      
       
     </div>
 
@@ -53,14 +53,23 @@ export default {
       name: "",
       rewards: [],
       punishments: [],
-      consequence: ""
+      consequence: "",
+      visibleButtons: true,
     }
   },
   created: function () {
     this.pollId = this.$route.params.id
     socket.emit('joinPoll', this.pollId)
-    socket.on("newQuestion", q =>
+    socket.on("newQuestion", q =>{
       this.question = q
+      console.log(this.cardOne)
+      if (this.cardOne !== "start"){
+        console.log("här är jag")
+        this.cardOne = 'start';
+        this.visibleButtons=true;
+        
+      }
+    }
     )
     
     this.lang = this.$route.params.lang;
@@ -70,10 +79,10 @@ export default {
       this.uiLabels = labels
     })
 
-    socket.on("getPollRewards", (data) =>
-      this.rewards = data,
+    socket.on("getPollRewards", (data) => {
+      this.rewards = data
       console.log(this.rewards)
-
+    }
     )
     socket.on("getPollPunishments", (data) =>
       this.punishments = data
@@ -93,8 +102,7 @@ export default {
       else {
         this.consequence = this.punishments[Math.floor(Math.random() * (this.punishments.length))]
       }
-      const buttonContainer = document.getElementById('buttonContainer');
-      buttonContainer.remove();
+      this.visibleButtons=false;
       console.log(this.rewards)
       
     },
