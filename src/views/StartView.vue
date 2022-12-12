@@ -1,15 +1,17 @@
 <template>
   <body>
-    
+    <ResponsiveNav v-bind:hideNav="hideNav" id="navDiv">
+    <img id="flag" v-bind:src=uiLabels.languageFlag v-on:click="switchLanguage">
+  </ResponsiveNav>
   <header>
     <div v-bind:class="['hamburger', {'close': !hideNav}]" 
          v-on:click="toggleNav">
     </div>
-    <div class="logo"> Flip or Flop </div>
+    <!-- <div class="logo"> punishment play: the flip. Also known as "Flip or Flop"  </div> -->
+    <h1 data-shadow='Flip or Flop!'>Flip or Flop!</h1>
+
   </header>
-  <ResponsiveNav v-bind:hideNav="hideNav">
-    <img id="flag" v-bind:src=uiLabels.languageFlag v-on:click="switchLanguage">
-  </ResponsiveNav>
+  
   <section>
     <div class="wrapper">
   
@@ -70,14 +72,17 @@ export default {
 }
 </script>
 <style scoped>
+
   body {
     margin: 0;
-    background-color: #BCD8C1;
+    background-color: #A6E9A3;
+    font-family: 'Courier New', Courier, monospace;
   }
   header {
     width: 100%;
     display: grid;
     grid-template-columns: 2em auto;
+
   }
   footer {
     height: 8.6em;
@@ -110,21 +115,25 @@ export default {
   }
   .wrapper {
     margin-top: 7em;
-    margin-left: 17em;
+    margin-left: 12.5em;
     display: grid;
     grid-gap: 1.2em;
     grid-template-columns: 15em 15em 15em 15em;
     grid-template-rows: 5em 5em 5em 5em;
+    
   }
   .startchoice {
-    color: black;
     text-decoration: none; 
     padding: 2em;
-    background-color: #007991;
+    background-color: #5C95FF;
     border-radius: 3em;
     font-size: 2em;
     border-style: outset;
     border-color: #0079918f;
+
+    color: #FFF1AD;
+    font-family: 'Righteous', serif;
+    text-shadow: .05em .05em 0 rgb(77, 94, 179);
   }
   .startchoice:hover {
     box-shadow: 0 5px 15px #439A86;
@@ -160,6 +169,7 @@ export default {
     padding: 0.8em;
     background-color: #FFF1AD;
     border-color: #fff1adbd;
+    color: #F87575;
   }
 
 @media screen and (max-width:50em) {
@@ -185,5 +195,43 @@ export default {
   height: 3em;
   cursor: pointer;
 }
+
+#navDiv {
+  background-color: #A6E9A3;
+}
+
+
+
+@import url(https://fonts.googleapis.com/css?family=Righteous);
+
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  }
+
+html, body {
+  height: 100%;
+  }
+  body {
+    text-align: center;
+    }
+  body:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 0;
+    height: 100%;
+    }
+
+h1 {
+  display: inline-block;
+  color: white;
+  font-family: 'Righteous', serif;
+  font-size: 8em; 
+  text-shadow: .08em .08em 0 #4779d6;
+  }
+
 
 </style>

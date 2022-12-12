@@ -10,8 +10,8 @@
           <p v-if="(this.question!= null)">{{this.question.q}} </p>
           <p v-else>You have reached the end of the quiz!
             <br>
-            <router-link class="button" v-bind:to="('/join/'+lang)"> Join another quiz </router-link>
-            <router-link class="button" v-bind:to="('/')"> Return to homepage </router-link>
+            <router-link class="button" v-bind:to="('/join/'+lang)">Join another quiz</router-link>
+            <router-link class="button" v-bind:to="('/')">Return to homepage</router-link>
 
           </p>
           
