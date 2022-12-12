@@ -5,7 +5,7 @@
     <div v-bind:class="['hamburger', {'close': !hideNav}]" 
          v-on:click="toggleNav">
     </div>
-    <div class="logo"> punishment play: the flip. Also known as "Flip or Flop" </div>
+    <div class="logo"> Flip or Flop </div>
   </header>
   <ResponsiveNav v-bind:hideNav="hideNav">
     <img id="flag" v-bind:src=uiLabels.languageFlag v-on:click="switchLanguage">
