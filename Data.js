@@ -99,6 +99,18 @@ Data.prototype.getQuestion = function(pollId, qId=null) {
   }
   return []
 }
+Data.prototype.getParticipant = function(pollId){
+  const poll = this.polls[pollId];
+  if (typeof poll !== 'undefined'){
+    if (poll.participants !== [])
+    console.log("hoppat in i loopen")
+    console.log(poll.participants)
+    return poll.participants[Math.floor(Math.random() * (poll.participants.length))];
+  }
+  return[]
+  
+  
+}
 Data.prototype.getAllQuestions = function(pollId) {
   const poll = this.polls[pollId];
   if (typeof poll !== 'undefined') {
@@ -221,6 +233,7 @@ Data.prototype.getAnswers = function(pollId) {
 Data.prototype.getParticipants = function(pollId) {
   const poll = this.polls[pollId];
   if (typeof poll !== 'undefined') {
+    console.log("getParticipants", poll.participants)
     return poll.participants
   }
   return []
@@ -228,13 +241,16 @@ Data.prototype.getParticipants = function(pollId) {
 Data.prototype.addParticipant = function(pollId, name) {
   const poll = this.polls[pollId];
   if (typeof poll !== 'undefined') {
+
     return poll.participants.push(name)
   }
 }
 Data.prototype.startedQuiz = function(pollId, participants) {
   const poll = this.polls[pollId];
   if (typeof poll !== 'undefined') {
+    console.log("startedQuiz innan: ", poll.participants)
     poll.participants = participants
+    console.log("efter: ", poll.participants)
   }
 }
 
@@ -248,7 +264,9 @@ Data.prototype.getQuiz = function(pollId) {
 Data.prototype.getQuizzes = function () {
   return this.polls
   }
-
+  Data.prototype.getFlip = function (wor, con, consequence) {
+    return {wor: wor, con: con, consequence: consequence}
+    }
 module.exports = Data;
 
 

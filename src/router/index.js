@@ -76,6 +76,11 @@ const routes = [
   name: 'HostPollView',
   component: () => import(/* webpackChunkName: "about" */ '../views/HostPollView.vue')
 },
+{
+  path: '/obs/:id/:lang/:name',
+  name: 'ObsView',
+  component: () => import('../views/ObsView.vue')
+},
 ]
 
 const router = createRouter({

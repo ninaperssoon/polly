@@ -42,16 +42,19 @@ function sockets(io, socket, data) {
     socket.emit('dataUpdate', data.getAnswers(pollId));
     socket.emit("getPollRewards", data.getAllRewards(pollId));
     socket.emit("getPollPunishments", data.getAllPunishments(pollId));
+    //io.to(pollId).emit('answeringParticipant', data.getParticipant(pollId));
   });
 
   socket.on('runQuestion', function(d) {
     io.to(d.pollId).emit('newQuestion', data.getQuestion(d.pollId, d.questionNumber));
+    io.to(d.pollId).emit('answeringParticipant', data.getParticipant(d.pollId));
     io.to(d.pollId).emit('dataUpdate', data.getAnswers(d.pollId));
   });
   
   socket.on('submitAnswer', function(d) {
     data.submitAnswer(d.pollId, d.answer);
     io.to(d.pollId).emit('dataUpdate', data.getAnswers(d.pollId));
+    io.to(d.pollId).emit('flipUpdate', data.getFlip(d.wor, d.con, d.consequence))
     
   });
 
@@ -99,10 +102,14 @@ function sockets(io, socket, data) {
     data.addParticipant(d.pollId, d.name);
     io.to(d.pollId).emit('participantUpdate', data.getParticipants(d.pollId));
    });
+   socket.on('firstParticipant', function(pollId){
+    io.to(pollId).emit('answeringParticipant', data.getParticipant(pollId));
+   } );
 
   socket.on('startedQuiz', function(d) {
     data.startedQuiz(d.pollId, d.participants);
     io.to(d.pollId).emit('quizUpdate', data.getQuiz(d.pollId));
+    // io.to(d.pollId).emit('answeringParticipant', data.getParticipant(d.pollId));
    })
 
   socket.on("getQuizzes", function() {

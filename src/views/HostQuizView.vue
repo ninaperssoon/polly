@@ -43,11 +43,14 @@ export default {
       this.uiLabels = labels
     })
     socket.on("participantUpdate", (participants) => {
+      console.log
       this.participants = participants
+      console.log("efter Update: ", this.participants)
     })
   },
   methods: {
     startQuiz: function() {
+      console.log("Host Started quiz", this.participants)
       this.$router.push('/poll/'+this.id+'/'+this.lang+'/'+this.name)
       socket.emit("startedQuiz",{ pollId: this.id, 
                                   participants: this.participants }

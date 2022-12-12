@@ -9,7 +9,7 @@
       
         <div class="card__face card__face--front">
 
-         <p v-if="(this.question != null)">{{this.question.q}}</p> 
+         <p v-if="(this.question != null)">{{this.question.q}} <br> {{this.playingName}} is answering</p> 
           <p v-else>You have reached the end of the quiz!
             <br>
             <router-link class="button" v-bind:to="('/myquizzes/'+lang)"> Host another quiz </router-link>
@@ -18,8 +18,7 @@
 
         </div>
         <div class="card__face card__face--back" v-bind:class="{ correct: ans == 'correct'}">
-        <p id="correctness"> {{this.ans}}! </p>
-        <p> Your {{this.con}} is </p>
+        <p > <span id="correctness"> {{this.ans}}! </span> <br> {{this.playingName}}'s {{this.con}} is {{this.consequence}}</p>
         </div>
       </div>
       <!-- <div id="buttonContainer">  
@@ -70,20 +69,34 @@ export default {
       con: "punishment" ,
       name: "",
       questionNumber: 1,
+      consequence: "",
+      playingName: "",
     }
   },
   created: function () {
     this.pollId = this.$route.params.id
     socket.emit('joinPoll', this.pollId)
-    socket.on("newQuestion", q =>
+    socket.emit('firstParticipant', this.pollId)
+    socket.on("newQuestion", q =>{
       this.question = q
-    )
+     } )
     
     this.lang = this.$route.params.lang;
     socket.emit("pageLoaded", this.lang);
     this.name = this.$route.params.name;
     socket.on("init", (labels) => {
       this.uiLabels = labels
+    })
+    socket.on("flipUpdate", data =>{
+      this.ans = data.wor
+      this.con = data.con
+      this.consequence= data.consequence
+      this.cardOne = 'flipped'
+    })
+    socket.on("answeringParticipant", (data) =>{
+      this.playingName=data
+      console.log("answeringParticipant:  ", data)
+      console.log(this.playingName)
     })
  
   },
@@ -100,15 +113,18 @@ export default {
     
     nextQuestion: function (){
     
-        socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber});
-        this.questionNumber= this.questionNumber +1;
-      
-
-    
+      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber});
+      this.questionNumber= this.questionNumber +1;
+      if (this.cardOne !== "start"){
+        this.cardOne = 'start';
+      }
     },
     resetQuiz: function (){
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: 0});
       this.questionNumber=1;
+      if (this.cardOne !== "start"){
+        this.cardOne = 'start';
+      }
     }
    
   }

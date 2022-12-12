@@ -1,13 +1,14 @@
 <template>
-   <h1> {{uiLabels.yourePlaying}} {{pollId}} </h1> 
+   <h1> {{uiLabels.yourePlaying}} {{pollId}} Alla hamnar här </h1> 
 
   <div class="container">
     <div class="scene scene--card">
       <div class="card" v-bind:class="{ flipme: cardOne == 'flipped' }">
       
         <div class="card__face card__face--front">
+
           
-          <p v-if="(this.question!= null)">{{this.question.q}} </p>
+          <p v-if="(this.question != null)"> {{this.playingName}} is answering: <br> {{this.question.q}} </p>
           <p v-else>You have reached the end of the quiz!
             <br>
             <router-link class="button" v-bind:to="('/join/'+lang)"> Join another quiz </router-link>
@@ -18,13 +19,13 @@
 
         </div>
         <div class="card__face card__face--back" v-bind:class="{ correct: ans == 'correct'}">
-        <p > <span id="correctness"> {{this.ans}}! </span><br> Your {{this.con}} is {{this.consequence}} </p>
+        <p><span id="correctness"> {{this.ans}}! </span> <br> {{playingName}}'s {{this.con}} is {{this.consequence}} </p>
         </div>
       </div>
-      <div id="buttonContainer">  
+      <!-- <div id="buttonContainer">  
         <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" v-if="visibleButtons"/>      
       
-    </div>
+    </div> -->
 
     </div>
   </div>
@@ -34,15 +35,15 @@
 
 <script>
 // @ is an alias to /src
-import QuestionComponent from '@/components/QuestionComponent.vue';
+// import QuestionComponent from '@/components/QuestionComponent.vue';
 import io from 'socket.io-client';
 
 const socket = io();
 
 export default {
-  name: 'PollView',
+  name: 'ObsView',
   components: {
-    QuestionComponent,    
+    // QuestionComponent,    
   },
   data: function () {
     return {
@@ -62,39 +63,24 @@ export default {
       punishments: [],
       consequence: "",
       visibleButtons: true,
-     
+      playingName: "",
     }
   },
   created: function () {
-    this.pollId = this.$route.params.id;
-    this.name = this.$route.params.name;
-    this.lang = this.$route.params.lang;
-
-    
+    this.pollId = this.$route.params.id
     socket.emit('joinPoll', this.pollId)
-    socket.on("answeringParticipant", (data) =>{
-      console.log("answeringParticipant:  ", data)
-      if (this.name !== data){
-        this.$router.push('/obs/'+this.pollId+'/'+this.lang+'/'+this.name)
-      }
-
-    })
     socket.on("newQuestion", q =>{
-      
       this.question = q
       console.log(this.cardOne)
       if (this.cardOne !== "start"){
-        console.log("här är jag")
-        this.cardOne = 'start';
-        this.visibleButtons=true;
-        
+        this.cardOne = 'start';       
       }
     }
     )
     
-    
+    this.lang = this.$route.params.lang;
     socket.emit("pageLoaded", this.lang);
-    
+    this.name = this.$route.params.name;
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
@@ -107,13 +93,29 @@ export default {
     socket.on("getPollPunishments", (data) =>
       this.punishments = data
     )
+    socket.on("answeringParticipant", (data) =>{
+      this.playingName=data
+      console.log("answeringParticipant:  ", data)
+      console.log(this.playingName)
+      if (this.name == data){
+        this.$router.push('/poll/'+this.pollId+'/'+this.lang+'/'+this.name)
+      }
+    })
+    socket.on("flipUpdate", data =>{
+      this.ans = data.wor
+      this.con = data.con
+      this.consequence= data.consequence
+      console.log(this.consequence)
+      console.log(this.playingName)
+      this.cardOne = 'flipped'
+    })
   },
   methods: {
     submitAnswer: function (answer) {
       console.log(answer)
-      this.ans = this.question.s[answer.index];
+      socket.emit("submitAnswer", {pollId: this.pollId, answer: answer.a})
       this.cardOne == 'start' ? (this.cardOne = 'flipped' ) : (this.cardOne = 'start' );
-      
+      this.ans = this.question.s[answer.index];
 
       if (this.ans == 'correct') {
         this.con = "reward"
@@ -124,8 +126,6 @@ export default {
       }
       this.visibleButtons=false;
       console.log(this.rewards)
-      socket.emit("submitAnswer", {pollId: this.pollId, answer: answer.a, wor: this.ans, con: this.con, consequence: this.consequence})
-      
       
     },
     
@@ -171,6 +171,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
 .card__face--front {

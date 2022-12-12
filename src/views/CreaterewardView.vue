@@ -94,7 +94,7 @@ export default {
   created: function () {
 
     this.pollId = this.$route.params.id
-    socket.emit('joinPoll', this.pollId)
+    //socket.emit('joinPoll', this.pollId)
 
     this.lang = this.$route.params.lang;
     socket.emit("pageLoaded", this.lang);

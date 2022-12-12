@@ -46,7 +46,7 @@ export default {
 
     
     socket.on("quizUpdate", () => {
-      this.$router.push('/poll/'+this.id+'/'+this.lang+'/'+this.name)
+      this.$router.push('/obs/'+this.id+'/'+this.lang+'/'+this.name)
     })
   },
   methods: {
