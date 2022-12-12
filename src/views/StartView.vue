@@ -1,6 +1,6 @@
 <template>
   <body>
-    <ResponsiveNav v-bind:hideNav="hideNav">
+    <ResponsiveNav v-bind:hideNav="hideNav" id="navDiv">
     <img id="flag" v-bind:src=uiLabels.languageFlag v-on:click="switchLanguage">
   </ResponsiveNav>
   <header>
@@ -194,6 +194,10 @@ export default {
   width: 3em;
   height: 3em;
   cursor: pointer;
+}
+
+#navDiv {
+  background-color: #A6E9A3;
 }
 
 
