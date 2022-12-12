@@ -53,9 +53,11 @@
 
 
     <div id="nextButton">
-    <router-link v-bind:to="'/start/'+lang"> <button id="submitButton" >
-    Save and Quit
-    </button> </router-link>
+    <router-link v-bind:to="'/start/'+lang"> 
+      <button id="submitButton" >
+      Save and Exit
+      </button> 
+    </router-link>
     </div>
 
     
@@ -280,12 +282,12 @@ row-gap: 1 em;
 }
 #submitButton{
   background-color: antiquewhite;
-  color: crimson;
+  color: black;
   
 
 }
 #submitButton:hover{
-  background-color: brown;
+  background-color: lightgreen;
 }
 
 

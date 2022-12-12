@@ -1,5 +1,7 @@
 <template>
+  
 <body>
+  <homeButton></homeButton>
   <div class="pollLink">
     Enter the name of your quiz: 
     <input type="text" v-model="id">
@@ -15,11 +17,13 @@
 
 <script>
 import io from 'socket.io-client';
+import homeButton from '@/components/HomeComponent.vue';
 const socket = io();
 
 export default {
   name: 'CreateIdView',
   components: {
+    homeButton
     
   },
   data: function () {
@@ -48,13 +52,29 @@ export default {
 </script>
 
 <style scoped>
+
   body {
     margin: 0;
     height: 46.5em;
 
     background-color: #BCD8C1;
   }
-  
+  #pollButton {
+    color:black;
+    margin: 1em;
+    text-decoration: none; 
+    background-color: rgb(235, 209, 106);
+    padding: 0.5em;
+    border-radius: 3em;
+    border-style: outset;
+    border-color: rgba(235, 209, 106, 0.689);
+  }
+
+  #pollButton:hover {
+    box-shadow: 0 5px 15px #0079918f;
+    transform: translateY(-2px);
+    cursor: pointer;
+  }
   
   
 </style>
