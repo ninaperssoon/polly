@@ -161,7 +161,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .pollLink {
   margin: 1em 2em 1em 70em;
   background-color:coral;
