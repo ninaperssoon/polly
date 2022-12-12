@@ -1,4 +1,5 @@
 <template>
+      <homeButton></homeButton>
   
    <h1> you're hosting {{pollId}}  </h1> 
 
@@ -8,7 +9,13 @@
       
         <div class="card__face card__face--front">
 
-          <p> {{this.question.q}}</p>
+         <p v-if="(this.question != null)">{{this.question.q}}</p> 
+          <p v-else>You have reached the end of the quiz!
+            <br>
+            <router-link class="button" v-bind:to="('/myquizzes/'+lang)"> Host another quiz </router-link>
+            <router-link class="button" v-bind:to="('/')"> Return to homepage </router-link>
+          </p>
+
         </div>
         <div class="card__face card__face--back" v-bind:class="{ correct: ans == 'correct'}">
         <p id="correctness"> {{this.ans}}! </p>
@@ -26,7 +33,7 @@
     Next Question
   </button>
   <button v-on:click="resetQuiz">
-    resetQuiz
+    Reset Quiz
   </button>
  
 
@@ -36,6 +43,7 @@
 // @ is an alias to /src
 // import QuestionComponent from '@/components/QuestionComponent.vue';
 import io from 'socket.io-client';
+import homeButton from '@/components/HomeComponent.vue';
 // import rewards from '@/CreaterewardView.vue';
 // import punishments from '@/CreaterewardView.vue';
 
@@ -44,6 +52,7 @@ const socket = io();
 export default {
   name: 'HostPollView',
   components: {
+    homeButton,
     // QuestionComponent,    
   },
   data: function () {
@@ -88,9 +97,14 @@ export default {
       const buttonContainer = document.getElementById('buttonContainer');
       buttonContainer.remove();
     },
+    
     nextQuestion: function (){
-      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber});
-      this.questionNumber= this.questionNumber +1;
+    
+        socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber});
+        this.questionNumber= this.questionNumber +1;
+      
+
+    
     },
     resetQuiz: function (){
       socket.emit("runQuestion", {pollId: this.pollId, questionNumber: 0});
@@ -170,5 +184,23 @@ export default {
 #correctness {
   font-size: 30px;
 }
+
+.button {
+    color:black;
+    margin: 1em;
+    text-decoration:none; 
+    background-color: rgb(235, 209, 106);
+    padding: 0.5em;
+    border-radius: 3em;
+    border-style: outset;
+    font-size:x-small;
+    border-color: rgba(235, 209, 106, 0.689);
+  }
+
+  .button:hover {
+    box-shadow: 0 5px 15px #0079918f;
+    transform: translateY(-2px);
+
+  }
 
 </style>

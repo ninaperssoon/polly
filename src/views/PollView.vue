@@ -6,8 +6,16 @@
       <div class="card" v-bind:class="{ flipme: cardOne == 'flipped' }">
       
         <div class="card__face card__face--front">
+          
+          <p v-if="this.question">{{this.question.q}} </p>
+          <p v-else>You have reached the end of the quiz!
+            <br>
+            <router-link class="button" v-bind:to="('/join/'+lang)"> Join another quiz </router-link>
+            <router-link class="button" v-bind:to="('/')"> Return to homepage </router-link>
 
-          <p> {{this.question.q}}</p>
+          </p>
+          
+
         </div>
         <div class="card__face card__face--back" v-bind:class="{ correct: ans == 'correct'}">
         <p id="correctness"> {{this.ans}}! </p>
@@ -179,5 +187,23 @@ export default {
 #correctness {
   font-size: 30px;
 }
+
+.button {
+    color:black;
+    margin: 1em;
+    text-decoration:none; 
+    background-color: rgb(235, 209, 106);
+    padding: 0.5em;
+    border-radius: 3em;
+    border-style: outset;
+    font-size:x-small;
+    border-color: rgba(235, 209, 106, 0.689);
+  }
+
+  .button:hover {
+    box-shadow: 0 5px 15px #0079918f;
+    transform: translateY(-2px);
+
+  }
 
 </style>
