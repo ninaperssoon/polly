@@ -13,16 +13,16 @@
       <div id="inputAnswer" >
         <div v-for="(_,i) in answers" v-bind:key="'answer' + i">
           <input type="text"  v-model="answers[i]" class="input" id="option" placeholder="Write your answers here..." 
-          v-bind:style="{'background-color':altColor[i]}">
+         >
 
           <button v-on:click="deleteAnswers(i)" class="deleteB" id="deleteAnswerButton">
              -
           </button>
 
-          <button v-on:click="setCorectAnswer(i)" >
+          <button v-on:click="setCorectAnswer(i)"  v-bind:style="{'background-color':altColor[i]}">
             correct answer 
           </button>
-          <button v-on:click="setWrongAnswer(i)" >
+          <button v-on:click="setWrongAnswer(i)"  >
             wrong answer 
           </button>
           <br>

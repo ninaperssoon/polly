@@ -160,13 +160,7 @@ export default {
 </script>
 
 <style>
-.pollLink {
-  margin: 1em 2em 1em 70em;
-  background-color:coral;
-  border-radius: 2em;
-  padding: 2em;
 
-}
 
 #pollButton {
   margin-top: 1em;
@@ -207,13 +201,7 @@ border-radius: 1em;
 
 }
 
-.pollLink {
-  margin: 1em 2em 1em 70em;
-  background-color:coral;
-  border-radius: 2em;
-  padding: 2em;
 
-}
 
 
  
@@ -233,7 +221,7 @@ border-radius: 1em;
 .innerWrapper {
 grid-template-columns: 1fr;
 padding: 3em;
-row-gap: 1 em;
+row-gap: 5 em;
 
 }
 

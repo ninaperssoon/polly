@@ -159,13 +159,7 @@ button:hover {
 
 }*/
 
-.pollLink {
-  margin: 1em 2em 1em 70em;
-  background-color:coral;
-  border-radius: 2em;
-  padding: 2em;
 
-}
 
 #pollButton {
   margin-top: 1em;
@@ -173,10 +167,9 @@ button:hover {
 }
 
 #deleteAnswerButton {
-  height: 2em;
-  width: 2em;
+  
   grid-column: 2;
-  grid-row: 2;
+  
   
 }
 
