@@ -16,7 +16,7 @@
       <div id="inputAnswer" >
         <div v-for="(_,i) in answers" v-bind:key="'answer' + i">
           <input type="text"  v-model="answers[i]" class="input" id="option" :placeholder= "uiLabels.WriteAnswersHere"
-           v-bind:style="{'background-color':altColor[i]}">
+          >
 
            <!-- {{uiLabels.WriteAnswersHere}} -->
           
@@ -25,11 +25,11 @@
              -
           </button>
 
-          <button class="buttonContainer" v-on:click="setCorectAnswer(i)" >
+          <button class="buttonContainer" v-on:click="setCorectAnswer(i)"  v-bind:style="{'background-color':altColor[i]}">
             <img class="button" src="https://cdn4.iconfinder.com/data/icons/essentials-72/24/040_-_Tick-512.png"/>
           </button>
           
-          <button class="buttonContainer" v-on:click="setWrongAnswer(i)" >
+          <button class="buttonContainer" v-on:click="setWrongAnswer(i)"  >
             <img class="button" src="https://cdn4.iconfinder.com/data/icons/essentials-72/24/039_-_Cross-512.png"/>
 
           </button>

@@ -4,10 +4,10 @@
     <div id="inputReward">
       {{uiLabels.punishment}}
       <div id="rewardGrid">
-        <input type="text" v-model="p" class="input" :placeholder="uiLabels.WritePunishmentHere" >
+        <input type="text" v-model="p" class="input" :placeholder="uiLabels.WritePunishmentHere" v-on:keypress="resetSavebutton()" >
 
-        <button v-on:click="sendPunishment">
-          {{uiLabels.SendPunishment}}
+        <button v-on:click="sendPunishment" v-bind:style="{'background-color':savedbackground}" id="SaveButton">
+          {{uiLabels.SavePunishment}}
         </button>
         
         <button v-on:click="deletePunishment" class="delButton">
@@ -33,8 +33,8 @@ data: function(){
   return{
     p : this.punishment,
     lang: "",
-    uiLabels: {}
-      
+    uiLabels: {},
+    savedbackground : "aqua",  
 
   }
 
@@ -49,12 +49,20 @@ created: function () {
   },
 methods:{
   sendPunishment: function (){
-    this.$emit('myPunishment', {p: this.p})
-    console.log("Sended punishment: ", this.p)
+   
+    this.savedbackground = "olivedrab";
+    console.log("color color color: "+ this.savedbackground)
+    this.$emit('myPunishment', {p: this.p});
+    console.log("Sended punishment: ", this.p);
+    this.savedbackground = "olivedrab";
+    
   },
     deletePunishment: function() {
       this.$emit('deletePunishment', {p: this.p})
     },
+    resetSavebutton: function(){
+      this.savedbackground = "orange";
+    }
 
 }
 
@@ -95,6 +103,13 @@ height: 8em;
   border-radius: 50%;
   margin-top: 1em;
 
+}
+#saveButton{
+  border-radius: 50%;
+}
+#SaveButton:hover {
+  background-color:lightgreen;
+  
 }
 
 

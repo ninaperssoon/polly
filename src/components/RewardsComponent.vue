@@ -1,13 +1,13 @@
 <template>
   
   <div id="consequenceBox" >
-    <div id="inputReward">
+    
       {{uiLabels.reward}}
       <div id="rewardGrid">
         <input type="text"  class="input" v-model="r" :placeholder= "uiLabels.WriteRewardHere" >
         
-        <button v-on:click="sendRewards">
-           {{uiLabels.SendReward}}
+        <button v-on:click="sendRewards" v-bind:style="{'background-color': savedColor}">
+           {{uiLabels.SaveReward}}
         </button>
         
         <button v-on:click="deleteReward" class="delButton">
@@ -15,7 +15,7 @@
         </button>
       </div>
       </div>
-   </div>
+ 
 </template>
 
 <script>
@@ -36,7 +36,8 @@ data: function(){
         r : this.reward,
         lang: "",
         uiLabels: {},
-        textett : ""
+        textett : "",
+        savedColor: ""
         
 
     }
@@ -54,6 +55,7 @@ methods:{
   sendRewards: function (){
     this.$emit('myReward', {r: this.r})
     console.log("Sended reward: ", this.r)
+    this.savedColor = "olivedrab ";
   },
     deleteReward: function() {
       this.$emit('deleteReward', {r: this.r})
@@ -79,7 +81,7 @@ height: 8em;
 #rewardGrid {
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: 90% 10%;
+  grid-template-columns: 8fr 2fr;
   
 
 }
@@ -92,9 +94,7 @@ height: 8em;
   display: grid;
 }
 .delButton {
-  width: 2.5em;
-  height: 2.5em;
-  border-radius: 50%;
+  
   margin-top: 1em;
 
 }
