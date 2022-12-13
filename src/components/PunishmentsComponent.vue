@@ -7,7 +7,7 @@
         <input type="text"  class="input" placeholder="Write your reward here..." v-model="p"  v-on:keypress="resetSavebutton()">
 
         <button v-on:click="sendPunishment" v-bind:style="{'background-color':savedbackground}" id="SaveButton">
-          Save Punishment
+          {{savetext}}
         </button>
         
         <button v-on:click="deletePunishment" class="delButton">
@@ -33,6 +33,7 @@ data: function(){
   return{
     p : this.punishment,
     savedbackground : "aqua",  
+    savetext: " Save Punishment" 
 
   }
 
@@ -45,6 +46,7 @@ methods:{
     this.$emit('myPunishment', {p: this.p});
     console.log("Sended punishment: ", this.p);
     this.savedbackground = "olivedrab";
+    this.savetext = "Saved!"
     
   },
     deletePunishment: function() {
@@ -52,6 +54,7 @@ methods:{
     },
     resetSavebutton: function(){
       this.savedbackground = "orange";
+      this.savetext = "save changes"
     }
 
 }
