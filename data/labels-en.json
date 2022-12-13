@@ -19,5 +19,7 @@
 	"incorrect" : "incorrect!",
 	"reward" : "reward",
 	"punishment" : "punishment",
-	"yourePlaying" : "You're playing: "
+	"yourePlaying" : "You're playing: ",
+	"EnterYourName": "Enter your name:",
+	
 }

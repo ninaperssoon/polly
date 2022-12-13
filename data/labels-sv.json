@@ -19,6 +19,7 @@
 	"incorrect" : "Fel!",
 	"reward" : "belöning",
 	"punishment" : "straff",
-	"yourePlaying" : "Du spelar: "
+	"yourePlaying" : "Du spelar: ",
+	"EnterYourName": "Skriv in ditt namn:",
 
 }

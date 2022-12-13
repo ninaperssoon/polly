@@ -5,7 +5,7 @@
     <div id="top"> </div>
     <div id="joinQuiz">
     <div>
-    <p> Enter your name: </p>
+    <p> {{uiLabels.EnterYourName}} </p>
     <input type="text" v-model="name">
     </div>
     <div>
