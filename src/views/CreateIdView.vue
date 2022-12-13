@@ -82,6 +82,21 @@ export default {
     cursor: pointer;
   }
 
+  .pollLink {
+    font-size:1.5em;
+    margin: auto;
+    background-color: #5C95FF;
+    height: 10em;
+    width: 30em;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3em;
+    border-style:outset;
+    border-color: #5C95FF;
+
+  }
+
   input {
     border-radius: 1em;
   }

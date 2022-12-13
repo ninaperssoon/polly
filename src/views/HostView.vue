@@ -93,7 +93,7 @@ export default {
     justify-content: center;
     border-radius: 2em;
     border-style: outset;
-    border-color: #0079918f;
+    border-color: #5C95FF;
 
   }
 
@@ -107,8 +107,8 @@ export default {
   #startQuiz {
     color: #F87575;
     font-size:1.5em;
-    background-color: rgb(235, 209, 106);
-    border-color: rgba(235, 209, 106, 0.689);
+    background-color: #FFF1AD;
+    border-color: #FFF1AD;
     text-decoration: none;
     height: 2.5em;
     width: 8em;

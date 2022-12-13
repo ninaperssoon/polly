@@ -2,8 +2,11 @@
 <body>
   <homeButton></homeButton>
   <section>
-    <div id="top"> </div>
+    <h1>Join Quiz</h1>
+   
+   
     <div id="joinQuiz">
+<<<<<<< HEAD
     <div>
     <p> {{uiLabels.EnterYourName}} </p>
     <input type="text" v-model="name">
@@ -15,12 +18,21 @@
   </label>
   <button id="joinbutton" v-on:click="sendName" >{{uiLabels.joinQuiz}}</button>
   </p>
+=======
+    
+      
+      <p>Enter your name: <input type="text" v-model="name"></p>
+      
+    <p><label>{{uiLabels.writeQuizId}}: <input type="text" v-model="id"></label></p>
+    
+>>>>>>> 9cbecf0 (more style)
 
 
 
   <!-- <router-link id="joinbutton" v-bind:to="('/poll/'+id+'/'+lang)" v-on:click="sendName" >{{uiLabels.joinQuiz}}</router-link> </p> -->
+
   </div>
-  </div>
+  <button id="joinbutton" v-on:click="sendName" >{{uiLabels.joinQuiz}}</button>
 
 </section>
 
@@ -98,18 +110,22 @@ export default {
     border-style:outset;
     border-color: #5C95FF;
   }
-  #top {
-    height: 12em;
-  }
-
   #joinbutton {
     margin: 1em;
     text-decoration: none; 
-    background-color: rgb(235, 209, 106);
+    background-color:#FFF1AD;
     padding: 0.5em;
-    border-radius: 3em;
+    border-radius: 2em;
     border-style: outset;
-    border-color: rgba(235, 209, 106, 0.689);
+    border-color: #FFF1AD;
+
+    color: #F87575;
+    font-size:1.5em;
+    bottom: 0;
+    right: 0;
+    border-style: outset;
+    font-family: 'Righteous', serif;
+    text-shadow: .05em .05em 0 #4779d6;
   }
 
   #joinbutton:hover {
@@ -119,5 +135,30 @@ export default {
   input {
     border-radius: 1em;
   }
+
+  button:hover {
+    cursor:pointer;
+  }
+
+  p {
+    margin: 0.5em;
+  }
+
+  *, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  }
+
+h1 {
+  display: inline-block;
+  color: white;
+  font-family: 'Righteous', serif;
+  font-size: 4em; 
+  text-shadow: .08em .08em 0 #4779d6;
+  margin-bottom: 1em;
+  }
+
   
 </style>
