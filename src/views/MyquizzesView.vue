@@ -11,17 +11,15 @@
           <router-link class="button" v-bind:to="('/host/'+id+'/'+lang)"> Host this quiz </router-link>
 
         </div>
-
+        <div id="createDiv">       
+         <router-link id="create" v-bind:to="('/create/'+lang+'/'+id)">{{uiLabels.createQuiz}}</router-link>
+        </div>
       
 
         <!-- <router-link  v-bind:to="('/create/'+lang+'/'+id)">{{uiLabels.joinQuiz}}</router-link> -->
-
-
     </section>
 
-      <div>       
-         <router-link id="create" v-bind:to="('/create/'+lang+'/'+id)">{{uiLabels.createQuiz}}</router-link>
-      </div>
+     
       <div></div>
   </body>
 
@@ -65,13 +63,10 @@ export default {
     margin: auto;
     background-color: #A6E9A3 ;
     text-align: center;
-    min-height: 100%;
-    min-width: 1024px;
     width: 100%;
-    height: auto;
-    position: fixed;
     top: 0;
     left: 0;
+    height: 100%
    
   }
   div {
@@ -79,9 +74,6 @@ export default {
     border-radius: 2em;
     height: 3.17em;
     
-  }
-  section {
-    height:35em;
   }
 
   #myQuizzes {
@@ -92,6 +84,11 @@ export default {
     width: 40em;
     background-color:#5C95FF;
 
+  
+  }
+
+  #createDiv {
+    margin-top: 5em;
   }
   
 
