@@ -2,7 +2,7 @@
   <body>
     <homeButton></homeButton>
     <section>
-      <div>
+      <div id="title">
       <h1>{{uiLabels.myQuizzes}}</h1>
       </div>
 
@@ -10,9 +10,6 @@
           <router-link class="button" v-bind:to="('/create/'+lang+'/'+id)"> Edit </router-link>
           <router-link class="button" v-bind:to="('/host/'+id+'/'+lang)"> Host this quiz </router-link>
 
-          
-        
-        
         </div>
 
       
@@ -22,7 +19,7 @@
 
     </section>
 
-    <div>       
+      <div>       
          <router-link id="create" v-bind:to="('/create/'+lang+'/'+id)">{{uiLabels.createQuiz}}</router-link>
       </div>
       <div></div>
@@ -66,7 +63,8 @@ export default {
 <style scoped>
   body {
     margin: auto;
-    background-color: #BCD8C1;
+    background-color: #A6E9A3 ;
+    text-align: center;
    
   }
   div {
@@ -82,15 +80,15 @@ export default {
   #myQuizzes {
     margin-top: 2em;
     padding: 2em;
+    padding-bottom: 3em;
     height: 2em;
     width: 40em;
-    background-color:#0079918f;
+    background-color:#5C95FF;
 
   }
   
 
   #create {
-    color:black;
     margin-top: 100em;
     padding: 1em;
     height: 0.8em; 
@@ -101,6 +99,9 @@ export default {
     border-color: #fff1adbd;
     text-decoration: none; 
     border-radius: 2em;
+    color: #F87575;
+    font-family: 'Righteous', serif;
+    text-shadow: .05em .05em 0 #4779d6;
   }
 
   #create:hover {
@@ -123,5 +124,26 @@ export default {
     transform: translateY(-2px);
 
   }
+
+
+  @import url(https://fonts.googleapis.com/css?family=Righteous);
+
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  }
+
+h1 {
+  display: inline-block;
+  color: white;
+  font-family: 'Righteous', serif;
+  font-size: 3em; 
+  text-shadow: .08em .08em 0 #4779d6;
+  }
   
+#title {
+  margin-bottom: 2em;
+}
 </style>

@@ -77,6 +77,7 @@ export default {
     margin: 0;
     background-color: #A6E9A3;
     font-family: 'Courier New', Courier, monospace;
+    text-align: center;
   }
   header {
     width: 100%;
@@ -129,7 +130,7 @@ export default {
     border-radius: 3em;
     font-size: 2em;
     border-style: outset;
-    border-color: #0079918f;
+    border-color: #5C95FF;
 
     color: #FFF1AD;
     font-family: 'Righteous', serif;
@@ -200,8 +201,6 @@ export default {
   background-color: #A6E9A3;
 }
 
-
-
 @import url(https://fonts.googleapis.com/css?family=Righteous);
 
 *, *:before, *:after {
@@ -211,20 +210,6 @@ export default {
   position: relative;
   }
 
-html, body {
-  height: 100%;
-  }
-  body {
-    text-align: center;
-    }
-  body:before {
-    content: '';
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 0;
-    height: 100%;
-    }
-
 h1 {
   display: inline-block;
   color: white;
@@ -232,6 +217,5 @@ h1 {
   font-size: 8em; 
   text-shadow: .08em .08em 0 #4779d6;
   }
-
 
 </style>

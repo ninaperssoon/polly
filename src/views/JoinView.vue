@@ -75,15 +75,13 @@ export default {
     margin: 0;
     height: 46.5em;
 
-    background-color: #BCD8C1;
+    background-color: #A6E9A3;
   }
-  section {
-    
-  }
+
   #joinQuiz {
     font-size:1.5em;
     margin: auto;
-    background-color: #007991;
+    background-color: #5C95FF;
     height: 10em;
     width: 30em;
     display:flex;
@@ -91,7 +89,7 @@ export default {
     justify-content: center;
     border-radius: 3em;
     border-style:outset;
-    border-color: #0079918f;
+    border-color: #5C95FF;
   }
   #top {
     height: 12em;
@@ -109,6 +107,10 @@ export default {
 
   #joinbutton:hover {
     box-shadow: 0 5px 15px black;
+  }
+
+  input {
+    border-radius: 1em;
   }
   
 </style>

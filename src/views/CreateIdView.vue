@@ -57,7 +57,7 @@ export default {
     margin: 0;
     height: 46.5em;
 
-    background-color: #BCD8C1;
+    background-color: #A6E9A3;
   }
   #pollButton {
     color:black;
@@ -74,6 +74,10 @@ export default {
     box-shadow: 0 5px 15px #0079918f;
     transform: translateY(-2px);
     cursor: pointer;
+  }
+
+  input {
+    border-radius: 1em;
   }
   
   
