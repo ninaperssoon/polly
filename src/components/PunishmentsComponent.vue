@@ -35,6 +35,7 @@ data: function(){
     lang: "",
     uiLabels: {},
     savedbackground : "aqua",  
+    savetext: " Save Punishment" 
 
   }
 
@@ -55,6 +56,7 @@ methods:{
     this.$emit('myPunishment', {p: this.p});
     console.log("Sended punishment: ", this.p);
     this.savedbackground = "olivedrab";
+    this.savetext = "Saved!"
     
   },
     deletePunishment: function() {
@@ -62,6 +64,7 @@ methods:{
     },
     resetSavebutton: function(){
       this.savedbackground = "orange";
+      this.savetext = "save changes"
     }
 
 }
