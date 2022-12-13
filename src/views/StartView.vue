@@ -78,6 +78,13 @@ export default {
     background-color: #A6E9A3;
     font-family: 'Courier New', Courier, monospace;
     text-align: center;
+    min-height: 100%;
+    min-width: 1024px;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
   }
   header {
     width: 100%;

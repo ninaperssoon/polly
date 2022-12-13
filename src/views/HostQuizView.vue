@@ -72,7 +72,15 @@ export default {
 <style scoped>
   body {
     margin: 0;
-    background-color: #BCD8C1;
+    background-color:  #A6E9A3;
+    min-height: 100%;
+    min-width: 1024px;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+ 
     
   }
 
@@ -124,6 +132,23 @@ export default {
 
   #startQuiz:hover {
     box-shadow: 0 5px 15px #0079918f;
+
+  }
+
+  button {
+    color:black;
+    margin: 1em;
+    text-decoration: none; 
+    background-color: rgb(235, 209, 106);
+    padding: 0.5em;
+    border-radius: 3em;
+    border-style: outset;
+    border-color: rgba(235, 209, 106, 0.689);
+  }
+
+  button:hover {
+    box-shadow: 0 5px 15px #0079918f;
+    transform: translateY(-2px);
 
   }
  

@@ -56,8 +56,14 @@ export default {
   body {
     margin: 0;
     height: 46.5em;
-
     background-color: #A6E9A3;
+    min-height: 100%;
+    min-width: 1024px;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
   }
   #pollButton {
     color:black;

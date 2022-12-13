@@ -65,6 +65,13 @@ export default {
     margin: auto;
     background-color: #A6E9A3 ;
     text-align: center;
+    min-height: 100%;
+    min-width: 1024px;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
    
   }
   div {
