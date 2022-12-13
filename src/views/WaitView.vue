@@ -36,16 +36,16 @@ export default {
     this.lang = this.$route.params.lang;
     this.id = this.$route.params.id;
     this.name = this.$route.params.name;
+    
     socket.emit("pageLoaded", this.lang);
     socket.emit("joinPoll", this.id);
+    socket.emit("joinWaiting", this.id);
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
     socket.on("participantUpdate", (participants) => {
       this.participants = participants
     })
-
-    
     socket.on("quizUpdate", () => {
       this.$router.push('/obs/'+this.id+'/'+this.lang+'/'+this.name)
     })

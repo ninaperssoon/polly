@@ -46,7 +46,6 @@ export default {
       this.uiLabels = labels
     })
     socket.on("participantUpdate", (participants) => {
-      console.log
       this.participants = participants
       console.log("efter Update: ", this.participants)
     })

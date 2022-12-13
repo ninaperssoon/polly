@@ -63,14 +63,15 @@ export default {
     this.lang = this.$route.params.lang;
     
     socket.emit("pageLoaded", this.lang);
+    socket.emit("joinCreate", this.pollId);
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
     socket.on("dataUpdate", (data) =>
       this.data = data
     )
-    socket.on("pollCreated", (data) =>
-      this.data = data,
+    socket.on("getPoll", (data) =>
+      this.questions = data,
     )
     socket.on("updateQuestions", (data) =>{
       this.questions= data

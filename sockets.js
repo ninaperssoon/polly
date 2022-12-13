@@ -96,9 +96,6 @@ function sockets(io, socket, data) {
   }); 
 
   socket.on('addParticipant', function(d) {
-    console.log("--- addParticipant i socket.js ---")
-    console.log("d: ", d)
-
     data.addParticipant(d.pollId, d.name);
     io.to(d.pollId).emit('participantUpdate', data.getParticipants(d.pollId));
    });
@@ -116,6 +113,22 @@ function sockets(io, socket, data) {
     
     socket.emit("sendQuizzes", data.getQuizzes());
 
+  })
+  socket.on('joinWaiting', function(pollId) {
+    io.to(pollId).emit('participantUpdate', data.getParticipants(pollId));
+  })
+
+  socket.on('resetParticipants', function(pollId) {
+    data.resetParticipants(pollId);
+  })
+
+  socket.on('joinCreate', function(pollId) {
+    socket.emit('getPoll', data.getAllQuestions(pollId));
+  })
+
+  socket.on('joinCreatereward', function(pollId) {
+    socket.emit('getRewards', data.getAllRewards(pollId));
+    socket.emit('getPunishments', data.getAllPunishments(pollId));
   })
   
 }

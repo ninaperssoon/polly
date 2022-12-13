@@ -48,14 +48,13 @@ export default {
   methods: {
   
   sendName: function() {
-    console.log("--- sendName i JoinView.vue ---")
-    console.log("this.name: ", this.name)
-    console.log("this.id: ", this.id)
+
 
     console.log(this.name)
     socket.emit("addParticipant", { name: this.name,
                             pollId: this.id }
                  );
+                 
     this.$router.push('/wait/'+this.id+'/'+this.lang+'/'+this.name)
   }},
 

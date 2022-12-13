@@ -15,8 +15,8 @@
               
       </div>
 
-     <!-- Kom ihåg att ändra länken nedan!!!! -->
-      <router-link id="startQuiz" v-bind:to="('/host/'+id+'/'+lang)">{{uiLabels.startQuiz}}</router-link> 
+     
+      <button id="startQuiz" v-on:click="startQuiz">{{uiLabels.startQuiz}}</button> 
    
       <div></div>
 
@@ -58,6 +58,10 @@ export default {
         this.lang = "en"
       socket.emit("switchLanguage", this.lang)
     },
+    startQuiz: function() {
+      socket.emit("resetParticipants", this.id)
+      this.$router.push('/host/'+this.id+'/'+this.lang)
+    }
 
   }
 }

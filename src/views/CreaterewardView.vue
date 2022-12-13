@@ -100,6 +100,13 @@ export default {
 
     this.lang = this.$route.params.lang;
     socket.emit("pageLoaded", this.lang);
+    socket.emit("joinCreatereward", this.pollId);
+    socket.on("getRewards", (data) => {
+      this.rewards = data
+    })
+    socket.on("getPunishments", (data) => {
+      this.punishments = data
+    })
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
