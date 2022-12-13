@@ -223,9 +223,10 @@ border-radius: 1em;
 
 
 .innerWrapper {
+  
 grid-template-columns: 1fr;
 padding: 3em;
-row-gap: 5 em;
+
 
 }
 
