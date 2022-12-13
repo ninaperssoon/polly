@@ -2,18 +2,18 @@
 
 <template>
   <div>
-    <div id="question" >
+    <div id="question" v-bind:style="{'background-color':SavedQuestionColor}">
       <div id="inputQuestion">
         <h2>Question: {{questionNumber +1}}</h2> 
-        <input type="text" v-model="q" class="input" placeholder="Write your question here...">
+        <input type="text" v-model="q" class="input" placeholder="Write your question here..." v-on:keypress="resetColor()">
         <br> 
-      </div>
+      </div> 
       
 
       <div id="inputAnswer" >
         <div v-for="(_,i) in answers" v-bind:key="'answer' + i">
           <input type="text"  v-model="answers[i]" class="input" id="option" placeholder="Write your answers here..." 
-         >
+         v-on:keypress="resetColor()">
 
           <button v-on:click="deleteAnswers(i)" class="deleteB" id="deleteAnswerButton">
              -
@@ -22,7 +22,7 @@
           <button v-on:click="setCorectAnswer(i)"  v-bind:style="{'background-color':altColor[i]}">
             correct answer 
           </button>
-          <button v-on:click="setWrongAnswer(i)"  >
+          <button v-on:click="setWrongAnswer(i)" v-bind:style="{'background-color':deleteColor[i]}" >
             wrong answer 
           </button>
           <br>
@@ -40,8 +40,8 @@
           Delete question
         </button >
 
-        <button v-on:click="sendQuestion">
-          Save question
+        <button v-on:click="sendQuestion" v-bind:style="{'background-color':SavebuttonColor}">
+          {{savebuttonText}}
         </button>
         <!--{{data}}
         <router-link v-bind:to="'/result/'+pollId">Check result</router-link>-->
@@ -74,7 +74,11 @@ export default{
       q: this.question.q,
       answers: [...this.question.a],
       
-      altColor:["white","white"],
+      altColor:[""],
+      deleteColor: [""],
+      SavedQuestionColor: "lightblue",
+      savebuttonText:"Save Question",
+      SavebuttonColor: "",
     }
 
   },
@@ -88,6 +92,7 @@ export default{
     addAnswer: function () {
       this.answers.push("");
       this.altColor.push("");
+      this.resetColor();
     },
     deleteAnswers: function(i) {
       console.log(i)
@@ -95,21 +100,43 @@ export default{
       this.selectedAnswers.splice(i,1);
       this.altColor.splice(i,1);
       this.$emit('deleteAnswer', { q: this.q, a: this.answers, selected: this.selectedAnswers})
+      this.resetColor();
     },
     deleteQuestion: function () {
       this.$emit('deleteIndex', {q: this.q, a: this.answers, selected: this.selectedAnswers}) //pop = delete/pull'
       },
     sendQuestion: function(){
+      
       this.$emit('myquestion', {q: this.q, a: this.answers, selected: this.selectedAnswers})
       console.log("Edit: ",this.selectedAnswers)
+      this.SavedQuestionColor = "seagreen"
+      
+     
     },
     setCorectAnswer: function(i){
       this.selectedAnswers[i] = 'correct';
-      this.altColor[i] = "lightgreen";  
+      this.altColor[i] = "green";  
+      this.deleteColor[i] = ""; 
+      this.resetColor();
+     
     },
     setWrongAnswer: function(i){
       this.selectedAnswers[i] = 'incorrect';
-      this.altColor[i] = "salmon";   
+      this.deleteColor[i] = "red"; 
+      this.altColor[i] = "";  
+      this.resetColor();
+     
+     
+    },
+    resetColor: function(){
+      this.SavedQuestionColor = "lightgreen";
+      this.savebuttonText = "save changes";
+      this.SavebuttonColor = "orange";
+    
+    },
+    savebutonReset: function(){
+      this.SavebuttonColor = "";
+      this.savebuttonText = "question saved"
     }
 
   }
@@ -146,7 +173,7 @@ export default{
   /*grid-template-columns: 1fr ;*/
   /*row-gap: 50px;
   column-gap: 30px;*/
-  background-color:lightblue;
+ /* background-color:lightblue;*/
   border-radius: 2em;
   padding: 1em;
 }
