@@ -1,8 +1,9 @@
 <template>
   <body>
-    <div>
+    <homeButton></homeButton>
+    <div id="host">
 
-      hosting the quiz: {{id}}
+      Hosting the quiz: {{id}}
       <p v-for="participant in participants" v-bind:key = "participant">
       {{participant}}
     </p>
@@ -18,11 +19,13 @@
 
 <script>
 import io from 'socket.io-client';
+import homeButton from '@/components/HomeComponent.vue';
 const socket = io();
 
 export default {
   name: 'HostQuizView',
   components: {
+    homeButton
     
   },
   data: function () {
@@ -92,17 +95,18 @@ export default {
   #host {
     font-size:1.5em;
 
+    font-size:1.5em;
     margin: auto;
-    margin-top: 2em;
-    height: 20em;
-    width: 30em;
-    background-color: #007991;
+    background-color: #5C95FF;
+    height: 5em;
+    width: 20em;
     display:flex;
     align-items: center;
     justify-content: center;
-    border-radius: 2em;
-    border-style: outset;
-    border-color: #0079918f;
+    border-radius: 3em;
+    border-style:outset;
+    border-color: #5C95FF;
+    margin-top: 2em;
 
   }
 
@@ -112,43 +116,24 @@ export default {
     border-radius: 1em;
     border-style: outset;
   }
-
-  #startQuiz {
-    font-size:1.5em;
-    background-color: rgb(235, 209, 106);
-    border-color: rgba(235, 209, 106, 0.689);
-    text-decoration: none;
-    height: 2.5em;
-    width: 8em;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    margin-right: 5em;
-    margin-bottom: 5em;
-    border-radius: 2em;
-    border-style: outset;
-    padding-top: 1.5em;
-  }
-
-  #startQuiz:hover {
-    box-shadow: 0 5px 15px #0079918f;
-
-  }
-
   button {
     color:black;
     margin: 1em;
     text-decoration: none; 
-    background-color: rgb(235, 209, 106);
+    background-color:  #FFF1AD;
     padding: 0.5em;
     border-radius: 3em;
     border-style: outset;
-    border-color: rgba(235, 209, 106, 0.689);
+    border-color:  #FFF1AD;
+    color: #F87575;
+    font-family: 'Righteous', serif;
+    text-shadow: .05em .05em 0 #4779d6;
   }
 
   button:hover {
     box-shadow: 0 5px 15px #0079918f;
     transform: translateY(-2px);
+    cursor: pointer;
 
   }
  

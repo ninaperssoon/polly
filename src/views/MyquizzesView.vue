@@ -13,7 +13,7 @@
 
         </div>
 
-        <div>       
+        <div id="createDiv">       
          <router-link id="create" v-bind:to="('/create/'+lang)">{{uiLabels.createQuiz}}</router-link>
       </div>
       <div></div>
@@ -150,5 +150,9 @@ h1 {
   
 #title {
   margin-bottom: 3em;
+}
+
+#createDiv {
+  margin-top: 4em;
 }
 </style>

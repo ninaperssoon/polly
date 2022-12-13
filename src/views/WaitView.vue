@@ -1,7 +1,8 @@
 <template>
   <body>
     <div>
-      waiting for host to start
+      waiting for host to start...
+      <br>
       other players:
       <p v-for="participant in participants" v-bind:key = "participant">
       {{participant}}
@@ -64,7 +65,12 @@ export default {
 <style scoped>
   body {
     margin: 0;
-    background-color: #BCD8C1;
+    background-color: #A6E9A3;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
     
   }
 

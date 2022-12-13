@@ -69,11 +69,15 @@ export default {
     color:black;
     margin: 1em;
     text-decoration: none; 
-    background-color: rgb(235, 209, 106);
+    background-color: #FFF1AD;
     padding: 0.5em;
     border-radius: 3em;
     border-style: outset;
-    border-color: rgba(235, 209, 106, 0.689);
+    border-color: #FFF1AD;
+
+    color: #F87575;
+    font-family: 'Righteous', serif;
+    text-shadow: .05em .05em 0 #4779d6;
   }
 
   #pollButton:hover {
