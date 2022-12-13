@@ -12,22 +12,10 @@
           <router-link class="button" v-bind:to="('/host/'+id+'/'+lang)"> Host this quiz </router-link>
 
         </div>
-<<<<<<< HEAD
-        <div id="createDiv">       
-         <router-link id="create" v-bind:to="('/create/'+lang+'/'+id)">{{uiLabels.createQuiz}}</router-link>
-        </div>
-      
-
-        <!-- <router-link  v-bind:to="('/create/'+lang+'/'+id)">{{uiLabels.joinQuiz}}</router-link> -->
-    </section>
-
-     
-=======
 
         <div>       
-         <router-link id="create" v-bind:to="('/create/'+lang+'/'+id)">{{uiLabels.createQuiz}}</router-link>
+         <router-link id="create" v-bind:to="('/create/'+lang)">{{uiLabels.createQuiz}}</router-link>
       </div>
->>>>>>> 37fb075 (lite småändringar hihi)
       <div></div>
 
     </section>
@@ -90,12 +78,9 @@ export default {
     height: 3.17em;
     
   }
-<<<<<<< HEAD
-=======
   section {
     background-color: #A6E9A3;
   }
->>>>>>> 37fb075 (lite småändringar hihi)
 
   #myQuizzes {
     margin-top: 2em;
@@ -103,16 +88,8 @@ export default {
     padding-bottom: 3em;
     height: 2em;
     width: 40em;
+    margin-bottom: 3em;
     background-color:#5C95FF;
-<<<<<<< HEAD
-
-  
-  }
-
-  #createDiv {
-    margin-top: 5em;
-=======
->>>>>>> 37fb075 (lite småändringar hihi)
   }
   
 
@@ -172,6 +149,6 @@ h1 {
   }
   
 #title {
-  margin-bottom: 2em;
+  margin-bottom: 3em;
 }
 </style>

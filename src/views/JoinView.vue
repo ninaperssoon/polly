@@ -12,14 +12,7 @@
     {{uiLabels.writeQuizId}}: 
     <input type="text" v-model="id">
   </label>
-  <button id="joinbutton" v-on:click="sendName" >{{uiLabels.joinQuiz}}</button>
   </p>
-    
-      
-      <p>Enter your name: <input type="text" v-model="name"></p>
-      
-    <p><label>{{uiLabels.writeQuizId}}: <input type="text" v-model="id"></label></p>
-    
 
 
 
