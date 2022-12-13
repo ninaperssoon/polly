@@ -51,7 +51,9 @@
 	"SendReward":"Save Reward",
 	"Question":"Question",
 	"joinanotherquiz":"Join another quiz",
-	"Your2":"Your"
+	"Your2":"Your",
+	"edit": "Edit",
+	"hostThisQuiz": "Host this quiz"
 
 
 

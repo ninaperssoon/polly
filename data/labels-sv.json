@@ -50,6 +50,8 @@
 	"SaveQuestion":"Spara fråga",
 	"SendPunishment":"Spara straff",
 	"SendReward":"Spara belöning",
-	"Question":"Fråga"
+	"Question":"Fråga",
+	"edit": "Redigera",
+	"hostThisQuiz": "Anordna det här quizzet"
 
 }

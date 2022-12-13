@@ -8,8 +8,8 @@
 
       
         <div id="myQuizzes" v-for="(contain, id) in quizzes" v-bind:key="id">{{id}} 
-          <router-link class="button" v-bind:to="('/create/'+lang+'/'+id)"> Edit </router-link>
-          <router-link class="button" v-bind:to="('/host/'+id+'/'+lang)"> Host this quiz </router-link>
+          <router-link class="button" v-bind:to="('/create/'+lang+'/'+id)"> {{uiLabels.edit}} </router-link>
+          <router-link class="button" v-bind:to="('/host/'+id+'/'+lang)"> {{uiLabels.hostThisQuiz}} </router-link>
 
         </div>
 
