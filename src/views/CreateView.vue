@@ -16,15 +16,17 @@
     {{uiLabels.AddQuestion}}
   </button>
 
+<div id="wrapper">
   <div id="backButton">
     
-    <router-link v-bind:to="'/start/'+lang"><img id="backPic" src="https://freesvg.org/img/pitr_green_arrows_set_4.png"/></router-link>
+    <router-link v-bind:to="'/start/'+lang"><img class="flipPic" src="../../public/img/leftfliplaying.png"/></router-link>
     </div>
 
 <div id="nextButton">
     
-  <router-link v-bind:to="'/createq/'+pollId+'/'+lang"><img id="nextPic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcMPs6LqvZihgtDeHWZ95Q0mEyUCRo5H5aJA&usqp=CAU"/></router-link>
+  <router-link v-bind:to="'/createq/'+pollId+'/'+lang"><img class="flipPic" src="../../public/img/rightfliplaying.png"/></router-link>
   </div>
+</div>
   
 </div>
 
@@ -182,31 +184,28 @@ button:hover {
   
 }
 
+
+.flipPic {
+  height: 5em;
+}
+#wrapper {
+  grid-gap: 55em;
+  display: grid;
+  grid-template-columns: 20em;
+  margin-bottom: 3em;
+}
 #backButton{
-  
-  margin-right: 85%;
+  grid-column: 1;
+ 
   padding: 20 em;
   
-}
-
-#backPic {
-  height: 3em;
-  width: 3em;
-  cursor: pointer;
-}
-
-#nextPic {
-  height: 3em;
-  width: 3em;
-  cursor: pointer;
 }
 #nextButton{
+  grid-column: 2;
   
-  margin-left: 85%;
   padding: 20 em;
   
 }
-
 
 
 </style>
