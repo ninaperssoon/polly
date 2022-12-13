@@ -19,11 +19,13 @@
              -
           </button>
 
-          <button v-on:click="setCorectAnswer(i)" >
-            correct answer 
+          <button class="buttonContainer" v-on:click="setCorectAnswer(i)" >
+            <img class="button" src="https://cdn4.iconfinder.com/data/icons/essentials-72/24/040_-_Tick-512.png"/>
           </button>
-          <button v-on:click="setWrongAnswer(i)" >
-            wrong answer 
+          
+          <button class="buttonContainer" v-on:click="setWrongAnswer(i)" >
+            <img class="button" src="https://cdn4.iconfinder.com/data/icons/essentials-72/24/039_-_Cross-512.png"/>
+
           </button>
           <br>
         </div>
@@ -211,7 +213,16 @@ export default{
   box-sizing: border-box;
   background-color: aliceblue;
 }
-
+.button {
+  cursor: pointer;
+  height: 4em;
+}
+.buttonContainer {
+  padding: 1em;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
 
 
 

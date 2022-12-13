@@ -37,11 +37,11 @@ export default {
   
   createPoll: function() {
     socket.emit("createPoll", {pollId: this.id, lang: this.lang })
+    socket.emit("anotherQuestion", {pollId: this.pollId})
     this.$router.push('/create/'+this.lang+'/'+this.id)
   }},
 
   created: function () {
-
      this.lang = this.$route.params.lang;
      socket.emit("pageLoaded", this.lang);
      socket.on("init", (labels) => {

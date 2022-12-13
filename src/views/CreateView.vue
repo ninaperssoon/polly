@@ -61,6 +61,7 @@ export default {
   created: function () {
     this.pollId = this.$route.params.id;
     this.lang = this.$route.params.lang;
+    
     socket.emit("pageLoaded", this.lang);
     socket.on("init", (labels) => {
       this.uiLabels = labels
@@ -69,7 +70,7 @@ export default {
       this.data = data
     )
     socket.on("pollCreated", (data) =>
-      this.data = data
+      this.data = data,
     )
     socket.on("updateQuestions", (data) =>{
       this.questions= data

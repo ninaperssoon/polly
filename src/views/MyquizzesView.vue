@@ -6,11 +6,13 @@
       <h1>{{uiLabels.myQuizzes}}</h1>
       </div>
 
+      
         <div id="myQuizzes" v-for="(contain, id) in quizzes" v-bind:key="id">{{id}} 
           <router-link class="button" v-bind:to="('/create/'+lang+'/'+id)"> Edit </router-link>
           <router-link class="button" v-bind:to="('/host/'+id+'/'+lang)"> Host this quiz </router-link>
 
         </div>
+<<<<<<< HEAD
         <div id="createDiv">       
          <router-link id="create" v-bind:to="('/create/'+lang+'/'+id)">{{uiLabels.createQuiz}}</router-link>
         </div>
@@ -20,7 +22,17 @@
     </section>
 
      
+=======
+
+        <div>       
+         <router-link id="create" v-bind:to="('/create/'+lang+'/'+id)">{{uiLabels.createQuiz}}</router-link>
+      </div>
+>>>>>>> 37fb075 (lite småändringar hihi)
       <div></div>
+
+    </section>
+
+      
   </body>
 
 
@@ -75,6 +87,12 @@ export default {
     height: 3.17em;
     
   }
+<<<<<<< HEAD
+=======
+  section {
+    background-color: #A6E9A3;
+  }
+>>>>>>> 37fb075 (lite småändringar hihi)
 
   #myQuizzes {
     margin-top: 2em;
@@ -83,17 +101,19 @@ export default {
     height: 2em;
     width: 40em;
     background-color:#5C95FF;
+<<<<<<< HEAD
 
   
   }
 
   #createDiv {
     margin-top: 5em;
+=======
+>>>>>>> 37fb075 (lite småändringar hihi)
   }
   
 
   #create {
-    margin-top: 100em;
     padding: 1em;
     height: 0.8em; 
     width: 10em;
@@ -106,6 +126,7 @@ export default {
     color: #F87575;
     font-family: 'Righteous', serif;
     text-shadow: .05em .05em 0 #4779d6;
+
   }
 
   #create:hover {
