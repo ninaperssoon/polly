@@ -8,11 +8,11 @@
         <div class="card__face card__face--front">
 
           
-          <p v-if="(this.question != null)"> {{this.playingName}} is answering: <br> {{this.question.q}} </p>
-          <p v-else>You have reached the end of the quiz!
+          <p v-if="(this.question != null)"> {{this.playingName}} {{uiLabels.IsAswering}} <br> {{this.question.q}} </p>
+          <p v-else>{{uiLabels.ReachedEndQuiz}}
             <br>
-            <router-link class="button" v-bind:to="('/join/'+lang)"> Join another quiz </router-link>
-            <router-link class="button" v-bind:to="('/')"> Return to homepage </router-link>
+            <router-link class="button" v-bind:to="('/join/'+lang)"> {{uiLabels.joinanotherquiz}} </router-link>
+            <router-link class="button" v-bind:to="('/')"> {{uiLabels.Returntohomepage}} </router-link>
 
           </p>
           

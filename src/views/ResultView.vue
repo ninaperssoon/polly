@@ -18,6 +18,7 @@ export default {
   },
   data: function () {
     return {
+      uiLabels: {},
       question: "",
       data: {
       }

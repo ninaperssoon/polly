@@ -13,7 +13,7 @@
   :questionNumber = index > </Question>
  
   <button v-on:click="newQuestion">
-        Add question
+    {{uiLabels.AddQuestion}}
   </button>
 
   <div id="backButton">

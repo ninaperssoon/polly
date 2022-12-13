@@ -3,7 +3,7 @@
     <homeButton></homeButton>
     <div id="host">
 
-      Hosting the quiz: {{id}}
+      {{uiLabels.yourehosting}}{{id}}
       <p v-for="participant in participants" v-bind:key = "participant">
       {{participant}}
     </p>

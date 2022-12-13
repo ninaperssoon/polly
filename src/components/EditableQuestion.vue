@@ -4,16 +4,22 @@
   <div>
     <div id="question" >
       <div id="inputQuestion">
-        <h2>Question: {{questionNumber +1}}</h2> 
-        <input type="text" v-model="q" class="input" placeholder="Write your question here...">
+        {{uiLabels.Question}} {{questionNumber +1}} 
+        <input type="text" v-model="q" class="input" placeholder="[[uiLabels.WriteQuestionHere]]" >
+
+        <!-- {{uiLabels.WriteQuestionHere}} -->
+
         <br> 
       </div>
       
 
       <div id="inputAnswer" >
         <div v-for="(_,i) in answers" v-bind:key="'answer' + i">
-          <input type="text"  v-model="answers[i]" class="input" id="option" placeholder="Write your answers here..." 
-          v-bind:style="{'background-color':altColor[i]}">
+          <input type="text"  v-model="answers[i]" class="input" id="option" placeholder= "kjfejef"
+           v-bind:style="{'background-color':altColor[i]}">
+
+           <!-- {{uiLabels.WriteAnswersHere}} -->
+          
 
           <button v-on:click="deleteAnswers(i)" class="deleteB" id="deleteAnswerButton">
              -
@@ -39,11 +45,11 @@
 
       <div>
         <button v-on:click="deleteQuestion" class="deleteB" id="deleteQuestions">
-          Delete question
+          {{uiLabels.DeleteQuestion}}
         </button >
 
         <button v-on:click="sendQuestion">
-          Save question
+          {{uiLabels.SaveQuestion}}
         </button>
         <!--{{data}}
         <router-link v-bind:to="'/result/'+pollId">Check result</router-link>-->
@@ -58,6 +64,8 @@
 
 <script>
 
+import io from 'socket.io-client';
+const socket = io();
 
 
 export default{
@@ -77,9 +85,21 @@ export default{
       answers: [...this.question.a],
       
       altColor:["white","white"],
+      lang: "",
+      uiLabels: {}
     }
 
   },
+
+  created: function () {
+    this.lang = this.$route.params.lang;
+    socket.emit("pageLoaded", this.lang);
+    socket.on("init", (labels) => {
+      this.uiLabels = labels
+    
+    } )
+  },
+  
  
 
   methods:{

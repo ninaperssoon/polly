@@ -3,10 +3,10 @@
 <body>
   <homeButton></homeButton>
   <div class="pollLink">
-    Enter the name of your quiz: 
+    {{uiLabels.Enternameyourquiz}} 
     <input type="text" v-model="id">
     <button v-on:click="createPoll" id="pollButton">
-      Continue to create the quiz
+      {{uiLabels.Continuecreate}} 
     </button>
     </div>
 

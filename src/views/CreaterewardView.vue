@@ -16,7 +16,7 @@
 
       <button v-on:click="newReward" class="addButton">
         +
-      </button> Add Reward
+      </button> {{uiLabels.AddReward}}
     </div>
 
 
@@ -33,7 +33,7 @@
     
       <button v-on:click="newPunishment" class="addButton">
         +
-      </button> Add Punishment
+      </button> {{uiLabels.AddPunishment}}
 
       
     </div>
@@ -46,7 +46,7 @@
     <div id="nextButton">
       <router-link v-bind:to="'/host/'+pollId+'/'+lang" > 
         <button id="submitButton" v-on:click="sendPollIdToH()">
-      Test Quiz
+          {{uiLabels.TestQuiz}}
       </button > </router-link>
       </div>
 
@@ -55,7 +55,7 @@
     <div id="nextButton">
     <router-link v-bind:to="'/start/'+lang"> 
       <button id="submitButton" >
-      Save and Exit
+        {{uiLabels.SaveandExit}}
       </button> 
     </router-link>
     </div>

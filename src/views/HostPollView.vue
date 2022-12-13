@@ -1,7 +1,7 @@
 <template>
       <homeButton></homeButton>
   
-   <h1> you're hosting {{pollId}}  </h1> 
+   <h1> {{uiLabels.yourehosting}} {{pollId}}  </h1> 
 
   <div class="container">
     <div class="scene scene--card">
@@ -9,11 +9,11 @@
       
         <div class="card__face card__face--front">
 
-         <p v-if="(this.question != null)">{{this.question.q}} <br> {{this.playingName}} is answering</p> 
-          <p v-else>You have reached the end of the quiz!
+         <p v-if="(this.question != null)">{{this.question.q}} <br> {{this.playingName}} {{uiLabels.IsAswering}}</p> 
+          <p v-else>{{uiLabels.ReachedEndQuiz}}
             <br>
-            <router-link class="button" v-bind:to="('/myquizzes/'+lang)"> Host another quiz </router-link>
-            <router-link class="button" v-bind:to="('/')"> Return to homepage </router-link>
+            <router-link class="button" v-bind:to="('/myquizzes/'+lang)"> {{uiLabels.Hostanotherquiz}} </router-link>
+            <router-link class="button" v-bind:to="('/')"> {{uiLabels.Returntohomepage}} </router-link>
           </p>
 
         </div>
@@ -29,10 +29,10 @@
     </div>
   </div>
   <button v-on:click="nextQuestion" >
-    Next Question
+    {{uiLabels.NextQuestion}} 
   </button>
   <button v-on:click="resetQuiz">
-    Reset Quiz
+    {{uiLabels.ResetQuiz}} 
   </button>
  
 

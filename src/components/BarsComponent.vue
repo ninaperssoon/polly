@@ -16,7 +16,8 @@ export default {
   name: 'BarsComponent',
   props: {
     data: Object
-  }
+  },
+  
 }
 </script>
 

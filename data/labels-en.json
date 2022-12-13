@@ -20,6 +20,41 @@
 	"reward" : "reward",
 	"punishment" : "punishment",
 	"yourePlaying" : "You're playing: ",
-	"EnterYourName": "Enter your name:"
+	"EnterYourName": "Enter your name:",
+	"Waitingforhosttostart": "Waiting for host to start",
+	"otherplayers": "Other players:",
+	"yourehosting": "You're hosting: ",
+	"Hostanotherquiz": "Host another quiz",
+	"Returntohomepage": "Return to homepage",
+	"NextQuestion": "Next Question",
+	"ResetQuiz": "Reset Quiz",
+	"ReachedEndQuiz": "You have reached the end of the quiz!",
+	"IsAswering":"is answering",
+	"Enternameyourquiz": "Enter the name of your quiz:",
+	"Continuecreate":"Continue to create the quiz",
+	"AddReward": "Add Reward",
+	"AddPunishment":"Add Punishment",
+	"TestQuiz":"Test Quiz",
+	"SaveandExit": "Save and Exit",
+	"AddQuestion": "Add question",
+	"Your":"Your",
+	"is":" is ",
+	"Save":"Save",
+	"WriteRewardHere":"Write your reward here...",
+	"WriteQuestionHere":"Write your question here...",
+	"WriteAnswersHere":"Write your answers here...",
+	"CorrectAnswer":"correct answer",
+	"WrongAnswer":"Wrong answer",
+	"DeleteQuestion":"Delete question",
+	"SaveQuestion":"Save Question",
+	"SendPunishment":"Save Punishment",
+	"SendReward":"Save Reward",
+	"Question":"Question",
+	"joinanotherquiz":"Join another quiz",
+	"Your2":"Your"
+
+
+
+
 	
 }

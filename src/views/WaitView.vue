@@ -1,9 +1,9 @@
 <template>
   <body>
     <div>
-      waiting for host to start...
+      {{uiLabels.Waitingforhosttostart}}
       <br>
-      other players:
+      {{uiLabels.otherplayers}}
       <p v-for="participant in participants" v-bind:key = "participant">
       {{participant}}
     </p>

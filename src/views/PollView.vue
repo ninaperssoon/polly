@@ -8,17 +8,17 @@
         <div class="card__face card__face--front">
           
           <p v-if="(this.question!= null)">{{this.question.q}} </p>
-          <p v-else>You have reached the end of the quiz!
+          <p v-else> {{uiLabels.ReachedEndQuiz}}
             <br>
-            <router-link class="button" v-bind:to="('/join/'+lang)">Join another quiz</router-link>
-            <router-link class="button" v-bind:to="('/')">Return to homepage</router-link>
+            <router-link class="button" v-bind:to="('/join/'+lang)">{{uiLabels.joinanotherquiz}}</router-link>
+            <router-link class="button" v-bind:to="('/')">{{uiLabels.Returntohomepage}}</router-link>
 
           </p>
           
 
         </div>
         <div class="card__face card__face--back" v-bind:class="{ correct: ans == 'correct'}">
-        <p > <span id="correctness"> {{this.ans}}! </span><br> Your {{this.con}} is {{this.consequence}} </p>
+        <p > <span id="correctness"> {{this.ans}}! </span><br> {{uiLabels.Your}} {{this.con}}{{uiLabels.is}}{{this.consequence}} </p>
         </div>
       </div>
       <div id="buttonContainer">  

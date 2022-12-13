@@ -5,6 +5,7 @@
 </button>
 </template>
 <script>
+
 export default {
   name: 'QuestionComponent',
   props: {

@@ -2,12 +2,12 @@
 
   <div id="consequenceBox" >
     <div id="inputReward">
-      {{message}}
+      {{uiLabels.punishment}}
       <div id="rewardGrid">
-        <input type="text"  class="input" placeholder="Write your reward here..." v-model="p">
+        <input type="text"  class="input" placeholder="Write your punishment here..." v-model="p">
 
         <button v-on:click="sendPunishment">
-          Send Punishment
+          {{uiLabels.SendPunishment}}
         </button>
         
         <button v-on:click="deletePunishment" class="delButton">
@@ -20,23 +20,33 @@
 
 <script>
 
-
+import io from 'socket.io-client';
+const socket = io();
 
 export default{
 name: 'PunishmentsComponent',
 props: {
-punishment: String,
-message: String,
+punishment: String
 },
 
 data: function(){
   return{
     p : this.punishment,
+    lang: "",
+    uiLabels: {}
       
 
   }
 
 },
+created: function () {
+    this.lang = this.$route.params.lang;
+    socket.emit("pageLoaded", this.lang);
+    socket.on("init", (labels) => {
+      this.uiLabels = labels
+    
+    } )
+  },
 methods:{
   sendPunishment: function (){
     this.$emit('myPunishment', {p: this.p})
