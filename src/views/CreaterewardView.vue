@@ -1,4 +1,5 @@
 <template>
+  <div id="myBackground">
   <homeButton></homeButton>
   
 
@@ -58,7 +59,7 @@
     </button> </router-link>
     </div>
 
-    
+  </div>
 
    
 </template>
@@ -161,13 +162,14 @@ export default {
 
 <style>
 
+#myBackground{
+  /*background-color: #A6E9A3;*/
+  background-color:  #dda880 ;
 
-#pollButton {
-  margin-top: 1em;
-  border-radius: 1em;
 }
+
 button:hover {
-  background-color:lightgreen;
+  background-color: lightgreen;
   cursor:pointer;
 }
 
@@ -176,6 +178,7 @@ button:hover {
   grid-gap: 10px;
   grid-template-columns: 1fr 1fr;
   margin-top: 5em;
+  
 
 }
 .box{
@@ -186,7 +189,7 @@ button:hover {
 .reward{
 grid-column: 1;
 grid-row: auto;
-background-color: greenyellow;
+background-color: #B9E6FF;
 border-radius: 1em;
 
 
@@ -194,29 +197,17 @@ border-radius: 1em;
 .punishment{
 grid-column: 2;
 grid-row: auto;
-background-color: red;
+background-color: #7E6C6C;
 border-radius: 1em; 
 
 
 
 }
 
-
-
-
- 
-
-
-
 .deleteB:hover {
   background-color: salmon;
   cursor:pointer;
 }
-
-
-
-
-
 
 .innerWrapper {
   
@@ -237,12 +228,6 @@ padding: 3em;
   background-color:salmon;
 
 }
-
-
-
-
-
-
 #backButton{
   
   margin-right: 85%;
