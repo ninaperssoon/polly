@@ -20,6 +20,7 @@ body {
   position: relative;
   text-align: center;
   margin-bottom: -5em;
+  animation: tilt-n-move-shaking 3s infinite;
 }
 
 #text {
@@ -32,8 +33,10 @@ body {
 
 #surfboard {
   height: 12em;
-
+  
 }
+
+
 .flipPic {
   height: 5em;
 }
@@ -52,7 +55,7 @@ button:hover {
 }
 
 #logo {
-  animation: tilt-n-move-shaking 0.5s infinite;
+  animation: tilt-n-move-shaking 0.9s infinite;
 }
 
 @keyframes tilt-n-move-shaking {

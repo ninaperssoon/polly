@@ -2,8 +2,7 @@
   <div id="body">
     <div>
       <h1>{{uiLabels.Waitingforhosttostart}}</h1>
-      <br>
-      {{uiLabels.Participants}}:
+
     </div>
       
       <div class="board" v-for="participant in participants" v-bind:key = "participant">

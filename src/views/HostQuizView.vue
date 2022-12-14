@@ -5,7 +5,7 @@
 
     <h1> {{uiLabels.yourehosting}}{{id}} </h1>
 
-      <div> {{uiLabels.Participants}}: </div>
+      <br>
 
       <div class="board" v-for="participant in participants" v-bind:key = "participant">
         <img id="surfboard" src="../../public/img/surfboard.png">
@@ -89,6 +89,7 @@ export default {
   button {
     color:black;
     margin: 1em;
+    margin-top: 2em;
     text-decoration: none; 
     background-color:  #FFF1AD;
     padding: 0.5em;
@@ -115,7 +116,6 @@ export default {
   font-size: 4em; 
   text-shadow: .08em .08em 0 #4779d6;
   }
-
 
  
 </style>
