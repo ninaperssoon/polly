@@ -1,7 +1,7 @@
 <template>
   
 <body>
-  <homeButton></homeButton>
+  <homeButton class="homeButton"></homeButton>
   <div class="pollLink">
     {{uiLabels.Enternameyourquiz}} 
     <input type="text" v-model="id">

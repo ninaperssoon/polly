@@ -1,5 +1,5 @@
 <template>
-  <homeButton></homeButton>
+  <homeButton class="homeButton"></homeButton>
   
 {{pollId}}
   <div class="wrapper">

@@ -1,6 +1,6 @@
 <template>
 <body>
-  <homeButton></homeButton>
+  <homeButton class="homeButton"></homeButton>
   <section>
     <h1>Join Quiz</h1>
    

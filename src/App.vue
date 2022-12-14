@@ -23,8 +23,17 @@ body {
   animation: tilt-n-move-shaking 0.5s infinite;
 }
 
+
 button:hover {
   cursor:pointer;
+}
+
+.homeButton:hover {
+  animation: tilt-n-move-shaking 0.5s infinite;
+}
+
+#logo {
+  animation: tilt-n-move-shaking 0.5s infinite;
 }
 
 @keyframes tilt-n-move-shaking {

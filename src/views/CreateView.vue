@@ -1,5 +1,5 @@
 <template>
-  <homeButton></homeButton>
+  <homeButton class="homeButton"></homeButton>
  
 
 

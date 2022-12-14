@@ -1,6 +1,6 @@
 <template>
   <body>
-      <homeButton></homeButton>
+      <homeButton class="homeButton"></homeButton>
   
    <h1> {{uiLabels.yourehosting}} {{pollId}}  </h1> 
 

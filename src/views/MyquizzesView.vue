@@ -1,6 +1,6 @@
 <template>
   <body>
-    <homeButton></homeButton>
+    <homeButton class="homeButton"></homeButton>
     
       <div id="title">
       <h1>{{uiLabels.myQuizzes}}</h1>
