@@ -7,9 +7,12 @@
          v-on:click="toggleNav"> 
     </div>
     <!-- <div class="logo"> punishment play: the flip. Also known as "Flip or Flop"  </div> -->
+    <div>
+    <div><img id="flag" v-bind:src=uiLabels.languageFlag v-on:click="switchLanguage"></div>
+
     <h1 data-shadow='Flip or Flop!'>Flip or Flop!    <img id="logo" src="../../public/img/fliplogo.png">
-</h1>
-    <img id="flag" v-bind:src=uiLabels.languageFlag v-on:click="switchLanguage">
+</h1></div>
+    
   </header>
   
   
@@ -152,10 +155,11 @@ export default {
     color: #F87575;
   }
   #flag {
-  margin: 2em;
   width: 3em;
   height: 3em;
   cursor: pointer;
+  left: -43em;
+  margin-top: 1em;
 }
 
 #navDiv {
@@ -192,10 +196,10 @@ h1 {
     overflow: auto;
   }
   #flag {
-    margin-left: 2em;
     width: 3em;
     height: 3em;
     cursor: pointer;
+
 }
 
   .startchoice {
@@ -238,6 +242,7 @@ h1 {
   }
 
 }
+
 
 
 </style>
