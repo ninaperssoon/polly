@@ -4,7 +4,7 @@
     <div id="inputReward">
       {{uiLabels.punishment}}
       <div id="rewardGrid">
-        <input type="text"  class="input" placeholder="Write your punishment here..." v-model="p">
+        <input type="text" v-model="p" class="input" :placeholder="uiLabels.WritePunishmentHere" >
 
         <button v-on:click="sendPunishment">
           {{uiLabels.SendPunishment}}

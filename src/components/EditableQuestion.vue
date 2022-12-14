@@ -5,7 +5,7 @@
     <div id="question" >
       <div id="inputQuestion">
         {{uiLabels.Question}} {{questionNumber +1}} 
-        <input type="text" v-model="q" class="input" placeholder="[[uiLabels.WriteQuestionHere]]" >
+        <input type="text" v-model="q" class="input" :placeholder="uiLabels.WriteQuestionHere" >
 
         <!-- {{uiLabels.WriteQuestionHere}} -->
 
@@ -15,7 +15,7 @@
 
       <div id="inputAnswer" >
         <div v-for="(_,i) in answers" v-bind:key="'answer' + i">
-          <input type="text"  v-model="answers[i]" class="input" id="option" placeholder= "kjfejef"
+          <input type="text"  v-model="answers[i]" class="input" id="option" :placeholder= "uiLabels.WriteAnswersHere"
            v-bind:style="{'background-color':altColor[i]}">
 
            <!-- {{uiLabels.WriteAnswersHere}} -->
