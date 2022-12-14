@@ -2,13 +2,13 @@
 
   <div id="consequenceBox" >
     
-      {{uiLabels.punishment}} {{p}}
+      
      
         <input type="text" v-model="p" class="input" :placeholder="uiLabels.WritePunishmentHere" v-on:keypress="resetSavebutton()" >
         
 
-        <button v-on:click="sendPunishment" v-bind:style="{'background-color':savedbackground}" id="SaveButton">
-          {{uiLabels.SavePunishment}}
+        <button v-on:click="sendPunishment" v-bind:style="{'background-color':savedbackground}" id="Savebutton">
+          {{uiLabels.SendPunishment}}
         </button>
         
         <button v-on:click="deletePunishment" class="delButton">
@@ -35,7 +35,7 @@ data: function(){
     p : this.punishment,
     lang: "",
     uiLabels: {},
-    savedbackground : "aqua",  
+    savedbackground : "#FFF1AD",  
     savetext: " Save Punishment" 
 
   }
@@ -52,11 +52,11 @@ created: function () {
 methods:{
   sendPunishment: function (){
    
-    this.savedbackground = "olivedrab";
+    this.savedbackground = "##A6E9A3";
     console.log("color color color: "+ this.savedbackground)
     this.$emit('myPunishment', {p: this.p});
     console.log("Sended punishment: ", this.p);
-    this.savedbackground = "olivedrab";
+    this.savedbackground = "#A6E9A3";
     this.savetext = "Saved!"
     
   },
@@ -72,5 +72,8 @@ methods:{
 
 }
 </script>
+
+
+
 
 

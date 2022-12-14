@@ -1,8 +1,8 @@
 <template>
-  <homeButton class="homeButton"></homeButton>
+
+<div class="body">
+<homeButton class="homeButton"></homeButton>
  
-
-
  <div>
    <Question v-for="(question,index) in questions" 
    v-bind:question="question"
@@ -28,6 +28,7 @@
   </div>
 </div>
   
+</div>
 </div>
 
 
@@ -147,6 +148,19 @@ export default {
 </script>
 
 <style scoped>
+.body { margin: auto;
+    background-color: #A6E9A3 ;
+    text-align: center;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    position:fixed;
+    overflow: auto;   
+
+}
+
+
 button:hover {
   background-color:lightgreen;
   cursor:pointer;

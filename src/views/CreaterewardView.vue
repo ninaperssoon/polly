@@ -1,11 +1,14 @@
 <template>
+
   <div id="myBackground">
-  <homeButton class="homeButton"></homeButton>
+
+    <homeButton class="homeButton"></homeButton>
   
-{{pollId}}
   <div class="wrapper">
- 
+
     <div class="innerWrapper"  >
+      
+      <h1>{{uiLabels.reward}}s</h1>
 
       <Reward  v-for=" (reward, index) in rewards"
       v-bind:reward= "reward"
@@ -16,12 +19,13 @@
       class="reward"/>
 
       <button v-on:click="newReward" class="addButton">
-        +
-      </button> {{uiLabels.AddReward}}
+        + {{uiLabels.AddReward}}
+      </button> 
     </div>
 
 
     <div  class="innerWrapper" >
+      <h1>{{uiLabels.punishment}}s</h1>
       <Punishment v-for=" (punishment, index) in punishments"
       v-bind:punishment = "punishment"
       v-bind:key="punishment"
@@ -33,8 +37,8 @@
 
     
       <button v-on:click="newPunishment" class="addButton">
-        +
-      </button> {{uiLabels.AddPunishment}}
+        + {{uiLabels.AddPunishment}}
+      </button> 
 
       
     </div>
@@ -50,7 +54,6 @@
           {{uiLabels.TestQuiz}}
       </button > </router-link>
       </div>
-
 
 
     <div id="nextButton">
@@ -170,9 +173,25 @@ export default {
 </script>
 
 <style scoped>
+
+h1{
+display: inline-block;
+  color: white;
+  font-family: 'Righteous', serif;
+  font-size: 4em; 
+  text-shadow: .08em .08em 0 #4779d6;
+}
+  
 #myBackground{
-  /*background-color: #A6E9A3;*/
-  background-color:  #dda880 ;
+  margin: auto;
+    background-color: #A6E9A3 ;
+    text-align: center;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    position:fixed;
+    overflow: auto;
 
 }
 
@@ -185,49 +204,37 @@ button:hover {
   display: grid;
   grid-gap: 10px;
   grid-template-columns: 1fr 1fr;
-  margin-top: 5em;
-  
-
 }
-
-
 
 .reward{
 grid-column: 1;
 grid-row: auto;
-background-color: #B9E6FF;
+background-color: #5C95FF;
 border-radius: 1em;
-
 
 }
 .punishment{
 grid-column: 2;
 grid-row: auto;
-background-color: #7E6C6C;
+background-color: #F87575;;
 border-radius: 1em; 
 
-
-
-}
-
-.deleteB:hover {
-  background-color: salmon;
-  cursor:pointer;
 }
 
 .innerWrapper {
-  
 grid-template-columns: 1fr;
-padding: 3em;
+padding: 1em;
 
 
 }
 
 .addButton {
-  width: 3.5em;
-  height: 3.5em;
-  border-radius: 50%;
-  margin: 18px 0;
+  padding: 0.5em;
+    background-color: #FFF1AD;
+    border-color: #fff1adbd;
+    color: #F87575;
+    font-size: 1.5em;
+    border-radius: 3em;
 }
 
 .delButton:hover {
@@ -236,10 +243,7 @@ padding: 3em;
 }
 
 
-
-
 #backButton{
-  
   margin-right: 85%;
   padding: 20 em;
   
@@ -256,18 +260,17 @@ padding: 3em;
   width: 3em;
   cursor: pointer;
 }
-#nextButton{
-  
-  margin-left: 85%;
-  padding: 20 em;
-  
-}
-#submitButton{
-  background-color: antiquewhite;
-  color: black;
-  
 
+#submitButton{
+  padding: 0.5em;
+    background-color: #FFF1AD;
+    border-color: #fff1adbd;
+    color: #F87575;
+    font-size: 1.5em;
+    margin-left: 80%;
+    border-radius: 3em;
 }
+
 #submitButton:hover{
   background-color: lightgreen;
 }
