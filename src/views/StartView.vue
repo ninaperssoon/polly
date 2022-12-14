@@ -7,7 +7,8 @@
          v-on:click="toggleNav"> 
     </div>
     <!-- <div class="logo"> punishment play: the flip. Also known as "Flip or Flop"  </div> -->
-    <h1 data-shadow='Flip or Flop!'>Flip or Flop!</h1>
+    <h1 data-shadow='Flip or Flop!'>Flip or Flop!    <img id="logo" src="../../public/img/fliplogo.png">
+</h1>
     <img id="flag" v-bind:src=uiLabels.languageFlag v-on:click="switchLanguage">
   </header>
   
@@ -176,6 +177,11 @@ h1 {
   font-family: 'Righteous', serif;
   font-size: 8em; 
   text-shadow: .08em .08em 0 #4779d6;
+  }
+
+  #logo{
+    height: 1.2em;
+    padding-top: 0.1em;
   }
 
 @media screen and (max-width:50em) {

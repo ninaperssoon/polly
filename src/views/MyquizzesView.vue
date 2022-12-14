@@ -1,24 +1,25 @@
 <template>
   <body>
     <homeButton></homeButton>
-    <section>
+    
       <div id="title">
       <h1>{{uiLabels.myQuizzes}}</h1>
       </div>
-      <!-- <div v-if="(this.quizzes = {})">{{uiLabels.noQuizzes}}</div>  -->
       
         <div id="myQuizzes" v-for="(contain, id) in quizzes" v-bind:key="id">{{id}} 
-          <router-link class="button" v-bind:to="('/create/'+lang+'/'+id)"> {{uiLabels.edit}} </router-link>
-          <router-link class="button" v-bind:to="('/host/'+id+'/'+lang)"> {{uiLabels.hostThisQuiz}} </router-link>
+         
+            <router-link class="button" v-bind:to="('/create/'+lang+'/'+id)"> {{uiLabels.edit}} </router-link>
+            <router-link class="button" v-bind:to="('/host/'+id+'/'+lang)"> {{uiLabels.hostThisQuiz}} </router-link>
+          
+          
 
         </div>
 
         <div id="createDiv">       
          <router-link id="create" v-bind:to="('/create/'+lang)">{{uiLabels.createQuiz}}</router-link>
       </div>
-      <div></div>
-
-    </section>
+  
+   
 
       
   </body>
@@ -77,19 +78,24 @@ export default {
     border-radius: 2em;
     height: 3.17em;
     
+    
   }
   section {
     background-color: #A6E9A3;
   }
 
   #myQuizzes {
-    margin-top: 2em;
     padding: 2em;
     padding-bottom: 3em;
-    height: 2em;
     width: 40em;
-    margin-bottom: 3em;
+    margin-bottom: 2em;
     background-color:#5C95FF;
+    display: grid;
+    grid-template-columns: 20em 5em 10em;
+    grid-template-rows: 1em;
+    place-items: center start;
+    border-style:outset;
+    border-color: #5C95FF;
   }
   
 
@@ -122,6 +128,7 @@ export default {
     border-radius: 3em;
     border-style: outset;
     border-color: #fff1adbd;
+
   }
 
   .button:hover {
@@ -154,5 +161,7 @@ h1 {
 
 #createDiv {
   margin-top: 4em;
+  margin-bottom: 2em;
 }
+
 </style>

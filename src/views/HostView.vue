@@ -3,24 +3,17 @@
     <homeButton></homeButton>
 
     
-    <section>
-      <h1>{{uiLabels.hostQuiz}}</h1>
-      <div id="host">
-        <p> {{uiLabels.writeQuizId}}: 
-          <br>
-          <input type="text" v-model="id">  </p>
-          
-        
-        
-              
-      </div>
+    <h1>{{uiLabels.hostQuiz}}</h1>
+    <div id="host">
+      <p> {{uiLabels.writeQuizId}}: 
+        <br>
+        <input type="text" v-model="id"> 
+      </p>      
+    </div>
 
      
-      <button id="startQuiz" v-on:click="startQuiz">{{uiLabels.startQuiz}}</button> 
-   
-      <div></div>
+    <button id="startQuiz" v-on:click="startQuiz">{{uiLabels.startQuiz}}</button> 
 
-    </section>
   
 </body>
 

@@ -13,6 +13,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
+
+
 .flipPic {
   height: 5em;
 }
