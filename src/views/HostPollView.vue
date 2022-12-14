@@ -1,4 +1,5 @@
 <template>
+  <body>
       <homeButton></homeButton>
   
    <h1> {{uiLabels.yourehosting}} {{pollId}}  </h1> 
@@ -17,8 +18,8 @@
           </p>
 
         </div>
-        <div class="card__face card__face--back" v-bind:class="{ correct: ans == 'correct'}">
-        <p > <span id="correctness"> {{this.ans}}! </span> <br> {{this.playingName}}'s {{this.con}} is {{this.consequence}}</p>
+        <div class="card__face card__face--back" v-bind:class="{ correct: ans == uiLabels.correct}">
+        <p > <span id="correctness"> {{this.ans}}! </span> <br> {{this.playingName}}{{uiLabels.s}} {{this.con}} {{uiLabels.is}} {{this.consequence}}</p>
         </div>
       </div>
       <!-- <div id="buttonContainer">  
@@ -35,7 +36,7 @@
     {{uiLabels.ResetQuiz}} 
   </button>
  
-
+  </body>
 </template>
 
 <script>
@@ -88,10 +89,11 @@ export default {
       this.uiLabels = labels
     })
     socket.on("flipUpdate", data =>{
-      this.ans = data.wor
-      this.con = data.con
+      this.ans = data.wor === "correct"?this.uiLabels.correct:this.uiLabels.incorrect
+      this.con = data.con === "punishment"?this.uiLabels.punishment2:this.uiLabels.reward
       this.consequence= data.consequence
       this.cardOne = 'flipped'
+      console.log("flipUpdate")
     })
     socket.on("answeringParticipant", (data) =>{
       this.playingName=data
@@ -134,6 +136,13 @@ export default {
 
 <style scoped>
 
+body {
+  background-color: #A6E9A3;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+}
+
 .container{
   height: 40em;
   display: flex;
@@ -173,7 +182,7 @@ export default {
 }
 
 .card__face--front {
-  background: #007991;
+  background: #5C95FF;
 }
 
 .card__face--back {
@@ -216,6 +225,39 @@ export default {
   .button:hover {
     box-shadow: 0 5px 15px #0079918f;
     transform: translateY(-2px);
+    cursor: pointer;
+
+  }
+
+  @import url(https://fonts.googleapis.com/css?family=Righteous);
+
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  }
+
+h1 {
+  display: inline-block;
+  color: white;
+  font-family: 'Righteous', serif;
+  font-size: 4em; 
+  text-shadow: .08em .08em 0 #4779d6;
+  }
+
+  button {
+    margin-top: -10em;
+    text-decoration: none; 
+    background-color:#FFF1AD;
+    padding: 0.5em;
+    border-radius: 2em;
+    border-style: outset;
+    border-color: #FFF1AD;
+    color: #F87575;
+    font-size:1.5em;
+    font-family: 'Righteous', serif;
+    text-shadow: .05em .05em 0 #4779d6;
 
   }
 

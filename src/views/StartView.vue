@@ -1,7 +1,5 @@
 <template>
-  <body>
-
-    
+  <div class="body">
   
   <header>
     
@@ -30,7 +28,7 @@
 <footer> 
   
 </footer>
-</body>
+  </div>
 
 </template>
 
@@ -74,7 +72,7 @@ export default {
 </script>
 <style scoped>
 
-  body {
+  .body {
     margin: 0;
     background-color: #A6E9A3;
     font-family: 'Courier New', Courier, monospace;

@@ -39,7 +39,7 @@
 	"SaveandExit": "Spara & lämna",
 	"AddQuestion":"Lägg till fråga",
 	"Your":"Din",
-	"is":"är ",
+	"is":" är ",
 	"Save":"Spara",
 	"WriteRewardHere":"Skriv din belöning här...",
 	"WriteQuestionHere":"Skriv din fråga här",
@@ -54,6 +54,8 @@
 	"edit": "Redigera",
 	"hostThisQuiz": "Anordna det här quizzet",
 	"Participants": "Deltagare",
-	"noQuizzes" : "Du har inte skapat något quiz än!"
+	"noQuizzes" : "Du har inte skapat något quiz än!",
+	"s": "s",
+	"punishment2": "bestraffning"
 
 }

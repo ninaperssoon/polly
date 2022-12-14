@@ -18,8 +18,8 @@
           
 
         </div>
-        <div class="card__face card__face--back" v-bind:class="{ correct: ans == 'correct'}">
-        <p><span id="correctness"> {{this.ans}}! </span> <br> {{playingName}}'s {{this.con}} is {{this.consequence}} </p>
+        <div class="card__face card__face--back" v-bind:class="{ correct: ans == uiLabels.correct}">
+        <p><span id="correctness"> {{this.ans}}! </span> <br> {{playingName}}{{uiLabels.s}} {{this.con}} {{uiLabels.is}} {{this.consequence}} </p>
         </div>
       </div>
       <!-- <div id="buttonContainer">  
@@ -102,8 +102,8 @@ export default {
       }
     })
     socket.on("flipUpdate", data =>{
-      this.ans = data.wor
-      this.con = data.con
+      this.ans = data.wor === "correct"?this.uiLabels.correct:this.uiLabels.incorrect
+      this.con = data.con === "punishment"?this.uiLabels.punishment2:this.uiLabels.reward
       this.consequence= data.consequence
       console.log(this.consequence)
       console.log(this.playingName)

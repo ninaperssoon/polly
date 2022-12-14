@@ -267,9 +267,10 @@ Data.prototype.getQuiz = function(pollId) {
 Data.prototype.getQuizzes = function () {
   return this.polls
   }
-  Data.prototype.getFlip = function (wor, con, consequence) {
+
+Data.prototype.getFlip = function (wor, con, consequence) {
     return {wor: wor, con: con, consequence: consequence}
-    }
+  }
 
 Data.prototype.resetParticipants = function (pollId) {
   const poll = this.polls[pollId];

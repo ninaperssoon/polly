@@ -55,7 +55,9 @@
 	"edit": "Edit",
 	"hostThisQuiz": "Host this quiz",
 	"Participants": "Participants",
-	"noQuizzes" : "You have not created a quiz yet!"
+	"noQuizzes" : "You have not created a quiz yet!",
+	"s": "'s",
+	"punishment2": "punishment"
 
 
 
