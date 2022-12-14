@@ -148,6 +148,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: -10em;
 }
 .scene {
   margin-top: -10em;
@@ -186,7 +187,8 @@ body {
 }
 
 .card__face--back {
-  background: rgba(226, 60, 60, 0.915);
+  /*background: rgba(226, 60, 60, 0.915);*/
+  background-color:#F87575;
   transform: rotateY(180deg); 
 }
 
@@ -204,6 +206,7 @@ body {
 
 .correct {
   background-color: rgb(63, 194, 63);
+  /*background-color:#A6E9A3;*/
 }
 
 #correctness {
@@ -258,7 +261,12 @@ h1 {
     font-size:1.5em;
     font-family: 'Righteous', serif;
     text-shadow: .05em .05em 0 #4779d6;
+  }
 
+  button:hover {
+    cursor:pointer;
+    box-shadow: 0 5px 15px #0079918f;
+    transform: translateY(-2px);
   }
 
 </style>

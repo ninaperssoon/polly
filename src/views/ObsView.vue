@@ -1,5 +1,6 @@
 <template>
-   <h1> {{uiLabels.yourePlaying}} {{pollId}} Alla hamnar här </h1> 
+  <div class="body">
+   <h1> {{uiLabels.yourePlaying}}{{pollId}} <br> Alla hamnar här </h1> 
 
   <div class="container">
     <div class="scene scene--card">
@@ -30,7 +31,7 @@
     </div>
   </div>
  
-
+</div>
 </template>
 
 <script>
@@ -135,6 +136,13 @@ export default {
 
 <style scoped>
 
+.body {
+  background-color: #A6E9A3;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+
+}
 .container{
   height: 40em;
   display: flex;
@@ -175,11 +183,11 @@ export default {
 }
 
 .card__face--front {
-  background: #007991;
+  background: #5C95FF;
 }
 
 .card__face--back {
-  background: rgba(226, 60, 60, 0.915);
+  background: #F87575;
   transform: rotateY(180deg); 
 }
 
@@ -219,6 +227,23 @@ export default {
     box-shadow: 0 5px 15px #0079918f;
     transform: translateY(-2px);
 
+  }
+
+  @import url(https://fonts.googleapis.com/css?family=Righteous);
+
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  }
+
+h1 {
+  display: inline-block;
+  color: white;
+  font-family: 'Righteous', serif;
+  font-size: 4em; 
+  text-shadow: .08em .08em 0 #4779d6;
   }
 
 </style>

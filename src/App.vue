@@ -23,6 +23,10 @@ body {
   animation: tilt-n-move-shaking 0.5s infinite;
 }
 
+button:hover {
+  cursor:pointer;
+}
+
 @keyframes tilt-n-move-shaking {
   0% { transform: translate(0, 0) rotate(0deg); }
   25% { transform: translate(5px, 5px) rotate(5deg); }
