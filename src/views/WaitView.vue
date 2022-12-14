@@ -1,16 +1,20 @@
 <template>
-  <body>
+  <div id="body">
     <div>
-      {{uiLabels.Waitingforhosttostart}}
+      <h1>{{uiLabels.Waitingforhosttostart}}</h1>
       <br>
-      {{uiLabels.otherplayers}}
-      <p v-for="participant in participants" v-bind:key = "participant">
-      {{participant}}
-    </p>
+      {{uiLabels.Participants}}:
     </div>
+      
+      <div class="board" v-for="participant in participants" v-bind:key = "participant">
+        <img id="surfboard" src="../../public/img/surfboard.png">
+        <div id="text">{{participant}}</div>
+      </div>
+
+ 
     
   
-</body>
+  </div>
 
 </template>
 
@@ -63,21 +67,18 @@ export default {
 }
 </script>
 <style scoped>
-  body {
-    margin: 0;
-    background-color: #A6E9A3;
+  #body {
+    margin: auto;
+    background-color: #A6E9A3 ;
+    text-align: center;
     width: 100%;
-    height: 100%;
-    position: fixed;
     top: 0;
     left: 0;
-    
+    height: 100%;
+    position:fixed;
+    overflow: auto;  
   }
 
-  div {
-    height: 4.78em;
-    line-height: 3em;
-  }
 
   #host {
     font-size:1.5em;
@@ -124,5 +125,13 @@ export default {
     box-shadow: 0 5px 15px #0079918f;
 
   }
+  h1 {
+  display: inline-block;
+  color: white;
+  font-family: 'Righteous', serif;
+  font-size: 4em; 
+  text-shadow: .08em .08em 0 #4779d6;
+  }
+  
  
 </style>

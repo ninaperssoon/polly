@@ -3,6 +3,7 @@
 </template>
 
 <style>
+
 body {
   margin: 0;
   padding: 0;
@@ -15,6 +16,24 @@ body {
 }
 
 
+.board {
+  position: relative;
+  text-align: center;
+  margin-bottom: -5em;
+}
+
+#text {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2em;
+}
+
+#surfboard {
+  height: 12em;
+
+}
 .flipPic {
   height: 5em;
 }

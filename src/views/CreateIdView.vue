@@ -3,12 +3,13 @@
 <body>
   <homeButton class="homeButton"></homeButton>
   <div class="pollLink">
-    {{uiLabels.Enternameyourquiz}} 
-    <input type="text" v-model="id">
-    <button v-on:click="createPoll" id="pollButton">
+    <p>{{uiLabels.Enternameyourquiz}} 
+      <br>
+    <input type="text" v-model="id"> </p> 
+  </div>
+  <button v-on:click="createPoll" id="pollButton">
       {{uiLabels.Continuecreate}} 
-    </button>
-    </div>
+  </button>
 
 
 </body>
@@ -74,7 +75,7 @@ export default {
     border-radius: 3em;
     border-style: outset;
     border-color: #FFF1AD;
-    font-size: 1em;
+    font-size: 1.5em;
     color: #F87575;
     font-family: 'Righteous', serif;
     text-shadow: .05em .05em 0 #4779d6;

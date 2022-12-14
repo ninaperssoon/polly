@@ -3,23 +3,18 @@
     <homeButton class="homeButton"></homeButton>
     <h1>
 
-      {{uiLabels.yourehosting}}{{id}}
-      
-    
-  </h1>
+    <h1> {{uiLabels.yourehosting}}{{id}} </h1>
 
-    <div id="host">
-      {{uiLabels.Participants}}:
-      <p v-for="participant in participants" v-bind:key = "participant">
-        {{participant}} 
-      </p>
-</div>
+      <div> {{uiLabels.Participants}}: </div>
 
-    <button v-on:click="startQuiz"> {{uiLabels.startQuiz}}</button>
+      <div class="board" v-for="participant in participants" v-bind:key = "participant">
+        <img id="surfboard" src="../../public/img/surfboard.png">
+        <div id="text">{{participant}}</div>
+      </div>
 
-    
-  
-</body>
+      <button v-on:click="startQuiz"> {{uiLabels.startQuiz}}</button>
+
+    </div>
 
 </template>
 
@@ -78,49 +73,19 @@ export default {
 }
 </script>
 <style scoped>
-  body {
-    margin: 0;
-    background-color:  #A6E9A3;
-    min-height: 100%;
-    min-width: 1024px;
+  #body {
+    margin: auto;
+    background-color: #A6E9A3 ;
+    text-align: center;
     width: 100%;
-    height: auto;
-    position: fixed;
     top: 0;
     left: 0;
+    height: 100%;
+    position:fixed;
+    overflow: auto;   
+  }
+
  
-    
-  }
-
-  div {
-    height: 4.78em;
-    line-height: 3em;
-  }
-
-  #host {
-    font-size:1.5em;
-
-    font-size:1.5em;
-    margin: auto;
-    background-color: #5C95FF;
-    height: 5em;
-    width: 20em;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 3em;
-    border-style:outset;
-    border-color: #5C95FF;
-    margin-top: 2em;
-
-  }
-
-  input {
-
-    font-size: 1em;
-    border-radius: 1em;
-    border-style: outset;
-  }
   button {
     color:black;
     margin: 1em;
@@ -143,6 +108,7 @@ export default {
 
   }
   h1 {
+  margin-top: -10em;
   display: inline-block;
   color: white;
   font-family: 'Righteous', serif;

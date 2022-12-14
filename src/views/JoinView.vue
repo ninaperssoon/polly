@@ -87,6 +87,7 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
+    
   }
   input {
     font-size: 1em;
