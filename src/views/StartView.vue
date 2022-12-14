@@ -101,7 +101,7 @@ export default {
   }
  
   .wrapper {
-    margin-top: 1em;
+    margin-top: 3em;
     margin-left: 12.5em;
     display: grid;
     grid-gap: 1.2em;
