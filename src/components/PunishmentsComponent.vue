@@ -1,10 +1,11 @@
 <template>
 
   <div id="consequenceBox" >
-    <div id="inputReward">
-      {{uiLabels.punishment}}
-      <div id="rewardGrid">
+    
+      {{uiLabels.punishment}} {{p}}
+     
         <input type="text" v-model="p" class="input" :placeholder="uiLabels.WritePunishmentHere" v-on:keypress="resetSavebutton()" >
+        
 
         <button v-on:click="sendPunishment" v-bind:style="{'background-color':savedbackground}" id="SaveButton">
           {{uiLabels.SavePunishment}}
@@ -14,8 +15,8 @@
           -
         </button>
       </div>
-    </div>
-  </div>
+  
+ 
 </template>
 
 <script>
@@ -73,47 +74,3 @@ methods:{
 </script>
 
 
-<style>
-#consequenceBox{
-height: 8em;
-}
-#inputReward {
-  
-  margin: 2em 3em 2em 3em;
-  padding-right: 2em;
-
-}
-
-#rewardGrid {
-  
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: 90% 10%;
-  
-
-}
-.input {
-  border-radius: 1em;
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  display: grid;
-}
-.delButton {
-  width: 2.5em;
-  height: 2.5em;
-  border-radius: 50%;
-  margin-top: 1em;
-
-}
-#saveButton{
-  border-radius: 50%;
-}
-#SaveButton:hover {
-  background-color:lightgreen;
-  
-}
-
-
-</style>
