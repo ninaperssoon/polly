@@ -1,7 +1,7 @@
 <template>
-  <body>
+  <div id="body">
     <homeButton class="homeButton"></homeButton>
-    <h1>
+
 
     <h1> {{uiLabels.yourehosting}}{{id}} </h1>
 
