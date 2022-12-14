@@ -8,11 +8,11 @@
         
 
         <button v-on:click="sendPunishment" v-bind:style="{'background-color':savedbackground}" id="Savebutton">
-          {{uiLabels.SendPunishment}}
+          {{uiLabels.Save}}
         </button>
         
         <button v-on:click="deletePunishment" class="delButton">
-          -
+          {{uiLabels.Delete}}
         </button>
       </div>
   

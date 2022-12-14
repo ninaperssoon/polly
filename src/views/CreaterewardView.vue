@@ -262,13 +262,15 @@ padding: 1em;
 }
 
 #submitButton{
-  padding: 0.5em;
+    padding: 0.5em;
     background-color: #FFF1AD;
     border-color: #fff1adbd;
     color: #F87575;
     font-size: 1.5em;
     margin-left: 80%;
     border-radius: 3em;
+    margin-bottom:0.75em;
+    
 }
 
 #submitButton:hover{

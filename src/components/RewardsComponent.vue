@@ -6,11 +6,11 @@
         <input type="text"  class="input" v-model="r" :placeholder= "uiLabels.WriteRewardHere" >
         
         <button v-on:click="sendRewards" v-bind:style="{'background-color': savedColor}" id="Savebutton">
-           {{uiLabels.SendReward}}
+           {{uiLabels.Save}}
         </button>
         
         <button v-on:click="deleteReward" class="delButton">
-          -
+         {{uiLabels.Delete}}
         </button>
      
       </div>
@@ -71,20 +71,23 @@ methods:{
 <style>
 #consequenceBox{
 display: grid;
-
-grid-template-columns: 8fr 2fr ;
+grid-template-columns: 8fr 1fr ;
 column-gap: 0.5em;
 padding: 1em;
 margin: 2em 1em 2em 1em ;
+height:10em
 }
 
 #Savebutton{
 grid-column: 2;
-padding: 0.5em;
     background-color: #FFF1AD;
     color: #F87575;
-    font-size: 1.5em;
-    border-radius: 3em;
+    font-size: 1em;
+    border-radius: 2em;
+    height:2em;
+    width: 5em;
+    margin: 4em 0.5em 2em 0.5em ;
+    
 }
 
 .input {
@@ -92,15 +95,22 @@ padding: 0.5em;
   grid-column: 1;
   border-radius: 1em;
   padding: 12px 20px;
-  margin: 8px 0;
+  height:4em;
   box-sizing: border-box;
+  margin: 4em 0.5em 2em 0.5em ;
+  
  
 }
 .delButton {
-  width: 2.5em;
-  height: 2.5em;
-  border-radius: 50%;
-  margin-top: 1em;
+    grid-column: 3;
+    background-color: #FFF1AD;
+    color: #F87575;
+    font-size: 1em;
+    border-radius: 2em;
+    height: 2em;
+    width: 5em;
+    margin: 4em 0.5em 2em 0.5em ;
+    
 
 }
 

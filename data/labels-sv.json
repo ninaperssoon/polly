@@ -57,6 +57,8 @@
 	"noQuizzes" : "Du har inte skapat något quiz än!",
 	"s": "s",
 	"punishment2": "bestraffning",
-	"WritePunishmentHere":"skriv din bestraffning här"
+	"WritePunishmentHere":"skriv din bestraffning här",
+	"DeleteReward":"Radera belöning",
+	"Delete":"Radera"
 
 }
