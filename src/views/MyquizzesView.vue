@@ -5,7 +5,7 @@
       <div id="title">
       <h1>{{uiLabels.myQuizzes}}</h1>
       </div>
-
+      <!-- <div v-if="(this.quizzes = {})">{{uiLabels.noQuizzes}}</div>  -->
       
         <div id="myQuizzes" v-for="(contain, id) in quizzes" v-bind:key="id">{{id}} 
           <router-link class="button" v-bind:to="('/create/'+lang+'/'+id)"> {{uiLabels.edit}} </router-link>
@@ -117,11 +117,11 @@ export default {
     color:black;
     margin: 1em;
     text-decoration: none; 
-    background-color: rgb(235, 209, 106);
+    background-color: #FFF1AD;
     padding: 0.5em;
     border-radius: 3em;
     border-style: outset;
-    border-color: rgba(235, 209, 106, 0.689);
+    border-color: #fff1adbd;
   }
 
   .button:hover {

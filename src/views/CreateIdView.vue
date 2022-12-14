@@ -74,7 +74,7 @@ export default {
     border-radius: 3em;
     border-style: outset;
     border-color: #FFF1AD;
-
+    font-size: 1em;
     color: #F87575;
     font-family: 'Righteous', serif;
     text-shadow: .05em .05em 0 #4779d6;
@@ -103,6 +103,7 @@ export default {
 
   input {
     border-radius: 1em;
+    font-size: 1em;
   }
   
   

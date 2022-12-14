@@ -52,6 +52,8 @@
 	"SendReward":"Spara belöning",
 	"Question":"Fråga",
 	"edit": "Redigera",
-	"hostThisQuiz": "Anordna det här quizzet"
+	"hostThisQuiz": "Anordna det här quizzet",
+	"Participants": "Deltagare",
+	"noQuizzes" : "Du har inte skapat något quiz än!"
 
 }

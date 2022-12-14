@@ -4,24 +4,30 @@
   <section>
     <h1>Join Quiz</h1>
    
-   
     <div id="joinQuiz">
-    <p> {{uiLabels.EnterYourName}} </p>
-    <input type="text" v-model="name">
-   <p> <label>
-    {{uiLabels.writeQuizId}}: 
-    <input type="text" v-model="id">
-  </label>
-  </p>
 
+      <div id="name">
+        <p> 
+          <label>
+            {{uiLabels.EnterYourName}}
+            <input type="text" v-model="name">
+          </label> 
+        </p>
+      </div>
 
+      <div id="id">
+        <p> 
+        <label>
+          {{uiLabels.writeQuizId}}: 
+          <input type="text" v-model="id">
+        </label>
+        </p>
+      </div>
 
-  <!-- <router-link id="joinbutton" v-bind:to="('/poll/'+id+'/'+lang)" v-on:click="sendName" >{{uiLabels.joinQuiz}}</router-link> </p> -->
-
-  </div>
+    </div>
   <button id="joinbutton" v-on:click="sendName" >{{uiLabels.joinQuiz}}</button>
 
-</section>
+  </section>
 
 </body>
 
@@ -82,6 +88,9 @@ export default {
     top: 0;
     left: 0;
   }
+  input {
+    font-size: 1em;
+  }
 
   #joinQuiz {
     font-size:1.5em;
@@ -95,6 +104,7 @@ export default {
     border-radius: 3em;
     border-style:outset;
     border-color: #5C95FF;
+    
   }
   #joinbutton {
     margin: 1em;
@@ -115,7 +125,7 @@ export default {
   }
 
   #joinbutton:hover {
-    box-shadow: 0 5px 15px black;
+    box-shadow: 0 5px 15px #439A86;
   }
 
   input {
@@ -146,5 +156,19 @@ h1 {
   margin-bottom: 1em;
   }
 
-  
+  #joinQuiz {
+    padding: 1em;
+    display: grid;
+    grid-template-rows: 3em 3em;
+    grid-gap: 1em;
+  }
+
+  #name {
+    grid-row: 1;
+  }
+
+  #id {
+    grid-row: 2;
+  }
+
 </style>

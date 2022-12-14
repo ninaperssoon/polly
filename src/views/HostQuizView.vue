@@ -1,13 +1,19 @@
 <template>
   <body>
     <homeButton></homeButton>
-    <div id="host">
+    <h1>
 
       {{uiLabels.yourehosting}}{{id}}
+      
+    
+  </h1>
+
+    <div id="host">
+      {{uiLabels.Participants}}:
       <p v-for="participant in participants" v-bind:key = "participant">
-      {{participant}}
-    </p>
-    </div>
+        {{participant}} 
+      </p>
+</div>
 
     <button v-on:click="startQuiz"> {{uiLabels.startQuiz}}</button>
 
@@ -127,6 +133,7 @@ export default {
     color: #F87575;
     font-family: 'Righteous', serif;
     text-shadow: .05em .05em 0 #4779d6;
+    font-size: 1.5em;
   }
 
   button:hover {
@@ -135,5 +142,14 @@ export default {
     cursor: pointer;
 
   }
+  h1 {
+  display: inline-block;
+  color: white;
+  font-family: 'Righteous', serif;
+  font-size: 4em; 
+  text-shadow: .08em .08em 0 #4779d6;
+  }
+
+
  
 </style>

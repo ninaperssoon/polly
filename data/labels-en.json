@@ -53,7 +53,9 @@
 	"joinanotherquiz":"Join another quiz",
 	"Your2":"Your",
 	"edit": "Edit",
-	"hostThisQuiz": "Host this quiz"
+	"hostThisQuiz": "Host this quiz",
+	"Participants": "Participants",
+	"noQuizzes" : "You have not created a quiz yet!"
 
 
 
