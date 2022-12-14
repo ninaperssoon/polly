@@ -19,12 +19,12 @@
 <div id="wrapper">
   <div id="backButton">
     
-    <router-link v-bind:to="'/start/'+lang"><img class="flipPic" src="../../public/img/leftfliplaying.png"/></router-link>
+    <router-link v-bind:to="'/start/'+lang"><img class="flipPic" src="../../public/img/leftfliparrow.png"/></router-link>
     </div>
 
 <div id="nextButton">
     
-  <router-link v-bind:to="'/createq/'+pollId+'/'+lang"><img class="flipPic" src="../../public/img/rightfliplaying.png"/></router-link>
+  <router-link v-bind:to="'/createq/'+pollId+'/'+lang"><img class="flipPic" src="../../public/img/rightfliparrow.png"/></router-link>
   </div>
 </div>
   
@@ -185,9 +185,7 @@ button:hover {
 }
 
 
-.flipPic {
-  height: 5em;
-}
+
 #wrapper {
   grid-gap: 55em;
   display: grid;
@@ -196,16 +194,14 @@ button:hover {
 }
 #backButton{
   grid-column: 1;
- 
-  padding: 20 em;
-  
-}
-#nextButton{
-  grid-column: 2;
-  
   padding: 20 em;
   
 }
 
+#nextButton{
+  grid-column: 2;
+  padding: 20 em;
+  
+}
 
 </style>

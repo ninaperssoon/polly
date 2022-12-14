@@ -1,7 +1,7 @@
 <template>
   <homeButton></homeButton>
   
-
+{{pollId}}
   <div class="wrapper">
  
     <div class="innerWrapper"  >
@@ -40,7 +40,7 @@
   </div>
   <div id="backButton">
     
-    <router-link v-bind:to="'/create/'+lang"><img id="backPic" src="https://freesvg.org/img/pitr_green_arrows_set_4.png"/></router-link>
+    <router-link v-bind:to="('/create/'+lang+'/'+pollId)"><img class="flipPic" src="../../public/img/leftfliparrow.png"/></router-link>
     </div>
 
     <div id="nextButton">
@@ -169,13 +169,6 @@ export default {
 </script>
 
 <style scoped>
-.pollLink {
-  margin: 1em 2em 1em 70em;
-  background-color:coral;
-  border-radius: 2em;
-  padding: 2em;
-
-}
 
 #pollButton {
   margin-top: 1em;
@@ -193,11 +186,7 @@ button:hover {
   margin-top: 5em;
 
 }
-.box{
-   border-radius: 2em;
-  padding: 1em;
 
-}
 .reward{
 grid-column: 1;
 grid-row: auto;
@@ -216,23 +205,10 @@ border-radius: 1em;
 
 }
 
-.pollLink {
-  margin: 1em 2em 1em 70em;
-  background-color:coral;
-  border-radius: 2em;
-  padding: 2em;
-
-}
 
 
  
 
-
-
-.deleteB:hover {
-  background-color: salmon;
-  cursor:pointer;
-}
 
 
 
@@ -252,12 +228,6 @@ row-gap: 1 em;
   border-radius: 50%;
   margin: 18px 0;
 }
-
-.delButton:hover {
-  background-color:salmon;
-
-}
-
 
 
 
