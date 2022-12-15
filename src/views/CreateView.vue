@@ -3,7 +3,9 @@
 <div class="body">
 <homeButton class="homeButton"></homeButton>
  
- <div>
+
+
+ <div id="backgroundDiv">
    <Question v-for="(question,index) in questions" 
    v-bind:question="question"
   v-bind:key="question.q"
@@ -161,6 +163,10 @@ export default {
 }
 
 
+
+#backgroundDiv{
+  padding: 5em;
+}
 button:hover {
   background-color:lightgreen;
   cursor:pointer;

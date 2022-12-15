@@ -1,35 +1,35 @@
 
 
 <template>
-  <div>
+  
     <div id="question" v-bind:style="{'background-color':SavedQuestionColor}">
-      <div id="inputQuestion">
+      
         {{uiLabels.Question}} {{questionNumber +1}} 
         <input type="text" v-model="q" class="input" :placeholder="uiLabels.WriteQuestionHere" v-on:keypress="resetColor()">
 
         <!-- {{uiLabels.WriteQuestionHere}} -->
 
         <br> 
-      </div>
+     
       
 
       <div id="inputAnswer" >
-        <div v-for="(_,i) in answers" v-bind:key="'answer' + i">
+        <div v-for="(_,i) in answers" v-bind:key="'answer' + i" class="answerLayout">
           <input type="text"  v-model="answers[i]" class="input" id="option" :placeholder= "uiLabels.WriteAnswersHere"
-          v-on:keypress="resetColor()">
+          v-on:keypress="resetColor()"> 
 
-           <!-- {{uiLabels.WriteAnswersHere}} -->
+           <!-- {{uiLabels.WriteAnswersHere}} -->  
           
 
-          <button v-on:click="deleteAnswers(i)" class="deleteB" id="deleteAnswerButton">
+          <button v-on:click="deleteAnswers(i)" class="deleteB" id="deleteAnswerButton"> 
              -
-          </button>
+          </button> 
 
-          <button class="buttonContainer" v-on:click="setCorectAnswer(i)"  v-bind:style="{'background-color':altColor[i]}">
+          <button class="buttonContainer" v-on:click="setCorectAnswer(i)" id="Right"  v-bind:style="{'background-color':altColor[i]}">
             <img class="button" src="https://cdn4.iconfinder.com/data/icons/essentials-72/24/040_-_Tick-512.png"/>
           </button>
           
-          <button class="buttonContainer" v-on:click="setWrongAnswer(i)" v-bind:style="{'background-color':deleteColor[i]}" >
+          <button class="buttonContainer" id="Wrong" v-on:click="setWrongAnswer(i)" v-bind:style="{'background-color':deleteColor[i]}" >
             <img class="button" src="https://cdn4.iconfinder.com/data/icons/essentials-72/24/039_-_Cross-512.png"/>
 
           </button>
@@ -53,7 +53,7 @@
         </button>
         <!--{{data}}
         <router-link v-bind:to="'/result/'+pollId">Check result</router-link>-->
-      </div>
+     
 
 
     </div>
@@ -171,13 +171,20 @@ export default{
 
 
 
-<style>
+<style scoped>
+
+#Right{
+  
+  grid-column: 2;
+  grid-row: 2;
+}
 
 #deleteAnswerButton {
   height: 2em;
   width: 2em;
-  grid-column: 2;
-  grid-row: 2;
+  
+  grid-row: 2; 
+  grid-column: 1/1;
   
 }
 
@@ -191,28 +198,23 @@ export default{
 }
 
 #question {
-  margin: 2em 8em 2em 8em;
+  margin: 2em 2em 2em 2em;
   display: grid;
-  /*grid-template-columns: 1fr ;*/
-  /*row-gap: 50px;
-  column-gap: 30px;*/
- /* background-color:lightblue;*/
+  grid-template-columns: 1fr ;
+ 
   border-radius: 2em;
   padding: 1em;
+  row-gap: 1em;
 }
 
-.answer {
-  display: grid;
-  
-}
+
 #inputAnswer {
+  
   display: grid;
   grid-template-columns: 1fr 1fr 1fr ;
-  column-gap: 0em;
-  row-gap: 2em;
-  padding: 1em;
-  grid-auto-rows: 4em;
-  column-gap: 1em;
+  column-gap: 3em;
+  
+  
 }
 
 
@@ -225,27 +227,28 @@ export default{
 #deleteQuestions {
   width: 5em;
   height: 5em;
-  margin-left: 80em;
+  
   border-radius: 2em;
   border-radius: 1em;
 }
 
 
 #option {
-  border-radius: 1em;
- 
-  height: auto;
-  padding: 1em 1em;
-  margin: 0 2em 0 0;
-  /*grid-column: 1 / span 2;
-  grid-row: 1 / span 2;*/
+  
+  grid-column: 1 /4;
+  background-color: aqua;
+  
 
-  box-sizing:border-box;
+  
 } 
-#inputQuestion {
-  margin: 2em 2em 2em 2em;
-  padding-right: 2em;
+.answerLayout{
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+row-gap: 1em;
+
+
 }
+
 
 #addAnswerButton {
   width: 3.5em;
@@ -255,23 +258,25 @@ export default{
 }
 .input {
   border-radius: 1em;
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  background-color: aliceblue;
+  
+  
+  
 }
 .button {
   cursor: pointer;
   height: 4em;
 }
 .buttonContainer {
-  padding: 1em;
+  
+  
   cursor: pointer;
   border: none;
   background: none;
 }
-
+#Wrong{
+  grid-column: 3;
+  grid-row: 2;
+}
 
 
 
