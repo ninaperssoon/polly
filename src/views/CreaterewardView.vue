@@ -9,6 +9,7 @@
     <div class="innerWrapper"  >
       
       <h1>{{uiLabels.rewards}}</h1>
+      <br>
 
       <Reward  v-for=" (reward, index) in rewards"
       v-bind:reward= "reward"
@@ -26,6 +27,8 @@
 
     <div  class="innerWrapper" >
       <h1>{{uiLabels.punishments}}</h1>
+      <br>
+      
       <Punishment v-for=" (punishment, index) in punishments"
       v-bind:punishment = "punishment"
       v-bind:key="punishment"

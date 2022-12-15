@@ -7,6 +7,9 @@
       <div id="myQuizzes" v-for="(contain, id) in quizzes" v-bind:key="id">{{id}}    
           <router-link class="button" v-bind:to="('/create/'+lang+'/'+id)"> {{uiLabels.edit}} </router-link>
           <router-link class="button" v-bind:to="('/host/'+id+'/'+lang)"> {{uiLabels.hostThisQuiz}} </router-link>
+          <button class="button" v-on:click="deleteQuiz" > 
+          {{uiLabels.DeleteQuiz}} 
+          </button>
       </div>
 
       <div id="createDiv">       
@@ -142,7 +145,7 @@ h1 {
     margin-bottom: 2em;
     background-color:#5C95FF;
     display: grid;
-    grid-template-columns: 18em 7em 12em;
+    grid-template-columns: 1fr 1fr 2fr 2fr;
     grid-template-rows: 1em;
     place-items: center start;
     border-style:outset;

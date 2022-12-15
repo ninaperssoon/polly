@@ -71,6 +71,7 @@ Data.prototype.deleteQuestion = function(pollId, index, q) {
   console.log("(deleteQuestion)   lista efter delete: ", this.polls[pollId].questions);
 }
 
+
 Data.prototype.editQuestion = function(pollId, index, newQuestion) {
   const poll = this.polls[pollId];
   if (typeof poll !== 'undefined') {
