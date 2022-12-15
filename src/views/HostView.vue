@@ -91,14 +91,9 @@ export default {
     border-radius: 2em;
     border-style: outset;
     border-color: #5C95FF;
+    color:#FFF1AD;
+    font-weight: bold;
 
-  }
-
-  input {
-
-    font-size: 1em;
-    border-radius: 1em;
-    border-style: outset;
   }
 
   #startQuiz {
@@ -143,5 +138,15 @@ h1 {
   text-shadow: .08em .08em 0 #4779d6;
   }
 
+  input {
+    padding-left: 0.5em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    font-size:medium;
+    border-radius: 1em;
+    border-color:#5C95FF;
+    border-radius: 1em;
+    border-style: outset;
+  }
  
 </style>

@@ -4,7 +4,7 @@
   <homeButton class="homeButton"></homeButton>
   <div class="pollLink">
     <p>{{uiLabels.Enternameyourquiz}} 
-      <br>
+      <br> <br>
     <input type="text" v-model="id"> </p> 
   </div>
   <button v-on:click="createPoll" id="pollButton">
@@ -99,13 +99,19 @@ export default {
     border-radius: 3em;
     border-style:outset;
     border-color: #5C95FF;
+    color: #FFF1AD;
+    font-weight: bold;
 
   }
-
   input {
+    padding-left: 0.5em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    font-size:medium;
     border-radius: 1em;
-    font-size: 1em;
+    border-color:#5C95FF;
+    border-radius: 1em;
+    border-style: outset;
   }
-  
   
 </style>

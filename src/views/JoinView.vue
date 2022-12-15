@@ -89,22 +89,15 @@ export default {
     left: 0;
     
   }
-  input {
-    font-size: 1em;
-  }
 
   #joinQuiz {
-    font-size:1.5em;
-    margin: auto;
-    background-color: #5C95FF;
-    height: 10em;
-    width: 30em;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 3em;
-    border-style:outset;
-    border-color: #5C95FF;
+    display: grid;
+    background-color: #A6E9A3 ;
+    grid-template-columns: 1fr 1fr;
+    padding: 1em;
+    grid-gap: 2em;
+    
+
     
   }
   #joinbutton {
@@ -127,10 +120,6 @@ export default {
 
   #joinbutton:hover {
     box-shadow: 0 5px 15px #439A86;
-  }
-
-  input {
-    border-radius: 1em;
   }
 
   button:hover {
@@ -157,19 +146,52 @@ h1 {
   margin-bottom: 1em;
   }
 
-  #joinQuiz {
-    padding: 1em;
-    display: grid;
-    grid-template-rows: 3em 3em;
-    grid-gap: 1em;
-  }
-
   #name {
-    grid-row: 1;
+    grid-column: 1;
+    font-size:1.5em;
+    margin: auto;
+    margin-left: 30%;
+    background-color: #5C95FF;
+    height: 10em;
+    width: 20em;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3em;
+    border-style:outset;
+    border-color: #5C95FF;
+    color: #FFF1AD;
+    font-weight: bold;
+    
   }
 
   #id {
-    grid-row: 2;
+    grid-column: 2;
+    font-size:1.5em;
+    margin: auto;
+    margin-right: 30%;
+    background-color: #5C95FF;
+    height: 10em;
+    width: 20em;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3em;
+    border-style:outset;
+    border-color: #5C95FF;
+    color: #FFF1AD;
+    font-weight: bold;
+
+  }
+
+  input {
+    padding-left: 0.5em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    font-size:medium;
+    border-radius: 1em;
+    border-color:#5C95FF;
+    border-style: outset;
   }
 
 </style>
