@@ -37,8 +37,6 @@
       message = "punishment"
       class="punishment" />
     
-
-    
       <button v-on:click="newPunishment" class="addButton" id="addButtonPunishment">
         + {{uiLabels.AddPunishment}}
       </button> 
@@ -46,25 +44,27 @@
       
     </div>
   </div>
-  <div id="backButton">
-    
-    <router-link v-bind:to="('/create/'+lang+'/'+pollId)"><img class="flipPic" src="../../public/img/leftfliparrow.png"/></router-link>
-    </div>
 
-    <div id="nextButton">
-      <router-link v-bind:to="'/host/'+pollId+'/'+lang" > 
+
+    <div class="nextButton">
+      <div id="testButton">
+        <router-link v-bind:to="'/host/'+pollId+'/'+lang" > 
         <button id="submitButton" v-on:click="sendPollIdToH()">
           {{uiLabels.TestQuiz}}
       </button > </router-link>
       </div>
 
 
-    <div id="nextButton">
-    <router-link v-bind:to="'/start/'+lang"> 
-      <button id="submitButton" >
+      <div id="saveButton">
+        <router-link v-bind:to="'/start/'+lang"> 
+        <button id="submitButton" >
         {{uiLabels.SaveandExit}}
-      </button> 
-    </router-link>
+      </button> </router-link>
+    </div>
+  </div>
+  <div id="backButton">
+    
+    <router-link v-bind:to="('/create/'+lang+'/'+pollId)"><img class="flipPic" src="../../public/img/leftfliparrow.png"/></router-link>
     </div>
 
   </div>
@@ -207,7 +207,7 @@ display: inline-block;
 
 #addButtonReward{
   background-color:  #5C95FF;
-    border-color:  #5C95FF;
+  border-color:  #5C95FF;
     
 
 }
@@ -224,40 +224,52 @@ button:hover {
   margin-top:-5em;
 }
 
+.innerWrapper {
+grid-template-columns: 1fr;
+padding: 1em;
+
+}
+
+.nextButton {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 1em;
+}
+
+#testButton {
+  grid-column: 1;
+  margin-left: 70%;
+}
+#saveButton {
+  grid-column: 2;
+  margin-right: 70%;
+}
+
+
 .reward{
 grid-column: 1;
 grid-row: auto;
 background-color: #5C95FF;
-border-radius: 1em;
+border-radius: 2em;
 
 }
 .punishment{
 grid-column: 2;
 grid-row: auto;
 background-color: #F87575;;
-border-radius: 1em; 
+border-radius: 2em; 
 
 }
 
-.innerWrapper {
-grid-template-columns: 1fr;
-padding: 1em;
-
-
-}
 
 .addButton {
   padding: 0.5em;
-    font-size: 1.5em;
-    border-radius: 3em;
-    color: #FFF1AD;
-    font-weight: bold;
+  font-size: 1.5em;
+  border-radius: 3em;
+  color: #FFF1AD;
+  font-weight: bold;
+  width: 10em;
     
-}
-
-.delButton:hover {
-  background-color:salmon;
-
 }
 
 
@@ -280,21 +292,21 @@ padding: 1em;
 }
 
 #submitButton{
+
     padding: 0.5em;
     background-color: #FFF1AD;
     border-color: #fff1adbd;
     color: #F87575;
     font-size: 1.5em;
-    margin-left: 80%;
+    width: 8em;
     border-radius: 3em;
-    margin-bottom:0.75em;
     font-weight: bolder;
     
 }
 
-#submitButton:hover{
-  background-color: lightgreen;
+button:hover {
+  box-shadow: 0 5px 15px #439A86;
+    transform: translateY(-2px);
 }
-
 
 </style>

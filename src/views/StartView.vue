@@ -149,7 +149,7 @@ export default {
   }
 
   #smallerbuttons {
-    padding: 0.8em;
+    padding-top: 0.6em;
     background-color: #FFF1AD;
     border-color: #fff1adbd;
     color: #F87575;

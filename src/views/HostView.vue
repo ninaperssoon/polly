@@ -2,7 +2,7 @@
   <div id="body">
     <homeButton class="homeButton"> </homeButton>
 
-    
+    <div class="wrapper">
     <h1>{{uiLabels.hostQuiz}}</h1>
     
     <div id="host">
@@ -14,7 +14,14 @@
 
      
     <button id="startQuiz" v-on:click="startQuiz">{{uiLabels.startQuiz}}</button> 
+    
+  </div>
+  <div>
+  <img id="palmtree" src="../../public/img/palmtree.gif">
+  <img id="palmtree" src="../../public/img/palmtree.gif">
+  <img id="palmtree" src="../../public/img/palmtree.gif">
 
+  </div>
   
   </div>
 
@@ -71,20 +78,23 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
+
     
   }
 
-  div {
-    height: 4.78em;
-    line-height: 3em;
+  
+
+  .wrapper {
+    margin-top: -6em;
+
   }
 
   #host {
     font-size:1.5em;
     margin: auto;
-    margin-top: 2em;
-    height: 20em;
-    width: 30em;
+    margin-top: 1em;
+    height: 10em;
+    width: 15em;
     background-color: #5C95FF;
     display:flex;
     align-items: center;
@@ -94,7 +104,6 @@ export default {
     border-color: #5C95FF;
     color:#FFF1AD;
     font-weight: bold;
-
   }
 
   #startQuiz {
@@ -105,14 +114,9 @@ export default {
     text-decoration: none;
     height: 2.5em;
     width: 8em;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    margin-right: 5em;
-    margin-bottom: 5em;
+    margin-top: 1em;
     border-radius: 2em;
     border-style: outset;
-    padding-top: 0.5em;
     font-family: 'Righteous', serif;
     text-shadow: .05em .05em 0 #4779d6;
   }
@@ -148,6 +152,10 @@ h1 {
     border-color:#5C95FF;
     border-radius: 1em;
     border-style: outset;
+  }
+
+  #palmtree {
+    height: 20em;
   }
  
 </style>
