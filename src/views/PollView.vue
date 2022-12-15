@@ -198,17 +198,24 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: bold;
+  border-style:outset;
 }
 .card__face--front {
-  background: #87d784 ;
+  background: #FFF1AD;
   color: black;
   font-weight: bold;
   padding: 5%;
+
+  border-color: #f9e998;
+  box-shadow: 0 5px 15px #c0ac48;
 }
 
 .card__face--back {
   background: #F87575;
   transform: rotateY(180deg); 
+  border-color: #f76868;
+  box-shadow: 0 5px 15px #bb3939 ;
 }
 
 /* this style is applied when the card is clicked */
@@ -225,6 +232,8 @@ export default {
 
 .correct {
   background-color:#5C95FF;
+  border-color: #4c88f8;
+  box-shadow: 0 5px 15px #2453a9 ;
 }
 
 #correctness {
@@ -266,7 +275,7 @@ h1 {
   color: white;
   font-family: 'Righteous', serif;
   font-size: 4em; 
-  text-shadow: .08em .08em 0 #4b8b49;
+  text-shadow: .08em .08em 0 #4779d6;
   margin-top: -5em;
   }
 

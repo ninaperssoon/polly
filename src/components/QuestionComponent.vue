@@ -23,11 +23,11 @@ export default {
 <style>
  button {
   color: black;
-    background-color: #71b86f;
+    background-color:#FFF1AD;
     border-radius: 1em;
     font-size: 1.2em;
     border-style: outset;
-    border-color:  #64a262;
+    border-color:  #e3cf6b;
     height: 2em;
  }
 
