@@ -137,10 +137,14 @@ export default {
 <style scoped>
 
 body {
-  background-color: #A6E9A3;
+  /* background-color: #A6E9A3; */
   height: 100%;
   width: 100%;
   position: fixed;
+
+  background-image: url("https://images.template.net/104478/pink-ocean-background-pdlb9.jpg?fbclid=IwAR1f5-_NQThWwcxCzlH0jRBLgD_Zh6ER41Kue--nu1mQAA5ybx0MyEwq3E4");
+  background-repeat:no-repeat;
+  background-size: cover;
 }
 
 .container{
@@ -183,7 +187,8 @@ body {
 }
 
 .card__face--front {
-  background: #5C95FF;
+  background: #87d784 ;
+  color: black;
 }
 
 .card__face--back {
@@ -205,8 +210,7 @@ body {
 }
 
 .correct {
-  background-color: rgb(63, 194, 63);
-  /*background-color:#A6E9A3;*/
+  background-color: #5C95FF;
 }
 
 #correctness {
@@ -246,7 +250,8 @@ h1 {
   color: white;
   font-family: 'Righteous', serif;
   font-size: 4em; 
-  text-shadow: .08em .08em 0 #4779d6;
+  text-shadow: .08em .08em 0 #4b8b49;
+  margin-top: -5em;
   }
 
   button {
