@@ -68,48 +68,51 @@ methods:{
 </script>
 
 
-<style>
+<style >
 #consequenceBox{
 display: grid;
-grid-template-columns: 8fr 1fr ;
+grid-template-columns: 6fr 1fr 1fr;
+grid-template-rows: 1fr 1fr 1fr;
 column-gap: 0.5em;
 padding: 1em;
 margin: 2em 1em 2em 1em ;
-height:10em
+height:8em
 }
 
 #Savebutton{
 grid-column: 2;
+grid-row: 2;
     background-color: #FFF1AD;
     color: #F87575;
-    font-size: 1em;
+    font-size: 1em; 
     border-radius: 2em;
-    height:2em;
-    width: 5em;
-    margin: 4em 0.5em 2em 0.5em ;
+    font-weight: bold;
+   
+   
+    
     
 }
 
 .input {
  
   grid-column: 1;
+  grid-row: 2;
   border-radius: 1em;
   padding: 12px 20px;
-  height:4em;
+  /* height:3.5em; */
   box-sizing: border-box;
-  margin: 4em 0.5em 2em 0.5em ;
+
   
  
 }
 .delButton {
     grid-column: 3;
+    grid-row: 2;
     background-color: #FFF1AD;
     color: #F87575;
     font-size: 1em;
     border-radius: 2em;
-    height: 2em;
-    width: 5em;
-    margin: 4em 0.5em 2em 0.5em ;
+    font-weight: bold;
     
 
 }

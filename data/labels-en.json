@@ -60,7 +60,9 @@
 	"s": "'s",
 	"punishment2": "punishment",
 	"DeleteReward":"Delete reward",
-	"Delete":"Delete"
+	"Delete":"Delete",
+	"rewards" : "rewards",
+	"punishments" : "punishments"
 
 
 

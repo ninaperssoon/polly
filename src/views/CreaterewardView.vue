@@ -8,7 +8,7 @@
 
     <div class="innerWrapper"  >
       
-      <h1>{{uiLabels.reward}}s</h1>
+      <h1>{{uiLabels.rewards}}</h1>
 
       <Reward  v-for=" (reward, index) in rewards"
       v-bind:reward= "reward"
@@ -18,14 +18,14 @@
       message ="reward"
       class="reward"/>
 
-      <button v-on:click="newReward" class="addButton">
+      <button v-on:click="newReward" class="addButton" id="addButtonReward">
         + {{uiLabels.AddReward}}
       </button> 
     </div>
 
 
     <div  class="innerWrapper" >
-      <h1>{{uiLabels.punishment}}s</h1>
+      <h1>{{uiLabels.punishments}}</h1>
       <Punishment v-for=" (punishment, index) in punishments"
       v-bind:punishment = "punishment"
       v-bind:key="punishment"
@@ -36,7 +36,7 @@
     
 
     
-      <button v-on:click="newPunishment" class="addButton">
+      <button v-on:click="newPunishment" class="addButton" id="addButtonPunishment">
         + {{uiLabels.AddPunishment}}
       </button> 
 
@@ -195,6 +195,20 @@ display: inline-block;
 
 }
 
+#addButtonPunishment{
+  background-color: #F87575;
+    border-color: #F87575;
+    
+
+}
+
+#addButtonReward{
+  background-color:  #5C95FF;
+    border-color:  #5C95FF;
+    
+
+}
+
 button:hover {
   background-color: lightgreen;
   cursor:pointer;
@@ -204,6 +218,7 @@ button:hover {
   display: grid;
   grid-gap: 10px;
   grid-template-columns: 1fr 1fr;
+  margin-top:-5em;
 }
 
 .reward{
@@ -230,11 +245,11 @@ padding: 1em;
 
 .addButton {
   padding: 0.5em;
-    background-color: #FFF1AD;
-    border-color: #fff1adbd;
-    color: #F87575;
     font-size: 1.5em;
     border-radius: 3em;
+    color: #FFF1AD;
+    font-weight: bold;
+    
 }
 
 .delButton:hover {
@@ -270,6 +285,7 @@ padding: 1em;
     margin-left: 80%;
     border-radius: 3em;
     margin-bottom:0.75em;
+    font-weight: bolder;
     
 }
 
