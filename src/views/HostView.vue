@@ -1,9 +1,10 @@
 <template>
-  <body>
+  <div id="body">
     <homeButton class="homeButton"> </homeButton>
 
     
     <h1>{{uiLabels.hostQuiz}}</h1>
+    
     <div id="host">
       <p> {{uiLabels.writeQuizId}}: 
         <br>
@@ -15,7 +16,7 @@
     <button id="startQuiz" v-on:click="startQuiz">{{uiLabels.startQuiz}}</button> 
 
   
-</body>
+  </div>
 
 </template>
 
@@ -60,7 +61,7 @@ export default {
 }
 </script>
 <style scoped>
-  body {
+  #body {
     margin: 0;
     background-color:  #A6E9A3;
     min-height: 100%;

@@ -1,8 +1,7 @@
 <template>
   <div id="body">
     <homeButton class="homeButton"></homeButton>
-
-
+  
     <h1> {{uiLabels.yourehosting}}{{id}} </h1>
 
       <br>
@@ -74,15 +73,14 @@ export default {
 </script>
 <style scoped>
   #body {
-    margin: auto;
-    background-color: #A6E9A3 ;
-    text-align: center;
+    margin: 0;
+    background-color:  #A6E9A3;
+    min-height: 100%;
+    min-width: 1024px;
     width: 100%;
+    height: auto;
     top: 0;
-    left: 0;
-    height: 100%;
-    position:fixed;
-    overflow: auto;   
+    left: 0;  
   }
 
  
@@ -109,7 +107,6 @@ export default {
 
   }
   h1 {
-  margin-top: -10em;
   display: inline-block;
   color: white;
   font-family: 'Righteous', serif;

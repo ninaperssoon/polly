@@ -17,10 +17,12 @@ body {
 
 
 .board {
+  margin:auto;
   position: relative;
   text-align: center;
   margin-bottom: -5em;
   animation: tilt-n-move-shaking 3s infinite;
+  width:50%;
 }
 
 #text {
