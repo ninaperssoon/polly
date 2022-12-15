@@ -14,15 +14,16 @@
   v-on:deleteAnswer="editQuestion($event, index)"
   :questionNumber = index > </Question>
  
-  <button v-on:click="newQuestion">
-    {{uiLabels.AddQuestion}}
-  </button>
-
+  
 <div id="wrapper">
   <div id="backButton">
     
     <router-link v-bind:to="'/start/'+lang"><img class="flipPic" src="../../public/img/leftfliparrow.png"/></router-link>
     </div>
+
+    <button id="addButton" v-on:click="newQuestion">
+    {{uiLabels.AddQuestion}}
+  </button>
 
 <div id="nextButton">
     
@@ -166,6 +167,7 @@ export default {
 
 #backgroundDiv{
   padding: 5em;
+  margin-top: -7em;
 }
 button:hover {
   background-color:lightgreen;
@@ -197,12 +199,32 @@ button:hover {
   
 }
 
+#addButton {
+    margin: 1em;
+    text-decoration: none; 
+    background-color:#FFF1AD;
+    padding: 0.5em;
+    border-radius: 2em;
+    border-style: outset;
+    border-color: #FFF1AD;
 
+    color: #F87575;
+    font-size:1.5em;
+    bottom: 0;
+    right: 0;
+    border-style: outset;
+    font-family: 'Righteous', serif;
+    text-shadow: .05em .05em 0 #4779d6;
+    grid-column: 2;
+}
+#addButton:hover {
+    box-shadow: 0 5px 15px #439A86;
+  }
 
 #wrapper {
-  grid-gap: 55em;
+  /* grid-gap: 55em; */
   display: grid;
-  grid-template-columns: 20em;
+  grid-template-columns: 1fr 1fr 1fr;
   margin-bottom: 3em;
 }
 #backButton{
@@ -212,7 +234,7 @@ button:hover {
 }
 
 #nextButton{
-  grid-column: 2;
+  grid-column: 3;
   padding: 20 em;
   
 }

@@ -1,60 +1,47 @@
 
 
 <template>
-  
-    <div id="question" v-bind:style="{'background-color':SavedQuestionColor}">
-      
-        {{uiLabels.Question}} {{questionNumber +1}} 
-        <input type="text" v-model="q" class="input" :placeholder="uiLabels.WriteQuestionHere" v-on:keypress="resetColor()">
-
-        <!-- {{uiLabels.WriteQuestionHere}} -->
-
-        <br> 
+    <div id="question" v-bind:style="{'background-color':SavedQuestionColor, 'border-color':SavedBorderColor}">
      
-      
+      <h1>{{uiLabels.Question}} {{questionNumber +1}} </h1>
+      <input id="questionInput" type="text" v-model="q" class="input" :placeholder="uiLabels.WriteQuestionHere" v-on:keypress="resetColor()" v-bind:style="{'border-color':SavedBorderColor}">
+
+      <br> 
 
       <div id="inputAnswer" >
         <div v-for="(_,i) in answers" v-bind:key="'answer' + i" class="answerLayout">
-          <input type="text"  v-model="answers[i]" class="input" id="option" :placeholder= "uiLabels.WriteAnswersHere"
-          v-on:keypress="resetColor()"> 
+          <input type="text"  v-model="answers[i]" class="input" id="option" :placeholder= "uiLabels.WriteAnswersHere" v-on:keypress="resetColor()" v-bind:style="{'border-color':SavedBorderColor}"> 
 
-           <!-- {{uiLabels.WriteAnswersHere}} -->  
-          
-
-          <button v-on:click="deleteAnswers(i)" class="deleteB" id="deleteAnswerButton"> 
-             -
+          <button v-on:click="deleteAnswers(i)" class="buttonContainer" id="deleteAnswerButton"> 
+            <img class="button" src="../../public/img/trashcan.png"/>
           </button> 
 
-          <button class="buttonContainer" v-on:click="setCorectAnswer(i)" id="Right"  v-bind:style="{'background-color':altColor[i]}">
-            <img class="button" src="https://cdn4.iconfinder.com/data/icons/essentials-72/24/040_-_Tick-512.png"/>
+          <button class="buttonContainer" v-on:click="setCorrectAnswer(i)" id="Right"  v-bind:style="{'background-color':altColor[i]}">
+            <img class="button" src="../../public/img/checkmark_nobackground.png"/>
           </button>
           
           <button class="buttonContainer" id="Wrong" v-on:click="setWrongAnswer(i)" v-bind:style="{'background-color':deleteColor[i]}" >
-            <img class="button" src="https://cdn4.iconfinder.com/data/icons/essentials-72/24/039_-_Cross-512.png"/>
+            <img class="button" src="../../public/img/redcross_nobackground.png"/>
 
           </button>
           <br>
         </div>
-        <!--Svarsalternativ: {{question}}-->
 
-        <button v-on:click="addAnswer" id="addAnswerButton">
+        <button v-if="(i<4)"  v-on:click="addAnswer" class="buttonContainer">
           +
         </button>
 
       </div>
 
-      <div>
-        <button v-on:click="deleteQuestion" class="deleteB" id="deleteQuestions">
-          {{uiLabels.DeleteQuestion}}
-        </button >
-
-        <button v-on:click="sendQuestion" v-bind:style="{'background-color':SavebuttonColor}">
+      <div id="saveDelete">
+        
+        <button v-on:click="sendQuestion" id="saveQuestion" v-bind:style="{'background-color':SavebuttonColor}">
           {{uiLabels.SaveQuestion}}
         </button>
-        <!--{{data}}
-        <router-link v-bind:to="'/result/'+pollId">Check result</router-link>-->
-     
 
+        <button v-on:click="deleteQuestion" id="deleteQuestions">
+          {{uiLabels.DeleteQuestion}}
+        </button >
 
     </div>
 
@@ -86,11 +73,13 @@ export default{
       
       altColor:[""],
       deleteColor: [""],
-      SavedQuestionColor: "lightblue",
+      SavedQuestionColor: "#5C95FF",
+      SavedBorderColor: "#5C95FF",
       savebuttonText:"Save Question",
       SavebuttonColor: "",
       lang: "",
-      uiLabels: {}
+      uiLabels: {},
+      i: 0,
     }
 
   },
@@ -99,7 +88,8 @@ export default{
     this.lang = this.$route.params.lang;
     socket.emit("pageLoaded", this.lang);
     socket.on("init", (labels) => {
-      this.uiLabels = labels
+      this.uiLabels = labels;
+      this.i = this.answers.length;
     
     } )
   },
@@ -115,6 +105,7 @@ export default{
       this.answers.push("");
       this.altColor.push("");
       this.resetColor();
+      this.i += 1
     },
     deleteAnswers: function(i) {
       console.log(i)
@@ -123,9 +114,11 @@ export default{
       this.altColor.splice(i,1);
       this.$emit('deleteAnswer', { q: this.q, a: this.answers, selected: this.selectedAnswers})
       this.resetColor();
+      this.i -= 1;
     },
     deleteQuestion: function () {
       this.$emit('deleteIndex', {q: this.q, a: this.answers, selected: this.selectedAnswers}) //pop = delete/pull'
+      
       },
     sendQuestion: function(){
       
@@ -136,29 +129,33 @@ export default{
       
      
     },
-    setCorectAnswer: function(i){
+    setCorrectAnswer: function(i){
       this.selectedAnswers[i] = 'correct';
-      this.altColor[i] = "green";  
+      this.altColor[i] = "#6BA468";  
       this.deleteColor[i] = ""; 
+      
       this.resetColor();
      
     },
     setWrongAnswer: function(i){
       this.selectedAnswers[i] = 'incorrect';
-      this.deleteColor[i] = "red"; 
+      this.deleteColor[i] = "#D34848"; 
       this.altColor[i] = "";  
       this.resetColor();
      
      
     },
     resetColor: function(){
-      this.SavedQuestionColor = "lightgreen";
+      this.SavedQuestionColor = "#B9E6FF";
+      this.SavedBorderColor = "#B9E6FF";
       this.savebuttonText = "save changes";
       this.SavebuttonColor = "orange";
     
     },
     savebutonReset: function(){
       this.SavebuttonColor = "";
+      this.SavedBorderColor = "seagreen";
+
       this.savebuttonText = "question saved"
     }
 
@@ -174,110 +171,142 @@ export default{
 <style scoped>
 
 #Right{
-  
   grid-column: 2;
   grid-row: 2;
 }
 
 #deleteAnswerButton {
-  height: 2em;
-  width: 2em;
-  
   grid-row: 2; 
   grid-column: 1/1;
-  
 }
 
 #checked {
   height: 2em;
   width: 2em;
-  /*grid-column: 2;
-  grid-row: 1;*/
-  
-
 }
 
 #question {
   margin: 2em 2em 2em 2em;
   display: grid;
   grid-template-columns: 1fr ;
- 
   border-radius: 2em;
   padding: 1em;
   row-gap: 1em;
+  border-radius: 3em;
+  border-style:outset;
+  border-color: #5C95FF;
+  color: #FFF1AD;
+  font-weight: bold;
 }
 
 
 #inputAnswer {
-  
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr ;
+  grid-template-columns: 1fr 1fr 1fr 1fr ;
   column-gap: 3em;
-  
-  
 }
 
-
-
-.deleteB:hover {
-  background-color: salmon;
-  cursor:pointer;
+#saveDelete {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding-right: 2em;
+  margin-top: -2em;
 }
 
 #deleteQuestions {
-  width: 5em;
-  height: 5em;
-  
+  width: 7em;
+  height: 4em;
+  font-size: 1em;
   border-radius: 2em;
-  border-radius: 1em;
+  background-color: #FFF1AD ;
+  border-color: #FFF1AD; 
+  grid-column: 3;
+  
 }
 
+#saveQuestion {
+  width: 7em;
+  height: 4em;
+  font-size: 1em;
+  border-radius: 2em;
+  background-color: #FFF1AD ;
+  border-color: #FFF1AD;
+  grid-column: 2; 
+}
+#deleteQuestions:hover {
+  background-color: salmon;
+  cursor:pointer;
+  border-color: salmon;
+}
+#saveQuestion:hover {
+  background-color: #A6E9A3;
+  cursor: pointer;
+  border-color: #A6E9A3;
+}
 
 #option {
-  
-  grid-column: 1 /4;
-  background-color: aqua;
-  
-
-  
+  grid-column: 1 /4; 
+  grid-row: 1;
 } 
 .answerLayout{
-display: grid;
-grid-template-columns: 1fr 1fr 1fr;
-row-gap: 1em;
-
-
+  display: grid;
+  grid-template-columns: 10fr 4fr fr;
+  row-gap: 1em;
 }
 
-
-#addAnswerButton {
-  width: 3.5em;
-  height: 3.5em;
-  border-radius: 50%;
-  margin: 18px 0;
-}
 .input {
   border-radius: 1em;
-  
-  
-  
 }
 .button {
   cursor: pointer;
-  height: 4em;
+  height: 1em;
+}
+
+.buttonContainer:hover{
+  transform: translateY(-2px);
+
 }
 .buttonContainer {
-  
-  
-  cursor: pointer;
-  border: none;
-  background: none;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  margin: 18px 0;
+  background-color: transparent;
+  border-style: solid;
+  border-color: transparent;
+  color: #F87575;
+  font-family: 'Righteous', serif;
+  text-shadow: .05em .05em 0 rgb(77, 94, 179);
+  font-size: 3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #Wrong{
   grid-column: 3;
   grid-row: 2;
 }
 
-
+h1{
+  display: inline-block;
+  color: white;
+  font-family: 'Righteous', serif;
+  font-size: 2em; 
+  text-shadow: .08em .08em 0 #4779d6;
+}
+input {
+    padding-left: 0.5em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    font-size: medium;
+    border-radius: 1em;
+    border-style: outset;
+  }
+#questionInput {
+  font-size: large;
+  margin-left: 26%;
+  margin-right: 26%;
+}
 
 </style>

@@ -16,7 +16,6 @@
   </header>
   
   
-  <section>
     <div class="wrapper">
   
       <router-link class="startchoice a" v-bind:to="'/join/'+lang">{{uiLabels.joinQuiz}}</router-link>
@@ -28,10 +27,6 @@
       <router-link class="startchoice d" id="smallerbuttons" v-bind:to="'/myquizzes/'+lang"> {{uiLabels.myQuizzes}}</router-link>
    
     </div>
-  </section>
-<footer> 
-  
-</footer>
   </div>
 
 </template>
