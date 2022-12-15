@@ -131,6 +131,12 @@ export default {
   font-size: 4em; 
   text-shadow: .08em .08em 0 #4779d6;
   }
+
+  #text {
+    color: white;
+    font-family: 'Righteous', serif;
+    text-shadow: .08em .08em 0 black;
+  }
   
  
 </style>

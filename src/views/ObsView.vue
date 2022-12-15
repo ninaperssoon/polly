@@ -12,7 +12,7 @@
           
           <p v-if="(this.question != null)"> {{this.playingName}} {{uiLabels.IsAswering}} <br> {{this.question.q}} </p>
           <p v-else>{{uiLabels.ReachedEndQuiz}}
-            <br>
+            <br><br>
             <router-link class="button" v-bind:to="('/join/'+lang)"> {{uiLabels.joinanotherquiz}} </router-link>
             <router-link class="button" v-bind:to="('/')"> {{uiLabels.Returntohomepage}} </router-link>
 
@@ -192,6 +192,8 @@ export default {
 .card__face--front {
   background: #87d784 ;
   color: black;
+  font-weight: bold;
+  padding: 5%;
 }
 
 .card__face--back {
@@ -220,15 +222,16 @@ export default {
 }
 
 .button {
-    color:black;
     margin: 1em;
     text-decoration:none; 
-    background-color: rgb(235, 209, 106);
+    background-color: #FFF1AD;
     padding: 0.5em;
     border-radius: 3em;
     border-style: outset;
-    font-size:x-small;
-    border-color: rgba(235, 209, 106, 0.689);
+    font-size: small;
+    border-color: #FFF1AD;
+    color: #F87575;
+    text-shadow: .05em .05em 0 #4779d6;
   }
 
   .button:hover {
