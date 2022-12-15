@@ -1,30 +1,23 @@
 <template>
   <div id="body">
     <homeButton class="homeButton"> </homeButton>
-
     <div class="wrapper">
-    <h1>{{uiLabels.hostQuiz}}</h1>
-    
-    <div id="host">
-      <p> {{uiLabels.writeQuizId}}: 
-        <br>
-        <input type="text" v-model="id"> 
-      </p>      
+
+      <div class="palm1"><img id="palmtree" src="../../public/img/palmtree.gif"></div>
+
+      <div class="theHost">
+        <h1>{{uiLabels.hostQuiz}}</h1>
+          <div id="host">
+            <p> {{uiLabels.writeQuizId}}: 
+            <br>
+            <input type="text" v-model="id"></p>      
+          </div>
+        <button id="startQuiz" v-on:click="startQuiz">{{uiLabels.startQuiz}}</button> 
+      </div>
+      
+      <div class="palm2"><img id="palmtree" src="../../public/img/palmtree.gif"></div>
     </div>
-
-     
-    <button id="startQuiz" v-on:click="startQuiz">{{uiLabels.startQuiz}}</button> 
-    
   </div>
-  <div>
-  <img id="palmtree" src="../../public/img/palmtree.gif">
-  <img id="palmtree" src="../../public/img/palmtree.gif">
-  <img id="palmtree" src="../../public/img/palmtree.gif">
-
-  </div>
-  
-  </div>
-
 </template>
 
 <script>
@@ -82,11 +75,22 @@ export default {
     
   }
 
-  
-
   .wrapper {
     margin-top: -6em;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 
+  .palm1 {
+    grid-column: 1;
+  }
+
+  .theHost {
+    grid-column: 2;
+  }
+
+  .palm2 {
+    grid-column: 3;
   }
 
   #host {
@@ -141,6 +145,8 @@ h1 {
   font-family: 'Righteous', serif;
   font-size: 4em; 
   text-shadow: .08em .08em 0 #4779d6;
+  margin-bottom: 1em;
+  margin-top: 1em;
   }
 
   input {
@@ -155,7 +161,8 @@ h1 {
   }
 
   #palmtree {
-    height: 20em;
+    height: 35em;
+    margin-top: 5em;
   }
  
 </style>

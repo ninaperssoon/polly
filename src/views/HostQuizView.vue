@@ -12,6 +12,7 @@
       </div>
 
       <button v-on:click="startQuiz"> {{uiLabels.startQuiz}}</button>
+      
 
     </div>
 
@@ -73,15 +74,18 @@ export default {
 </script>
 <style scoped>
   #body {
-    margin: 0;
-    background-color:  #A6E9A3;
-    min-height: 100%;
-    min-width: 1024px;
+    margin: auto;
+    background-color: #A6E9A3 ;
+    text-align: center;
     width: 100%;
-    height: auto;
     top: 0;
-    left: 0;  
+    left: 0;
+    height: 100%;
+    position:fixed;
+    overflow: auto;  
   }
+
+  
 
  
   button {
