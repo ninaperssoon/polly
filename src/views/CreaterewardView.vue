@@ -12,7 +12,7 @@
       <br>
 
       <Consequence  v-for=" (reward, index) in rewards"
-      v-bind:reward= "reward"
+      v-bind:consequence= "reward"
       v-bind:key="reward"
       v-on:myReward="sendReward($event, index)"
       v-on:deleteReward="deleteReward($event, index)"
@@ -30,7 +30,7 @@
       <br>
       
       <Consequence v-for=" (punishment, index) in punishments"
-      v-bind:reward = "punishment"
+      v-bind:consequence = "punishment"
       v-bind:key="punishment"
       v-on:myReward="sendPunishment($event, index)"
       v-on:deleteReward="deletePunishment($event, index)"
@@ -143,13 +143,13 @@ export default {
     },
     sendReward: function (event, index) {
       console.log("reward: ", event.r)
-      socket.emit("sendReward", {pollId: this.pollId, index: index, r: event.r} )
+      socket.emit("sendReward", {pollId: this.pollId, index: index, r: event.c} )
       
     },
 
     deleteReward: function(event,index){
       console.log("det här är index: ", index);
-      socket.emit("deleteReward",{pollId: this.pollId, index: index, r: event.r} )
+      socket.emit("deleteReward",{pollId: this.pollId, index: index, r: event.c} )
       console.log(this.rewards);
        
     },
@@ -158,12 +158,12 @@ export default {
       
     },
     sendPunishment: function (event, index) {
-      socket.emit("sendPunishment", {pollId: this.pollId, index: index, p: event.r } )
+      socket.emit("sendPunishment", {pollId: this.pollId, index: index, p: event.c } )
       console.log("punishment: ", event.r)
     },
     deletePunishment: function(event,index){
       console.log("det här är index: ", index);
-      socket.emit("deletePunishment",{pollId: this.pollId, index: index, p: event.r} )
+      socket.emit("deletePunishment",{pollId: this.pollId, index: index, p: event.c} )
       console.log(this.punishments);
        
     },

@@ -26,8 +26,8 @@
       </div>
       <div id="buttonContainer">  
         <!-- <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" v-if="visibleButtons"/>    -->
-        <VotingRewardComponent v-bind:voting="voting" v-on:voteR="submitVoteR" v-if="visibleRewards"/>
-        <VotingPunishmentComponent v-bind:voting="voting" v-on:voteP="submitVoteP" v-if="visiblePunishments"/>
+        <VotingComponent v-bind:voting="voting.r" v-on:vote="submitVoteR" v-if="visibleRewards" message="#A6E9A3"/>
+        <VotingComponent v-bind:voting="voting.p" v-on:vote="submitVoteP" v-if="visiblePunishments" message="#F87575"/>
       
         <!-- <VotingComponent v-bind:voting="voting" v-on:voteR="submitVoteR" v-on:voteP="submitVoteP"  v-if="visibleButtons"/> -->
       
@@ -42,9 +42,9 @@
 <script>
 // @ is an alias to /src
 // import QuestionComponent from '@/components/QuestionComponent.vue';
-// import VotingComponent from '@/components/VotingComponent.vue';
-import VotingRewardComponent from '@/components/VotingRewardComponent.vue';
-import VotingPunishmentComponent from '@/components/VotingPunishmentComponent.vue';
+import VotingComponent from '@/components/VotingComponent.vue';
+// import VotingRewardComponent from '@/components/VotingRewardComponent.vue';
+// import VotingPunishmentComponent from '@/components/VotingPunishmentComponent.vue';
 import io from 'socket.io-client';
 import homeButton from '@/components/HomeComponent.vue';
 
@@ -55,9 +55,9 @@ export default {
   components: {
     homeButton,
     // QuestionComponent, 
-    // VotingComponent,
-    VotingRewardComponent,
-    VotingPunishmentComponent,
+    VotingComponent,
+    // VotingRewardComponent,
+    // VotingPunishmentComponent,
   },
   data: function () {
     return {

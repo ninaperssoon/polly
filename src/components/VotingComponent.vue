@@ -1,36 +1,41 @@
 <template>
 <!-- <p>{{question.q}} {{question.s}}</p> -->
-<button v-for="(r,index) in voting.r" v-on:click="voteR(r,index)" v-bind:key="r">
-  {{ r }}
+<button v-for="(v,index) in voting" v-on:click="vote(v, index)" v-bind:key="v" v-bind:style="{'background-color':buttonColor}">
+  {{ v }}
 </button>
-<button v-for="(p,index) in voting.p" v-on:click="voteP(p,index)" v-bind:key="p">
+<!-- <button v-for="(p,index) in voting.p" v-on:click="voteP(p,index)" v-bind:key="p">
   {{ p }}
-</button>
+</button> -->
 
 </template>
 <script>
 export default {
   name: 'VotingComponent',
   props: {
-    voting: Object
+    voting: Array,
+    message: String
   },
-  emits: ["voteR", "voteP"],
+  data: function(){
+    return {
+      buttonColor: this.message,
+    }
+  },
+  emits: ["vote"],
   methods: {
-    voteR: function (vote,index) {
+    vote: function (vote,index) {
       console.log(vote,index)
-      this.$emit("voteR", {v: vote, index: index});
+      this.$emit("vote", {v: vote, index: index});
     },
-    voteP: function (vote,index) {
-      console.log(vote,index)
-      this.$emit("voteP", {v: vote, index: index});
-    } 
+    // voteP: function (vote,index) {
+    //   console.log(vote,index)
+    //   this.$emit("voteP", {v: vote, index: index});
+    // } 
   }
 }
 </script>
 <style>
  button {
   color: black;
-    background-color: #FFF1AD;
     border-radius: 1em;
     font-size: 1.2em;
     border-style: outset;

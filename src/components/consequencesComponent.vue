@@ -3,7 +3,7 @@
   <div id="consequenceBox" >
     
      
-        <input type="text"  class="input" v-model="r" :placeholder= "uiLabels.WriteRewardHere" v-on:keypress="resetSavebutton()" >
+        <input type="text"  class="input" v-model="c" :placeholder= "uiLabels.WriteRewardHere" v-on:keypress="resetSavebutton()" >
         
         <button v-on:click="sendRewards" v-bind:style="{'background-color': savedColor}" id="Savebutton">
            {{uiLabels.Save}}
@@ -28,13 +28,13 @@ const socket = io();
 export default{
 name: 'RewardsComponent',
 props: {
-reward: String,
+consequence: String,
 message: String,
 },
 
 data: function(){
     return{
-        r : this.reward,
+        c : this.consequence,
         lang: "",
         uiLabels: {},
         textett : "",
@@ -54,12 +54,12 @@ created: function () {
   },
 methods:{
   sendRewards: function (){
-    this.$emit('myReward', {r: this.r})
-    console.log("Sended reward: ", this.r)
+    this.$emit('myReward', {c: this.c})
+    console.log("Sended reward: ", this.c)
     
   },
     deleteReward: function() {
-      this.$emit('deleteReward', {r: this.r})
+      this.$emit('deleteReward', {c: this.c})
     },
     resetSavebutton: function(){
       this.savedColor = "orange";
