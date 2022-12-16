@@ -38,7 +38,7 @@ export default {
  }
 
  button:hover{
-  box-shadow: 0 5px 15px #439A86;
+  box-shadow: 0 5px 15px rgb(158, 100, 145);
     transform: translateY(-2px);
 
  }

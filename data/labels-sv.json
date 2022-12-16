@@ -62,7 +62,8 @@
 	"Delete":"Radera",
 	"rewards" : "Belöningar",
 	"punishments" : "Bestraffningar",
-	"DeleteQuiz":"Radera Quiz"
+	"DeleteQuiz":"Radera Quiz",
+	"Host": "Anordna"
 
 
 }

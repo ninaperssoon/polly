@@ -65,20 +65,18 @@ export default {
     margin: 0;
     background-color:  #A6E9A3;
     min-height: 100%;
-    min-width: 1024px;
     width: 100%;
     height: auto;
     position: fixed;
     top: 0;
     left: 0;
-
-    
   }
 
   .wrapper {
     margin-top: -6em;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+
   }
 
   .palm1 {
@@ -126,8 +124,8 @@ export default {
   }
 
   #startQuiz:hover {
-    box-shadow: 0 5px 15px #0079918f;
-
+    box-shadow: 0 5px 15px #80B57D;
+    transform: translateY(-2px);
   }
 
   @import url(https://fonts.googleapis.com/css?family=Righteous);
@@ -161,8 +159,8 @@ h1 {
   }
 
   #palmtree {
-    height: 35em;
-    margin-top: 5em;
+    height: 30em;
+    margin-top: 12em;
   }
  
 </style>

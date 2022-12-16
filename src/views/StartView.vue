@@ -2,10 +2,7 @@
   <div class="body">
   
   <header>
-    
-    <div v-bind:class="['hamburger', {'close': !hideNav}]" 
-         v-on:click="toggleNav"> 
-    </div>
+   
     <!-- <div class="logo"> punishment play: the flip. Also known as "Flip or Flop"  </div> -->
     <div class="J">
     <div><img id="flag" v-bind:src=uiLabels.languageFlag v-on:click="switchLanguage"></div>
@@ -84,17 +81,7 @@ export default {
     top: 0;
     left: 0;
   }
-  header {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 2em auto;
 
-  }
-  footer {
-    height: 8.6em;
-    width: 100%;
-  }
- 
   .wrapper {
     margin-top: 3em;
     margin-left: 12.5em;
@@ -116,7 +103,7 @@ export default {
     text-shadow: .05em .05em 0 rgb(77, 94, 179);
   }
   .startchoice:hover {
-    box-shadow: 0 5px 15px #439A86;
+    box-shadow: 0 5px 15px #80B57D;
     transform: translateY(-2px);
   }
   .a {

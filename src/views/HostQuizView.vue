@@ -91,7 +91,7 @@ export default {
   button {
     color:black;
     margin: 1em;
-    margin-top: 2em;
+    margin-top: 4em;
     text-decoration: none; 
     background-color:  #FFF1AD;
     padding: 0.5em;
@@ -105,12 +105,13 @@ export default {
   }
 
   button:hover {
-    box-shadow: 0 5px 15px #0079918f;
+    box-shadow: 0 5px 15px #80B57D;
     transform: translateY(-2px);
     cursor: pointer;
 
   }
   h1 {
+    margin-top: -3em;
   display: inline-block;
   color: white;
   font-family: 'Righteous', serif;

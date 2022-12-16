@@ -241,7 +241,7 @@ body {
   }
 
   .button:hover {
-    box-shadow: 0 5px 15px #0079918f;
+    box-shadow: 0 5px 15px rgb(158, 100, 145);
     transform: translateY(-2px);
     cursor: pointer;
 
@@ -281,7 +281,7 @@ h1 {
 
   button:hover {
     cursor:pointer;
-    box-shadow: 0 5px 15px #0079918f;
+    box-shadow: 0 5px 15px rgb(158, 100, 145);
     transform: translateY(-2px);
   }
 
