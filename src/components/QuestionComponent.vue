@@ -29,14 +29,12 @@ export default {
 <style>
  button {
   color: black;
-    /* background-color:#FFF1AD; */
-    /* border-radius: 1em; */
+    background-color:#FFF1AD;
+    border-radius: 1em;
     font-size: 1.2em;
     border-style: outset;
-    /* border-color:  #e3cf6b; */
+    border-color:  #e3cf6b;
     height: 2em;
-    color: white;
-    font: bolder;
  }
 
  button:hover{

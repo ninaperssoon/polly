@@ -242,7 +242,7 @@ export default{
   border-color: White;
   border-style:solid;
   border-radius: 0.5em;
-
+  
 }
 #deleteQuestions:hover {
   background-color: salmon;

@@ -14,7 +14,7 @@
         </button>
         
         <button v-on:click="deletePunishment" class="delButton">
-          {{uiLabels.Delete}}
+          <img class="button" src="../../public/img/trashcan.png"/>
         </button>
       </div>
   
@@ -37,7 +37,7 @@ data: function(){
     p : this.punishment,
     lang: "",
     uiLabels: {},
-    savedbackground : "#FFF1AD",  
+    // savedbackground : "#FFF1AD",  
     savetext: " Save Punishment" 
 
   }

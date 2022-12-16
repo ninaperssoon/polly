@@ -10,7 +10,7 @@
         </button>
         
         <button v-on:click="deleteReward" class="delButton">
-         {{uiLabels.Delete}}
+        <img class="button" src="../../public/img/trashcan.png"/>
         </button>
      
       </div>
@@ -82,15 +82,17 @@ height:8em
 #Savebutton{
 grid-column: 2;
 grid-row: 2;
-    background-color: #FFF1AD;
-    color: #F87575;
-    font-size: 1em; 
-    border-radius: 2em;
-    font-weight: bold;
-   
-   
-    
-    
+width: 4em;
+  height: 2em; 
+  font-size: 1.25em;
+  grid-column: 2; 
+  color:white;
+  font:bolder;
+  background-color: transparent;
+  border-color: White;
+  border-style:solid;
+  border-radius: 0.5em;
+  margin-top:0.2em;
 }
 
 .input {
@@ -99,23 +101,26 @@ grid-row: 2;
   grid-row: 2;
   border-radius: 1em;
   padding: 12px 20px;
-  /* height:3.5em; */
   box-sizing: border-box;
 
-  
  
 }
 .delButton {
-    grid-column: 3;
-    grid-row: 2;
-    background-color: #FFF1AD;
-    color: #F87575;
-    font-size: 1em;
-    border-radius: 2em;
-    font-weight: bold;
-    
-
+  background-color: transparent;
+  border-style: solid;
+  border-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-column: 3;
+  grid-row: 2;
 }
+.button{
+  width: 3.25em;
+  height: 3.25em;
+}
+
+
 
 
 </style>
