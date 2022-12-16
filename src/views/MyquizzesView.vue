@@ -69,7 +69,8 @@ export default {
     width: 100%;
     height: 100%;
     position:fixed;
-    overflow: auto;   
+    overflow-y: auto;  
+    overflow-x: hidden; 
   }
 
   #create {
@@ -128,7 +129,7 @@ h1 {
     margin-bottom: 1em;
     background-color:#5C95FF;
     display: grid;
-    grid-template-columns: 15em 4.2em 3em 3em;
+    grid-template-columns: 50% 17% 12% 12%;
     grid-template-rows: 1em;
     place-items: center start;
     border-style:outset;

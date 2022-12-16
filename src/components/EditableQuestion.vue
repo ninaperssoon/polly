@@ -285,7 +285,7 @@ export default{
   background-color: transparent;
   border-style: solid;
   border-color: transparent;
-  color: #F87575;
+  color: white;
   font-family: 'Righteous', serif;
   text-shadow: .05em .05em 0 rgb(77, 94, 179);
   font-size: 3em;

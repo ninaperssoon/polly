@@ -75,18 +75,14 @@ export default {
 <style scoped>
   #body {
     margin: auto;
-    background-color: #A6E9A3 ;
+    background-color: #75bdf8 ;
     text-align: center;
     width: 100%;
     top: 0;
     left: 0;
     height: 100%;
     position:fixed;
-    overflow: auto;  
   }
-
-  
-
  
   button {
     color:black;
@@ -105,7 +101,7 @@ export default {
   }
 
   button:hover {
-    box-shadow: 0 5px 15px #80B57D;
+    box-shadow: 0 5px 15px #5387b2;
     transform: translateY(-2px);
     cursor: pointer;
 

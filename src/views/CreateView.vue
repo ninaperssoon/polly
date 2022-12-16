@@ -157,7 +157,8 @@ export default {
     left: 0;
     height: 100%;
     position:fixed;
-    overflow: auto;   
+    overflow-y: auto; 
+    overflow-x: hidden;  
 
 }
 
@@ -172,18 +173,6 @@ button:hover {
   cursor:pointer;
 }
 
-/*.wrapper {
-  /*background-color: aquamarine;
-  margin: auto ;
-  padding: 1em;
-  display: grid;
-  grid-template-columns: 1fr ;
-  grid-template-rows: 1fr;
-  border-radius: 1em;
-
-}*/
-
-
 
 #pollButton {
   margin-top: 1em;
@@ -191,10 +180,7 @@ button:hover {
 }
 
 #deleteAnswerButton {
-  
   grid-column: 2;
-  
-  
 }
 
 #addButton {
@@ -216,7 +202,7 @@ button:hover {
     grid-column: 2;
 }
 #addButton:hover {
-    box-shadow: 0 5px 15px #439A86;
+    box-shadow: 0 5px 15px #80B57D;
   }
 
 #wrapper {

@@ -13,8 +13,8 @@
          <p v-if="(this.question !== null)">{{this.question.q}} <br> {{this.playingName}} {{uiLabels.IsAswering}}</p> 
           <p v-else>{{uiLabels.ReachedEndQuiz}}
             <br><br>
-            <router-link class="button" v-bind:to="('/myquizzes/'+lang)"> {{uiLabels.Hostanotherquiz}} </router-link>
-            <router-link class="button" v-bind:to="('/')"> {{uiLabels.Returntohomepage}} </router-link>
+            <router-link class="button" id="yellow" v-bind:to="('/myquizzes/'+lang)"> {{uiLabels.Hostanotherquiz}} </router-link>
+            <router-link class="button" id="yellow" v-bind:to="('/')"> {{uiLabels.Returntohomepage}} </router-link>
           </p>
 
         </div>
@@ -356,6 +356,7 @@ body {
   }
 
 h1 {
+  margin-top: -4em;
   display: inline-block;
   color: white;
   font-family: 'Righteous', serif;
@@ -384,4 +385,8 @@ h1 {
     transform: translateY(-2px);
   }
 
+  #yellow:hover {
+    box-shadow: 0 5px 15px #90875b;
+
+  }
 </style>

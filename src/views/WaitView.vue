@@ -1,17 +1,14 @@
 <template>
   <div id="body">
-    <div>
-      <h1>{{uiLabels.Waitingforhosttostart}}</h1>
 
+    <div id="header">
+      <h1>{{uiLabels.Waitingforhosttostart}}<span class="dot1"> .</span><span class="dot2">.</span><span class="dot3">.</span></h1> 
     </div>
       
       <div class="board" v-for="participant in participants" v-bind:key = "participant">
         <img id="surfboard" src="../../public/img/surfboard.png">
         <div id="text">{{participant}}</div>
-      </div>
-
- 
-    
+      </div>    
   
   </div>
 
@@ -68,7 +65,7 @@ export default {
 <style scoped>
   #body {
     margin: auto;
-    background-color: #A6E9A3 ;
+    background-color: #75bdf8 ;
     text-align: center;
     width: 100%;
     top: 0;
@@ -76,31 +73,6 @@ export default {
     height: 100%;
     position:fixed;
     overflow: auto;  
-  }
-
-
-  #host {
-    font-size:1.5em;
-
-    margin: auto;
-    margin-top: 2em;
-    height: 20em;
-    width: 30em;
-    background-color: #007991;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 2em;
-    border-style: outset;
-    border-color: #0079918f;
-
-  }
-
-  input {
-
-    font-size: 1em;
-    border-radius: 1em;
-    border-style: outset;
   }
 
   #startQuiz {
@@ -125,11 +97,11 @@ export default {
 
   }
   h1 {
-  display: inline-block;
-  color: white;
-  font-family: 'Righteous', serif;
-  font-size: 4em; 
-  text-shadow: .08em .08em 0 #4779d6;
+    display: inline-block;
+    color: white;
+    font-family: 'Righteous', serif;
+    font-size: 4em; 
+    text-shadow: .08em .08em 0 #4779d6;
   }
 
   #text {
@@ -137,6 +109,77 @@ export default {
     font-family: 'Righteous', serif;
     text-shadow: .08em .08em 0 black;
   }
-  
+
+  #header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .dot1 {
+ animation: visibility 2s linear infinite;
+}
+@keyframes visibility {
+ 0% {
+ opacity: 1;
+ }
+ 65% {
+ opacity: 1;
+ }
+ 66% {
+ opacity: 0;
+ }
+ 100% {
+ opacity: 0;
+ }
+}
+.dot2 {
+ animation: visibility2 2s linear infinite;
+}
+@keyframes visibility2 {
+ 0% {
+  opacity: 0;
+ }
+ 21% {
+  opacity: 0;
+ }
+ 22% {
+  opacity: 1;
+ }
+ 65% {
+  opacity: 1;
+ }
+ 66% {
+  opacity: 0;
+ }
+ 100% {
+  opacity: 0;
+ }
+}
+.dot3 {
+ animation: visibility3 2s linear infinite;
+}
+@keyframes visibility3 {
+ 0% {
+  opacity: 0;
+ }
+ 43% {
+  opacity: 0;
+ }
+ 44% {
+  opacity: 1;
+ }
+ 65% {
+  opacity: 1;
+ }
+ 66% {
+  opacity: 0;
+ }
+ 100% {
+  opacity: 0;
+ }
+}
+
+
  
 </style>

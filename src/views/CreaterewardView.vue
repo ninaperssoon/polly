@@ -194,7 +194,9 @@ display: inline-block;
     left: 0;
     height: 100%;
     position:fixed;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden
+    ;
 
 }
 
@@ -202,13 +204,11 @@ display: inline-block;
   background-color: #F87575;
     border-color: #F87575;
     
-
 }
 
 #addButtonReward{
   background-color:  #5C95FF;
   border-color:  #5C95FF;
-    
 
 }
 
@@ -268,8 +268,7 @@ border-radius: 2em;
   border-radius: 3em;
   color: #FFF1AD;
   font-weight: bold;
-  width: 10em;
-    
+  width: 10em;  
 }
 
 
@@ -292,7 +291,6 @@ border-radius: 2em;
 }
 
 #submitButton{
-
     padding: 0.5em;
     background-color: #FFF1AD;
     border-color: #fff1adbd;
@@ -301,11 +299,10 @@ border-radius: 2em;
     width: 8em;
     border-radius: 3em;
     font-weight: bolder;
-    
 }
 
 button:hover {
-  box-shadow: 0 5px 15px #439A86;
+  box-shadow: 0 5px 15px #80B57D;
     transform: translateY(-2px);
 }
 
