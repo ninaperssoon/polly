@@ -11,7 +11,7 @@
       <h1>{{uiLabels.rewards}}</h1>
       <br>
 
-      <Reward  v-for=" (reward, index) in rewards"
+      <Consequence  v-for=" (reward, index) in rewards"
       v-bind:reward= "reward"
       v-bind:key="reward"
       v-on:myReward="sendReward($event, index)"
@@ -29,11 +29,11 @@
       <h1>{{uiLabels.punishments}}</h1>
       <br>
       
-      <Punishment v-for=" (punishment, index) in punishments"
-      v-bind:punishment = "punishment"
+      <Consequence v-for=" (punishment, index) in punishments"
+      v-bind:reward = "punishment"
       v-bind:key="punishment"
-      v-on:myPunishment="sendPunishment($event, index)"
-      v-on:deletePunishment="deletePunishment($event, index)"
+      v-on:myReward="sendPunishment($event, index)"
+      v-on:deleteReward="deletePunishment($event, index)"
       message = "punishment"
       class="punishment" />
     
@@ -75,9 +75,9 @@
 <script>
 import io from 'socket.io-client';
 import homeButton from '@/components/HomeComponent.vue';
-//import consequences from '@/components/consequences.vue';
-import Reward from '@/components/RewardsComponent.vue';
-import Punishment from '@/components/PunishmentsComponent.vue';
+//import consequence from '@/components/consequence.vue';
+import Consequence from '@/components/consequencesComponent.vue';
+//import Punishment from '@/components/PunishmentsComponent.vue';
 const socket = io();
 
 
@@ -85,9 +85,9 @@ export default {
   name: 'CreaterewardView',
   components: {
     homeButton, 
-    //consequences,
-    Reward,
-    Punishment
+    //consequence,
+    Consequence,
+    
   },
   data: function () {
     return {
@@ -158,12 +158,12 @@ export default {
       
     },
     sendPunishment: function (event, index) {
-      socket.emit("sendPunishment", {pollId: this.pollId, index: index, p: event.p } )
-      console.log("punishment: ", event.p)
+      socket.emit("sendPunishment", {pollId: this.pollId, index: index, p: event.r } )
+      console.log("punishment: ", event.r)
     },
     deletePunishment: function(event,index){
       console.log("det här är index: ", index);
-      socket.emit("deletePunishment",{pollId: this.pollId, index: index, p: event.p} )
+      socket.emit("deletePunishment",{pollId: this.pollId, index: index, p: event.r} )
       console.log(this.punishments);
        
     },

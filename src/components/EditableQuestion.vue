@@ -125,7 +125,7 @@ export default{
       
       this.$emit('myquestion', {q: this.q ,a: this.answers, selected: this.selectedAnswers})
       console.log("Edit: ",this.selectedAnswers)
-      this.SavedQuestionColor = "seagreen"
+      this.SavedQuestionColor = "#5C95FF"
       this.savebutonReset();
       
      
@@ -155,7 +155,7 @@ export default{
     },
     savebutonReset: function(){
       this.SavebuttonColor = "";
-      this.SavedBorderColor = "seagreen";
+     
 
       this.savebuttonText = "question saved"
     }

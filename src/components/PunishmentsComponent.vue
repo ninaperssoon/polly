@@ -6,7 +6,7 @@
      
         <input type="text" v-model="p" class="input" :placeholder="uiLabels.WritePunishmentHere" v-on:keypress="resetSavebutton()" >
         
-        <input type="text" v-model="p" class="input" :placeholder="uiLabels.WritePunishmentHere" v-on:keypress="resetSavebutton()" >
+        
         
 
         <button v-on:click="sendPunishment" v-bind:style="{'background-color':savedbackground}" id="Savebutton">
@@ -37,7 +37,7 @@ data: function(){
     p : this.punishment,
     lang: "",
     uiLabels: {},
-    // savedbackground : "#FFF1AD",  
+    savedbackground : "",  
     savetext: " Save Punishment" 
 
   }
@@ -54,11 +54,11 @@ created: function () {
 methods:{
   sendPunishment: function (){
    
-    this.savedbackground = "##A6E9A3";
+    
     console.log("color color color: "+ this.savedbackground)
     this.$emit('myPunishment', {p: this.p});
     console.log("Sended punishment: ", this.p);
-    this.savedbackground = "#A6E9A3";
+    
     this.savetext = "Saved!"
     
   },

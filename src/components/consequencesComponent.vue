@@ -3,7 +3,7 @@
   <div id="consequenceBox" >
     
      
-        <input type="text"  class="input" v-model="r" :placeholder= "uiLabels.WriteRewardHere" >
+        <input type="text"  class="input" v-model="r" :placeholder= "uiLabels.WriteRewardHere" v-on:keypress="resetSavebutton()" >
         
         <button v-on:click="sendRewards" v-bind:style="{'background-color': savedColor}" id="Savebutton">
            {{uiLabels.Save}}
@@ -56,11 +56,14 @@ methods:{
   sendRewards: function (){
     this.$emit('myReward', {r: this.r})
     console.log("Sended reward: ", this.r)
-    this.savedColor = "#A6E9A3 ";
+    
   },
     deleteReward: function() {
       this.$emit('deleteReward', {r: this.r})
     },
+    resetSavebutton: function(){
+      this.savedColor = "orange";
+    }
 
 }
 
