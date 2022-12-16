@@ -216,23 +216,32 @@ export default{
 
 #deleteQuestions {
   width: 7em;
-  height: 4em;
-  font-size: 1em;
-  border-radius: 2em;
-  background-color: #FFF1AD ;
-  border-color: #FFF1AD; 
+  height: 3em;
   grid-column: 3;
-  
+  font-size: 1.25em;
+  color:white;
+  font:bolder;
+  background-color: transparent;
+  border-color: white;
+  margin-left:1em;
+  border-style:solid;
+  border-radius: 0.5em;
 }
+  
+  
 
 #saveQuestion {
   width: 7em;
-  height: 4em;
-  font-size: 1em;
-  border-radius: 2em;
-  background-color: #FFF1AD ;
-  border-color: #FFF1AD;
+  height: 3em; 
+  font-size: 1.25em;
   grid-column: 2; 
+  color:white;
+  font:bolder;
+  background-color: transparent;
+  border-color: White;
+  border-style:solid;
+  border-radius: 0.5em;
+
 }
 #deleteQuestions:hover {
   background-color: salmon;
