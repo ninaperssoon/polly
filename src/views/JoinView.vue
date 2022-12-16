@@ -49,19 +49,19 @@ export default {
       id: "",
       lang: "",
       name: "",
+      hostingQuiz: ""
     }
   },
   methods: {
   
   sendName: function() {
-
-
     console.log(this.name)
     socket.emit("addParticipant", { name: this.name,
                             pollId: this.id }
                  );
                  
     this.$router.push('/wait/'+this.id+'/'+this.lang+'/'+this.name)
+    
   }},
 
   created: function () {

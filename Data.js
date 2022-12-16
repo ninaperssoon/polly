@@ -50,7 +50,8 @@ Data.prototype.createPoll = function(pollId, lang="en") {
     poll.amountOfVotesR=0;
     poll.ongoingVote=false;
     poll.answeringParticipant = "";
-    poll.votedNeeded={r: "no", p: "no"}
+    poll.votedNeeded={r: "no", p: "no"};
+    poll.hosting = false;
   }
   return this.polls[pollId];
 }
@@ -513,6 +514,13 @@ Data.prototype.resetVotes = function(pollId){
     console.log("Setting votes to zero again")
   }
 }
+
+Data.prototype.deleteQuiz = function(pollId){
+  console.log(pollId)
+  delete this.polls[pollId]
+  return this.polls
+}
+
 
 
 

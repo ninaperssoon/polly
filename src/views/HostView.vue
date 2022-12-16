@@ -12,7 +12,7 @@
             <br>
             <input type="text" v-model="id"></p>      
           </div>
-        <button id="startQuiz" v-on:click="startQuiz">{{uiLabels.startQuiz}}</button> 
+        <button id="startQuiz" v-on:click="hostQuiz">{{uiLabels.hostQuiz}}</button> 
       </div>
       
       <div class="palm2"><img id="palmtree" src="../../public/img/palmtree.gif"></div>
@@ -23,6 +23,7 @@
 <script>
 import homeButton from '@/components/HomeComponent.vue';
 import io from 'socket.io-client';
+
 const socket = io();
 
 export default {
@@ -35,6 +36,7 @@ export default {
       uiLabels: {},
       id: "",
       lang: "en",
+      quizzes: {},
     }
   },
   created: function () {
@@ -43,6 +45,8 @@ export default {
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
+    socket.emit("getQuizzes");
+    socket.on("sendQuizzes", (quizzes) => this.quizzes = quizzes);
   },
   methods: {
     switchLanguage: function() {
@@ -52,9 +56,15 @@ export default {
         this.lang = "en"
       socket.emit("switchLanguage", this.lang)
     },
-    startQuiz: function() {
-      socket.emit("resetParticipants", this.id)
-      this.$router.push('/host/'+this.id+'/'+this.lang)
+    hostQuiz: function() {
+      for (const id in this.quizzes) {
+        if (this.id == id){
+          console.log(this.id)
+          socket.emit("resetParticipants", this.id)
+          this.$router.push('/host/'+this.id+'/'+this.lang)
+        }
+      }
+    
     }
 
   }

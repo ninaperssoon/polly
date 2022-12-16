@@ -5,12 +5,12 @@
      
         <input type="text"  class="input" v-model="c" :placeholder= "uiLabels.WriteRewardHere" v-on:keypress="resetSavebutton()" >
         
-        <button v-on:click="sendRewards" v-bind:style="{'background-color': savedColor}" id="Savebutton">
+        <button v-on:click="sendRewards" v-bind:style="{'background-color': savedColor}" class="button" id="Savebutton">
            {{uiLabels.Save}}
         </button>
         
         <button v-on:click="deleteReward" class="delButton">
-        <img class="button" src="../../public/img/trashcan.png"/>
+          <img class="button" src="../../public/img/trashcan.png"/>
         </button>
      
       </div>
@@ -119,8 +119,11 @@ width: 4em;
   grid-row: 2;
 }
 .button{
-  width: 3.25em;
   height: 3.25em;
+}
+
+.button:hover {
+  transform: translateY(-2px);
 }
 
 

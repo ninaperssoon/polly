@@ -12,7 +12,7 @@
             <img id="edit"  src="../../public/img/edit.png"/>
           </button>
 
-          <button class="button"  v-on:click="deletequiz" >
+          <button class="button"  v-on:click="deleteQuiz(id)" >
             <img id="delete" src="../../public/img/trashcan.png"/>
           </button>
           
@@ -40,7 +40,7 @@ export default {
   data: function () {
     return {
       uiLabels: {},
-      id: "hej",
+      id: "",
       lang: "en",
       quizzes: {},
 
@@ -54,11 +54,17 @@ export default {
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
+    socket.on("updateQuiz", (data) => {
+      this.quizzes = data
+    })
   },
   methods: {
     edit: function () {
       this.$router.push('/create/'+this.lang+'/'+this.id)
     },
+    deleteQuiz: function (id) {
+      socket.emit("deleteQuiz", id)
+    }
   }
  
 }
@@ -132,7 +138,7 @@ h1 {
     grid-template-columns: 50% 17% 12% 12%;
     grid-template-rows: 1em;
     place-items: center start;
-    border-style:outset;
+    border-style: outset;
     border-color: #5C95FF;
     border-radius: 2em;
     color: #FFF1AD;

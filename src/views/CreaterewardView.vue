@@ -195,8 +195,7 @@ display: inline-block;
     height: 100%;
     position:fixed;
     overflow-y: auto;
-    overflow-x: hidden
-    ;
+    overflow-x: hidden;
 
 }
 

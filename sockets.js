@@ -205,8 +205,17 @@ function sockets(io, socket, data) {
     data.votingDone(pollId);
     io.to(pollId).emit("checkVoting", data.isVoting(pollId))
   });
-
   
+  socket.on('deleteQuiz', function(pollId) {
+    console.log("id är:",pollId);
+    data.deleteQuiz(pollId);
+    socket.emit('updateQuiz', data.getQuizzes());
+    
+  }); 
+
+
+
+
 }
 
 module.exports = sockets;
