@@ -147,7 +147,7 @@ h1 {
     border-color: transparent;
     font-size: 1em;
     color: white;
-
+    
   }
 
   #edit {

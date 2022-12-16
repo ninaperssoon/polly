@@ -82,6 +82,8 @@ export default {
     left: 0;
     height: 100%;
     position:fixed;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
  
   button {
@@ -101,7 +103,7 @@ export default {
   }
 
   button:hover {
-    box-shadow: 0 5px 15px #5387b2;
+    box-shadow: 0 5px 15px #4779d6;
     transform: translateY(-2px);
     cursor: pointer;
 
