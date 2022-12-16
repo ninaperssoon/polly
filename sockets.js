@@ -40,15 +40,36 @@ function sockets(io, socket, data) {
     socket.join(pollId);
     socket.emit('newQuestion', data.getQuestion(pollId));
     socket.emit('dataUpdate', data.getAnswers(pollId));
-    socket.emit("getPollRewards", data.getAllRewards(pollId));
-    socket.emit("getPollPunishments", data.getAllPunishments(pollId));
+    socket.emit("getVotedReward", data.getVotedReward(pollId));
+    socket.emit("getVotedPunishment", data.getVotedPunishment(pollId));
+    socket.emit("checkVoting", data.isVoting(pollId));
+    socket.emit('answeringParticipant', data.getAnsParticipant(pollId));
     //io.to(pollId).emit('answeringParticipant', data.getParticipant(pollId));
+  });
+  socket.on('joinObs', function(pollId) {
+    socket.join(pollId);
+    socket.emit('newQuestion', data.getQuestion(pollId));
+    socket.emit('dataUpdate', data.getAnswers(pollId));
+    socket.emit("checkVoting", data.isVoting(pollId));
+    socket.emit('answeringParticipant', data.getAnsParticipant(pollId));
+    socket.emit("getVotingRewards", data.getVotingRewards(pollId));
+    socket.emit("getVotingPunishments", data.getVotingPunishments(pollId));
+    //io.to(pollId).emit('answeringParticipant', data.getParticipant(pollId));
+  });
+  socket.on('joinHostPoll', function(pollId){
+    data.createAnsParticipant(pollId)
+    io.to(pollId).emit('answeringParticipant', data.getAnsParticipant(pollId));
+    socket.emit("isVotingNeeded", data.isVotingNeeded(pollId))
+
   });
 
   socket.on('runQuestion', function(d) {
+    data.resetVotes(d.pollId);
+    data.createAnsParticipant(d.pollId)
     io.to(d.pollId).emit('newQuestion', data.getQuestion(d.pollId, d.questionNumber));
-    io.to(d.pollId).emit('answeringParticipant', data.getParticipant(d.pollId));
+    io.to(d.pollId).emit('answeringParticipant', data.getAnsParticipant(d.pollId));
     io.to(d.pollId).emit('dataUpdate', data.getAnswers(d.pollId));
+
   });
   
   socket.on('submitAnswer', function(d) {
@@ -103,7 +124,7 @@ function sockets(io, socket, data) {
     io.to(d.pollId).emit('participantUpdate', data.getParticipants(d.pollId));
    });
    socket.on('firstParticipant', function(pollId){
-    io.to(pollId).emit('answeringParticipant', data.getParticipant(pollId));
+    io.to(pollId).emit('answeringParticipant', data.getAnsParticipant(pollId));
    } );
 
   socket.on('startedQuiz', function(d) {
@@ -117,6 +138,45 @@ function sockets(io, socket, data) {
     socket.emit("sendQuizzes", data.getQuizzes());
 
   })
+  socket.on("createRewardsVoting", function(pollId){
+    data.createVotingRewards(pollId);
+    io.to(pollId).emit("checkVoting", data.isVoting(pollId))
+    io.to(pollId).emit("getVotingRewards", data.getVotingRewards(pollId));
+  });
+  socket.on("createPunishmentsVoting", function(pollId){
+    data.createVotingPunishments(pollId);
+    io.to(pollId).emit("checkVoting", data.isVoting(pollId))
+    io.to(pollId).emit("getVotingPunishments", data.getVotingPunishments(pollId))
+  });
+
+  socket.on('createVoting', function(d) {
+    data.submitVote(d.pollId, d.vote, d.index);
+    socket.emit("voteUpdate", data.getVotes(d.pollId))
+    
+  });
+  socket.on('submitVoteR', function(d) {
+    data.submitVoteR(d.pollId, d.vote, d.index);
+    io.to(d.pollId).emit("voteUpdateR", data.countVotingR(d.pollId))
+    
+  });
+  socket.on('submitVoteP', function(d) {
+    data.submitVoteP(d.pollId, d.vote, d.index);
+    io.to(d.pollId).emit("voteUpdateP", data.countVotingP(d.pollId))
+    
+  }); 
+  socket.on("votingDoneR", function(pollId){
+    io.to(pollId).emit("getVotedReward", data.getVotedReward(pollId));
+
+  });
+  socket.on("votingDoneP", function(pollId){
+    io.to(pollId).emit("getVotedPunishment", data.getVotedPunishment(pollId));
+  });
+
+   socket.on("votingDone", function(pollId){
+    data.votingDone(pollId);
+    io.to(pollId).emit("checkVoting", data.isVoting(pollId))
+  });
+
   
 }
 

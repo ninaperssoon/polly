@@ -68,7 +68,7 @@
 <script>
 import io from 'socket.io-client';
 import homeButton from '@/components/HomeComponent.vue';
-//import consequence from '@/components/consequence.vue';
+//import consequences from '@/components/consequences.vue';
 import Reward from '@/components/RewardsComponent.vue';
 import Punishment from '@/components/PunishmentsComponent.vue';
 const socket = io();
@@ -78,7 +78,7 @@ export default {
   name: 'CreaterewardView',
   components: {
     homeButton, 
-    //consequence,
+    //consequences,
     Reward,
     Punishment
   },
@@ -88,7 +88,7 @@ export default {
       pollId: "",
       uiLabels: {},
       text: "",
-      //consequences: {r: [], p:[]},
+      consequences: {r: [], p:[]},
       rewards: [],
       punishments: [],
     }

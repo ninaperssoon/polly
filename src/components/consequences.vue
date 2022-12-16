@@ -4,7 +4,7 @@
      
         {{message}}
         <div id="rewardGrid">
-          <input type="text"  class="input" placeholder="Write your reward here..." v-model="reward">
+          <input type="text"  class="input" placeholder="Write your reward here..." v-model="r">
 
 
           
@@ -15,9 +15,27 @@
           <button v-on:click="deleteReward" class="delButton">
             -
           </button>
+
+
       
       </div>
    </div>
+   <div id="consequenceBox" >
+    <div id="inputReward">
+      {{message}}
+      <div id="rewardGrid">
+        <input type="text"  class="input" placeholder="Write your reward here..." v-model="p">
+
+        <button v-on:click="sendPunishment">
+          Send Punishment
+        </button>
+        
+        <button v-on:click="deletePunishment" class="delButton">
+          -
+        </button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -27,13 +45,14 @@
 export default{
 name: 'PunishmentReward',
 props: {
-consequence: Object,
+consequencse: Object,
 message: String,
 },
 
 data: function(){
     return{
-        r : this.reward,
+        r : this.consequences.r,
+        p: this.consequences.p
         
 
     }
@@ -45,7 +64,14 @@ methods:{
     console.log("Sended reward: ", this.r)
   },
     deleteReward: function() {
-      this.rewards.pop("")
+      this.$emit('deleteReward', {r: this.r})
+    },
+    sendPunishment: function (){
+    this.$emit('myPunishment', {p: this.p})
+    console.log("Sended punishment: ", this.p)
+  },
+    deletePunishment: function() {
+      this.$emit('deletePunishment', {p: this.p})
     },
 
 }

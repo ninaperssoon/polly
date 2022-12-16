@@ -7,7 +7,7 @@
       
         <div class="card__face card__face--front">
           
-          <p v-if="(this.question!= null)">{{this.question.q}} </p>
+          <p v-if="(this.question !== null)">{{this.question.q}} </p>
           <p v-else>You have reached the end of the quiz!
             <br>
             <router-link class="button" v-bind:to="('/join/'+lang)">Join another quiz</router-link>
@@ -58,8 +58,8 @@ export default {
       ans: "correct",
       con: "punishment" ,
       name: "",
-      rewards: [],
-      punishments: [],
+      reward: "",
+      punishment: "",
       consequence: "",
       visibleButtons: true,
      
@@ -86,7 +86,6 @@ export default {
       if (this.cardOne !== "start"){
         console.log("här är jag")
         this.cardOne = 'start';
-        this.visibleButtons=true;
         
       }
     }
@@ -98,15 +97,26 @@ export default {
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
+    socket.on("checkVoting",(data) => {
+      console.log("checkVoting")
+      if(data == true){
+        this.visibleButtons=false;
+        console.log("wating for votes")
+      }
+      else{
+        this.visibleButtons=true;
+      } 
+  })
 
-    socket.on("getPollRewards", (data) => {
-      this.rewards = data
-      console.log(this.rewards)
+    socket.on("getVotedReward", (data) => {
+      this.reward = data
+      console.log("Mottagen framröstad r:", this.reward)
     }
     )
-    socket.on("getPollPunishments", (data) =>
-      this.punishments = data
-    )
+    socket.on("getVotedPunishment", (data) =>{
+      this.punishment = data
+      console.log("Mottagen framröstad p:", this.punishment)
+    })
   },
   methods: {
     submitAnswer: function (answer) {
@@ -117,13 +127,13 @@ export default {
 
       if (this.ans == 'correct') {
         this.con = "reward"
-        this.consequence = this.rewards[Math.floor(Math.random() * (this.rewards.length))]
+        this.consequence = this.reward
       }
       else {
-        this.consequence = this.punishments[Math.floor(Math.random() * (this.punishments.length))]
+        this.consequence = this.punishment
       }
       this.visibleButtons=false;
-      console.log(this.rewards)
+      console.log(this.reward)
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer.a, wor: this.ans, con: this.con, consequence: this.consequence})
       
       

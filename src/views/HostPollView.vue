@@ -1,24 +1,25 @@
 <template>
-      <homeButton></homeButton>
-  
-   <h1> you're hosting {{pollId}}  </h1> 
+  <homeButton></homeButton>
+
+  <h1> you're hosting {{ pollId }} </h1>
 
   <div class="container">
     <div class="scene scene--card">
       <div class="card" v-bind:class="{ flipme: cardOne == 'flipped' }">
-      
+
         <div class="card__face card__face--front">
 
-         <p v-if="(this.question != null)">{{this.question.q}} <br> {{this.playingName}} is answering</p> 
+          <p v-if="(this.question !== null)">{{ this.question.q }} <br> {{ this.playingName }} is answering</p>
           <p v-else>You have reached the end of the quiz!
             <br>
-            <router-link class="button" v-bind:to="('/myquizzes/'+lang)"> Host another quiz </router-link>
+            <router-link class="button" v-bind:to="('/myquizzes/' + lang)"> Host another quiz </router-link>
             <router-link class="button" v-bind:to="('/')"> Return to homepage </router-link>
           </p>
 
         </div>
-        <div class="card__face card__face--back" v-bind:class="{ correct: ans == 'correct'}">
-        <p > <span id="correctness"> {{this.ans}}! </span> <br> {{this.playingName}}'s {{this.con}} is {{this.consequence}}</p>
+        <div class="card__face card__face--back" v-bind:class="{ correct: ans == 'correct' }">
+          <p> <span id="correctness"> {{ this.ans }}! </span> <br> {{ this.playingName }}'s {{ this.con }} is
+            {{ this.consequence }}</p>
         </div>
       </div>
       <!-- <div id="buttonContainer">  
@@ -28,13 +29,13 @@
 
     </div>
   </div>
-  <button v-on:click="nextQuestion" >
+  <button v-on:click="nextQuestion">
     Next Question
   </button>
   <button v-on:click="resetQuiz">
     Reset Quiz
   </button>
- 
+
 
 </template>
 
@@ -47,6 +48,7 @@ import homeButton from '@/components/HomeComponent.vue';
 // import punishments from '@/CreaterewardView.vue';
 
 const socket = io();
+
 
 export default {
   name: 'HostPollView',
@@ -66,80 +68,176 @@ export default {
       pollId: "inactive poll",
       cardOne: "start",
       ans: "correct",
-      con: "punishment" ,
+      con: "punishment",
       name: "",
       questionNumber: 1,
       consequence: "",
       playingName: "",
+      votesP: [],
+      votesR: [],
+      punishment: "",
+      reward: "",
+      amountOfVotesR: 0,
+      amountOfVotesP: 0,
+      voteRewards: [],
+      votePunishments: [],
+      allRewards: [],
+      allPunishments: [],
+      waitningVote: {
+        p: true,
+        r: true
+
+      },
+      voteNeeded: {
+        r: "",
+        p: ""
+      },
     }
   },
   created: function () {
     this.pollId = this.$route.params.id
     socket.emit('joinPoll', this.pollId)
-    socket.emit('firstParticipant', this.pollId)
-    socket.on("newQuestion", q =>{
+    socket.emit('joinHostPoll', this.pollId)
+    //socket.emit('firstParticipant', this.pollId)
+    socket.on("isVotingNeeded", (data) => {
+      this.voteNeeded = data
+      console.log("votedNeeded: ", this.voteNeeded)
+      if (this.voteNeeded.r == "yes") {
+        socket.emit("createRewardsVoting", this.pollId)
+        console.log("started voting for Rewards")
+        this.waitningVote.r = false;
+      }
+      if (this.voteNeeded.p == "yes") {
+        socket.emit("createPunishmentsVoting", this.pollId)
+        console.log("started voting for Punishments")
+        this.waitningVote.p = false;
+      }
+    })
+    socket.on("newQuestion", q => {
       this.question = q
-     } )
-    
+    })
+
     this.lang = this.$route.params.lang;
     socket.emit("pageLoaded", this.lang);
     this.name = this.$route.params.name;
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
-    socket.on("flipUpdate", data =>{
+    socket.on("getPollRewards", (data) => {
+      this.allRewards = data
+
+    }
+    )
+    socket.on("getPollPunishments", (data) =>
+      this.allPunishments = data
+    )
+    socket.on("getVotingRewards", (data) => {
+      this.rewards = data
+      console.log(this.rewards)
+    }
+    )
+    socket.on("getVotingPunishments", (data) =>
+      this.votePunishments = data
+    )
+    socket.on("flipUpdate", data => {
       this.ans = data.wor
       this.con = data.con
-      this.consequence= data.consequence
+      this.consequence = data.consequence
       this.cardOne = 'flipped'
     })
-    socket.on("answeringParticipant", (data) =>{
-      this.playingName=data
+    socket.on("answeringParticipant", (data) => {
+      this.playingName = data
       console.log("answeringParticipant:  ", data)
       console.log(this.playingName)
     })
- 
+    socket.on("voteUpdateR", (data) => {
+      console.log("tagit emot meddelande om röstR")
+      if (data == "R-voting done") {
+        socket.emit("votingDoneR", this.pollId)
+        console.log("votingDoneR")
+        this.waitningVote.r = true;
+        if (this.waitningVote.p && this.waitningVote.r == true) {
+          console.log("votingDone")
+          socket.emit("votingDone", this.pollId)
+        }
+      }
+    })
+    socket.on("voteUpdateP", (data) => {
+      console.log("tagit emot meddelande om röstP")
+      if (data == "P-voting done") {
+        socket.emit("votingDoneP", this.pollId)
+        console.log("votingDoneP")
+        this.waitningVote.p = true;
+        if (this.waitningVote.p && this.waitningVote.r == true) {
+          console.log("votingDone")
+          socket.emit("votingDone", this.pollId)
+        }
+      }
+    })
+
   },
   methods: {
     submitAnswer: function (answer) {
-      socket.emit("submitAnswer", {pollId: this.pollId, answer: answer})
-      this.cardOne == 'start' ? (this.cardOne = 'flipped' ) : (this.cardOne = 'start' );
+      socket.emit("submitAnswer", { pollId: this.pollId, answer: answer })
+      this.cardOne == 'start' ? (this.cardOne = 'flipped') : (this.cardOne = 'start');
       if (this.ans == 'correct') {
         this.con = "reward"
       }
       const buttonContainer = document.getElementById('buttonContainer');
       buttonContainer.remove();
     },
-    
-    nextQuestion: function (){
-    
-      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber});
-      this.questionNumber= this.questionNumber +1;
-      if (this.cardOne !== "start"){
+
+    nextQuestion: function () {
+
+      socket.emit("runQuestion", { pollId: this.pollId, questionNumber: this.questionNumber });
+      this.questionNumber = this.questionNumber + 1;
+      if (this.cardOne !== "start") {
         this.cardOne = 'start';
       }
+      
+      if (this.voteNeeded.r == "yes") {
+        socket.emit("createRewardsVoting", this.pollId)
+        console.log("started voting for Rewards")
+        this.waitningVote.r = false;
+      }
+      if (this.voteNeeded.p == "yes") {
+        socket.emit("createPunishmentsVoting", this.pollId)
+        console.log("started voting for Punishments")
+        this.waitningVote.p = false;
+      }
     },
-    resetQuiz: function (){
-      socket.emit("runQuestion", {pollId: this.pollId, questionNumber: 0});
-      this.questionNumber=1;
-      if (this.cardOne !== "start"){
+    resetQuiz: function () {
+      socket.emit("runQuestion", { pollId: this.pollId, questionNumber: 0 });
+      if (this.voteNeeded.r == "yes") {
+        socket.emit("createRewardsVoting", this.pollId)
+        console.log("started voting for Rewards")
+        this.waitningVote.r = false;
+      }
+      if (this.voteNeeded.p == "yes") {
+        socket.emit("createPunishmentsVoting", this.pollId)
+        console.log("started voting for Punishments")
+        this.waitningVote.p = false;
+      }
+     
+      this.questionNumber = 1;
+      if (this.cardOne !== "start") {
         this.cardOne = 'start';
       }
     }
-   
+
   }
 }
 
 </script>
 
 <style scoped>
-
-.container{
+.container {
   height: 40em;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .scene {
   margin-top: -10em;
   width: 25em;
@@ -178,7 +276,7 @@ export default {
 
 .card__face--back {
   background: rgba(226, 60, 60, 0.915);
-  transform: rotateY(180deg); 
+  transform: rotateY(180deg);
 }
 
 /* this style is applied when the card is clicked */
@@ -202,21 +300,20 @@ export default {
 }
 
 .button {
-    color:black;
-    margin: 1em;
-    text-decoration:none; 
-    background-color: rgb(235, 209, 106);
-    padding: 0.5em;
-    border-radius: 3em;
-    border-style: outset;
-    font-size:x-small;
-    border-color: rgba(235, 209, 106, 0.689);
-  }
+  color: black;
+  margin: 1em;
+  text-decoration: none;
+  background-color: rgb(235, 209, 106);
+  padding: 0.5em;
+  border-radius: 3em;
+  border-style: outset;
+  font-size: x-small;
+  border-color: rgba(235, 209, 106, 0.689);
+}
 
-  .button:hover {
-    box-shadow: 0 5px 15px #0079918f;
-    transform: translateY(-2px);
+.button:hover {
+  box-shadow: 0 5px 15px #0079918f;
+  transform: translateY(-2px);
 
-  }
-
+}
 </style>

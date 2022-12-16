@@ -62,6 +62,7 @@ export default {
     this.pollId = this.$route.params.id;
     this.lang = this.$route.params.lang;
     socket.emit("pageLoaded", this.lang);
+    
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
@@ -76,9 +77,7 @@ export default {
       console.log("Skickade frågor från data:",data)
       // this.question=this.questions.q 
       // this.answers=this.questions.a
-    }
-      
-      )
+    })
     
   },
   methods: {

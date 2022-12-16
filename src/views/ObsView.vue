@@ -8,7 +8,7 @@
         <div class="card__face card__face--front">
 
           
-          <p v-if="(this.question != null)"> {{this.playingName}} is answering: <br> {{this.question.q}} </p>
+          <p v-if="(this.question !== null)"> {{this.playingName}} is answering: <br> {{this.question.q}} </p>
           <p v-else>You have reached the end of the quiz!
             <br>
             <router-link class="button" v-bind:to="('/join/'+lang)"> Join another quiz </router-link>
@@ -22,10 +22,14 @@
         <p><span id="correctness"> {{this.ans}}! </span> <br> {{playingName}}'s {{this.con}} is {{this.consequence}} </p>
         </div>
       </div>
-      <!-- <div id="buttonContainer">  
-        <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" v-if="visibleButtons"/>      
+      <div id="buttonContainer">  
+        <!-- <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" v-if="visibleButtons"/>    -->
+        <VotingRewardComponent v-bind:voting="voting" v-on:voteR="submitVoteR" v-if="visibleRewards"/>
+        <VotingPunishmentComponent v-bind:voting="voting" v-on:voteP="submitVoteP" v-if="visiblePunishments"/>
       
-    </div> -->
+        <!-- <VotingComponent v-bind:voting="voting" v-on:voteR="submitVoteR" v-on:voteP="submitVoteP"  v-if="visibleButtons"/> -->
+      
+    </div>
 
     </div>
   </div>
@@ -36,6 +40,9 @@
 <script>
 // @ is an alias to /src
 // import QuestionComponent from '@/components/QuestionComponent.vue';
+// import VotingComponent from '@/components/VotingComponent.vue';
+import VotingRewardComponent from '@/components/VotingRewardComponent.vue';
+import VotingPunishmentComponent from '@/components/VotingPunishmentComponent.vue';
 import io from 'socket.io-client';
 
 const socket = io();
@@ -43,7 +50,10 @@ const socket = io();
 export default {
   name: 'ObsView',
   components: {
-    // QuestionComponent,    
+    // QuestionComponent, 
+    // VotingComponent,
+    VotingRewardComponent,
+    VotingPunishmentComponent,
   },
   data: function () {
     return {
@@ -62,18 +72,25 @@ export default {
       rewards: [],
       punishments: [],
       consequence: "",
-      visibleButtons: true,
+      visibleRewards: true,
+      visiblePunishments: true,
       playingName: "",
+      voting: { r: [],
+                p: []},
     }
   },
   created: function () {
     this.pollId = this.$route.params.id
-    socket.emit('joinPoll', this.pollId)
+    socket.emit('joinObs', this.pollId)
     socket.on("newQuestion", q =>{
       this.question = q
       console.log(this.cardOne)
       if (this.cardOne !== "start"){
         this.cardOne = 'start';       
+      }
+      if(q !== null){
+        this.visiblePunishments=true;
+        this.visibleRewards= true;
       }
     }
     )
@@ -85,14 +102,15 @@ export default {
       this.uiLabels = labels
     })
 
-    socket.on("getPollRewards", (data) => {
-      this.rewards = data
-      console.log(this.rewards)
+    socket.on("getVotingRewards", (data) => {
+      this.voting.r = data
+      console.log("Inkommande rötsning r:", this.voting.r)
     }
     )
-    socket.on("getPollPunishments", (data) =>
-      this.punishments = data
-    )
+    socket.on("getVotingPunishments", (data) =>{
+      this.voting.p = data
+      console.log("Inkommande rötsning p:", this.voting.p)
+     } )
     socket.on("answeringParticipant", (data) =>{
       this.playingName=data
       console.log("answeringParticipant:  ", data)
@@ -111,25 +129,37 @@ export default {
     })
   },
   methods: {
-    submitAnswer: function (answer) {
-      console.log(answer)
-      socket.emit("submitAnswer", {pollId: this.pollId, answer: answer.a})
-      this.cardOne == 'start' ? (this.cardOne = 'flipped' ) : (this.cardOne = 'start' );
-      this.ans = this.question.s[answer.index];
+    // submitAnswer: function (answer) {
+    //   console.log(answer)
+    //   socket.emit("submitAnswer", {pollId: this.pollId, answer: answer.a})
+    //   this.cardOne == 'start' ? (this.cardOne = 'flipped' ) : (this.cardOne = 'start' );
+    //   this.ans = this.question.s[answer.index];
 
-      if (this.ans == 'correct') {
-        this.con = "reward"
-        this.consequence = this.rewards[Math.floor(Math.random() * (this.rewards.length))]
-      }
-      else {
-        this.consequence = this.punishments[Math.floor(Math.random() * (this.punishments.length))]
-      }
-      this.visibleButtons=false;
-      console.log(this.rewards)
+    //   if (this.ans == 'correct') {
+    //     this.con = "reward"
+    //     this.consequence = this.rewards[Math.floor(Math.random() * (this.rewards.length))]
+    //   }
+    //   else {
+    //     this.consequence = this.punishments[Math.floor(Math.random() * (this.punishments.length))]
+    //   }
+    //   this.visibleButtons=false;
+    //   console.log(this.rewards)
+      
+    // },
+
+     submitVoteR: function (vote) {
+      console.log(vote)
+      socket.emit("submitVoteR", {pollId: this.pollId, vote: vote.v, index: vote.index})
+      this.visibleRewards=false;
+     
       
     },
-    
+    submitVoteP: function (vote) {
+      console.log(vote)
+      socket.emit("submitVoteP", {pollId: this.pollId, vote: vote.v, index: vote.index})
+      this.visiblePunishments=false;
   },
+}
 }
 </script>
 
