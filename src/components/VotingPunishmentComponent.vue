@@ -1,6 +1,5 @@
 <template>
 <!-- <p>{{question.q}} {{question.s}}</p> -->
-<p><br> Mellanrum <br> </p>
 <button v-for="(p,index) in voting.p" v-on:click="voteP(p,index)" v-bind:key="p">
   {{ p}}
 </button>
@@ -21,14 +20,14 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
  button {
   color: black;
-    background-color: #FFF1AD;
+    background-color: #F87575;
     border-radius: 1em;
     font-size: 1.2em;
     border-style: outset;
-    border-color: #fff1adbd;
+    border-color: #F87575;
     height: 2em;
  }
 

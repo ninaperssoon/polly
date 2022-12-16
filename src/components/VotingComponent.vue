@@ -3,7 +3,6 @@
 <button v-for="(r,index) in voting.r" v-on:click="voteR(r,index)" v-bind:key="r">
   {{ r }}
 </button>
-<p><br> Mellanrum <br> </p>
 <button v-for="(p,index) in voting.p" v-on:click="voteP(p,index)" v-bind:key="p">
   {{ p }}
 </button>

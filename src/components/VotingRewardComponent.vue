@@ -20,14 +20,14 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
  button {
   color: black;
-    background-color: #FFF1AD;
+    background-color: #A6E9A3;
     border-radius: 1em;
     font-size: 1.2em;
     border-style: outset;
-    border-color: #fff1adbd;
+    border-color: #A6E9A3;
     height: 2em;
  }
 
