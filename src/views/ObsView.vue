@@ -72,31 +72,33 @@ export default {
   },
   created: function () {
     this.pollId = this.$route.params.id
+    this.lang = this.$route.params.lang;
+    this.name = this.$route.params.name;
+
     socket.emit('joinPoll', this.pollId)
+    socket.emit("pageLoaded", this.lang);
+
     socket.on("newQuestion", q =>{
       this.question = q
       console.log(this.cardOne)
       if (this.cardOne !== "start"){
         this.cardOne = 'start';       
       }
-    }
-    )
-    
-    this.lang = this.$route.params.lang;
-    socket.emit("pageLoaded", this.lang);
-    this.name = this.$route.params.name;
-    socket.on("init", (labels) => {
-      this.uiLabels = labels
     })
+
+    socket.on("init", (labels) =>
+      this.uiLabels = labels
+    )
 
     socket.on("getPollRewards", (data) => {
       this.rewards = data
       console.log(this.rewards)
-    }
-    )
+    })
+
     socket.on("getPollPunishments", (data) =>
       this.punishments = data
     )
+
     socket.on("answeringParticipant", (data) =>{
       this.playingName=data
       console.log("answeringParticipant:  ", data)
@@ -105,6 +107,7 @@ export default {
         this.$router.push('/poll/'+this.pollId+'/'+this.lang+'/'+this.name)
       }
     })
+
     socket.on("flipUpdate", data =>{
       this.ans = data.wor === "correct"?this.uiLabels.correct:this.uiLabels.incorrect
       this.con = data.con === "punishment"?this.uiLabels.punishment2:this.uiLabels.reward
@@ -232,14 +235,14 @@ export default {
 .button {
     margin: 1em;
     text-decoration:none; 
-    background-color: #FFF1AD;
+    background-color: #5C95FF;
     padding: 0.5em;
     border-radius: 3em;
     border-style: outset;
     font-size: small;
-    border-color: #FFF1AD;
-    color: #F87575;
-    text-shadow: .05em .05em 0 #4779d6;
+    border-color: #5C95FF;
+    color: #FFF1AD;
+    text-shadow: .05em .05em 0 #0a2049;
   }
 
   .button:hover {

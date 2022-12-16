@@ -127,9 +127,9 @@ Data.prototype.getAllQuestions = function(pollId) {
 Data.prototype.submitAnswer = function(pollId, answer) {
   const poll = this.polls[pollId];
   console.log("answer submitted for ", pollId, answer);
-  if (typeof poll !== 'undefined') {
+  if (typeof poll != 'undefined') {
     let answers = poll.answers[poll.currentQuestion];
-    if (typeof answers !== 'object') {
+    if (typeof answers != 'object') {
       answers = {};
       console.log("ans:"+ poll.questions[0].a);
       console.log("q" + poll.questions[0].q);

@@ -1,9 +1,8 @@
 <template>
-
-
   
   <div class="body">
     <homeButton class="homeButton"></homeButton>
+    <div id="wrapper">
    <h1> {{uiLabels.yourePlaying}}{{pollId}} </h1> 
 
   <div class="container">
@@ -26,10 +25,11 @@
         <p > <span id="correctness"> {{this.ans}}! </span><br> {{uiLabels.Your}} {{this.con}}{{uiLabels.is}}{{this.consequence}} </p>
         </div>
       </div>
-      <div id="buttonContainer">  
+      <div >  
         <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" v-if="visibleButtons"/>      
       
     </div>
+  </div>
 
     </div>
   </div>
@@ -79,8 +79,31 @@ export default {
     this.name = this.$route.params.name;
     this.lang = this.$route.params.lang;
 
-    
     socket.emit('joinPoll', this.pollId)
+    socket.emit("pageLoaded", this.lang);
+
+    socket.on("newQuestion", q =>{
+      this.question = q
+      console.log(this.cardOne)
+      if (this.cardOne !== "start"){
+        console.log("här är jag")
+        this.cardOne = 'start';
+        this.visibleButtons=true; 
+      }
+    })
+
+    socket.on("init", (labels) => {
+      this.uiLabels = labels
+    })
+
+    socket.on("getPollRewards", (data) => {
+      this.rewards = data
+      console.log(this.rewards)
+    })
+    socket.on("getPollPunishments", (data) =>
+      this.punishments = data
+    )
+
     socket.on("answeringParticipant", (data) =>{
       console.log("answeringParticipant:  ", data)
       if (this.name !== data){
@@ -88,18 +111,7 @@ export default {
       }
 
     })
-    socket.on("newQuestion", q =>{
-      
-      this.question = q
-      console.log(this.cardOne)
-      if (this.cardOne !== "start"){
-        console.log("här är jag")
-        this.cardOne = 'start';
-        this.visibleButtons=true;
-        
-      }
-    }
-    )
+
     socket.on("flipUpdate", data =>{
       this.ans = data.wor === "correct"?this.uiLabels.correct:this.uiLabels.incorrect
       this.con = data.con === "punishment"?this.uiLabels.punishment2:this.uiLabels.reward
@@ -108,22 +120,7 @@ export default {
       console.log(this.playingName)
       this.cardOne = 'flipped'
     })
-    
-    
-    socket.emit("pageLoaded", this.lang);
-    
-    socket.on("init", (labels) => {
-      this.uiLabels = labels
-    })
-
-    socket.on("getPollRewards", (data) => {
-      this.rewards = data
-      console.log(this.rewards)
-    }
-    )
-    socket.on("getPollPunishments", (data) =>
-      this.punishments = data
-    )
+ 
   },
   methods: {
     submitAnswer: function (answer) {
@@ -223,12 +220,7 @@ export default {
   transform: rotateY(180deg);
 }
 
-#buttonContainer {
-  margin-top: 1em;
-  display: grid;
-  grid-gap: 0.5em;
-  grid-template-columns: 1fr;
-}
+
 
 .correct {
   background-color:#5C95FF;
@@ -243,14 +235,14 @@ export default {
 .button {
     margin: 1em;
     text-decoration:none; 
-    background-color: #FFF1AD;
+    background-color: #5C95FF;
     padding: 0.5em;
     border-radius: 3em;
     border-style: outset;
     font-size: small;
-    border-color: #FFF1AD;
-    color: #F87575;
-    text-shadow: .05em .05em 0 #4779d6;
+    border-color: #5C95FF;
+    color: #FFF1AD;
+    text-shadow: .05em .05em 0 #0a2049;
   }
 
   .button:hover {
@@ -260,6 +252,9 @@ export default {
 
   }
 
+  #wrapper {
+    margin-top: -3em;
+  }
 
   @import url(https://fonts.googleapis.com/css?family=Righteous);
 
@@ -276,7 +271,7 @@ h1 {
   font-family: 'Righteous', serif;
   font-size: 4em; 
   text-shadow: .08em .08em 0 #4779d6;
-  margin-top: -5em;
+  margin-top: -6em;
   }
 
 #background {

@@ -118,7 +118,7 @@ export default{
       this.i -= 1;
     },
     deleteQuestion: function () {
-      this.$emit('deleteIndex', {q: this.q, a: this.answers, selected: this.selectedAnswers}) //pop = delete/pull'
+      this.$emit('deleteIndex', {q: this.q, a: this.answers, selected: this.selectedAnswers})
       
       },
     sendQuestion: function(){
@@ -209,7 +209,7 @@ export default{
 
 #saveDelete {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   padding-right: 2em;
   margin-top: -2em;

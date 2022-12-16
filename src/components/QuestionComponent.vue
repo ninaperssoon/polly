@@ -1,8 +1,14 @@
 <template>
 <!-- <p>{{question.q}} {{question.s}}</p> -->
-<button v-for="(a,index) in question.a" v-on:click="answer(a,index)" v-bind:key="a">
-  {{ a }}
-</button>
+
+<div id="buttonContainer" v-if="(this.question != null)">    
+ 
+  <button v-for="(a,index) in question.a" v-on:click="answer(a,index)" v-bind:key="a">
+    {{ a }}
+  </button>
+  <br>
+
+</div> 
 </template>
 <script>
 
@@ -38,6 +44,11 @@ export default {
     transform: translateY(-2px);
 
  }
- 
+ #buttonContainer {
+  margin-top: 1em;
+  display: grid;
+  grid-gap: 0.5em;
+  grid-template-columns: 1fr;
+}
 
 </style>
