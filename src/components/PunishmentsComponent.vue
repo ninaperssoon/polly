@@ -6,6 +6,8 @@
      
         <input type="text" v-model="p" class="input" :placeholder="uiLabels.WritePunishmentHere" v-on:keypress="resetSavebutton()" >
         
+        <input type="text" v-model="p" class="input" :placeholder="uiLabels.WritePunishmentHere" v-on:keypress="resetSavebutton()" >
+        
 
         <button v-on:click="sendPunishment" v-bind:style="{'background-color':savedbackground}" id="Savebutton">
           {{uiLabels.Save}}

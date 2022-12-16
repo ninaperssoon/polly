@@ -68,6 +68,7 @@ export default{
   data: function(){
     return{
       selectedAnswers : [...this.question.s],
+      myquestion: "",
       q: this.question.q,
       answers: [...this.question.a],
       
@@ -122,7 +123,7 @@ export default{
       },
     sendQuestion: function(){
       
-      this.$emit('myquestion', {q: this.q, a: this.answers, selected: this.selectedAnswers})
+      this.$emit('myquestion', {q: this.q ,a: this.answers, selected: this.selectedAnswers})
       console.log("Edit: ",this.selectedAnswers)
       this.SavedQuestionColor = "seagreen"
       this.savebutonReset();
