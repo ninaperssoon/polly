@@ -6,8 +6,8 @@
     <!-- <div class="logo"> punishment play: the flip. Also known as "Flip or Flop"  </div> -->
     <div class="J">
     <div><img id="flag" v-bind:src=uiLabels.languageFlag v-on:click="switchLanguage"></div>
-
-    <h1 data-shadow='Flip or Flop!'>Flip or Flop!    <img id="logo" src="../../public/img/fliplogo.png">
+  
+    <h1 >Flip or Flop!    <img id="logo" src="../../public/img/fliplogo.png">
 </h1></div>
     
   </header>
@@ -68,6 +68,10 @@ export default {
 </script>
 <style scoped>
 
+#j{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
   .body {
     margin: 0;
     background-color: #A6E9A3;
@@ -158,7 +162,7 @@ export default {
   }
 
 h1 {
-  display: inline-block;
+ 
   color: white;
   font-family: 'Righteous', serif;
   font-size: 8em; 
@@ -207,13 +211,7 @@ h1 {
     grid-template-columns: 5em 5em 5em 5em;
     grid-template-rows: 4em 4em 6em 4em;  
   }
-  h1 {
-    display: inline-block;
-    color: white;
-    font-family: 'Righteous', serif;
-    font-size: 3em; 
-    text-shadow: .08em .08em 0 #4779d6;
-  }
+  
   #smallerbuttons {
     padding: 0.5em;
     background-color: #FFF1AD;
@@ -223,7 +221,17 @@ h1 {
     margin-left: 1em;
   }
   .J{
+    
     background-color: #F87575;
+    display: grid;
+  grid-template-rows: 2em;
+  grid-auto-rows: 10em;
+
+  }
+  h1{
+
+    background-color: aquamarine;
+    font-size: 4em; 
   }
 
 }
