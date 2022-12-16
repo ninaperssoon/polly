@@ -1,10 +1,17 @@
 <template>
 <!-- <p>{{question.q}} {{question.s}}</p> -->
-<button v-for="(a,index) in question.a" v-on:click="answer(a,index)" v-bind:key="a">
-  {{ a }}
-</button>
+
+<div id="buttonContainer" v-if="(this.question != null)">    
+ 
+  <button v-for="(a,index) in question.a" v-on:click="answer(a,index)" v-bind:key="a">
+    {{ a }}
+  </button>
+  <br>
+
+</div> 
 </template>
 <script>
+
 export default {
   name: 'QuestionComponent',
   props: {
@@ -22,19 +29,24 @@ export default {
 <style>
  button {
   color: black;
-    background-color: #FFF1AD;
+    background-color:#FFF1AD;
     border-radius: 1em;
     font-size: 1.2em;
     border-style: outset;
-    border-color: #fff1adbd;
+    border-color:  #e3cf6b;
     height: 2em;
  }
 
  button:hover{
-  box-shadow: 0 5px 15px #439A86;
+  box-shadow: 0 5px 15px rgb(158, 100, 145);
     transform: translateY(-2px);
 
  }
- 
+ #buttonContainer {
+  margin-top: 1em;
+  display: grid;
+  grid-gap: 0.5em;
+  grid-template-columns: 1fr;
+}
 
 </style>

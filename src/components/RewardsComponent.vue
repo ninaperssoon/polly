@@ -1,25 +1,28 @@
 <template>
-  
+  <div>
   <div id="consequenceBox" >
-    <div id="inputReward">
-      {{message}}
-      <div id="rewardGrid">
-        <input type="text"  class="input" placeholder="Write your reward here..." v-model="r">
+    
+     
+        <input type="text"  class="input" v-model="r" :placeholder= "uiLabels.WriteRewardHere" >
         
-        <button v-on:click="sendRewards">
-           Send Reward
+        <button v-on:click="sendRewards" v-bind:style="{'background-color': savedColor}" id="Savebutton">
+           {{uiLabels.Save}}
         </button>
         
         <button v-on:click="deleteReward" class="delButton">
-          -
+        <img class="button" src="../../public/img/trashcan.png"/>
         </button>
+     
       </div>
-      </div>
-   </div>
+
+    </div>
+ 
 </template>
 
 <script>
 
+import io from 'socket.io-client';
+const socket = io();
 
 
 export default{
@@ -32,15 +35,28 @@ message: String,
 data: function(){
     return{
         r : this.reward,
+        lang: "",
+        uiLabels: {},
+        textett : "",
+        savedColor: ""
         
 
     }
 
 },
+created: function () {
+    this.lang = this.$route.params.lang;
+    socket.emit("pageLoaded", this.lang);
+    socket.on("init", (labels) => {
+      this.uiLabels = labels
+    
+    } )
+  },
 methods:{
   sendRewards: function (){
     this.$emit('myReward', {r: this.r})
     console.log("Sended reward: ", this.r)
+    this.savedColor = "#A6E9A3 ";
   },
     deleteReward: function() {
       this.$emit('deleteReward', {r: this.r})
@@ -52,39 +68,59 @@ methods:{
 </script>
 
 
-<style>
+<style >
 #consequenceBox{
-height: 8em;
+display: grid;
+grid-template-columns: 6fr 1fr 1fr;
+grid-template-rows: 1fr 1fr 1fr;
+column-gap: 0.5em;
+padding: 1em;
+margin: 2em 1em 2em 1em ;
+height:8em
 }
-#inputReward {
-  
-  margin: 2em 3em 2em 3em;
-  padding-right: 2em;
 
+#Savebutton{
+grid-column: 2;
+grid-row: 2;
+width: 4em;
+  height: 2em; 
+  font-size: 1.25em;
+  grid-column: 2; 
+  color:white;
+  font:bolder;
+  background-color: transparent;
+  border-color: White;
+  border-style:solid;
+  border-radius: 0.5em;
+  margin-top:0.2em;
 }
 
-#rewardGrid {
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: 90% 10%;
-  
-
-}
 .input {
+ 
+  grid-column: 1;
+  grid-row: 2;
   border-radius: 1em;
-  width: 100%;
   padding: 12px 20px;
-  margin: 8px 0;
   box-sizing: border-box;
-  display: grid;
+
+ 
 }
 .delButton {
-  width: 2.5em;
-  height: 2.5em;
-  border-radius: 50%;
-  margin-top: 1em;
-
+  background-color: transparent;
+  border-style: solid;
+  border-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-column: 3;
+  grid-row: 2;
 }
+.button{
+  width: 3.25em;
+  height: 3.25em;
+}
+
+
 
 
 </style>

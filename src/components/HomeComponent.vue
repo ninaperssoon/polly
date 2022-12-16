@@ -1,6 +1,6 @@
 <template>
   <div id="homeButton">
-    <router-link to="/"><img id="homePic" src="https://cdn-icons-png.flaticon.com/512/15/15766.png"/></router-link>
+    <router-link to="/"><img id="homePic" src="../../public/img/fliplogo.png"/></router-link>
   </div>
 </template>
 
@@ -17,11 +17,11 @@ export default {
 <style scoped>
 #homeButton {
   margin-right: 100%;
-  padding: 0.4em;
+  padding: 1.5em;
 }
 #homePic {
-  height: 3em;
-  width: 3em;
+  height: 7em;
+
   cursor: pointer;
 }
 

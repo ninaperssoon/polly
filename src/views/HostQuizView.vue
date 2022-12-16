@@ -1,28 +1,32 @@
 <template>
-  <body>
-    <div>
-
-      hosting the quiz: {{id}}
-      <p v-for="participant in participants" v-bind:key = "participant">
-      {{participant}}
-    </p>
-    </div>
-
-    <button v-on:click="startQuiz"> {{uiLabels.startQuiz}}</button>
-
-    
+  <div id="body">
+    <homeButton class="homeButton"></homeButton>
   
-</body>
+    <h1> {{uiLabels.yourehosting}}{{id}} </h1>
+
+      <br>
+
+      <div class="board" v-for="participant in participants" v-bind:key = "participant">
+        <img id="surfboard" src="../../public/img/surfboard.png">
+        <div id="text">{{participant}}</div>
+      </div>
+
+      <button v-on:click="startQuiz"> {{uiLabels.startQuiz}}</button>
+      
+
+    </div>
 
 </template>
 
 <script>
 import io from 'socket.io-client';
+import homeButton from '@/components/HomeComponent.vue';
 const socket = io();
 
 export default {
   name: 'HostQuizView',
   components: {
+    homeButton
     
   },
   data: function () {
@@ -43,7 +47,6 @@ export default {
       this.uiLabels = labels
     })
     socket.on("participantUpdate", (participants) => {
-      console.log
       this.participants = participants
       console.log("efter Update: ", this.participants)
     })
@@ -70,61 +73,56 @@ export default {
 }
 </script>
 <style scoped>
-  body {
-    margin: 0;
-    background-color: #BCD8C1;
-    
-  }
-
-  div {
-    height: 4.78em;
-    line-height: 3em;
-  }
-
-  #host {
-    font-size:1.5em;
-
+  #body {
     margin: auto;
-    margin-top: 2em;
-    height: 20em;
-    width: 30em;
-    background-color: #007991;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 2em;
-    border-style: outset;
-    border-color: #0079918f;
-
+    background-color: #A6E9A3 ;
+    text-align: center;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    position:fixed;
+    overflow: auto;  
   }
 
-  input {
+  
 
-    font-size: 1em;
-    border-radius: 1em;
+ 
+  button {
+    color:black;
+    margin: 1em;
+    margin-top: 4em;
+    text-decoration: none; 
+    background-color:  #FFF1AD;
+    padding: 0.5em;
+    border-radius: 3em;
     border-style: outset;
+    border-color:  #FFF1AD;
+    color: #F87575;
+    font-family: 'Righteous', serif;
+    text-shadow: .05em .05em 0 #4779d6;
+    font-size: 1.5em;
   }
 
-  #startQuiz {
-    font-size:1.5em;
-    background-color: rgb(235, 209, 106);
-    border-color: rgba(235, 209, 106, 0.689);
-    text-decoration: none;
-    height: 2.5em;
-    width: 8em;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    margin-right: 5em;
-    margin-bottom: 5em;
-    border-radius: 2em;
-    border-style: outset;
-    padding-top: 1.5em;
+  button:hover {
+    box-shadow: 0 5px 15px #80B57D;
+    transform: translateY(-2px);
+    cursor: pointer;
+
+  }
+  h1 {
+    margin-top: -3em;
+  display: inline-block;
+  color: white;
+  font-family: 'Righteous', serif;
+  font-size: 4em; 
+  text-shadow: .08em .08em 0 #4779d6;
   }
 
-  #startQuiz:hover {
-    box-shadow: 0 5px 15px #0079918f;
-
+  #text {
+    color: white;
+    font-family: 'Righteous', serif;
+    text-shadow: .08em .08em 0 black;
   }
  
 </style>

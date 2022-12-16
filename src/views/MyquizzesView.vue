@@ -1,33 +1,28 @@
 <template>
-  <body>
-    <homeButton></homeButton>
-    <section>
-      <div>
+  <div id="body">
+    <homeButton class="homeButton"></homeButton>
+    
       <h1>{{uiLabels.myQuizzes}}</h1>
-      </div>
+  
+      <div class="myQuizzes" v-for="(contain, id) in quizzes" v-bind:key="id">{{id}} 
 
-        <div id="myQuizzes" v-for="(contain, id) in quizzes" v-bind:key="id">{{id}} 
-          <router-link class="button" v-bind:to="('/create/'+lang+'/'+id)"> Edit </router-link>
-          <router-link class="button" v-bind:to="('/host/'+id+'/'+lang)"> Host this quiz </router-link>
+          <router-link class="button" v-bind:to="('/host/'+id+'/'+lang)"> {{uiLabels.Host}} </router-link>
 
+          <button class="button" v-on:click="edit" >
+            <img id="edit"  src="../../public/img/edit.png"/>
+          </button>
+
+          <button class="button"  v-on:click="deletequiz" >
+            <img id="delete" src="../../public/img/trashcan.png"/>
+          </button>
           
-        
-        
-        </div>
-
-      
-
-        <!-- <router-link  v-bind:to="('/create/'+lang+'/'+id)">{{uiLabels.joinQuiz}}</router-link> -->
-
-
-    </section>
-
-    <div>       
-         <router-link id="create" v-bind:to="('/create/'+lang+'/'+id)">{{uiLabels.createQuiz}}</router-link>
       </div>
-      <div></div>
-  </body>
 
+      <div id="createDiv">       
+        <router-link id="create" v-bind:to="('/create/'+lang)">{{uiLabels.createQuiz}}</router-link>
+      </div> 
+
+  </div>
 
 </template>
 
@@ -60,68 +55,105 @@ export default {
       this.uiLabels = labels
     })
   },
+  methods: {
+    edit: function () {
+      this.$router.push('/create/'+this.lang+'/'+this.id)
+    },
+  }
  
 }
 </script>
 <style scoped>
-  body {
-    margin: auto;
-    background-color: #BCD8C1;
-   
+  #body {
+    background-color: #A6E9A3 ;
+    width: 100%;
+    height: 100%;
+    position:fixed;
+    overflow: auto;   
   }
-  div {
-    margin: auto;
-    border-radius: 2em;
-    height: 3.17em;
-    
-  }
-  section {
-    height:35em;
-  }
-
-  #myQuizzes {
-    margin-top: 2em;
-    padding: 2em;
-    height: 2em;
-    width: 40em;
-    background-color:#0079918f;
-
-  }
-  
 
   #create {
-    color:black;
-    margin-top: 100em;
     padding: 1em;
-    height: 0.8em; 
-    width: 10em;
-    font-size: 2em;
+    font-size: 1.5em;
     border-style: outset;
     background-color: #FFF1AD;
     border-color: #fff1adbd;
     text-decoration: none; 
     border-radius: 2em;
+    color: #F87575;
+    font-family: 'Righteous', serif;
+    text-shadow: .05em .05em 0 #4779d6;
   }
 
   #create:hover {
-    box-shadow: 0 5px 15px #439A86;
-
+    box-shadow: 0 5px 15px #80B57D;
+    transform: translateY(-2px);
   }
-  .button {
-    color:black;
-    margin: 1em;
-    text-decoration: none; 
-    background-color: rgb(235, 209, 106);
-    padding: 0.5em;
-    border-radius: 3em;
-    border-style: outset;
-    border-color: rgba(235, 209, 106, 0.689);
-  }
+ 
 
   .button:hover {
-    box-shadow: 0 5px 15px #0079918f;
     transform: translateY(-2px);
+  }
 
+
+  @import url(https://fonts.googleapis.com/css?family=Righteous);
+
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  }
+
+h1 {
+  margin-top:-5em;
+  display: inline-block;
+  color: white;
+  font-family: 'Righteous', serif;
+  font-size: 3em; 
+  text-shadow: .08em .08em 0 #4779d6;
   }
   
+
+#createDiv {
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+.myQuizzes {
+    margin: auto;
+    padding: 2em;
+    padding-bottom: 2em;
+    width: 30em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    background-color:#5C95FF;
+    display: grid;
+    grid-template-columns: 15em 4.2em 3em 3em;
+    grid-template-rows: 1em;
+    place-items: center start;
+    border-style:outset;
+    border-color: #5C95FF;
+    border-radius: 2em;
+    color: #FFF1AD;
+    font-weight: bold;
+    font-size:1.5em;
+  }
+  .button {
+    margin: 1em;
+    text-decoration: none; 
+    background-color: transparent;
+    padding: 1.2em;
+    border-color: transparent;
+    font-size: 1em;
+    color: white;
+
+  }
+
+  #edit {
+    height: 2em;
+  }
+
+  #delete {
+    height: 2.5em;
+  }
 </style>

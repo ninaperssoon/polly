@@ -1,10 +1,15 @@
 <template>
-  <homeButton></homeButton>
-  
 
+  <div id="myBackground">
+
+    <homeButton class="homeButton"></homeButton>
+  
   <div class="wrapper">
- 
+
     <div class="innerWrapper"  >
+      
+      <h1>{{uiLabels.rewards}}</h1>
+      <br>
 
       <Reward  v-for=" (reward, index) in rewards"
       v-bind:reward= "reward"
@@ -14,13 +19,16 @@
       message ="reward"
       class="reward"/>
 
-      <button v-on:click="newReward" class="addButton">
-        +
-      </button> Add Reward
+      <button v-on:click="newReward" class="addButton" id="addButtonReward">
+        + {{uiLabels.AddReward}}
+      </button> 
     </div>
 
 
     <div  class="innerWrapper" >
+      <h1>{{uiLabels.punishments}}</h1>
+      <br>
+      
       <Punishment v-for=" (punishment, index) in punishments"
       v-bind:punishment = "punishment"
       v-bind:key="punishment"
@@ -29,38 +37,37 @@
       message = "punishment"
       class="punishment" />
     
-
-    
-      <button v-on:click="newPunishment" class="addButton">
-        +
-      </button> Add Punishment
+      <button v-on:click="newPunishment" class="addButton" id="addButtonPunishment">
+        + {{uiLabels.AddPunishment}}
+      </button> 
 
       
     </div>
   </div>
-  <div id="backButton">
-    
-    <router-link v-bind:to="'/create/'+lang"><img id="backPic" src="https://freesvg.org/img/pitr_green_arrows_set_4.png"/></router-link>
-    </div>
 
-    <div id="nextButton">
-      <router-link v-bind:to="'/host/'+pollId+'/'+lang" > 
+
+    <div class="nextButton">
+      <div id="testButton">
+        <router-link v-bind:to="'/host/'+pollId+'/'+lang" > 
         <button id="submitButton" v-on:click="sendPollIdToH()">
-      Test Quiz
+          {{uiLabels.TestQuiz}}
       </button > </router-link>
       </div>
 
 
-
-    <div id="nextButton">
-    <router-link v-bind:to="'/start/'+lang"> 
-      <button id="submitButton" >
-      Save and Exit
-      </button> 
-    </router-link>
+      <div id="saveButton">
+        <router-link v-bind:to="'/start/'+lang"> 
+        <button id="submitButton" >
+        {{uiLabels.SaveandExit}}
+      </button> </router-link>
+    </div>
+  </div>
+  <div id="backButton">
+    
+    <router-link v-bind:to="('/create/'+lang+'/'+pollId)"><img class="flipPic" src="../../public/img/leftfliparrow.png"/></router-link>
     </div>
 
-    
+  </div>
 
    
 </template>
@@ -100,6 +107,13 @@ export default {
 
     this.lang = this.$route.params.lang;
     socket.emit("pageLoaded", this.lang);
+    socket.emit("joinCreatereward", this.pollId);
+    socket.on("getRewards", (data) => {
+      this.rewards = data
+    })
+    socket.on("getPunishments", (data) => {
+      this.punishments = data
+    })
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
@@ -162,20 +176,44 @@ export default {
 </script>
 
 <style scoped>
-.pollLink {
-  margin: 1em 2em 1em 70em;
-  background-color:coral;
-  border-radius: 2em;
-  padding: 2em;
+
+h1{
+display: inline-block;
+  color: white;
+  font-family: 'Righteous', serif;
+  font-size: 4em; 
+  text-shadow: .08em .08em 0 #4779d6;
+}
+  
+#myBackground{
+  margin: auto;
+    background-color: #A6E9A3 ;
+    text-align: center;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    position:fixed;
+    overflow: auto;
 
 }
 
-#pollButton {
-  margin-top: 1em;
-  border-radius: 1em;
+#addButtonPunishment{
+  background-color: #F87575;
+    border-color: #F87575;
+    
+
 }
+
+#addButtonReward{
+  background-color:  #5C95FF;
+  border-color:  #5C95FF;
+    
+
+}
+
 button:hover {
-  background-color:lightgreen;
+  background-color: lightgreen;
   cursor:pointer;
 }
 
@@ -183,81 +221,59 @@ button:hover {
   display: grid;
   grid-gap: 10px;
   grid-template-columns: 1fr 1fr;
-  margin-top: 5em;
+  margin-top:-5em;
+}
+
+.innerWrapper {
+grid-template-columns: 1fr;
+padding: 1em;
 
 }
-.box{
-   border-radius: 2em;
-  padding: 1em;
 
+.nextButton {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 1em;
 }
+
+#testButton {
+  grid-column: 1;
+  margin-left: 70%;
+}
+#saveButton {
+  grid-column: 2;
+  margin-right: 70%;
+}
+
+
 .reward{
 grid-column: 1;
 grid-row: auto;
-background-color: greenyellow;
-border-radius: 1em;
-
+background-color: #5C95FF;
+border-radius: 2em;
 
 }
 .punishment{
 grid-column: 2;
 grid-row: auto;
-background-color: red;
-border-radius: 1em; 
-
-
+background-color: #F87575;;
+border-radius: 2em; 
 
 }
 
-.pollLink {
-  margin: 1em 2em 1em 70em;
-  background-color:coral;
-  border-radius: 2em;
-  padding: 2em;
-
-}
-
-
- 
-
-
-
-.deleteB:hover {
-  background-color: salmon;
-  cursor:pointer;
-}
-
-
-
-
-
-
-.innerWrapper {
-grid-template-columns: 1fr;
-padding: 3em;
-row-gap: 1 em;
-
-}
 
 .addButton {
-  width: 3.5em;
-  height: 3.5em;
-  border-radius: 50%;
-  margin: 18px 0;
+  padding: 0.5em;
+  font-size: 1.5em;
+  border-radius: 3em;
+  color: #FFF1AD;
+  font-weight: bold;
+  width: 10em;
+    
 }
-
-.delButton:hover {
-  background-color:salmon;
-
-}
-
-
-
-
 
 
 #backButton{
-  
   margin-right: 85%;
   padding: 20 em;
   
@@ -274,21 +290,23 @@ row-gap: 1 em;
   width: 3em;
   cursor: pointer;
 }
-#nextButton{
-  
-  margin-left: 85%;
-  padding: 20 em;
-  
-}
+
 #submitButton{
-  background-color: antiquewhite;
-  color: black;
-  
 
-}
-#submitButton:hover{
-  background-color: lightgreen;
+    padding: 0.5em;
+    background-color: #FFF1AD;
+    border-color: #fff1adbd;
+    color: #F87575;
+    font-size: 1.5em;
+    width: 8em;
+    border-radius: 3em;
+    font-weight: bolder;
+    
 }
 
+button:hover {
+  box-shadow: 0 5px 15px #439A86;
+    transform: translateY(-2px);
+}
 
 </style>

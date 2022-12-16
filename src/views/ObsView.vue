@@ -1,5 +1,7 @@
 <template>
-   <h1> {{uiLabels.yourePlaying}} {{pollId}} Alla hamnar här </h1> 
+  <div class="body">
+    <homeButton class="homeButton"></homeButton>
+   <h1> {{uiLabels.yourePlaying}}{{pollId}}</h1> 
 
   <div class="container">
     <div class="scene scene--card">
@@ -8,18 +10,18 @@
         <div class="card__face card__face--front">
 
           
-          <p v-if="(this.question !== null)"> {{this.playingName}} is answering: <br> {{this.question.q}} </p>
-          <p v-else>You have reached the end of the quiz!
-            <br>
-            <router-link class="button" v-bind:to="('/join/'+lang)"> Join another quiz </router-link>
-            <router-link class="button" v-bind:to="('/')"> Return to homepage </router-link>
+          <p v-if="(this.question !== null)"> {{this.playingName}} {{uiLabels.IsAswering}} <br> {{this.question.q}} </p>
+          <p v-else>{{uiLabels.ReachedEndQuiz}}
+            <br><br>
+            <router-link class="button" v-bind:to="('/join/'+lang)"> {{uiLabels.joinanotherquiz}} </router-link>
+            <router-link class="button" v-bind:to="('/')"> {{uiLabels.Returntohomepage}} </router-link>
 
           </p>
           
 
         </div>
-        <div class="card__face card__face--back" v-bind:class="{ correct: ans == 'correct'}">
-        <p><span id="correctness"> {{this.ans}}! </span> <br> {{playingName}}'s {{this.con}} is {{this.consequence}} </p>
+        <div class="card__face card__face--back" v-bind:class="{ correct: ans == uiLabels.correct}">
+        <p><span id="correctness"> {{this.ans}}! </span> <br> {{playingName}}{{uiLabels.s}} {{this.con}} {{uiLabels.is}} {{this.consequence}} </p>
         </div>
       </div>
       <div id="buttonContainer">  
@@ -34,7 +36,7 @@
     </div>
   </div>
  
-
+</div>
 </template>
 
 <script>
@@ -44,12 +46,14 @@
 import VotingRewardComponent from '@/components/VotingRewardComponent.vue';
 import VotingPunishmentComponent from '@/components/VotingPunishmentComponent.vue';
 import io from 'socket.io-client';
+import homeButton from '@/components/HomeComponent.vue';
 
 const socket = io();
 
 export default {
   name: 'ObsView',
   components: {
+    homeButton,
     // QuestionComponent, 
     // VotingComponent,
     VotingRewardComponent,
@@ -81,7 +85,12 @@ export default {
   },
   created: function () {
     this.pollId = this.$route.params.id
+    this.lang = this.$route.params.lang;
+    this.name = this.$route.params.name;
+
     socket.emit('joinObs', this.pollId)
+    socket.emit("pageLoaded", this.lang);
+
     socket.on("newQuestion", q =>{
       this.question = q
       console.log(this.cardOne)
@@ -92,15 +101,14 @@ export default {
         this.visiblePunishments=true;
         this.visibleRewards= true;
       }
-    }
-    )
+    })
     
     this.lang = this.$route.params.lang;
     socket.emit("pageLoaded", this.lang);
     this.name = this.$route.params.name;
     socket.on("init", (labels) => {
       this.uiLabels = labels
-    })
+  })
 
     socket.on("getVotingRewards", (data) => {
       this.voting.r = data
@@ -119,9 +127,10 @@ export default {
         this.$router.push('/poll/'+this.pollId+'/'+this.lang+'/'+this.name)
       }
     })
+
     socket.on("flipUpdate", data =>{
-      this.ans = data.wor
-      this.con = data.con
+      this.ans = data.wor === "correct"?this.uiLabels.correct:this.uiLabels.incorrect
+      this.con = data.con === "punishment"?this.uiLabels.punishment2:this.uiLabels.reward
       this.consequence= data.consequence
       console.log(this.consequence)
       console.log(this.playingName)
@@ -165,6 +174,18 @@ export default {
 
 <style scoped>
 
+.body {
+  /* background-color: #A6E9A3; */
+  height: 100%;
+  width: 100%;
+  position: fixed;
+
+  background-image: url("https://images.template.net/104478/pink-ocean-background-pdlb9.jpg?fbclid=IwAR1f5-_NQThWwcxCzlH0jRBLgD_Zh6ER41Kue--nu1mQAA5ybx0MyEwq3E4");
+  background-repeat:no-repeat;
+  background-size: cover;
+  overflow: auto;
+
+}
 .container{
   height: 40em;
   display: flex;
@@ -202,15 +223,24 @@ export default {
   align-items: center;
   justify-content: center;
   text-align: center;
+  font-weight: bold;
+  border-style:outset;
 }
 
 .card__face--front {
-  background: #007991;
+  background: #FFF1AD;
+  color: black;
+  font-weight: bold;
+  padding: 5%;
+  border-color: #f9e998;
+  box-shadow: 0 5px 15px #c0ac48;
 }
 
 .card__face--back {
-  background: rgba(226, 60, 60, 0.915);
+  background: #F87575;
   transform: rotateY(180deg); 
+  border-color: #f76868;
+  box-shadow: 0 5px 15px #bb3939 ;
 }
 
 /* this style is applied when the card is clicked */
@@ -226,7 +256,9 @@ export default {
 }
 
 .correct {
-  background-color: rgb(63, 194, 63);
+  background-color: #5C95FF;
+  border-color: #4c88f8;
+  box-shadow: 0 5px 15px #2453a9 ;
 }
 
 #correctness {
@@ -234,21 +266,40 @@ export default {
 }
 
 .button {
-    color:black;
     margin: 1em;
     text-decoration:none; 
-    background-color: rgb(235, 209, 106);
+    background-color: #5C95FF;
     padding: 0.5em;
     border-radius: 3em;
     border-style: outset;
-    font-size:x-small;
-    border-color: rgba(235, 209, 106, 0.689);
+    font-size: small;
+    border-color: #5C95FF;
+    color: #FFF1AD;
+    text-shadow: .05em .05em 0 #0a2049;
   }
 
   .button:hover {
     box-shadow: 0 5px 15px #0079918f;
     transform: translateY(-2px);
 
+  }
+
+  @import url(https://fonts.googleapis.com/css?family=Righteous);
+
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  }
+
+h1 {
+  display: inline-block;
+  color: white;
+  font-family: 'Righteous', serif;
+  font-size: 4em; 
+  text-shadow: .08em .08em 0 #4779d6;
+  margin-top: -5em;
   }
 
 </style>

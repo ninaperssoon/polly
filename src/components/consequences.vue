@@ -45,7 +45,7 @@
 export default{
 name: 'PunishmentReward',
 props: {
-consequencse: Object,
+consequencses: Object,
 message: String,
 },
 

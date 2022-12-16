@@ -29,11 +29,14 @@ Data.prototype.createPoll = function(pollId, lang="en") {
   if (typeof this.polls[pollId] === "undefined") {
     let poll = {};
     poll.lang = lang;  
-    poll.questions = [];
+    poll.questions = [{ q: "",
+                        a: ["",""],
+                        s:[]
+                      }];
     poll.answers = [];
     poll.currentQuestion = 0;
-    poll.rewards= [];
-    poll.punishments= [];              
+    poll.rewards= [""];
+    poll.punishments= [""];              
     this.polls[pollId] = poll;
     console.log("poll created", pollId, poll);
     poll.participants=[];
@@ -78,6 +81,7 @@ Data.prototype.deleteQuestion = function(pollId, index, q) {
   }
   console.log("(deleteQuestion)   lista efter delete: ", this.polls[pollId].questions);
 }
+
 
 Data.prototype.editQuestion = function(pollId, index, newQuestion) {
   const poll = this.polls[pollId];
@@ -300,8 +304,17 @@ Data.prototype.getQuizzes = function () {
   }
 
 Data.prototype.getFlip = function (wor, con, consequence) {
-  return {wor: wor, con: con, consequence: consequence}
+    return {wor: wor, con: con, consequence: consequence}
   }
+
+Data.prototype.resetParticipants = function (pollId) {
+  const poll = this.polls[pollId];
+  if (typeof poll !== 'undefined') {
+    poll.participants = []
+  }
+}
+
+
 
 Data.prototype.createVotingPunishments = function(pollId) {
   const poll = this.polls[pollId];

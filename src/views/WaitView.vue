@@ -1,15 +1,19 @@
 <template>
-  <body>
+  <div id="body">
     <div>
-      waiting for host to start
-      other players:
-      <p v-for="participant in participants" v-bind:key = "participant">
-      {{participant}}
-    </p>
+      <h1>{{uiLabels.Waitingforhosttostart}}</h1>
+
     </div>
+      
+      <div class="board" v-for="participant in participants" v-bind:key = "participant">
+        <img id="surfboard" src="../../public/img/surfboard.png">
+        <div id="text">{{participant}}</div>
+      </div>
+
+ 
     
   
-</body>
+  </div>
 
 </template>
 
@@ -35,17 +39,16 @@ export default {
     this.lang = this.$route.params.lang;
     this.id = this.$route.params.id;
     this.name = this.$route.params.name;
+    
     socket.emit("pageLoaded", this.lang);
     socket.emit("joinPoll", this.id);
-  
+    socket.emit("joinWaiting", this.id);
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
     socket.on("participantUpdate", (participants) => {
       this.participants = participants
     })
-
-    
     socket.on("quizUpdate", () => {
       this.$router.push('/obs/'+this.id+'/'+this.lang+'/'+this.name)
     })
@@ -63,16 +66,18 @@ export default {
 }
 </script>
 <style scoped>
-  body {
-    margin: 0;
-    background-color: #BCD8C1;
-    
+  #body {
+    margin: auto;
+    background-color: #A6E9A3 ;
+    text-align: center;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    position:fixed;
+    overflow: auto;  
   }
 
-  div {
-    height: 4.78em;
-    line-height: 3em;
-  }
 
   #host {
     font-size:1.5em;
@@ -119,5 +124,19 @@ export default {
     box-shadow: 0 5px 15px #0079918f;
 
   }
+  h1 {
+  display: inline-block;
+  color: white;
+  font-family: 'Righteous', serif;
+  font-size: 4em; 
+  text-shadow: .08em .08em 0 #4779d6;
+  }
+
+  #text {
+    color: white;
+    font-family: 'Righteous', serif;
+    text-shadow: .08em .08em 0 black;
+  }
+  
  
 </style>

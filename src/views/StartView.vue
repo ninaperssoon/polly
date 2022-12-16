@@ -1,18 +1,18 @@
 <template>
-  <body>
-    <ResponsiveNav v-bind:hideNav="hideNav" id="navDiv">
-    <img id="flag" v-bind:src=uiLabels.languageFlag v-on:click="switchLanguage">
-  </ResponsiveNav>
+  <div class="body">
+  
   <header>
-    <div v-bind:class="['hamburger', {'close': !hideNav}]" 
-         v-on:click="toggleNav">
-    </div>
+   
     <!-- <div class="logo"> punishment play: the flip. Also known as "Flip or Flop"  </div> -->
-    <h1 data-shadow='Flip or Flop!'>Flip or Flop!</h1>
-
+    <div class="J">
+    <div><img id="flag" v-bind:src=uiLabels.languageFlag v-on:click="switchLanguage"></div>
+  
+    <h1 >Flip or Flop!    <img id="logo" src="../../public/img/fliplogo.png">
+</h1></div>
+    
   </header>
   
-  <section>
+  
     <div class="wrapper">
   
       <router-link class="startchoice a" v-bind:to="'/join/'+lang">{{uiLabels.joinQuiz}}</router-link>
@@ -24,23 +24,18 @@
       <router-link class="startchoice d" id="smallerbuttons" v-bind:to="'/myquizzes/'+lang"> {{uiLabels.myQuizzes}}</router-link>
    
     </div>
-  </section>
-<footer> 
-  
-</footer>
-</body>
+  </div>
 
 </template>
 
 <script>
-import ResponsiveNav from '@/components/ResponsiveNav.vue';
 import io from 'socket.io-client';
 const socket = io();
 
 export default {
   name: 'StartView',
   components: {
-    ResponsiveNav,
+ 
   },
   data: function () {
     return {
@@ -73,54 +68,31 @@ export default {
 </script>
 <style scoped>
 
-  body {
+#j{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+  .body {
     margin: 0;
     background-color: #A6E9A3;
     font-family: 'Courier New', Courier, monospace;
-  }
-  header {
+    text-align: center;
+    min-height: 100%;
+    min-width: 1024px;
     width: 100%;
-    display: grid;
-    grid-template-columns: 2em auto;
-
-  }
-  footer {
-    height: 8.6em;
-    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
   }
 
-  .logo {
-    color: black;
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    font-size: 2.5rem;
-    padding-top:0.2em;
-  }
-  .logo img {
-    height:2.5rem;
-    vertical-align: bottom;
-    margin-right: 0.5rem; 
-  }
-  .hamburger {
-    width:1em;
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    padding:0.5rem;
-    top:0;
-    left:0;
-    height: 2rem;
-    cursor: pointer;
-    font-size: 1.5rem;
-  }
   .wrapper {
-    margin-top: 7em;
+    margin-top: 3em;
     margin-left: 12.5em;
     display: grid;
     grid-gap: 1.2em;
     grid-template-columns: 15em 15em 15em 15em;
-    grid-template-rows: 5em 5em 5em 5em;
-    
+    grid-template-rows: 5em 5em 5em 5em;  
   }
   .startchoice {
     text-decoration: none; 
@@ -129,17 +101,14 @@ export default {
     border-radius: 3em;
     font-size: 2em;
     border-style: outset;
-    border-color: #0079918f;
-
+    border-color: #5C95FF;
     color: #FFF1AD;
     font-family: 'Righteous', serif;
     text-shadow: .05em .05em 0 rgb(77, 94, 179);
   }
   .startchoice:hover {
-    box-shadow: 0 5px 15px #439A86;
+    box-shadow: 0 5px 15px #80B57D;
     transform: translateY(-2px);
-
-
   }
   .a {
     grid-column-start: 1 ;
@@ -166,41 +135,22 @@ export default {
   }
 
   #smallerbuttons {
-    padding: 0.8em;
+    padding-top: 0.6em;
     background-color: #FFF1AD;
     border-color: #fff1adbd;
     color: #F87575;
   }
-
-@media screen and (max-width:50em) {
-  .logo {
-    font-size: 5vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .hamburger::before {
-    content: "☰";
-  }
-  .close::before {
-    content: "✕";
-  }
-  .hide {
-    left:-12em;
-  }
-}
-#flag {
-  margin: 2em;
+  #flag {
   width: 3em;
   height: 3em;
   cursor: pointer;
+  left: -43em;
+  margin-top: 1em;
 }
 
 #navDiv {
   background-color: #A6E9A3;
 }
-
-
 
 @import url(https://fonts.googleapis.com/css?family=Righteous);
 
@@ -211,27 +161,81 @@ export default {
   position: relative;
   }
 
-html, body {
-  height: 100%;
-  }
-  body {
-    text-align: center;
-    }
-  body:before {
-    content: '';
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 0;
-    height: 100%;
-    }
-
 h1 {
-  display: inline-block;
+ 
   color: white;
   font-family: 'Righteous', serif;
   font-size: 8em; 
   text-shadow: .08em .08em 0 #4779d6;
   }
+
+  #logo{
+    height: 1.2em;
+    padding-top: 0.1em;
+  }
+
+@media screen and (max-width:50em) {
+  body {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    overflow: auto;
+  }
+  #flag {
+    width: 3em;
+    height: 3em;
+    cursor: pointer;
+
+}
+
+  .startchoice {
+    text-decoration: none; 
+    padding: 1em;
+    background-color: #5C95FF;
+    border-radius: 1.5em;
+    font-size: 2em;
+    border-style: outset;
+    border-color: #5C95FF;
+    color: #FFF1AD;
+    font-family: 'Righteous', serif;
+    text-shadow: .05em .05em 0 rgb(77, 94, 179);
+    height: 4em;
+    width: 5em;
+  }
+  
+  .wrapper {
+    margin-top: 0em;
+    margin-left: 1em;
+    display: grid;
+    grid-gap: 0.6em;
+    grid-template-columns: 5em 5em 5em 5em;
+    grid-template-rows: 4em 4em 6em 4em;  
+  }
+  
+  #smallerbuttons {
+    padding: 0.5em;
+    background-color: #FFF1AD;
+    border-color: #fff1adbd;
+    color: #F87575;
+    font-size: 1.5em;
+    margin-left: 1em;
+  }
+  .J{
+    
+    background-color: #F87575;
+    display: grid;
+  grid-template-rows: 2em;
+  grid-auto-rows: 10em;
+
+  }
+  h1{
+
+    background-color: aquamarine;
+    font-size: 4em; 
+  }
+
+}
+
 
 
 </style>

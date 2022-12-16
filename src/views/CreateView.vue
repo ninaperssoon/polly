@@ -1,9 +1,11 @@
 <template>
-  <homeButton></homeButton>
+
+<div class="body">
+<homeButton class="homeButton"></homeButton>
  
 
 
- <div>
+ <div id="backgroundDiv">
    <Question v-for="(question,index) in questions" 
    v-bind:question="question"
   v-bind:key="question.q"
@@ -12,20 +14,24 @@
   v-on:deleteAnswer="editQuestion($event, index)"
   :questionNumber = index > </Question>
  
-  <button v-on:click="newQuestion">
-        Add question
-  </button>
-
+  
+<div id="wrapper">
   <div id="backButton">
     
-    <router-link v-bind:to="'/start/'+lang"><img id="backPic" src="https://freesvg.org/img/pitr_green_arrows_set_4.png"/></router-link>
+    <router-link v-bind:to="'/start/'+lang"><img class="flipPic" src="../../public/img/leftfliparrow.png"/></router-link>
     </div>
+
+    <button id="addButton" v-on:click="newQuestion">
+    {{uiLabels.AddQuestion}}
+  </button>
 
 <div id="nextButton">
     
-  <router-link v-bind:to="'/createq/'+pollId+'/'+lang"><img id="nextPic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcMPs6LqvZihgtDeHWZ95Q0mEyUCRo5H5aJA&usqp=CAU"/></router-link>
+  <router-link v-bind:to="'/createq/'+pollId+'/'+lang"><img class="flipPic" src="../../public/img/rightfliparrow.png"/></router-link>
   </div>
+</div>
   
+</div>
 </div>
 
 
@@ -61,16 +67,17 @@ export default {
   created: function () {
     this.pollId = this.$route.params.id;
     this.lang = this.$route.params.lang;
-    socket.emit("pageLoaded", this.lang);
     
+    socket.emit("pageLoaded", this.lang);
+    socket.emit("joinCreate", this.pollId);
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
     socket.on("dataUpdate", (data) =>
       this.data = data
     )
-    socket.on("pollCreated", (data) =>
-      this.data = data
+    socket.on("getPoll", (data) =>
+      this.questions = data,
     )
     socket.on("updateQuestions", (data) =>{
       this.questions= data
@@ -142,6 +149,24 @@ export default {
 </script>
 
 <style scoped>
+.body { margin: auto;
+    background-color: #A6E9A3 ;
+    text-align: center;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    position:fixed;
+    overflow: auto;   
+
+}
+
+
+
+#backgroundDiv{
+  padding: 5em;
+  margin-top: -7em;
+}
 button:hover {
   background-color:lightgreen;
   cursor:pointer;
@@ -158,13 +183,7 @@ button:hover {
 
 }*/
 
-.pollLink {
-  margin: 1em 2em 1em 70em;
-  background-color:coral;
-  border-radius: 2em;
-  padding: 2em;
 
-}
 
 #pollButton {
   margin-top: 1em;
@@ -172,38 +191,50 @@ button:hover {
 }
 
 #deleteAnswerButton {
-  height: 2em;
-  width: 2em;
+  
   grid-column: 2;
-  grid-row: 2;
+  
   
 }
 
+#addButton {
+    margin: 1em;
+    text-decoration: none; 
+    background-color:#FFF1AD;
+    padding: 0.5em;
+    border-radius: 2em;
+    border-style: outset;
+    border-color: #FFF1AD;
+
+    color: #F87575;
+    font-size:1.5em;
+    bottom: 0;
+    right: 0;
+    border-style: outset;
+    font-family: 'Righteous', serif;
+    text-shadow: .05em .05em 0 #4779d6;
+    grid-column: 2;
+}
+#addButton:hover {
+    box-shadow: 0 5px 15px #439A86;
+  }
+
+#wrapper {
+  /* grid-gap: 55em; */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-bottom: 3em;
+}
 #backButton{
-  
-  margin-right: 85%;
+  grid-column: 1;
   padding: 20 em;
   
 }
 
-#backPic {
-  height: 3em;
-  width: 3em;
-  cursor: pointer;
-}
-
-#nextPic {
-  height: 3em;
-  width: 3em;
-  cursor: pointer;
-}
 #nextButton{
-  
-  margin-left: 85%;
+  grid-column: 3;
   padding: 20 em;
   
 }
-
-
 
 </style>

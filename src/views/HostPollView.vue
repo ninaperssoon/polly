@@ -1,7 +1,8 @@
 <template>
-  <homeButton></homeButton>
-
-  <h1> you're hosting {{ pollId }} </h1>
+  <body>
+      <homeButton class="homeButton"></homeButton>
+  
+   <h1> {{uiLabels.yourehosting}} {{pollId}}  </h1> 
 
   <div class="container">
     <div class="scene scene--card">
@@ -9,17 +10,16 @@
 
         <div class="card__face card__face--front">
 
-          <p v-if="(this.question !== null)">{{ this.question.q }} <br> {{ this.playingName }} is answering</p>
-          <p v-else>You have reached the end of the quiz!
-            <br>
-            <router-link class="button" v-bind:to="('/myquizzes/' + lang)"> Host another quiz </router-link>
-            <router-link class="button" v-bind:to="('/')"> Return to homepage </router-link>
+         <p v-if="(this.question !== null)">{{this.question.q}} <br> {{this.playingName}} {{uiLabels.IsAswering}}</p> 
+          <p v-else>{{uiLabels.ReachedEndQuiz}}
+            <br><br>
+            <router-link class="button" v-bind:to="('/myquizzes/'+lang)"> {{uiLabels.Hostanotherquiz}} </router-link>
+            <router-link class="button" v-bind:to="('/')"> {{uiLabels.Returntohomepage}} </router-link>
           </p>
 
         </div>
-        <div class="card__face card__face--back" v-bind:class="{ correct: ans == 'correct' }">
-          <p> <span id="correctness"> {{ this.ans }}! </span> <br> {{ this.playingName }}'s {{ this.con }} is
-            {{ this.consequence }}</p>
+        <div class="card__face card__face--back" v-bind:class="{ correct: ans == uiLabels.correct}">
+        <p > <span id="correctness"> {{this.ans}}! </span> <br> {{this.playingName}}{{uiLabels.s}} {{this.con}} {{uiLabels.is}} {{this.consequence}}</p>
         </div>
       </div>
       <!-- <div id="buttonContainer">  
@@ -29,14 +29,14 @@
 
     </div>
   </div>
-  <button v-on:click="nextQuestion">
-    Next Question
+  <button v-on:click="nextQuestion" >
+    {{uiLabels.NextQuestion}} 
   </button>
   <button v-on:click="resetQuiz">
-    Reset Quiz
+    {{uiLabels.ResetQuiz}} 
   </button>
-
-
+ 
+  </body>
 </template>
 
 <script>
@@ -140,10 +140,11 @@ export default {
       this.votePunishments = data
     )
     socket.on("flipUpdate", data => {
-      this.ans = data.wor
-      this.con = data.con
+      this.ans = data.wor === "correct"?this.uiLabels.correct:this.uiLabels.incorrect
+      this.con = data.con === "punishment"?this.uiLabels.punishment2:this.uiLabels.reward
       this.consequence = data.consequence
       this.cardOne = 'flipped'
+      console.log("flipUpdate")
     })
     socket.on("answeringParticipant", (data) => {
       this.playingName = data
@@ -231,11 +232,25 @@ export default {
 </script>
 
 <style scoped>
-.container {
+
+body {
+  /* background-color: #A6E9A3; */
+  height: 100%;
+  width: 100%;
+  position: fixed;
+
+  background-image: url("https://images.template.net/104478/pink-ocean-background-pdlb9.jpg?fbclid=IwAR1f5-_NQThWwcxCzlH0jRBLgD_Zh6ER41Kue--nu1mQAA5ybx0MyEwq3E4");
+  background-repeat:no-repeat;
+  background-size: cover;
+  overflow: auto;
+}
+
+.container{
   height: 40em;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: -10em;
 }
 
 .scene {
@@ -268,15 +283,25 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: bold;
+  border-style:outset;
 }
 
 .card__face--front {
-  background: #007991;
+  background: #FFF1AD;
+  color: black;
+  font-weight: bold;
+  padding: 5%;
+  border-color: #f9e998;
+  box-shadow: 0 5px 15px #c0ac48;
 }
 
 .card__face--back {
-  background: rgba(226, 60, 60, 0.915);
-  transform: rotateY(180deg);
+  /*background: rgba(226, 60, 60, 0.915);*/
+  background-color:#F87575;
+  transform: rotateY(180deg); 
+  border-color: #f76868;
+  box-shadow: 0 5px 15px #bb3939 ;
 }
 
 /* this style is applied when the card is clicked */
@@ -292,7 +317,9 @@ export default {
 }
 
 .correct {
-  background-color: rgb(63, 194, 63);
+  background-color: #5C95FF;
+  border-color: #4c88f8;
+  box-shadow: 0 5px 15px #2453a9 ;
 }
 
 #correctness {
@@ -300,20 +327,61 @@ export default {
 }
 
 .button {
-  color: black;
-  margin: 1em;
-  text-decoration: none;
-  background-color: rgb(235, 209, 106);
-  padding: 0.5em;
-  border-radius: 3em;
-  border-style: outset;
-  font-size: x-small;
-  border-color: rgba(235, 209, 106, 0.689);
-}
+    margin: 1em;
+    text-decoration:none; 
+    background-color: #5C95FF;
+    padding: 0.5em;
+    border-radius: 3em;
+    border-style: outset;
+    font-size: small;
+    border-color: #5C95FF;
+    color: #FFF1AD;
+    text-shadow: .05em .05em 0 #0a2049;
+  }
 
-.button:hover {
-  box-shadow: 0 5px 15px #0079918f;
-  transform: translateY(-2px);
+  .button:hover {
+    box-shadow: 0 5px 15px rgb(158, 100, 145);
+    transform: translateY(-2px);
+    cursor: pointer;
 
-}
+  }
+
+  @import url(https://fonts.googleapis.com/css?family=Righteous);
+
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  }
+
+h1 {
+  display: inline-block;
+  color: white;
+  font-family: 'Righteous', serif;
+  font-size: 4em; 
+  text-shadow: .08em .08em 0 #4779d6;
+  margin-top: -5em;
+  }
+
+  button {
+    margin-top: -10em;
+    text-decoration: none; 
+    background-color:#FFF1AD;
+    padding: 0.5em;
+    border-radius: 2em;
+    border-style: outset;
+    border-color: #FFF1AD;
+    color: #F87575;
+    font-size:1.5em;
+    font-family: 'Righteous', serif;
+    text-shadow: .05em .05em 0 #4779d6;
+  }
+
+  button:hover {
+    cursor:pointer;
+    box-shadow: 0 5px 15px rgb(158, 100, 145);
+    transform: translateY(-2px);
+  }
+
 </style>
