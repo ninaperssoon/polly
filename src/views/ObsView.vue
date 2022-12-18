@@ -1,6 +1,7 @@
 <template>
   <div class="body">
     <homeButton class="homeButton"></homeButton>
+    <div id="wrapper">
    <h1> {{uiLabels.yourePlaying}}{{pollId}}</h1> 
 
   <div class="container">
@@ -34,6 +35,7 @@
     </div>
 
     </div>
+  </div>
   </div>
  
 </div>
@@ -186,6 +188,10 @@ export default {
   overflow: auto;
 
 }
+
+#wrapper {
+    margin-top: -2em;
+  }
 .container{
   height: 40em;
   display: flex;

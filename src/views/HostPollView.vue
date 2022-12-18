@@ -1,7 +1,7 @@
 <template>
-  <body>
+  <div class="body">
       <homeButton class="homeButton"></homeButton>
-  
+  <div id="wrapper">
    <h1> {{uiLabels.yourehosting}} {{pollId}}  </h1> 
 
   <div class="container">
@@ -36,7 +36,8 @@
     {{uiLabels.ResetQuiz}} 
   </button>
  
-  </body>
+</div>
+</div>
 </template>
 
 <script>
@@ -233,7 +234,7 @@ export default {
 
 <style scoped>
 
-body {
+.body {
   /* background-color: #A6E9A3; */
   height: 100%;
   width: 100%;
@@ -244,6 +245,10 @@ body {
   background-size: cover;
   overflow: auto;
 }
+
+#wrapper {
+    margin-top: -2em;
+  }
 
 .container{
   height: 40em;

@@ -264,7 +264,7 @@ export default {
   }
 
   #wrapper {
-    margin-top: -3em;
+    margin-top: -2em;
   }
 
   @import url(https://fonts.googleapis.com/css?family=Righteous);
