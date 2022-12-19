@@ -300,11 +300,7 @@ export default {
   }
 
 h1 {
-  display: inline-block;
-  color: white;
-  font-family: 'Righteous', serif;
   font-size: 4em; 
-  text-shadow: .08em .08em 0 #4779d6;
   margin-top: -5em;
   }
 
