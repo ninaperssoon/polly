@@ -41,7 +41,7 @@ export default {
     return {
       uiLabels: {},
       id: "",
-      lang: "en",
+      lang: "",
       hideNav: true
     }
   },

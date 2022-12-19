@@ -50,7 +50,7 @@
       <div id="testButton">
         <router-link v-bind:to="'/host/'+pollId+'/'+lang" > 
         <button id="submitButton" v-on:click="sendPollIdToH()">
-          {{uiLabels.TestQuiz}}
+          {{uiLabels.hostThisQuiz}}
       </button > </router-link>
       </div>
 

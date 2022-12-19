@@ -523,8 +523,6 @@ Data.prototype.deleteQuiz = function(pollId){
 
 
 
-
-
 module.exports = Data;
 
 

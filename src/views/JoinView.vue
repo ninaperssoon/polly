@@ -2,7 +2,7 @@
 <body>
   <homeButton class="homeButton"></homeButton>
   <section>
-    <h1>Join Quiz</h1>
+    <h1>{{uiLabels.joinQuiz}}</h1>
    
     <div id="joinQuiz">
 
@@ -55,21 +55,25 @@ export default {
   methods: {
   
   sendName: function() {
-    console.log(this.name)
-    socket.emit("addParticipant", { name: this.name,
-                            pollId: this.id }
-                 );
-                 
-    this.$router.push('/wait/'+this.id+'/'+this.lang+'/'+this.name)
-    
+    for (const id in this.quizzes) {
+        if (this.id == id){
+          console.log(this.name)
+          socket.emit("addParticipant", { name: this.name,
+                                          pollId: this.id }
+                 );       
+          this.$router.push('/wait/'+this.id+'/'+this.lang+'/'+this.name)
+        }
+      }    
   }},
 
   created: function () {
-     this.lang = this.$route.params.lang;
-     socket.emit("pageLoaded", this.lang);
-     socket.on("init", (labels) => {
+    this.lang = this.$route.params.lang;
+    socket.emit("pageLoaded", this.lang);
+    socket.on("init", (labels) => {
       this.uiLabels = labels
     })
+    socket.emit("getQuizzes");
+    socket.on("sendQuizzes", (quizzes) => this.quizzes = quizzes);
   }
 }
 </script>

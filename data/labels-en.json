@@ -64,5 +64,6 @@
 	"rewards" : "Rewards",
 	"punishments" : "Punishments",
 	"DeleteQuiz":"Delete Quiz",
-	"Host": "Host"
+	"Host": "Host",
+	"waitingForParticipants": "Waiting for participants to join"
 }

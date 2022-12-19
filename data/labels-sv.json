@@ -63,5 +63,6 @@
 	"rewards" : "Belöningar",
 	"punishments" : "Bestraffningar",
 	"DeleteQuiz":"Radera Quiz",
-	"Host": "Anordna"
+	"Host": "Anordna",
+	"waitingForParticipants": "Väntar på att deltagare ska ansluta"
 }
