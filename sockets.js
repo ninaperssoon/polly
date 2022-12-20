@@ -213,14 +213,6 @@ function sockets(io, socket, data) {
     
   }); 
 
-  socket.on('hostingQuiz', function(pollId) {
-    console.log("hostar: ", pollId);
-    data.hostingQuiz(pollId);
-  })
-  
-  socket.on('checkHosting', function(pollId) {
-    data.checkHosting(pollId);
-  })
 
 }
 
