@@ -83,6 +83,7 @@ export default {
     socket.emit("pageLoaded", this.lang);
 
     socket.on("newQuestion", q =>{
+      console.log("I PollView.vue: newQuestion, q: ", q)
       this.question = q
       console.log(this.cardOne)
       if (this.cardOne !== "start"){
@@ -127,6 +128,7 @@ export default {
       this.ans = data.wor === "correct"?this.uiLabels.correct:this.uiLabels.incorrect
       this.con = data.con === "punishment"?this.uiLabels.punishment2:this.uiLabels.reward
       this.consequence= data.consequence
+      console.log("flipUpdate: PollView.vue, ans: ", data.wor, " con: ", data.con)
       console.log(this.consequence)
       console.log(this.playingName)
       this.cardOne = 'flipped'
@@ -144,6 +146,7 @@ export default {
         this.consequence = this.reward
       }
       else {
+        this.con = "punishment"
         this.consequence = this.punishment
       }
       this.visibleButtons=false;

@@ -1,7 +1,7 @@
 <template>
 <!-- <p>{{question.q}} {{question.s}}</p> -->
 
-<div id="buttonContainer" v-if="(this.question != null)">    
+<div id="buttonContainer" v-if="(this.question !== null)">    
  
   <button v-for="(a,index) in question.a" v-on:click="answer(a,index)" v-bind:key="a">
     {{ a }}

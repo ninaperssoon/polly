@@ -69,6 +69,7 @@ function sockets(io, socket, data) {
     io.to(d.pollId).emit('newQuestion', data.getQuestion(d.pollId, d.questionNumber));
     io.to(d.pollId).emit('answeringParticipant', data.getAnsParticipant(d.pollId));
     io.to(d.pollId).emit('dataUpdate', data.getAnswers(d.pollId));
+    io.to(d.pollId).emit("checkVoting", data.isVoting(d.pollId));
 
   });
   

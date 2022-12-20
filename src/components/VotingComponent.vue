@@ -1,11 +1,14 @@
 <template>
-<!-- <p>{{question.q}} {{question.s}}</p> -->
+
+    <!-- <p>{{question.q}} {{question.s}}</p> -->
 <button v-for="(v,index) in voting" v-on:click="vote(v, index)" v-bind:key="v" v-bind:style="{'background-color':buttonColor}">
   {{ v }}
 </button>
 <!-- <button v-for="(p,index) in voting.p" v-on:click="voteP(p,index)" v-bind:key="p">
   {{ p }}
 </button> -->
+ 
+
 
 </template>
 <script>
@@ -47,7 +50,8 @@ export default {
   box-shadow: 0 5px 15px #439A86;
     transform: translateY(-2px);
 
+  
  }
- 
+
 
 </style>

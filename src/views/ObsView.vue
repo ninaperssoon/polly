@@ -26,8 +26,9 @@
       </div>
       <div id="buttonContainer">  
         <!-- <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" v-if="visibleButtons"/>    -->
-        <VotingComponent v-bind:voting="voting.r" v-on:vote="submitVoteR" v-if="visibleRewards" message="#A6E9A3"/>
-        <VotingComponent v-bind:voting="voting.p" v-on:vote="submitVoteP" v-if="visiblePunishments" message="#F87575"/>
+                 <VotingComponent v-bind:voting="voting.r" v-on:vote="submitVoteR" v-if="visibleRewards" message="#A6E9A3"/>  
+                <VotingComponent v-bind:voting="voting.p" v-on:vote="submitVoteP" v-if="visiblePunishments" message="#F87575"/>
+           
       
         <!-- <VotingComponent v-bind:voting="voting" v-on:voteR="submitVoteR" v-on:voteP="submitVoteP"  v-if="visibleButtons"/> -->
       
