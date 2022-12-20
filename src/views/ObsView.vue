@@ -285,7 +285,7 @@ export default {
   }
 
   .button:hover {
-    box-shadow: 0 5px 15px #0079918f;
+    box-shadow: 0 5px 15px #c0ac48;
     transform: translateY(-2px);
 
   }

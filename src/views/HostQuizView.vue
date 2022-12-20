@@ -194,6 +194,11 @@ export default {
   opacity: 0;
  }
 }
-
+@media screen and (max-width:50em) {
+  h1 {
+    margin-top: 0.01em;
+    font-size: 3em;
+  }
+}
  
 </style>

@@ -18,8 +18,8 @@ h1 {
   display: inline-block;
   color: white;
   font-family: 'Righteous', serif;
-  font-size: 3em; 
   text-shadow: .08em .08em 0 #4779d6;
+  font-size: 3em;
 }
 
 .board {
@@ -28,7 +28,7 @@ h1 {
   text-align: center;
   margin-bottom: -5em;
   animation: tilt-n-move-shaking 3s infinite;
-  width:50%;
+  width:22em;
 }
 
 #text {
@@ -42,6 +42,67 @@ h1 {
 #surfboard {
   height: 12em;
   
+}
+
+.container {
+  height: 40em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scene {
+  margin-top: -10em;
+  width: 25em;
+  height: 26em;
+  perspective: 2000px;
+}
+
+.card {
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.card__face {
+  padding: 0.2em;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  color: white;
+  backface-visibility: hidden;
+  border-radius: 2em;
+  font-size: 25px;
+  line-height: 30px;
+  align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border-style:outset;
+}
+
+.card__face--front {
+  background: #FFF1AD;
+  color: black;
+  font-weight: bold;
+  padding: 5%;
+  border-color: #f9e998;
+  box-shadow: 0 5px 15px #c0ac48;
+}
+
+.card__face--back {
+  background: #F87575;
+  transform: rotateY(180deg); 
+  border-color: #f76868;
+  box-shadow: 0 5px 15px #bb3939 ;
+}
+
+.flipme {
+  transform: rotateY(180deg);
 }
 
 

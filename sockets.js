@@ -215,9 +215,24 @@ function sockets(io, socket, data) {
 
   socket.on('hostingQuiz', function(pollId) {
     console.log("i sockets, hostar: ", pollId)
-    io.to(pollId).emit("isHosted")
-  })
+    if (!data.isQuizHosted(pollId)) {
+      socket.join(pollId);
+      data.hostQuiz(pollId);
+      console.log("vad som helst")
+      io.to(pollId).emit("isHosted")
+    }
+    else {
+      socket.emit("hostingDenied")}
+  });
 
+  socket.on('forceHost', function(pollId) {
+    console.log("i sockets, hostar: ", pollId)
+    socket.join(pollId);
+    data.hostQuiz(pollId);
+    console.log("vad som helst")
+    io.to(pollId).emit("isHosted")
+    
+  })
 }
 
 module.exports = sockets;

@@ -22,14 +22,14 @@
 
         </div>
         <div class="card__face card__face--back" v-bind:class="{ correct: ans == uiLabels.correct}">
-        <p> <span id="correctness"> {{this.ans}}! </span><br> {{uiLabels.Your}} {{this.con}}{{uiLabels.is}}{{this.consequence}} </p>
+        <p v-if="(this.consequence!== '')"> <span id="correctness"> {{this.ans}}! </span><br> {{uiLabels.Your}} {{this.con}}{{uiLabels.is}}{{this.consequence}} </p>
         </div>
       </div>
       <div >  
         <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" v-if="visibleButtons"/>      
       
+      </div>
     </div>
-  </div>
 
     </div>
   </div>
@@ -38,7 +38,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import QuestionComponent from '@/components/QuestionComponent.vue';
 import io from 'socket.io-client';
 import homeButton from '@/components/HomeComponent.vue';
