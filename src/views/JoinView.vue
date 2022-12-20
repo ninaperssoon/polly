@@ -49,21 +49,40 @@ export default {
       id: "",
       lang: "",
       name: "",
-      hostingQuiz: ""
+      idInQuizzes: false
+      
     }
   },
   methods: {
   
   sendName: function() {
-    for (const id in this.quizzes) {
+    if (this.name !== ""){for (const id in this.quizzes) {
         if (this.id == id){
-          console.log(this.name)
+          this.idInQuizzes = true
           socket.emit("addParticipant", { name: this.name,
                                           pollId: this.id }
                  );       
           this.$router.push('/wait/'+this.id+'/'+this.lang+'/'+this.name)
         }
-      }    
+      }  
+      if (this.idInQuizzes == false) {
+        if (this.lang == "en") {
+              alert("You cannot join a quiz that doensn't exist")
+           }
+            else {
+              alert("Du kan inte delta i ett quiz som inte finns")
+          }
+      } }
+      else {
+        if (this.lang == "en") {
+              alert("Please enter your name")
+           }
+            else {
+              alert("Var god och ange ditt namn först")
+          }
+      }
+     
+     
   }},
 
   created: function () {

@@ -37,6 +37,7 @@ export default {
       id: "",
       lang: "en",
       quizzes: {},
+      idInQuizzes: false
     }
   },
   created: function () {
@@ -47,6 +48,7 @@ export default {
     })
     socket.emit("getQuizzes");
     socket.on("sendQuizzes", (quizzes) => this.quizzes = quizzes);
+    
   },
   methods: {
     switchLanguage: function() {
@@ -59,10 +61,19 @@ export default {
     hostQuiz: function() {
       for (const id in this.quizzes) {
         if (this.id == id){
-          console.log(this.id)
+          this.idInQuizzes = true
+          socket.emit("hostingQuiz", this.id)
           socket.emit("resetParticipants", this.id)
           this.$router.push('/host/'+this.id+'/'+this.lang)
         }
+      }
+      if (this.idInQuizzes == false) {
+        if (this.lang == "en") {
+              alert("You cannot host a quiz that doensn't exist")
+           }
+            else {
+              alert("Du kan inte anordna ett quiz som inte finns")
+          }
       }
     
     }

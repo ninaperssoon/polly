@@ -213,6 +213,10 @@ function sockets(io, socket, data) {
     
   }); 
 
+  socket.on('hostingQuiz', function(pollId) {
+    console.log("i sockets, hostar: ", pollId)
+    io.to(pollId).emit("isHosted")
+  })
 
 }
 
