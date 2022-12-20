@@ -61,13 +61,9 @@
 	"punishment2": "punishment",
 	"DeleteReward":"Delete reward",
 	"Delete":"Delete",
-	"rewards" : "rewards",
-	"punishments" : "punishments",
+	"rewards" : "Rewards",
+	"punishments" : "Punishments",
 	"DeleteQuiz":"Delete Quiz",
-	"Host": "Host"
-
-
-
-
-	
+	"Host": "Host",
+	"waitingForParticipants": "Waiting for participants to join"
 }

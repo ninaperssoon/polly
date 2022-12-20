@@ -10,8 +10,6 @@
   <button v-on:click="createPoll" id="pollButton">
       {{uiLabels.Continuecreate}} 
   </button>
-
-
 </body>
 
 </template>
@@ -37,9 +35,11 @@ export default {
   methods: {
   
   createPoll: function() {
-    socket.emit("createPoll", {pollId: this.id, lang: this.lang })
-    socket.emit("anotherQuestion", {pollId: this.pollId})
-    this.$router.push('/create/'+this.lang+'/'+this.id)
+    if (this.id != "") {
+      socket.emit("createPoll", {pollId: this.id, lang: this.lang })
+      socket.emit("anotherQuestion", {pollId: this.pollId})
+      this.$router.push('/create/'+this.lang+'/'+this.id)
+    }
   }},
 
   created: function () {
@@ -113,5 +113,6 @@ export default {
     border-radius: 1em;
     border-style: outset;
   }
+
   
 </style>

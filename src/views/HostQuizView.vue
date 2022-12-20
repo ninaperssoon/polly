@@ -3,6 +3,7 @@
     <homeButton class="homeButton"></homeButton>
   
     <h1> {{uiLabels.yourehosting}}{{id}} </h1>
+     <h2> {{uiLabels.waitingForParticipants}} <span class="dot1"> .</span><span class="dot2">.</span><span class="dot3">.</span> </h2>
 
       <br>
 
@@ -109,12 +110,18 @@ export default {
 
   }
   h1 {
-    margin-top: -3em;
-  display: inline-block;
-  color: white;
-  font-family: 'Righteous', serif;
-  font-size: 4em; 
-  text-shadow: .08em .08em 0 #4779d6;
+    margin-top: -3em; 
+    font-size: 4em; 
+    
+  }
+
+  h2 {
+    margin-top: -1em;
+    margin-bottom: -1em;
+    font-weight: bold;
+    color: #FFF1AD;
+    text-shadow: .08em .08em 0 #4779d6;
+
   }
 
   #text {
@@ -122,5 +129,71 @@ export default {
     font-family: 'Righteous', serif;
     text-shadow: .08em .08em 0 black;
   }
+
+  
+  .dot1 {
+ animation: visibility 2s linear infinite;
+}
+@keyframes visibility {
+ 0% {
+ opacity: 1;
+ }
+ 65% {
+ opacity: 1;
+ }
+ 66% {
+ opacity: 0;
+ }
+ 100% {
+ opacity: 0;
+ }
+}
+.dot2 {
+ animation: visibility2 2s linear infinite;
+}
+@keyframes visibility2 {
+ 0% {
+  opacity: 0;
+ }
+ 21% {
+  opacity: 0;
+ }
+ 22% {
+  opacity: 1;
+ }
+ 65% {
+  opacity: 1;
+ }
+ 66% {
+  opacity: 0;
+ }
+ 100% {
+  opacity: 0;
+ }
+}
+.dot3 {
+ animation: visibility3 2s linear infinite;
+}
+@keyframes visibility3 {
+ 0% {
+  opacity: 0;
+ }
+ 43% {
+  opacity: 0;
+ }
+ 44% {
+  opacity: 1;
+ }
+ 65% {
+  opacity: 1;
+ }
+ 66% {
+  opacity: 0;
+ }
+ 100% {
+  opacity: 0;
+ }
+}
+
  
 </style>

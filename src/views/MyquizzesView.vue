@@ -6,13 +6,13 @@
   
       <div class="myQuizzes" v-for="(contain, id) in quizzes" v-bind:key="id">{{id}} 
 
-          <router-link class="button" v-bind:to="('/host/'+id+'/'+lang)"> {{uiLabels.Host}} </router-link>
+          <button class="button" v-on:click="host(id)"> {{uiLabels.Host}} </button>
 
-          <button class="button" v-on:click="edit" >
+          <button class="button" v-on:click="edit(id)" >
             <img id="edit"  src="../../public/img/edit.png"/>
           </button>
 
-          <button class="button"  v-on:click="deletequiz" >
+          <button class="button"  v-on:click="deleteQuiz(id)" >
             <img id="delete" src="../../public/img/trashcan.png"/>
           </button>
           
@@ -40,7 +40,7 @@ export default {
   data: function () {
     return {
       uiLabels: {},
-      id: "hej",
+      id: "",
       lang: "en",
       quizzes: {},
 
@@ -54,11 +54,20 @@ export default {
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
+    socket.on("updateQuiz", (data) => {
+      this.quizzes = data
+    })
   },
   methods: {
-    edit: function () {
-      this.$router.push('/create/'+this.lang+'/'+this.id)
+    edit: function (id) {
+      this.$router.push('/create/'+this.lang+'/'+id)
     },
+    deleteQuiz: function (id) {
+      socket.emit("deleteQuiz", id)
+    },
+    host: function(id) {
+      this.$router.push('/host/'+id+'/'+this.lang)
+    }
   }
  
 }
@@ -106,13 +115,8 @@ export default {
   position: relative;
   }
 
-h1 {
-  margin-top:-5em;
-  display: inline-block;
-  color: white;
-  font-family: 'Righteous', serif;
-  font-size: 3em; 
-  text-shadow: .08em .08em 0 #4779d6;
+  h1 {
+    margin-top:-5em;
   }
   
 
@@ -132,7 +136,7 @@ h1 {
     grid-template-columns: 50% 17% 12% 12%;
     grid-template-rows: 1em;
     place-items: center start;
-    border-style:outset;
+    border-style: outset;
     border-color: #5C95FF;
     border-radius: 2em;
     color: #FFF1AD;
@@ -147,7 +151,8 @@ h1 {
     border-color: transparent;
     font-size: 1em;
     color: white;
-    
+    font-weight: bold;
+
   }
 
   #edit {

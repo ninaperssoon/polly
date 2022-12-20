@@ -22,7 +22,7 @@
 
         </div>
         <div class="card__face card__face--back" v-bind:class="{ correct: ans == uiLabels.correct}">
-        <p > <span id="correctness"> {{this.ans}}! </span><br> {{uiLabels.Your}} {{this.con}}{{uiLabels.is}}{{this.consequence}} </p>
+        <p> <span id="correctness"> {{this.ans}}! </span><br> {{uiLabels.Your}} {{this.con}}{{uiLabels.is}}{{this.consequence}} </p>
         </div>
       </div>
       <div >  
@@ -267,7 +267,7 @@ export default {
   }
 
   #wrapper {
-    margin-top: -3em;
+    margin-top: -2em;
   }
 
   @import url(https://fonts.googleapis.com/css?family=Righteous);
@@ -280,11 +280,7 @@ export default {
   }
 
 h1 {
-  display: inline-block;
-  color: white;
-  font-family: 'Righteous', serif;
   font-size: 4em; 
-  text-shadow: .08em .08em 0 #4779d6;
   margin-top: -6em;
   }
 

@@ -1,6 +1,7 @@
 <template>
   <div class="body">
     <homeButton class="homeButton"></homeButton>
+    <div id="wrapper">
    <h1> {{uiLabels.yourePlaying}}{{pollId}}</h1> 
 
   <div class="container">
@@ -35,6 +36,7 @@
     </div>
 
     </div>
+  </div>
   </div>
  
 </div>
@@ -187,6 +189,10 @@ export default {
   overflow: auto;
 
 }
+
+#wrapper {
+    margin-top: -2em;
+  }
 .container{
   height: 40em;
   display: flex;
@@ -295,11 +301,7 @@ export default {
   }
 
 h1 {
-  display: inline-block;
-  color: white;
-  font-family: 'Righteous', serif;
   font-size: 4em; 
-  text-shadow: .08em .08em 0 #4779d6;
   margin-top: -5em;
   }
 

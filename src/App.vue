@@ -14,7 +14,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
-
+h1 {
+  display: inline-block;
+  color: white;
+  font-family: 'Righteous', serif;
+  font-size: 3em; 
+  text-shadow: .08em .08em 0 #4779d6;
+}
 
 .board {
   margin:auto;
@@ -62,9 +68,25 @@ button:hover {
 
 @keyframes tilt-n-move-shaking {
   0% { transform: translate(0, 0) rotate(0deg); }
+  5% { transform: translate(1px, 1px) rotate(1deg); }
+  10% { transform: translate(2px, 2px) rotate(2deg); }
+  15% { transform: translate(3px, 3px) rotate(3deg); }
+  20% { transform: translate(4px, 4px) rotate(4deg); }
   25% { transform: translate(5px, 5px) rotate(5deg); }
-  50% { transform: translate(0, 0) rotate(0eg); }
+  30% { transform: translate(4px, 4px) rotate(4deg); }
+  35% { transform: translate(3px, 3px) rotate(3deg); }
+  40% { transform: translate(2px, 2px) rotate(2deg); }
+  45% { transform: translate(1px, 1px) rotate(1deg); }
+  50% { transform: translate(0, 0) rotate(0deg); }
+  55% { transform: translate(-1px, 1px) rotate(-1deg); }
+  60% { transform: translate(-2px, 2px) rotate(-2deg); }
+  65% { transform: translate(-3px, 3px) rotate(-3deg); }
+  70% { transform: translate(-4px, 4px) rotate(-4deg); }
   75% { transform: translate(-5px, 5px) rotate(-5deg); }
+  80% { transform: translate(-4px, 4px) rotate(-4deg); }
+  85% { transform: translate(-3px, 3px) rotate(-3deg); }
+  90% { transform: translate(-2px, 2px) rotate(-2deg); }
+  95% { transform: translate(-1px, 1px) rotate(-1deg); }
   100% { transform: translate(0, 0) rotate(0deg); }
 }
 

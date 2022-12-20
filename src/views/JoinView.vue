@@ -2,7 +2,7 @@
 <body>
   <homeButton class="homeButton"></homeButton>
   <section>
-    <h1>Join Quiz</h1>
+    <h1>{{uiLabels.joinQuiz}}</h1>
    
     <div id="joinQuiz">
 
@@ -49,27 +49,50 @@ export default {
       id: "",
       lang: "",
       name: "",
+      idInQuizzes: false
+      
     }
   },
   methods: {
   
   sendName: function() {
-
-
-    console.log(this.name)
-    socket.emit("addParticipant", { name: this.name,
-                            pollId: this.id }
-                 );
-                 
-    this.$router.push('/wait/'+this.id+'/'+this.lang+'/'+this.name)
+    if (this.name !== ""){for (const id in this.quizzes) {
+        if (this.id == id){
+          this.idInQuizzes = true
+          socket.emit("addParticipant", { name: this.name,
+                                          pollId: this.id }
+                 );       
+          this.$router.push('/wait/'+this.id+'/'+this.lang+'/'+this.name)
+        }
+      }  
+      if (this.idInQuizzes == false) {
+        if (this.lang == "en") {
+              alert("You cannot join a quiz that doensn't exist")
+           }
+            else {
+              alert("Du kan inte delta i ett quiz som inte finns")
+          }
+      } }
+      else {
+        if (this.lang == "en") {
+              alert("Please enter your name")
+           }
+            else {
+              alert("Var god och ange ditt namn först")
+          }
+      }
+     
+     
   }},
 
   created: function () {
-     this.lang = this.$route.params.lang;
-     socket.emit("pageLoaded", this.lang);
-     socket.on("init", (labels) => {
+    this.lang = this.$route.params.lang;
+    socket.emit("pageLoaded", this.lang);
+    socket.on("init", (labels) => {
       this.uiLabels = labels
     })
+    socket.emit("getQuizzes");
+    socket.on("sendQuizzes", (quizzes) => this.quizzes = quizzes);
   }
 }
 </script>
@@ -140,11 +163,6 @@ export default {
   }
 
 h1 {
-  display: inline-block;
-  color: white;
-  font-family: 'Righteous', serif;
-  font-size: 4em; 
-  text-shadow: .08em .08em 0 #4779d6;
   margin-bottom: 1em;
   }
 

@@ -3,35 +3,32 @@
 <div class="body">
 <homeButton class="homeButton"></homeButton>
  
-
-
- <div id="backgroundDiv">
-   <Question v-for="(question,index) in questions" 
-   v-bind:question="question"
-  v-bind:key="question.q"
-  v-on:myquestion="saveQuestion($event, index)"
-  v-on:deleteIndex="deleteQuestion($event,index)"
-  v-on:deleteAnswer="editQuestion($event, index)"
-  :questionNumber = index > </Question>
+  <div id="backgroundDiv">
+    <Question v-for="(question,index) in questions" 
+    v-bind:question="question"
+    v-bind:key="question.q"
+    v-on:myquestion="saveQuestion($event, index)"
+    v-on:deleteIndex="deleteQuestion($event,index)"
+    v-on:deleteAnswer="editQuestion($event, index)"
+    :questionNumber = index > </Question>
  
   
-<div id="wrapper">
-  <div id="backButton">
+    <div id="wrapper">
+      <div id="backButton">
     
-    <router-link v-bind:to="'/start/'+lang"><img class="flipPic" src="../../public/img/leftfliparrow.png"/></router-link>
+          <router-link v-bind:to="'/start/'+lang"><img class="flipPic" src="../../public/img/leftfliparrow.png"/></router-link>
+      </div>
+
+      <button id="addButton" v-on:click="newQuestion">
+        {{uiLabels.AddQuestion}}
+      </button>
+
+      <div id="nextButton">
+        <router-link v-bind:to="'/createq/'+pollId+'/'+lang"><img class="flipPic" src="../../public/img/rightfliparrow.png"/></router-link>
+      </div>
     </div>
-
-    <button id="addButton" v-on:click="newQuestion">
-    {{uiLabels.AddQuestion}}
-  </button>
-
-<div id="nextButton">
-    
-  <router-link v-bind:to="'/createq/'+pollId+'/'+lang"><img class="flipPic" src="../../public/img/rightfliparrow.png"/></router-link>
-  </div>
-</div>
   
-</div>
+  </div>
 </div>
 
 

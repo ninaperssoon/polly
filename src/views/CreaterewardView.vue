@@ -50,7 +50,7 @@
       <div id="testButton">
         <router-link v-bind:to="'/host/'+pollId+'/'+lang" > 
         <button id="submitButton" v-on:click="sendPollIdToH()">
-          {{uiLabels.TestQuiz}}
+          {{uiLabels.hostThisQuiz}}
       </button > </router-link>
       </div>
 
@@ -178,11 +178,7 @@ export default {
 <style scoped>
 
 h1{
-display: inline-block;
-  color: white;
-  font-family: 'Righteous', serif;
   font-size: 4em; 
-  text-shadow: .08em .08em 0 #4779d6;
 }
   
 #myBackground{
@@ -195,8 +191,7 @@ display: inline-block;
     height: 100%;
     position:fixed;
     overflow-y: auto;
-    overflow-x: hidden
-    ;
+    overflow-x: hidden;
 
 }
 

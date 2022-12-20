@@ -12,7 +12,7 @@
             <br>
             <input type="text" v-model="id"></p>      
           </div>
-        <button id="startQuiz" v-on:click="startQuiz">{{uiLabels.startQuiz}}</button> 
+        <button id="startQuiz" v-on:click="hostQuiz">{{uiLabels.hostQuiz}}</button> 
       </div>
       
       <div class="palm2"><img id="palmtree" src="../../public/img/palmtree.gif"></div>
@@ -23,6 +23,7 @@
 <script>
 import homeButton from '@/components/HomeComponent.vue';
 import io from 'socket.io-client';
+
 const socket = io();
 
 export default {
@@ -35,6 +36,8 @@ export default {
       uiLabels: {},
       id: "",
       lang: "en",
+      quizzes: {},
+      idInQuizzes: false
     }
   },
   created: function () {
@@ -43,6 +46,9 @@ export default {
     socket.on("init", (labels) => {
       this.uiLabels = labels
     })
+    socket.emit("getQuizzes");
+    socket.on("sendQuizzes", (quizzes) => this.quizzes = quizzes);
+    
   },
   methods: {
     switchLanguage: function() {
@@ -52,9 +58,24 @@ export default {
         this.lang = "en"
       socket.emit("switchLanguage", this.lang)
     },
-    startQuiz: function() {
-      socket.emit("resetParticipants", this.id)
-      this.$router.push('/host/'+this.id+'/'+this.lang)
+    hostQuiz: function() {
+      for (const id in this.quizzes) {
+        if (this.id == id){
+          this.idInQuizzes = true
+          socket.emit("hostingQuiz", this.id)
+          socket.emit("resetParticipants", this.id)
+          this.$router.push('/host/'+this.id+'/'+this.lang)
+        }
+      }
+      if (this.idInQuizzes == false) {
+        if (this.lang == "en") {
+              alert("You cannot host a quiz that doensn't exist")
+           }
+            else {
+              alert("Du kan inte anordna ett quiz som inte finns")
+          }
+      }
+    
     }
 
   }
@@ -138,11 +159,6 @@ export default {
   }
 
 h1 {
-  display: inline-block;
-  color: white;
-  font-family: 'Righteous', serif;
-  font-size: 4em; 
-  text-shadow: .08em .08em 0 #4779d6;
   margin-bottom: 1em;
   margin-top: 1em;
   }
