@@ -156,10 +156,7 @@ export default {
     position:fixed;
     overflow-y: auto; 
     overflow-x: hidden;  
-
 }
-
-
 
 #backgroundDiv{
   padding: 5em;
@@ -169,7 +166,6 @@ button:hover {
   background-color:lightgreen;
   cursor:pointer;
 }
-
 
 #pollButton {
   margin-top: 1em;
@@ -219,5 +215,12 @@ button:hover {
   padding: 20 em;
   
 }
-
+@media screen and (max-width:80em) {
+.flipPic {
+  height: 3em;
+}
+#addButton {
+  font-size:1em;
+}
+}
 </style>

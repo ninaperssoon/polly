@@ -35,11 +35,11 @@
 
       <div id="saveDelete">
         
-        <button v-on:click="sendQuestion" id="saveQuestion" v-bind:style="{'background-color':SavebuttonColor}">
+        <button v-on:click="sendQuestion" class="saveDeleteButton" id="saveQuestion" v-bind:style="{'background-color':SavebuttonColor}">
           {{uiLabels.SaveQuestion}}
         </button>
 
-        <button v-on:click="deleteQuestion" id="deleteQuestions">
+        <button v-on:click="deleteQuestion" class="saveDeleteButton" id="deleteQuestion">
           {{uiLabels.DeleteQuestion}}
         </button >
 
@@ -166,9 +166,6 @@ export default{
 </script>
 
 
-
-
-
 <style scoped>
 
 #Right{
@@ -187,7 +184,7 @@ export default{
 }
 
 #question {
-  margin: 2em 2em 2em 2em;
+  margin: auto;
   display: grid;
   grid-template-columns: 1fr ;
   border-radius: 2em;
@@ -198,6 +195,8 @@ export default{
   border-color: #5C95FF;
   color: #FFF1AD;
   font-weight: bold;
+  width: 80%;
+  margin-bottom:1em;
 }
 
 
@@ -215,43 +214,30 @@ export default{
   margin-top: -2em;
 }
 
-#deleteQuestions {
+.saveDeleteButton {
   width: 7em;
   height: 3em;
-  grid-column: 3;
   font-size: 1.25em;
   color:white;
   font:bolder;
   background-color: transparent;
   border-color: white;
-  margin-left:1em;
   border-style:solid;
   border-radius: 0.5em;
+  margin: 1em;
 }
-  
-  
 
-#saveQuestion {
-  width: 7em;
-  height: 3em; 
-  font-size: 1.25em;
-  grid-column: 2; 
-  color:white;
-  font:bolder;
-  background-color: transparent;
-  border-color: White;
-  border-style:solid;
-  border-radius: 0.5em;
-  
+.saveDeleteButton:hover {
+  transform: translateY(-2px);
 }
-#deleteQuestions:hover {
+
+
+#deleteQuestion:hover {
   background-color: salmon;
-  cursor:pointer;
   border-color: salmon;
 }
 #saveQuestion:hover {
   background-color: #A6E9A3;
-  cursor: pointer;
   border-color: #A6E9A3;
 }
 
@@ -262,7 +248,7 @@ export default{
 .answerLayout{
   display: grid;
   grid-template-columns: 10fr 4fr fr;
-  row-gap: 1em;
+  row-gap: 0em;
 }
 
 .input {
@@ -319,6 +305,31 @@ input {
   margin-right: 26%;
 }
 
+@media screen and (max-width:80em) {
+#inputAnswer {
+  grid-template-columns: 1fr;
+  padding: 2em;
+}
+#question {
+  width: 100%;
+  padding: 0em;
+}
+#questionInput {
+  margin: auto;
+}
+.saveDeleteButton {
+  width: 50%;
+  font-size: 1em;
+}
+#saveDelete {
+  justify-content: center;
+  align-items: center;
+  padding-right: 0em;
+  margin-top: -2em;
+}
+.buttonContainer {
+  font-size: 2em;
+}
 
-
+}
 </style>

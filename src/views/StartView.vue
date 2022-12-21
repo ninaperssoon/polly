@@ -70,17 +70,15 @@ export default {
 
 #j{
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
 }
   .body {
     margin: 0;
     background-color: #A6E9A3;
     font-family: 'Courier New', Courier, monospace;
     text-align: center;
-    min-height: 100%;
-    min-width: 1024px;
     width: 100%;
-    height: auto;
+    height: 100%;
     position: fixed;
     top: 0;
     left: 0;
@@ -88,12 +86,13 @@ export default {
 
   .wrapper {
     padding: 3em;
-    padding-left: 10vw;
     display: grid;
     grid-gap: 1.2em;
     row-gap: 2em;
     grid-template-columns: 15vw 15vw 15vw 15vw;
     grid-template-rows: 10vh 10vh 10vh 10vh;  
+    justify-content: center;
+    align-items: center;
   }
   .startchoice {
     background-color: coral;
@@ -137,14 +136,14 @@ export default {
   }
 
   #smallerbuttons {
-    padding-top: 0.6em;
     background-color: #FFF1AD;
     border-color: #fff1adbd;
     color: #F87575;
+    padding: 0.8em;
   }
   #flag {
-  height: 10vh;
-  width: 10vh;
+  height: 7vh;
+  width: 7vh;
   cursor: pointer;
   
   margin-top: 1em;
@@ -178,41 +177,33 @@ h1 {
 
 @media screen and (max-width:70em) {
   body {
-    height: 100%;
-    width: 100%;
-    position: fixed;
     overflow: auto;
-  }
-  .wrapper {
-   
-    grid-template-columns: 15vw 15vw 15vw 15vw;
-    grid-template-rows: 12vh 12vh 12vh 12vh;  
   }
 
 
   .startchoice {
+    margin: auto;
     text-decoration: none; 
     padding: 1em;
     border-radius: 1.5em;
-    font-size: 1.5em;
-   
+    font-size: 2em;
   }
-  
+
+ #smallerbuttons {
+  font-size: 1.6em;
+ }
+
  
   .J{
     height: 25vh;
     width: 100vw;
-    
     display: grid;
     grid-template-rows: 2em;
     grid-auto-rows: 10em;
 
   }
   h1{
-
-   
     font-size: 12vw;
-    
   }
   #flag{
    height: 30px;
