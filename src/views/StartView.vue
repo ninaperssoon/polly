@@ -5,9 +5,9 @@
    
     <!-- <div class="logo"> punishment play: the flip. Also known as "Flip or Flop"  </div> -->
     <div class="J">
-    <div><img id="flag" v-bind:src=uiLabels.languageFlag v-on:click="switchLanguage"></div>
-  
-    <h1 >Flip or Flop!    <img id="logo" src="../../public/img/fliplogo.png">
+    
+   
+    <h1 > <img id="flag" v-bind:src=uiLabels.languageFlag v-on:click="switchLanguage">   Flip or Flop!    <img id="logo" src="../../public/img/fliplogo.png">
 </h1></div>
     
   </header>
@@ -87,14 +87,16 @@ export default {
   }
 
   .wrapper {
-    margin-top: 3em;
-    margin-left: 12.5em;
+    padding: 3em;
+    padding-left: 10vw;
     display: grid;
     grid-gap: 1.2em;
-    grid-template-columns: 15em 15em 15em 15em;
-    grid-template-rows: 5em 5em 5em 5em;  
+    row-gap: 2em;
+    grid-template-columns: 15vw 15vw 15vw 15vw;
+    grid-template-rows: 10vh 10vh 10vh 10vh;  
   }
   .startchoice {
+    background-color: coral;
     text-decoration: none; 
     padding: 2em;
     background-color: #5C95FF;
@@ -141,10 +143,10 @@ export default {
     color: #F87575;
   }
   #flag {
-  width: 3em;
-  height: 3em;
+  height: 10vh;
+  width: 10vh;
   cursor: pointer;
-  left: -43em;
+  
   margin-top: 1em;
 }
 
@@ -174,65 +176,49 @@ h1 {
     padding-top: 0.1em;
   }
 
-@media screen and (max-width:50em) {
+@media screen and (max-width:70em) {
   body {
     height: 100%;
     width: 100%;
     position: fixed;
     overflow: auto;
   }
-  #flag {
-    width: 3em;
-    height: 3em;
-    cursor: pointer;
+  .wrapper {
+   
+    grid-template-columns: 15vw 15vw 15vw 15vw;
+    grid-template-rows: 12vh 12vh 12vh 12vh;  
+  }
 
-}
 
   .startchoice {
     text-decoration: none; 
     padding: 1em;
-    background-color: #5C95FF;
     border-radius: 1.5em;
-    font-size: 2em;
-    border-style: outset;
-    border-color: #5C95FF;
-    color: #FFF1AD;
-    font-family: 'Righteous', serif;
-    text-shadow: .05em .05em 0 rgb(77, 94, 179);
-    height: 4em;
-    width: 5em;
-  }
-  
-  .wrapper {
-    margin-top: 0em;
-    margin-left: 1em;
-    display: grid;
-    grid-gap: 0.6em;
-    grid-template-columns: 5em 5em 5em 5em;
-    grid-template-rows: 4em 4em 6em 4em;  
-  }
-  
-  #smallerbuttons {
-    padding: 0.5em;
-    background-color: #FFF1AD;
-    border-color: #fff1adbd;
-    color: #F87575;
     font-size: 1.5em;
-    margin-left: 1em;
+   
   }
+  
+ 
   .J{
+    height: 25vh;
+    width: 100vw;
     
-    background-color: #F87575;
     display: grid;
-  grid-template-rows: 2em;
-  grid-auto-rows: 10em;
+    grid-template-rows: 2em;
+    grid-auto-rows: 10em;
 
   }
   h1{
 
-    background-color: aquamarine;
-    font-size: 4em; 
+   
+    font-size: 12vw;
+    
   }
+  #flag{
+   height: 30px;
+   width: 30px;
+  }
+  
 
 }
 

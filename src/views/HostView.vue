@@ -1,12 +1,13 @@
 <template>
   <div id="body">
     <homeButton class="homeButton"> </homeButton>
+    <h1>{{uiLabels.hostQuiz}}</h1>
     <div class="wrapper">
 
-      <div class="palm1"><img id="palmtree" src="../../public/img/palmtree.gif"></div>
+      <div id="palm1"><img class="palmtree" src="../../public/img/palmtree.gif"></div>
 
       <div class="theHost">
-        <h1>{{uiLabels.hostQuiz}}</h1>
+       
           <div id="host">
             <p> {{uiLabels.writeQuizId}}: 
             <br>
@@ -15,7 +16,7 @@
         <button id="startQuiz" v-on:click="hostQuiz">{{uiLabels.hostQuiz}}</button> 
       </div>
       
-      <div class="palm2"><img id="palmtree" src="../../public/img/palmtree.gif"></div>
+      <div id="palm2"><img class="palmtree" src="../../public/img/palmtree.gif"></div>
     </div>
   </div>
 </template>
@@ -48,7 +49,16 @@ export default {
     })
     socket.emit("getQuizzes");
     socket.on("sendQuizzes", (quizzes) => this.quizzes = quizzes);
-    
+    socket.on("isHosted", () => {
+      console.log("isHosted")
+      this.$router.push('/host/'+this.id+'/'+this.lang)
+    })
+    socket.on("hostingDenied", () => {
+      if (window.confirm("Do you really want to host?")) {
+        socket.emit("forceHost", this.id)
+    }
+      
+    })
   },
   methods: {
     switchLanguage: function() {
@@ -64,12 +74,11 @@ export default {
           this.idInQuizzes = true
           socket.emit("hostingQuiz", this.id)
           socket.emit("resetParticipants", this.id)
-          this.$router.push('/host/'+this.id+'/'+this.lang)
         }
       }
       if (this.idInQuizzes == false) {
         if (this.lang == "en") {
-              alert("You cannot host a quiz that doensn't exist")
+              alert("You cannot host a quiz that doesn't exist")
            }
             else {
               alert("Du kan inte anordna ett quiz som inte finns")
@@ -97,10 +106,9 @@ export default {
     margin-top: -6em;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-
   }
 
-  .palm1 {
+  #palm1 {
     grid-column: 1;
   }
 
@@ -108,7 +116,7 @@ export default {
     grid-column: 2;
   }
 
-  .palm2 {
+  #palm2 {
     grid-column: 3;
   }
 
@@ -116,8 +124,8 @@ export default {
     font-size:1.5em;
     margin: auto;
     margin-top: 1em;
-    height: 10em;
-    width: 15em;
+    height: 50%;
+    width: 75%;
     background-color: #5C95FF;
     display:flex;
     align-items: center;
@@ -159,8 +167,8 @@ export default {
   }
 
 h1 {
-  margin-bottom: 1em;
-  margin-top: 1em;
+  margin-bottom: 3em;
+  margin-top: -5em;
   }
 
   input {
@@ -174,9 +182,18 @@ h1 {
     border-style: outset;
   }
 
-  #palmtree {
-    height: 30em;
-    margin-top: 12em;
+  .palmtree {
+    width: 80%;
+    /* margin-top: 1em; */
+  }
+  @media screen and (max-width:50em) {
+  .palmtree {
+    width: 0%;
+  }
+  #host {
+    width: 100%;
+    height: 40%;
+  }
   }
  
 </style>

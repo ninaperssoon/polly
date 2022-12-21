@@ -1,12 +1,12 @@
 <template>
-<body>
+<div id="body">
   <homeButton class="homeButton"></homeButton>
   <section>
     <h1>{{uiLabels.joinQuiz}}</h1>
    
     <div id="joinQuiz">
 
-      <div id="name">
+      <div class="box" id="name">
         <p> 
           <label>
             {{uiLabels.EnterYourName}}
@@ -15,7 +15,7 @@
         </p>
       </div>
 
-      <div id="id">
+      <div class="box" id="idbox">
         <p> 
         <label>
           {{uiLabels.writeQuizId}}: 
@@ -29,7 +29,7 @@
 
   </section>
 
-</body>
+</div>
 
 </template>
 
@@ -100,29 +100,13 @@ export default {
 <style scoped>
 
 
-  body {
-    margin: 0;
-    background-color: #A6E9A3;
-    min-height: 100%;
-    min-width: 1024px;
-    width: 100%;
-    height: auto;
-    position: fixed;
-    top: 0;
-    left: 0;
-    
-  }
-
-  #joinQuiz {
-    display: grid;
+  #body {
     background-color: #A6E9A3 ;
-    grid-template-columns: 1fr 1fr;
-    padding: 1em;
-    grid-gap: 2em;
-    
-
-    
+    width: 100%;
+    height: 100%;
+    position:fixed;
   }
+
   #joinbutton {
     margin: 1em;
     text-decoration: none; 
@@ -131,7 +115,6 @@ export default {
     border-radius: 2em;
     border-style: outset;
     border-color: #FFF1AD;
-
     color: #F87575;
     font-size:1.5em;
     bottom: 0;
@@ -166,14 +149,20 @@ h1 {
   margin-bottom: 1em;
   }
 
-  #name {
-    grid-column: 1;
-    font-size:1.5em;
-    margin: auto;
-    margin-left: 30%;
-    background-color: #5C95FF;
+  #joinQuiz {
+    display: grid;
+    /* background-color: red; */
+    grid-template-columns: 1fr 1fr;
+    padding: 1em;
+    grid-gap: 15%;
+    font-size: 1.5em;
     height: 10em;
-    width: 20em;
+    place-items: center start;
+    width: 70%;
+    margin: auto;
+  }
+  .box{
+    background-color: #5C95FF;
     display:flex;
     align-items: center;
     justify-content: center;
@@ -182,26 +171,18 @@ h1 {
     border-color: #5C95FF;
     color: #FFF1AD;
     font-weight: bold;
+    height: 100%;
+    /* width: 100%; */
     
   }
+  #name {
+    grid-column: 1;
+    margin-left: 30%;
+  }
 
-  #id {
+  #idbox {
     grid-column: 2;
-    font-size:1.5em;
-    margin: auto;
     margin-right: 30%;
-    background-color: #5C95FF;
-    height: 10em;
-    width: 20em;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 3em;
-    border-style:outset;
-    border-color: #5C95FF;
-    color: #FFF1AD;
-    font-weight: bold;
-
   }
 
   input {
@@ -212,6 +193,26 @@ h1 {
     border-radius: 1em;
     border-color:#5C95FF;
     border-style: outset;
+  }
+  @media screen and (max-width:50em) {
+    #joinQuiz {
+      grid-template-columns: 100%;
+      grid-template-rows: 50% 50%;
+
+    }
+    #name {
+      grid-column:1;
+      grid-row:1;
+      margin-left: 0%;
+      width: 100%;
+
+    }
+    #idbox {
+      grid-column:1;
+      grid-row: 2;
+      margin-right: 0%;
+      width: 100%;
+    }
   }
 
 </style>

@@ -94,10 +94,6 @@ export default {
 
   #startQuiz:hover {
     box-shadow: 0 5px 15px #0079918f;
-
-  }
-  h1 {
-    font-size: 4em; 
   }
 
   #text {
@@ -176,6 +172,10 @@ export default {
  }
 }
 
-
+@media screen and (max-width:50em) {
+  h1 {
+    font-size: 2em;
+  }
+}
  
 </style>

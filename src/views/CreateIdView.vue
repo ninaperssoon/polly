@@ -2,14 +2,18 @@
   
 <body>
   <homeButton class="homeButton"></homeButton>
+  <div class="paddingwrapper">
   <div class="pollLink">
     <p>{{uiLabels.Enternameyourquiz}} 
       <br> <br>
     <input type="text" v-model="id"> </p> 
   </div>
+</div>
+<div id="paddiv">
   <button v-on:click="createPoll" id="pollButton">
       {{uiLabels.Continuecreate}} 
   </button>
+</div>
 </body>
 
 </template>
@@ -68,14 +72,14 @@ export default {
   }
   #pollButton {
     color:black;
-    margin: 1em;
+   
     text-decoration: none; 
     background-color: #FFF1AD;
     padding: 0.5em;
     border-radius: 3em;
     border-style: outset;
     border-color: #FFF1AD;
-    font-size: 1.5em;
+    font-size: 3vw;
     color: #F87575;
     font-family: 'Righteous', serif;
     text-shadow: .05em .05em 0 #4779d6;
@@ -89,10 +93,10 @@ export default {
 
   .pollLink {
     font-size:1.5em;
-    margin: auto;
+    
     background-color: #5C95FF;
     height: 10em;
-    width: 30em;
+    width: 60vw;
     display:flex;
     align-items: center;
     justify-content: center;
@@ -112,6 +116,16 @@ export default {
     border-color:#5C95FF;
     border-radius: 1em;
     border-style: outset;
+  }
+  .paddingwrapper{
+    padding-left: 20vw;
+  }
+  #paddiv{
+    
+    display: grid;
+    padding-left: 20vw;
+    padding-right: 20vw;
+    width: 60vw;
   }
 
   

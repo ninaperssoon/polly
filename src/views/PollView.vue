@@ -30,8 +30,8 @@
       <div >  
         <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" v-if="visibleButtons"/>      
       
+      </div>
     </div>
-  </div>
 
     </div>
   </div>
@@ -40,7 +40,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import QuestionComponent from '@/components/QuestionComponent.vue';
 import io from 'socket.io-client';
 import homeButton from '@/components/HomeComponent.vue';

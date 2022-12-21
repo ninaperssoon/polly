@@ -128,7 +128,7 @@ export default {
     margin: auto;
     padding: 2em;
     padding-bottom: 2em;
-    width: 30em;
+    width: 50%;
     margin-top: 1em;
     margin-bottom: 1em;
     background-color:#5C95FF;
@@ -162,4 +162,15 @@ export default {
   #delete {
     height: 2.5em;
   }
+
+  @media screen and (max-width:50em) {
+    .myQuizzes {
+      width: 90%;
+      grid-template-columns: 30% 25% 18% 18%;
+
+    }
+
+
+  }
+
 </style>

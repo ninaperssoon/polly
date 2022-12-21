@@ -521,6 +521,20 @@ Data.prototype.deleteQuiz = function(pollId){
   return this.polls
 }
 
+Data.prototype.hostQuiz = function(pollId){
+  const poll = this.polls[pollId];
+  if ( typeof poll !== 'undefined'){
+    poll.hosting = true
+  }
+}
+
+Data.prototype.isQuizHosted = function(pollId){
+  const poll = this.polls[pollId];
+  if ( typeof poll !== 'undefined'){
+    return poll.hosting
+  }
+  return true
+}
 
 
 module.exports = Data;

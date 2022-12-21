@@ -71,7 +71,7 @@ methods:{
 </script>
 
 
-<style >
+<style scoped >
 #consequenceBox{
 display: grid;
 grid-template-columns: 6fr 1fr 1fr;
