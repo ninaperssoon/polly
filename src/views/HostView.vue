@@ -1,12 +1,13 @@
 <template>
   <div id="body">
     <homeButton class="homeButton"> </homeButton>
+    <h1>{{uiLabels.hostQuiz}}</h1>
     <div class="wrapper">
 
       <div id="palm1"><img class="palmtree" src="../../public/img/palmtree.gif"></div>
 
       <div class="theHost">
-        <h1>{{uiLabels.hostQuiz}}</h1>
+       
           <div id="host">
             <p> {{uiLabels.writeQuizId}}: 
             <br>
@@ -105,7 +106,6 @@ export default {
     margin-top: -6em;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-
   }
 
   #palm1 {
@@ -124,7 +124,7 @@ export default {
     font-size:1.5em;
     margin: auto;
     margin-top: 1em;
-    height: 30%;
+    height: 50%;
     width: 75%;
     background-color: #5C95FF;
     display:flex;
@@ -167,8 +167,8 @@ export default {
   }
 
 h1 {
-  margin-bottom: 1em;
-  margin-top: 1em;
+  margin-bottom: 3em;
+  margin-top: -5em;
   }
 
   input {
@@ -184,9 +184,8 @@ h1 {
 
   .palmtree {
     width: 80%;
-    margin-top: 12em;
+    /* margin-top: 1em; */
   }
-
   @media screen and (max-width:50em) {
   .palmtree {
     width: 0%;
