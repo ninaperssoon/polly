@@ -2,9 +2,12 @@
   <div class="body">
       <homeButton class="homeButton"></homeButton>
   <div id="wrapper">
-   <h1> {{uiLabels.yourehosting}} {{pollId}}  </h1> 
+    <h1 v-if="(this.vote == true)"> {{ uiLabels.pleaceVote}}{{this.playingName}}{{uiLabels.s}} {{ uiLabels.rewardpunishment }} </h1>
+    <h2> {{uiLabels.yourehosting}} {{pollId}}  </h2> 
+
 
   <div class="container">
+    
     <div class="scene scene--card">
       <div class="card" v-bind:class="{ flipme: cardOne == 'flipped' }">
 
@@ -19,22 +22,28 @@
 
         </div>
         <div class="card__face card__face--back" v-bind:class="{ correct: ans == uiLabels.correct}">
-        <p > <span id="correctness"> {{this.ans}}! </span> <br> {{this.playingName}}{{uiLabels.s}} {{this.con}} {{uiLabels.is}} {{this.consequence}}</p>
-        </div>
+        <p v-if="(this.consequence !== '')"> <span id="correctness"> {{this.ans}}! </span> <br> {{this.playingName}}{{uiLabels.s}} {{this.con}} {{uiLabels.is}} {{this.consequence}}</p>
+        <p v-else id="correctness"> {{this.ans}}! </p> 
       </div>
-      <!-- <div id="buttonContainer">  
-        <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" />      
+      </div>
+      <div id="buttonContainer">  
+        <VotingComponent v-bind:voting="voteRewards" v-on:vote="submitVoteR" v-if="visibleRewards" message="#A6E9A3"/>  
+        <VotingComponent v-bind:voting="votePunishments" v-on:vote="submitVoteP" v-if="visiblePunishments" message="#F87575"/>
       
-    </div> -->
-
     </div>
-  </div>
-  <button v-on:click="nextQuestion" >
+    <div id="resetNext"> 
+      <button v-on:click="nextQuestion" >
     {{uiLabels.NextQuestion}} 
   </button>
   <button v-on:click="resetQuiz">
     {{uiLabels.ResetQuiz}} 
   </button>
+    </div>
+    
+  
+    </div>
+  </div>
+
  
 </div>
 </div>
@@ -45,6 +54,7 @@
 // import QuestionComponent from '@/components/QuestionComponent.vue';
 import io from 'socket.io-client';
 import homeButton from '@/components/HomeComponent.vue';
+import VotingComponent from '@/components/VotingComponent.vue';
 // import rewards from '@/CreaterewardView.vue';
 // import punishments from '@/CreaterewardView.vue';
 
@@ -55,6 +65,7 @@ export default {
   name: 'HostPollView',
   components: {
     homeButton,
+    VotingComponent,
     // QuestionComponent,    
   },
   data: function () {
@@ -93,11 +104,14 @@ export default {
         r: "",
         p: ""
       },
+      visibleRewards: true,
+      visiblePunishments: true,
+      vote: false,
     }
   },
   created: function () {
     this.pollId = this.$route.params.id
-    socket.emit('joinPoll', this.pollId)
+    //socket.emit('joinPoll', this.pollId)
     socket.emit('joinHostPoll', this.pollId)
     //socket.emit('firstParticipant', this.pollId)
     socket.on("isVotingNeeded", (data) => {
@@ -105,18 +119,31 @@ export default {
       console.log("votedNeeded: ", this.voteNeeded)
       if (this.voteNeeded.r == "yes") {
         socket.emit("createRewardsVoting", this.pollId)
-        console.log("started voting for Rewards")
+        console.log("HostPollView.vue, socket isVoitngNeeded: started voting for Rewards")
         this.waitningVote.r = false;
       }
       if (this.voteNeeded.p == "yes") {
         socket.emit("createPunishmentsVoting", this.pollId)
-        console.log("started voting for Punishments")
+        console.log("HostPollView.vue, socket isVoitngNeeded: started voting for Punishments")
         this.waitningVote.p = false;
       }
     })
     socket.on("newQuestion", q => {
       this.question = q
+      if(q !== null){
+        this.visiblePunishments=true;
+        this.visibleRewards= true;
+      }
     })
+    socket.on("checkVoting", (data) => {
+    console.log("HostPollView.vue: checkVoting: ", data)
+    if(data == true){
+      this.vote=true
+    }
+    else{
+      this.vote=false
+    }
+  })
 
     this.lang = this.$route.params.lang;
     socket.emit("pageLoaded", this.lang);
@@ -133,13 +160,15 @@ export default {
       this.allPunishments = data
     )
     socket.on("getVotingRewards", (data) => {
-      this.rewards = data
-      console.log(this.rewards)
+      this.voteRewards = data
+      console.log("HostPollView, getVotingRewards: ", this.voteRewards, data)
+  
     }
     )
-    socket.on("getVotingPunishments", (data) =>
+    socket.on("getVotingPunishments", (data) =>{
       this.votePunishments = data
-    )
+      console.log("HostPollView, getVotingPunishments: ", this.votePunishments, data)
+  })
     socket.on("flipUpdate", data => {
       this.ans = data.wor === "correct"?this.uiLabels.correct:this.uiLabels.incorrect
       this.con = data.con === "punishment"?this.uiLabels.punishment2:this.uiLabels.reward
@@ -179,7 +208,7 @@ export default {
 
   },
   methods: {
-    submitAnswer: function (answer) {
+  /*   submitAnswer: function (answer) {
       socket.emit("submitAnswer", { pollId: this.pollId, answer: answer })
       this.cardOne == 'start' ? (this.cardOne = 'flipped') : (this.cardOne = 'start');
       if (this.ans == 'correct') {
@@ -187,7 +216,19 @@ export default {
       }
       const buttonContainer = document.getElementById('buttonContainer');
       buttonContainer.remove();
+    }, */
+    submitVoteR: function (vote) {
+      console.log(vote)
+      socket.emit("submitVoteR", {pollId: this.pollId, vote: vote.v, index: vote.index})
+      this.visibleRewards=false;
+     
+      
     },
+    submitVoteP: function (vote) {
+      console.log(vote)
+      socket.emit("submitVoteP", {pollId: this.pollId, vote: vote.v, index: vote.index})
+      this.visiblePunishments=false;
+  },
 
     nextQuestion: function () {
 
@@ -199,12 +240,13 @@ export default {
       
       if (this.voteNeeded.r == "yes") {
         socket.emit("createRewardsVoting", this.pollId)
-        console.log("started voting for Rewards")
+        console.log("HostPollView.vue, runQuestion: started voting for Rewards")
         this.waitningVote.r = false;
       }
       if (this.voteNeeded.p == "yes") {
+        
         socket.emit("createPunishmentsVoting", this.pollId)
-        console.log("started voting for Punishments")
+        console.log("HostPollView.vue, runQuestion: started voting for Punishments")
         this.waitningVote.p = false;
       }
     },
@@ -212,12 +254,12 @@ export default {
       socket.emit("runQuestion", { pollId: this.pollId, questionNumber: 0 });
       if (this.voteNeeded.r == "yes") {
         socket.emit("createRewardsVoting", this.pollId)
-        console.log("started voting for Rewards")
+        console.log("HostPollView.vue, resetQuiz: started voting for Rewards")
         this.waitningVote.r = false;
       }
       if (this.voteNeeded.p == "yes") {
         socket.emit("createPunishmentsVoting", this.pollId)
-        console.log("started voting for Punishments")
+        console.log("HostPollView.vue, resetQuiz: started voting for Punishments")
         this.waitningVote.p = false;
       }
      
@@ -320,6 +362,9 @@ export default {
   grid-gap: 0.5em;
   grid-template-columns: 1fr;
 }
+#resetNext{
+  margin-top: 2em;
+}
 
 .correct {
   background-color: #5C95FF;
@@ -363,6 +408,14 @@ export default {
 h1 {
   font-size: 4em; 
   margin-top: -5em;
+  }
+  h2 {
+    margin-top: 1em;
+    margin-bottom: -1em;
+    font-weight: bold;
+    color: #FFF1AD;
+    text-shadow: .08em .08em 0 #4779d6;
+
   }
 
   button {

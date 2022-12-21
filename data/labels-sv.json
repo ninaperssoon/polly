@@ -64,5 +64,8 @@
 	"punishments" : "Bestraffningar",
 	"DeleteQuiz":"Radera Quiz",
 	"Host": "Anordna",
-	"waitingForParticipants": "Väntar på att deltagare ska ansluta"
+	"waitingForParticipants": "Väntar på att deltagare ska ansluta",
+	"watingForVotes": "Vänta på att de andra spelarna röstar",
+	"pleaceVote": "Rösta på ",
+	"rewardpunishment": "belöning och straff"
 }

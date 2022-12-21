@@ -418,7 +418,7 @@ Data.prototype.countVotingP = function(pollId) {
   const poll = this.polls[pollId];
   if (typeof poll !== 'undefined') {
     console.log("Partici length: ", poll.participants.length, " antalet röster: ", poll.amountOfVotesP)
-    if(poll.participants.length == (poll.amountOfVotesP+1)){
+    if(poll.participants.length == (poll.amountOfVotesP)){
       console.log("countingVotesP")
       if (poll.votesP[0]>poll.votesP[1]){
         poll.votedPunishment=poll.votingPunishments[0]
@@ -444,7 +444,7 @@ Data.prototype.countVotingP = function(pollId) {
 Data.prototype.countVotingR = function(pollId) {
   const poll = this.polls[pollId];
   if (typeof poll !== 'undefined') {
-    if(poll.participants.length == (poll.amountOfVotesR+1)){
+    if(poll.participants.length == (poll.amountOfVotesR)){
       console.log("countingVotesR")
       if (poll.votesR[0]>poll.votesR[1]){
         poll.votedReward=poll.votingRewards[0]

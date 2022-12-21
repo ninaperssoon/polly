@@ -3,7 +3,8 @@
   <div class="body">
     <homeButton class="homeButton"></homeButton>
     <div id="wrapper">
-   <h1> {{uiLabels.yourePlaying}}{{pollId}} </h1> 
+   <h1 v-if="(voting == true)">  {{ uiLabels.watingForVotes}}</h1> 
+   <h2 > {{uiLabels.yourePlaying}}{{pollId}} </h2>
 
   <div class="container">
     <div class="scene scene--card">
@@ -22,8 +23,9 @@
 
         </div>
         <div class="card__face card__face--back" v-bind:class="{ correct: ans == uiLabels.correct}">
-        <p> <span id="correctness"> {{this.ans}}! </span><br> {{uiLabels.Your}} {{this.con}}{{uiLabels.is}}{{this.consequence}} </p>
-        </div>
+        <p v-if="(this.consequence !== '')"> <span id="correctness"> {{this.ans}}! </span><br> {{uiLabels.Your}} {{this.con}}{{uiLabels.is}}{{this.consequence}} </p>
+       <p v-else id="correctness"> {{this.ans}}! </p>  
+      </div>
       </div>
       <div >  
         <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" v-if="visibleButtons"/>      
@@ -71,6 +73,7 @@ export default {
       punishment: "",
       consequence: "",
       visibleButtons: true,
+      voting: false,
      
     }
   },
@@ -99,11 +102,13 @@ export default {
     socket.on("checkVoting",(data) => {
       console.log("checkVoting")
       if(data == true){
+        this.voting = true;
         this.visibleButtons=false;
         console.log("wating for votes")
       }
       else{
         this.visibleButtons=true;
+        this.voting =false;
       } 
   })
 
@@ -283,7 +288,14 @@ h1 {
   font-size: 4em; 
   margin-top: -6em;
   }
+  h2 {
+    margin-top: 1em;
+    margin-bottom: -1em;
+    font-weight: bold;
+    color: #FFF1AD;
+    text-shadow: .08em .08em 0 #4779d6;
 
+  }
 #background {
   width: 100%;
 }

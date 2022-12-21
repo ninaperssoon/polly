@@ -65,5 +65,8 @@
 	"punishments" : "Punishments",
 	"DeleteQuiz":"Delete Quiz",
 	"Host": "Host",
-	"waitingForParticipants": "Waiting for participants to join"
+	"waitingForParticipants": "Waiting for participants to join",
+	"watingForVotes": "Wait for the other players to vote",
+	"pleaceVote": "Vote for ",
+	"rewardpunishment": "reward and punishment"
 }

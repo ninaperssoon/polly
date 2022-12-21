@@ -57,9 +57,18 @@ function sockets(io, socket, data) {
     //io.to(pollId).emit('answeringParticipant', data.getParticipant(pollId));
   });
   socket.on('joinHostPoll', function(pollId){
+    data.resetVotes(pollId);
     data.createAnsParticipant(pollId)
+    socket.join(pollId);
     io.to(pollId).emit('answeringParticipant', data.getAnsParticipant(pollId));
     socket.emit("isVotingNeeded", data.isVotingNeeded(pollId))
+    socket.emit('newQuestion', data.getQuestion(pollId));
+    socket.emit('dataUpdate', data.getAnswers(pollId));
+    socket.emit("checkVoting", data.isVoting(pollId));
+    socket.emit('answeringParticipant', data.getAnsParticipant(pollId));
+    socket.emit("getVotingRewards", data.getVotingRewards(pollId));
+    socket.emit("getVotingPunishments", data.getVotingPunishments(pollId));
+    
 
   });
 

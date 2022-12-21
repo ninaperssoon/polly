@@ -2,7 +2,8 @@
   <div class="body">
     <homeButton class="homeButton"></homeButton>
     <div id="wrapper">
-   <h1> {{uiLabels.yourePlaying}}{{pollId}}</h1> 
+   <h1 v-if="(this.vote == true)"> {{ uiLabels.pleaceVote}}{{this.playingName}}{{uiLabels.s}} {{ uiLabels.rewardpunishment }} </h1> 
+   <h2>{{uiLabels.yourePlaying}}{{pollId}}</h2>
 
   <div class="container">
     <div class="scene scene--card">
@@ -22,8 +23,9 @@
 
         </div>
         <div class="card__face card__face--back" v-bind:class="{ correct: ans == uiLabels.correct}">
-        <p><span id="correctness"> {{this.ans}}! </span> <br> {{playingName}}{{uiLabels.s}} {{this.con}} {{uiLabels.is}} {{this.consequence}} </p>
-        </div>
+        <p v-if="(this.consequence !== '')"><span id="correctness"> {{this.ans}}! </span> <br> {{playingName}}{{uiLabels.s}} {{this.con}} {{uiLabels.is}} {{this.consequence}} </p>
+        <p v-else id="correctness"> {{this.ans}}! </p> 
+      </div>
       </div>
       <div id="buttonContainer">  
         <!-- <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" v-if="visibleButtons"/>    -->
@@ -84,6 +86,7 @@ export default {
       playingName: "",
       voting: { r: [],
                 p: []},
+      vote: false,
     }
   },
   created: function () {
@@ -111,6 +114,15 @@ export default {
     this.name = this.$route.params.name;
     socket.on("init", (labels) => {
       this.uiLabels = labels
+  })
+  socket.on("checkVoting", (data) => {
+    console.log("ObsView.vue: checkVoting: ", data)
+    if(data == true){
+      this.vote=true
+    }
+    else{
+      this.vote=false
+    }
   })
 
     socket.on("getVotingRewards", (data) => {
@@ -304,5 +316,12 @@ h1 {
   font-size: 4em; 
   margin-top: -5em;
   }
+  h2 {
+    margin-top: 1em;
+    margin-bottom: -1em;
+    font-weight: bold;
+    color: #FFF1AD;
+    text-shadow: .08em .08em 0 #4779d6;
 
+  }
 </style>
