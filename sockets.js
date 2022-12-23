@@ -44,7 +44,6 @@ function sockets(io, socket, data) {
     socket.emit("getVotedPunishment", data.getVotedPunishment(pollId));
     socket.emit("checkVoting", data.isVoting(pollId));
     socket.emit('answeringParticipant', data.getAnsParticipant(pollId));
-    //io.to(pollId).emit('answeringParticipant', data.getParticipant(pollId));
   });
   socket.on('joinObs', function(pollId) {
     socket.join(pollId);
@@ -54,7 +53,6 @@ function sockets(io, socket, data) {
     socket.emit('answeringParticipant', data.getAnsParticipant(pollId));
     socket.emit("getVotingRewards", data.getVotingRewards(pollId));
     socket.emit("getVotingPunishments", data.getVotingPunishments(pollId));
-    //io.to(pollId).emit('answeringParticipant', data.getParticipant(pollId));
   });
   socket.on('joinHostPoll', function(pollId){
     data.resetVotes(pollId);
@@ -137,7 +135,6 @@ function sockets(io, socket, data) {
   socket.on('startedQuiz', function(d) {
     data.startedQuiz(d.pollId, d.participants);
     io.to(d.pollId).emit('quizUpdate', data.getQuiz(d.pollId));
-    // io.to(d.pollId).emit('answeringParticipant', data.getParticipant(d.pollId));
    })
 
   socket.on("getQuizzes", function() {

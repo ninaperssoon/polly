@@ -3,48 +3,46 @@
   <div class="body">
     <homeButton class="homeButton"></homeButton>
     <div id="wrapper">
-   <h1 v-if="(voting == true)">  {{ uiLabels.watingForVotes}}</h1> 
-   <h2 > {{uiLabels.yourePlaying}}{{pollId}} </h2>
+      <h1 v-if="(voting == true)">  {{ uiLabels.watingForVotes}}</h1> 
+      <h2 > {{uiLabels.yourePlaying}}{{pollId}} </h2>
 
-  <div class="container">
-    <div class="scene scene--card">
-      <div class="card" v-bind:class="{ flipme: cardOne == 'flipped' }">
+      <div class="container">
+        <div class="scene scene--card">
+            <div class="card" v-bind:class="{ flipme: cardOne == 'flipped' }">
       
-        <div class="card__face card__face--front">
+              <div class="card__face card__face--front">
           
-          <p v-if="(this.question!== null)">{{this.question.q}} </p>
-          <p v-else> {{uiLabels.ReachedEndQuiz}}
-            <br><br>
-            <router-link class="button" v-bind:to="('/join/'+lang)">{{uiLabels.joinanotherquiz}}</router-link>
-            <router-link class="button" v-bind:to="('/')">{{uiLabels.Returntohomepage}}</router-link>
+                <p v-if="(this.question!== null)">{{this.question.q}} </p>
+                <p v-else> {{uiLabels.ReachedEndQuiz}}
+                <br><br>
+                <router-link class="button" v-bind:to="('/join/'+lang)">{{uiLabels.joinanotherquiz}}</router-link>
+                <router-link class="button" v-bind:to="('/')">{{uiLabels.Returntohomepage}}</router-link>
+                </p>
+          
 
-          </p>
-          
+              </div>
+              <div class="card__face card__face--back" v-bind:class="{ correct: ans == uiLabels.correct}">
+                <p v-if="(this.consequence !== '')"> <span id="correctness"> {{this.ans}}! </span><br> {{uiLabels.Your}} {{this.con}}{{uiLabels.is}}{{this.consequence}} </p>
+                <p v-else id="correctness"> {{this.ans}}! </p>  
+              </div>
+
+            </div>
+            <div >  
+              <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" v-if="visibleButtons"/>      
+            </div>
 
         </div>
-        <div class="card__face card__face--back" v-bind:class="{ correct: ans == uiLabels.correct}">
-        <p v-if="(this.consequence !== '')"> <span id="correctness"> {{this.ans}}! </span><br> {{uiLabels.Your}} {{this.con}}{{uiLabels.is}}{{this.consequence}} </p>
-       <p v-else id="correctness"> {{this.ans}}! </p>  
-      </div>
-      </div>
-      <div >  
-        <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" v-if="visibleButtons"/>      
-      
       </div>
     </div>
-
-    </div>
-  </div>
  
-</div>
+  </div>
+
 </template>
 
 <script>
 import QuestionComponent from '@/components/QuestionComponent.vue';
 import io from 'socket.io-client';
 import homeButton from '@/components/HomeComponent.vue';
-
-
 
 const socket = io();
 
@@ -167,7 +165,6 @@ export default {
 <style scoped>
 
 .body {
-  /*background-color: #A6E9A3;*/
   height: 100%;
   width: 100%;
   position: fixed;
@@ -238,8 +235,6 @@ export default {
   transform: rotateY(180deg);
 }
 
-
-
 .correct {
   background-color:#5C95FF;
   border-color: #4c88f8;
@@ -264,10 +259,8 @@ export default {
   }
 
   .button:hover {
-    box-shadow: 0 5px 15px #c0ac48;
-    transform: translateY(-2px);
-    
-
+  box-shadow: 0 5px 15px #c0ac48;
+  transform: translateY(-2px);
   }
 
   #wrapper {
