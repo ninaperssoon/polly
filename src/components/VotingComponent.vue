@@ -39,16 +39,16 @@ export default {
 <style>
  button {
   color: black;
-    border-radius: 1em;
-    font-size: 1.2em;
-    border-style: outset;
-    border-color: #fff1adbd;
-    height: 2em;
+  border-radius: 1em;
+  font-size: 1.2em;
+  border-style: outset;
+  border-color: #fff1adbd;
+  height: 2em;
  }
 
  button:hover{
-  box-shadow: 0 5px 15px #439A86;
-    transform: translateY(-2px);
+  box-shadow: 0 5px 15px #59615f;
+  transform: translateY(-2px);
 
   
  }

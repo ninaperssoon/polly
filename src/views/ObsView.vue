@@ -317,11 +317,18 @@ h1 {
   margin-top: -5em;
   }
   h2 {
-    margin-top: 1em;
-    margin-bottom: -1em;
-    font-weight: bold;
-    color: #FFF1AD;
-    text-shadow: .08em .08em 0 #4779d6;
-
+  margin-top: 1em;
+  margin-bottom: -1em;
+  font-weight: bold;
+  color: white;
+  text-shadow: .08em .08em 0 #4779d6;
   }
+
+  @media screen and (max-width:50em) {
+h1 {
+  margin-top: 0em;
+  font-size: 9vw;
+}
+
+}
 </style>

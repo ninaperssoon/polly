@@ -413,7 +413,7 @@ h1 {
     margin-top: 1em;
     margin-bottom: -1em;
     font-weight: bold;
-    color: #FFF1AD;
+    color: white;
     text-shadow: .08em .08em 0 #4779d6;
 
   }
@@ -442,4 +442,11 @@ h1 {
     box-shadow: 0 5px 15px #90875b;
 
   }
+@media screen and (max-width:50em) {
+h1 {
+  margin-top: 0em;
+  font-size: 9vw;
+}
+
+}
 </style>
