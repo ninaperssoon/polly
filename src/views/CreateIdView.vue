@@ -2,18 +2,14 @@
   
 <body>
   <homeButton class="homeButton"></homeButton>
-  <div class="paddingwrapper">
   <div class="pollLink">
     <p>{{uiLabels.Enternameyourquiz}} 
       <br> <br>
     <input type="text" v-model="id"> </p> 
   </div>
-</div>
-<div id="paddiv">
   <button v-on:click="createPoll" id="pollButton">
       {{uiLabels.Continuecreate}} 
   </button>
-</div>
 </body>
 
 </template>
@@ -62,10 +58,8 @@ export default {
     margin: 0;
     height: 46.5em;
     background-color: #A6E9A3;
-    min-height: 100%;
-    min-width: 1024px;
     width: 100%;
-    height: auto;
+    height: 100%;
     position: fixed;
     top: 0;
     left: 0;
@@ -79,10 +73,11 @@ export default {
     border-radius: 3em;
     border-style: outset;
     border-color: #FFF1AD;
-    font-size: 3vw;
+    font-size: 2vw;
     color: #F87575;
     font-family: 'Righteous', serif;
     text-shadow: .05em .05em 0 #4779d6;
+    margin-top: 3%;
   }
 
   #pollButton:hover {
@@ -92,11 +87,12 @@ export default {
   }
 
   .pollLink {
+    margin:auto;
     font-size:1.5em;
     
     background-color: #5C95FF;
-    height: 10em;
-    width: 60vw;
+    height: 15vw;
+    width: 40vw;
     display:flex;
     align-items: center;
     justify-content: center;
@@ -117,15 +113,15 @@ export default {
     border-radius: 1em;
     border-style: outset;
   }
-  .paddingwrapper{
-    padding-left: 20vw;
-  }
-  #paddiv{
-    
-    display: grid;
-    padding-left: 20vw;
-    padding-right: 20vw;
-    width: 60vw;
+  @media screen and (max-width:50em) {
+.pollLink {
+  width: 90vw;
+  height: 40vw;
+}
+
+    #pollButton {
+      font-size: 1.5em;
+    }
   }
 
   

@@ -52,23 +52,17 @@
 </template>
 
 <script>
-// @ is an alias to /src
-// import QuestionComponent from '@/components/QuestionComponent.vue';
 import io from 'socket.io-client';
 import homeButton from '@/components/HomeComponent.vue';
 import VotingComponent from '@/components/VotingComponent.vue';
-// import rewards from '@/CreaterewardView.vue';
-// import punishments from '@/CreaterewardView.vue';
 
 const socket = io();
-
 
 export default {
   name: 'HostPollView',
   components: {
     homeButton,
     VotingComponent,
-    // QuestionComponent,    
   },
   data: function () {
     return {
@@ -113,9 +107,7 @@ export default {
   },
   created: function () {
     this.pollId = this.$route.params.id
-    //socket.emit('joinPoll', this.pollId)
     socket.emit('joinHostPoll', this.pollId)
-    //socket.emit('firstParticipant', this.pollId)
     socket.on("isVotingNeeded", (data) => {
       this.voteNeeded = data
       console.log("votedNeeded: ", this.voteNeeded)
@@ -210,15 +202,6 @@ export default {
 
   },
   methods: {
-  /*   submitAnswer: function (answer) {
-      socket.emit("submitAnswer", { pollId: this.pollId, answer: answer })
-      this.cardOne == 'start' ? (this.cardOne = 'flipped') : (this.cardOne = 'start');
-      if (this.ans == 'correct') {
-        this.con = "reward"
-      }
-      const buttonContainer = document.getElementById('buttonContainer');
-      buttonContainer.remove();
-    }, */
     submitVoteR: function (vote) {
       console.log(vote)
       socket.emit("submitVoteR", {pollId: this.pollId, vote: vote.v, index: vote.index})
@@ -279,7 +262,6 @@ export default {
 <style scoped>
 
 .body {
-  /* background-color: #A6E9A3; */
   height: 100%;
   width: 100%;
   position: fixed;
@@ -346,7 +328,6 @@ export default {
 }
 
 .card__face--back {
-  /*background: rgba(226, 60, 60, 0.915);*/
   background-color:#F87575;
   transform: rotateY(180deg); 
   border-color: #f76868;
@@ -415,7 +396,7 @@ h1 {
     margin-top: 1em;
     margin-bottom: -1em;
     font-weight: bold;
-    color: #FFF1AD;
+    color: white;
     text-shadow: .08em .08em 0 #4779d6;
 
   }
@@ -444,4 +425,11 @@ h1 {
     box-shadow: 0 5px 15px #90875b;
 
   }
+@media screen and (max-width:50em) {
+h1 {
+  margin-top: 0em;
+  font-size: 9vw;
+}
+
+}
 </style>

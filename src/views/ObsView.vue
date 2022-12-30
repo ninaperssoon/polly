@@ -28,14 +28,12 @@
       </div>
       </div>
       <div id="buttonContainer">  
-        <!-- <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" v-if="visibleButtons"/>    -->
               <p v-if="visibleRewards" class="textbutton" id="textbuttonflip"> Flip </p>        
                 <VotingComponent v-bind:voting="voting.r" v-on:vote="submitVoteR" v-if="visibleRewards" message="#97b13e"/> 
                 <p v-if="visiblePunishments" class="textbutton" id="textbuttonflop"> Flop</p> 
                 <VotingComponent v-bind:voting="voting.p" v-on:vote="submitVoteP" v-if="visiblePunishments" message="#eb8cb0"/>
            
       
-        <!-- <VotingComponent v-bind:voting="voting" v-on:voteR="submitVoteR" v-on:voteP="submitVoteP"  v-if="visibleButtons"/> -->
       
     </div>
 
@@ -47,11 +45,7 @@
 </template>
 
 <script>
-// @ is an alias to /src
-// import QuestionComponent from '@/components/QuestionComponent.vue';
 import VotingComponent from '@/components/VotingComponent.vue';
-// import VotingRewardComponent from '@/components/VotingRewardComponent.vue';
-// import VotingPunishmentComponent from '@/components/VotingPunishmentComponent.vue';
 import io from 'socket.io-client';
 import homeButton from '@/components/HomeComponent.vue';
 
@@ -61,10 +55,7 @@ export default {
   name: 'ObsView',
   components: {
     homeButton,
-    // QuestionComponent, 
     VotingComponent,
-    // VotingRewardComponent,
-    // VotingPunishmentComponent,
   },
   data: function () {
     return {
@@ -155,24 +146,6 @@ export default {
     })
   },
   methods: {
-    // submitAnswer: function (answer) {
-    //   console.log(answer)
-    //   socket.emit("submitAnswer", {pollId: this.pollId, answer: answer.a})
-    //   this.cardOne == 'start' ? (this.cardOne = 'flipped' ) : (this.cardOne = 'start' );
-    //   this.ans = this.question.s[answer.index];
-
-    //   if (this.ans == 'correct') {
-    //     this.con = "reward"
-    //     this.consequence = this.rewards[Math.floor(Math.random() * (this.rewards.length))]
-    //   }
-    //   else {
-    //     this.consequence = this.punishments[Math.floor(Math.random() * (this.punishments.length))]
-    //   }
-    //   this.visibleButtons=false;
-    //   console.log(this.rewards)
-      
-    // },
-
      submitVoteR: function (vote) {
       console.log(vote)
       socket.emit("submitVoteR", {pollId: this.pollId, vote: vote.v, index: vote.index})
@@ -192,7 +165,6 @@ export default {
 <style scoped>
 
 .body {
-  /* background-color: #A6E9A3; */
   height: 100%;
   width: 100%;
   position: fixed;
@@ -319,11 +291,18 @@ h1 {
   margin-top: -5em;
   }
   h2 {
-    margin-top: 1em;
-    margin-bottom: -1em;
-    font-weight: bold;
-    color: #FFF1AD;
-    text-shadow: .08em .08em 0 #4779d6;
+  margin-top: 1em;
+  margin-bottom: -1em;
+  font-weight: bold;
+  color: white;
+  text-shadow: .08em .08em 0 #4779d6;
+  }
+
+  @media screen and (max-width:50em) {
+h1 {
+  margin-top: 0em;
+  font-size: 9vw;
+}
 
   }
   .textbutton{

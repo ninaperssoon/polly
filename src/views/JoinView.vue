@@ -151,7 +151,6 @@ h1 {
 
   #joinQuiz {
     display: grid;
-    /* background-color: red; */
     grid-template-columns: 1fr 1fr;
     padding: 1em;
     grid-gap: 15%;
@@ -171,9 +170,7 @@ h1 {
     border-color: #5C95FF;
     color: #FFF1AD;
     font-weight: bold;
-    height: 100%;
-    /* width: 100%; */
-    
+    height: 100%;    
   }
   #name {
     grid-column: 1;

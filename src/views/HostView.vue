@@ -184,7 +184,6 @@ h1 {
 
   .palmtree {
     width: 80%;
-    /* margin-top: 1em; */
   }
   @media screen and (max-width:50em) {
   .palmtree {

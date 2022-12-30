@@ -55,10 +55,6 @@ export default {
       pollId: "",
       questions: [],
       uiLabels:{},
-      //answers: {},
-      //question: "",
-      //questionId: '',
-      
     }
   },
   created: function () {
@@ -79,8 +75,6 @@ export default {
     socket.on("updateQuestions", (data) =>{
       this.questions= data
       console.log("Skickade frågor från data:",data)
-      // this.question=this.questions.q 
-      // this.answers=this.questions.a
     })
     
   },
@@ -89,77 +83,43 @@ export default {
       socket.emit("createPoll", {pollId: this.pollId, lang: this.lang })
       socket.emit("anotherQuestion", {pollId: this.pollId})
     },
-   // addQuestion: function (index) {
-
-       //socket.emit("addQuestion", {pollId: this.pollId, index: index, q: this.question, a: this.answers } )
-      
-   // },
     newQuestion: function(){
       console.log(this.pollId)
       socket.emit("anotherQuestion", {pollId: this.pollId})
       console.log("NewQuestion", this.questions)
-
     },
-    
-  
     editQuestion: function(event, index){
-      //this.question=event.name;
-      //this.answers=event.answer;
       console.log("editQuestion index: ", index);
       socket.emit("editQuestion", {pollId: this.pollId, index: index, q: event.q, a: event.a, s: event.selected})
     }, 
-   
-    // runQuestion: function () {
-    //   socket.emit("runQuestion", {pollId: this.pollId, questionNumber: this.questionNumber})
-    // },
     saveQuestion: function (event,index) {
-      //this.questionId = event.questionId;
-      //console.log(question.questionId)
-      // this.answers = event.answer;
-      // this.question = event.q;
-      // this.questions[index]={q: this.question,
-      //                       a: this.answers        
-      //                     }
-                          socket.emit("addQuestion", {pollId: this.pollId, index: index, q: event.q, a: event.a, s: event.selected} )                    
-      // this.addQuestion(index);
+      socket.emit("addQuestion", {pollId: this.pollId, index: index, q: event.q, a: event.a, s: event.selected} )                    
       console.log(this.question) 
       console.log(this.answers);
       console.log(event.selected)
     },
     deleteQuestion: function(event,index){
-      // console.log(event.element);
-      // console.log(this.questions);
-      // var deleteIndex = this.questions.indexOf(event);
-      // console.log(deleteIndex);
       console.log("det här är index: ", index);
-      //this.question=event.name;
-      //this.answers=event.answer;
-      //this.$delete(this.questions, index);
-      //this.questions.splice(index, 1);
       socket.emit("deleteQuestion",{pollId: this.pollId, index: index, q: event.q, a: event.a, s: event.selected} )
       console.log(this.questions);
-       
     }
-   
   }
 }
 </script>
 
 <style scoped>
-.body { margin: auto;
-    background-color: #A6E9A3 ;
-    text-align: center;
-    width: 100%;
-    top: 0;
-    left: 0;
-    height: 100%;
-    position:fixed;
-    overflow-y: auto; 
-    overflow-x: hidden;  
-
+.body { 
+  margin: auto;
+  background-color: #A6E9A3 ;
+  text-align: center;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100%;
+  position:fixed;
+  overflow-y: auto; 
+  overflow-x: hidden;  
 }
-
-
 
 #backgroundDiv{
   padding: 5em;
@@ -169,7 +129,6 @@ button:hover {
   background-color:lightgreen;
   cursor:pointer;
 }
-
 
 #pollButton {
   margin-top: 1em;
@@ -181,29 +140,28 @@ button:hover {
 }
 
 #addButton {
-    margin: 1em;
-    text-decoration: none; 
-    background-color:#FFF1AD;
-    padding: 0.5em;
-    border-radius: 2em;
-    border-style: outset;
-    border-color: #FFF1AD;
-
-    color: #F87575;
-    font-size:1.5em;
-    bottom: 0;
-    right: 0;
-    border-style: outset;
-    font-family: 'Righteous', serif;
-    text-shadow: .05em .05em 0 #4779d6;
-    grid-column: 2;
+  margin: 1em;
+  text-decoration: none; 
+  background-color:#FFF1AD;
+  padding: 0.5em;
+  border-radius: 2em;
+  border-style: outset;
+  border-color: #FFF1AD;
+  color: #F87575;
+  font-size:1.5em;
+  bottom: 0;
+  right: 0;
+  border-style: outset;
+  font-family: 'Righteous', serif;
+  text-shadow: .05em .05em 0 #4779d6;
+  grid-column: 2;
 }
+
 #addButton:hover {
-    box-shadow: 0 5px 15px #80B57D;
-  }
+  box-shadow: 0 5px 15px #80B57D;
+}
 
 #wrapper {
-  /* grid-gap: 55em; */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   margin-bottom: 3em;
@@ -211,13 +169,20 @@ button:hover {
 #backButton{
   grid-column: 1;
   padding: 20 em;
-  
 }
 
 #nextButton{
   grid-column: 3;
   padding: 20 em;
-  
 }
 
+@media screen and (max-width:80em) {
+.flipPic {
+  height: 3em;
+}
+
+#addButton {
+  font-size:1em;
+}
+}
 </style>

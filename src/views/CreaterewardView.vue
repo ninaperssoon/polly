@@ -228,16 +228,19 @@ padding: 1em;
 .nextButton {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin-top: 1em;
+  padding: 3em;
+  padding-left: 20em;
+  padding-right: 20em;
+ 
 }
 
 #testButton {
   grid-column: 1;
-  margin-left: 70%;
+ 
 }
 #saveButton {
   grid-column: 2;
-  margin-right: 70%;
+  
 }
 
 
@@ -299,6 +302,17 @@ border-radius: 2em;
 button:hover {
   box-shadow: 0 5px 15px #80B57D;
     transform: translateY(-2px);
+}
+@media screen and (max-width:70em) {
+  .wrapper{
+    grid-template-columns: 1fr;
+  }
+  .nextButton{
+    padding-left: 0em;
+  padding-right: 0em;
+    grid-template-columns: 1fr;
+    row-gap: 0.5em;
+  }
 }
 
 </style>
