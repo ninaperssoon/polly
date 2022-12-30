@@ -29,8 +29,10 @@
       </div>
       <div id="buttonContainer">  
         <!-- <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" v-if="visibleButtons"/>    -->
-                 <VotingComponent v-bind:voting="voting.r" v-on:vote="submitVoteR" v-if="visibleRewards" message="#A6E9A3"/>  
-                <VotingComponent v-bind:voting="voting.p" v-on:vote="submitVoteP" v-if="visiblePunishments" message="#F87575"/>
+              <p v-if="visibleRewards" class="textbutton" id="textbuttonflip"> Flip </p>        
+                <VotingComponent v-bind:voting="voting.r" v-on:vote="submitVoteR" v-if="visibleRewards" message="#97b13e"/> 
+                <p v-if="visiblePunishments" class="textbutton" id="textbuttonflop"> Flop</p> 
+                <VotingComponent v-bind:voting="voting.p" v-on:vote="submitVoteP" v-if="visiblePunishments" message="#eb8cb0"/>
            
       
         <!-- <VotingComponent v-bind:voting="voting" v-on:voteR="submitVoteR" v-on:voteP="submitVoteP"  v-if="visibleButtons"/> -->
@@ -322,6 +324,23 @@ h1 {
     font-weight: bold;
     color: #FFF1AD;
     text-shadow: .08em .08em 0 #4779d6;
+
+  }
+  .textbutton{
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
+    font-weight: bold;
+    
+    font-size: 1.8em;
+  }
+  #textbuttonflip{
+    color:  #eb8cb0;
+    text-shadow: .08em .08em 0 #97b13e;
+
+  }
+  #textbuttonflop{
+    color: #97b13e;
+    text-shadow: .08em .08em 0 #eb8cb0;
 
   }
 </style>

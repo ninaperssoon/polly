@@ -56,6 +56,7 @@ export default {
     startQuiz: function() {
       console.log("Host Started quiz", this.participants)
       this.$router.push('/poll/'+this.id+'/'+this.lang+'/'+this.name)
+      console.log("StartQUiz Hosten är:", this.name)
       socket.emit("startedQuiz",{ pollId: this.id, 
                                   participants: this.participants }
                                 );

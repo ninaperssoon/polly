@@ -3,7 +3,7 @@
       <homeButton class="homeButton"></homeButton>
   <div id="wrapper">
     <h1 v-if="(this.vote == true)"> {{ uiLabels.pleaceVote}}{{this.playingName}}{{uiLabels.s}} {{ uiLabels.rewardpunishment }} </h1>
-    <h2> {{uiLabels.yourehosting}} {{pollId}}  </h2> 
+    <h2> {{uiLabels.yourehosting}} {{pollId}} {{ voteRewards }} </h2> 
 
 
   <div class="container">
@@ -26,7 +26,9 @@
         <p v-else id="correctness"> {{this.ans}}! </p> 
       </div>
       </div>
+      
       <div id="buttonContainer">  
+        
         <VotingComponent v-bind:voting="voteRewards" v-on:vote="submitVoteR" v-if="visibleRewards" message="#A6E9A3"/>  
         <VotingComponent v-bind:voting="votePunishments" v-on:vote="submitVoteP" v-if="visiblePunishments" message="#F87575"/>
       
