@@ -22,7 +22,7 @@
 
               </div>
               <div class="card__face card__face--back" v-bind:class="{ correct: ans == uiLabels.correct}">
-                <p v-if="(this.consequence !== '')"><span v-if="(this.joker == true)"> {{uiLabels.youJoker}} <br><br></span> <span id="correctness"> {{this.ans}}! </span><br> <span v-if = "(this.sendedJoker== true)">{{ this.playingName }}</span><span v-else>{{uiLabels.Your}}</span> {{this.con}}{{uiLabels.is}}{{this.consequence}} </p>
+                <p v-if="(this.consequence !== '')"><span v-if="(this.joker == true)"> {{uiLabels.youJoker}} <br><br></span> <span id="correctness"> {{this.ans}}! </span><br> <span v-if = "(this.sendedJoker== true)">{{ this.playingName }}{{uiLabels.s}}</span><span v-else>{{uiLabels.Your}}</span> {{this.con}}{{uiLabels.is}}{{this.consequence}} </p>
                 <p v-else id="correctness"> {{this.ans}}! </p>  
               </div>
 
