@@ -3,16 +3,16 @@
   <div class="body">
     <homeButton class="homeButton"></homeButton>
     <div id="wrapper">
-      <h1 v-if="(voting == true)">  {{ uiLabels.watingForVotes}}</h1> 
-      <h2 > {{uiLabels.yourePlaying}}{{pollId}} </h2>
+      <!-- <h1 v-if="(voting == true)">  {{ uiLabels.watingForVotes}}</h1>  -->
+      <h2 > {{uiLabels.yourePlaying}} {{pollId}} </h2>
 
       <div class="container">
         <div class="scene scene--card">
             <div class="card" v-bind:class="{ flipme: cardOne == 'flipped' }">
       
               <div class="card__face card__face--front">
-          
-                <p v-if="(this.question!== null)">{{this.question.q}} </p>
+                <p v-if="(voting == true)">  {{ uiLabels.watingForVotes}}</p>
+                <p v-else-if="(this.question!== null)">{{this.question.q}} </p>
                 <p v-else> {{uiLabels.ReachedEndQuiz}}
                 <br><br>
                 <router-link class="button" v-bind:to="('/join/'+lang)">{{uiLabels.joinanotherquiz}}</router-link>
@@ -22,13 +22,14 @@
 
               </div>
               <div class="card__face card__face--back" v-bind:class="{ correct: ans == uiLabels.correct}">
-                <p v-if="(this.consequence !== '')"> <span id="correctness"> {{this.ans}}! </span><br> {{uiLabels.Your}} {{this.con}}{{uiLabels.is}}{{this.consequence}} </p>
+                <p v-if="(this.consequence !== '')"><span v-if="(this.joker == true)"> {{uiLabels.youJoker}} <br><br></span> <span id="correctness"> {{this.ans}}! </span><br> <span v-if = "(this.sendedJoker== true)">{{ this.playingName }}</span><span v-else>{{uiLabels.Your}}</span> {{this.con}}{{uiLabels.is}}{{this.consequence}} </p>
                 <p v-else id="correctness"> {{this.ans}}! </p>  
               </div>
 
             </div>
             <div >  
-              <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" v-if="visibleButtons"/>      
+              <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" v-if="visibleButtons"/> 
+              <VotingComponent v-bind:voting="participants" v-on:vote="submitJoker" v-if="visibleJoker" message="#eb8cb0"/>  
             </div>
 
         </div>
@@ -43,6 +44,7 @@
 import QuestionComponent from '@/components/QuestionComponent.vue';
 import io from 'socket.io-client';
 import homeButton from '@/components/HomeComponent.vue';
+import VotingComponent from '@/components/VotingComponent.vue';
 
 const socket = io();
 
@@ -50,7 +52,8 @@ export default {
   name: 'PollView',
   components: {
     QuestionComponent,    
-    homeButton
+    homeButton,
+    VotingComponent
   },
   data: function () {
     return {
@@ -71,6 +74,13 @@ export default {
       consequence: "",
       visibleButtons: true,
       voting: false,
+      participants: [],
+      visibleJoker: false,
+      joker: false,
+      playingName: "",
+      jokerAns: "",
+      sendedJoker: false,
+
      
     }
   },
@@ -82,10 +92,16 @@ export default {
     socket.emit('joinPoll', this.pollId)
     socket.emit("pageLoaded", this.lang);
 
+    socket.on("getParticipantsandHost", (data) => {
+      this.participants = data
+      console.log("Mottagana participants, Poll.View.vue: getParticipants, data:", data, "particpants:",this.participants)
+      })
+
     socket.on("newQuestion", q =>{
       console.log("I PollView.vue: newQuestion, q: ", q)
       this.question = q
       console.log(this.cardOne)
+      this.sendedJoker= false
       if (this.cardOne !== "start"){
         console.log("här är jag")
         this.cardOne = 'start';
@@ -133,6 +149,9 @@ export default {
       console.log("flipUpdate: PollView.vue, ans: ", data.wor, " con: ", data.con)
       console.log(this.consequence)
       console.log(this.playingName)
+      if(typeof data.name !== 'undefined'){
+        this.playingName=data.name
+      }
       this.cardOne = 'flipped'
     })
   },
@@ -146,14 +165,36 @@ export default {
       if (this.ans == 'correct') {
         this.con = "reward"
         this.consequence = this.reward
+        this.jokerAns = 'correct'
+        
       }
       else {
         this.con = "punishment"
         this.consequence = this.punishment
+        this.jokerAns = 'incorrect'
       }
       this.visibleButtons=false;
       console.log(this.reward)
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer.a, wor: this.ans, con: this.con, consequence: this.consequence})
+      const jokerNum = Math.floor(Math.random() * 4);
+      if(jokerNum == 3){
+        this.joker=true;
+        this.visibleJoker = true;
+       socket.emit("isJoker", this.pollId)
+        
+      }
+      
+      
+    },
+    submitJoker: function (vote) {
+      console.log("PollView.vue, submitJoker: röstning:", vote)
+      //this.ans = this.question.s[answer.index];
+      console.log("PollView.vuesubmitJoker, ans:",this.jokerAns)
+      socket.emit("submitJoker", {pollId: this.pollId, name: vote.v, wor: this.jokerAns, con: this.con, consequence: this.consequence})
+      this.playingName = vote.v
+      this.visibleJoker = false;
+      this.joker=false;
+      this.sendedJoker=true;
       
       
     },

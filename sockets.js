@@ -44,6 +44,7 @@ function sockets(io, socket, data) {
     socket.emit("getVotedPunishment", data.getVotedPunishment(pollId));
     socket.emit("checkVoting", data.isVoting(pollId));
     socket.emit('answeringParticipant', data.getAnsParticipant(pollId));
+    socket.emit('getParticipantsandHost', data.getParticipants(pollId, "host"))
   });
   socket.on('joinObs', function(pollId) {
     socket.join(pollId);
@@ -86,6 +87,13 @@ function sockets(io, socket, data) {
     io.to(d.pollId).emit('flipUpdate', data.getFlip(d.wor, d.con, d.consequence))
     
   });
+  socket.on('submitJoker', function(d) {
+    io.to(d.pollId).emit('flipUpdate', data.getFlip(d.wor, d.con, d.consequence, d.name))
+    
+  });
+  socket.on("isJoker", function(pollId){
+    io.to(pollId).emit("Joker", data.getJoker(pollId));
+  })
 
   socket.on('resetAll', () => {
     data = new Data();
@@ -126,7 +134,7 @@ function sockets(io, socket, data) {
 
   socket.on('addParticipant', function(d) {
     data.addParticipant(d.pollId, d.name);
-    io.to(d.pollId).emit('participantUpdate', data.getParticipants(d.pollId));
+    io.to(d.pollId).emit('participantUpdate', data.getParticipants(d.pollId, "onlyP"));
    });
    socket.on('firstParticipant', function(pollId){
     io.to(pollId).emit('answeringParticipant', data.getAnsParticipant(pollId));
@@ -143,23 +151,7 @@ function sockets(io, socket, data) {
 
   })
   socket.on('joinWaiting', function(pollId) {
-    io.to(pollId).emit('participantUpdate', data.getParticipants(pollId));
-  })
-
-  socket.on('resetParticipants', function(pollId) {
-    data.resetParticipants(pollId);
-  })
-
-  socket.on('joinCreate', function(pollId) {
-    socket.emit('getPoll', data.getAllQuestions(pollId));
-  })
-
-  socket.on('joinCreatereward', function(pollId) {
-    socket.emit('getRewards', data.getAllRewards(pollId));
-    socket.emit('getPunishments', data.getAllPunishments(pollId));
-  })
-  socket.on('joinWaiting', function(pollId) {
-    io.to(pollId).emit('participantUpdate', data.getParticipants(pollId));
+    io.to(pollId).emit('participantUpdate', data.getParticipants(pollId, "onlyP"));
   })
 
   socket.on('resetParticipants', function(pollId) {

@@ -2,7 +2,7 @@
   <div class="body">
       <homeButton class="homeButton"></homeButton>
   <div id="wrapper">
-    <h1 v-if="(this.vote == true)"> {{ uiLabels.pleaceVote}}{{this.playingName}}{{uiLabels.s}} {{ uiLabels.rewardpunishment }} </h1>
+    <!-- <h1 v-if="(this.vote == true)"> {{ uiLabels.pleaceVote}}{{this.playingName}}{{uiLabels.s}} {{ uiLabels.rewardpunishment }} </h1> -->
     <h2> {{uiLabels.yourehosting}} {{pollId}} {{ voteRewards }} </h2> 
 
 
@@ -12,8 +12,9 @@
       <div class="card" v-bind:class="{ flipme: cardOne == 'flipped' }">
 
         <div class="card__face card__face--front">
-
-         <p v-if="(this.question !== null)">{{this.question.q}} <br> {{this.playingName}} {{uiLabels.IsAswering}}</p> 
+          <p v-if="(this.isJoker == true)"> {{ this.playingName }} {{uiLabels.isJoker}}</p>
+          <p v-else-if="(this.vote == true)"> {{ uiLabels.pleaceVote}}{{this.playingName}}{{uiLabels.s}} {{ uiLabels.rewardpunishment }} </p>
+         <p v-else-if="(this.question !== null)">{{this.question.q}} <br> {{this.playingName}} {{uiLabels.IsAswering}}</p> 
           <p v-else>{{uiLabels.ReachedEndQuiz}}
             <br><br>
             <router-link class="button" id="yellow" v-bind:to="('/myquizzes/'+lang)"> {{uiLabels.Hostanotherquiz}} </router-link>
@@ -103,6 +104,7 @@ export default {
       visibleRewards: true,
       visiblePunishments: true,
       vote: false,
+      isJoker: false,
     }
   },
   created: function () {
@@ -124,9 +126,11 @@ export default {
     })
     socket.on("newQuestion", q => {
       this.question = q
+      this.isJoker=false
       if(q !== null){
         this.visiblePunishments=true;
         this.visibleRewards= true;
+        
       }
     })
     socket.on("checkVoting", (data) => {
@@ -167,6 +171,9 @@ export default {
       this.ans = data.wor === "correct"?this.uiLabels.correct:this.uiLabels.incorrect
       this.con = data.con === "punishment"?this.uiLabels.punishment2:this.uiLabels.reward
       this.consequence = data.consequence
+      if(typeof data.name !== 'undefined'){
+        this.playingName=data.name
+      }
       this.cardOne = 'flipped'
       console.log("flipUpdate")
     })
@@ -198,6 +205,14 @@ export default {
           socket.emit("votingDone", this.pollId)
         }
       }
+    })
+    socket.on("Joker", data =>{
+      console.log("HostPollView.vue, Joker, data", data)
+      if (data == true){
+      this.cardOne = 'start'
+      this.isJoker = true
+      }
+
     })
 
   },

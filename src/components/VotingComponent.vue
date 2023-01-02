@@ -1,8 +1,10 @@
 <template>
-
+<div id="buttonContainer">
   <button v-for="(v,index) in voting" v-on:click="vote(v, index)" v-bind:key="v" v-bind:style="{'background-color':buttonColor}">
     {{ v }}
   </button>
+</div>
+
 
 </template>
 
@@ -41,6 +43,12 @@ export default {
   box-shadow: 0 5px 15px #59615f;
   transform: translateY(-2px);  
  }
+ #buttonContainer {
+  margin-top: 1em;
+  display: grid;
+  grid-gap: 0.5em;
+  grid-template-columns: 1fr;
+}
 
 
 </style>

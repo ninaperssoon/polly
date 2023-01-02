@@ -2,7 +2,7 @@
   <div class="body">
     <homeButton class="homeButton"></homeButton>
     <div id="wrapper">
-   <h1 v-if="(this.vote == true)"> {{ uiLabels.pleaceVote}}{{this.playingName}}{{uiLabels.s}} {{ uiLabels.rewardpunishment }} </h1> 
+   <!-- <h1 v-if="(this.vote == true)"> {{ uiLabels.pleaceVote}}{{this.playingName}}{{uiLabels.s}} {{ uiLabels.rewardpunishment }} </h1>  -->
    <h2>{{uiLabels.yourePlaying}}{{pollId}}</h2>
 
   <div class="container">
@@ -11,8 +11,9 @@
       
         <div class="card__face card__face--front">
 
-          
-          <p v-if="(this.question !== null)"> {{this.playingName}} {{uiLabels.IsAswering}} <br> {{this.question.q}} </p>
+          <p v-if="(this.isJoker == true)"> {{ this.playingName }} {{uiLabels.isJoker}} </p>
+          <p v-else-if="(this.vote == true)"> {{ uiLabels.pleaceVote}}{{this.playingName}}{{uiLabels.s}} {{ uiLabels.rewardpunishment }} </p>
+          <p v-else-if="(this.question !== null)"> {{this.playingName}} {{uiLabels.IsAswering}} <br> {{this.question.q}} </p>
           <p v-else>{{uiLabels.ReachedEndQuiz}}
             <br><br>
             <router-link class="button" v-bind:to="('/join/'+lang)"> {{uiLabels.joinanotherquiz}} </router-link>
@@ -28,10 +29,10 @@
       </div>
       </div>
       <div id="buttonContainer">  
-              <p v-if="visibleRewards" class="textbutton" id="textbuttonflip"> Flip </p>        
-                <VotingComponent v-bind:voting="voting.r" v-on:vote="submitVoteR" v-if="visibleRewards" message="#97b13e"/> 
-                <p v-if="visiblePunishments" class="textbutton" id="textbuttonflop"> Flop</p> 
-                <VotingComponent v-bind:voting="voting.p" v-on:vote="submitVoteP" v-if="visiblePunishments" message="#eb8cb0"/>
+              <!-- <p v-if="visibleRewards" class="textbutton" id="textbuttonflip"> Flip </p>         -->
+                <VotingComponent v-bind:voting="voting.r" v-on:vote="submitVoteR" v-if="visibleRewards" message="#A6E9A3"/> 
+                <!-- <p v-if="visiblePunishments" class="textbutton" id="textbuttonflop"> Flop</p>  -->
+                <VotingComponent v-bind:voting="voting.p" v-on:vote="submitVoteP" v-if="visiblePunishments" message="#F87575"/>
            
       
       
@@ -80,6 +81,7 @@ export default {
       voting: { r: [],
                 p: []},
       vote: false,
+      isJoker: false,
     }
   },
   created: function () {
@@ -92,6 +94,7 @@ export default {
 
     socket.on("newQuestion", q =>{
       this.question = q
+      this.isJoker = false;
       console.log(this.cardOne)
       if (this.cardOne !== "start"){
         this.cardOne = 'start';       
@@ -137,12 +140,24 @@ export default {
     })
 
     socket.on("flipUpdate", data =>{
+      console.log("flipUpdate, ObsView.vue, data:", data)
+      if(typeof data.name !== 'undefined'){
+        this.playingName=data.name
+      }
       this.ans = data.wor === "correct"?this.uiLabels.correct:this.uiLabels.incorrect
       this.con = data.con === "punishment"?this.uiLabels.punishment2:this.uiLabels.reward
       this.consequence= data.consequence
       console.log(this.consequence)
       console.log(this.playingName)
       this.cardOne = 'flipped'
+    })
+    socket.on("Joker", data =>{
+      console.log("ObsView, Joker, data", data)
+      if (data == true){
+      this.cardOne = 'start'
+      this.isJoker = true
+      }
+
     })
   },
   methods: {

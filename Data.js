@@ -269,7 +269,23 @@ Data.prototype.getAnswers = function(pollId) {
   }
   return {}
 }
-Data.prototype.getParticipants = function(pollId) {
+Data.prototype.getParticipants = function(pollId, message) {
+  const poll = this.polls[pollId];
+  if (typeof poll !== 'undefined') {
+    if(message === "host"){
+      let pHArray = poll.participants.concat()
+      pHArray.push("host")
+      console.log("getParticipants + host:", pHArray)
+      return pHArray
+    }
+    else{
+      console.log("getParticipants", poll.participants)
+      return poll.participants
+    } 
+  }
+  return []
+}
+Data.prototype.getParticipantsandHost = function(pollId) {
   const poll = this.polls[pollId];
   if (typeof poll !== 'undefined') {
     console.log("getParticipants", poll.participants)
@@ -304,8 +320,8 @@ Data.prototype.getQuizzes = function () {
   return this.polls
   }
 
-Data.prototype.getFlip = function (wor, con, consequence) {
-    return {wor: wor, con: con, consequence: consequence}
+Data.prototype.getFlip = function (wor, con, consequence, name) {
+    return {wor: wor, con: con, consequence: consequence, name: name}
   }
 
 Data.prototype.resetParticipants = function (pollId) {
@@ -534,6 +550,15 @@ Data.prototype.isQuizHosted = function(pollId){
     return poll.hosting
   }
   return true
+}
+Data.prototype.getJoker = function(pollId){
+  const poll = this.polls[pollId];
+  console.log("getJoker")
+  if(typeof poll !== 'undefined'){
+    console.log("getJoker")
+    return true
+  }
+  return false
 }
 
 

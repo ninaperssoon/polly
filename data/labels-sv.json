@@ -67,5 +67,7 @@
 	"waitingForParticipants": "Väntar på att deltagare ska ansluta",
 	"watingForVotes": "Vänta på att de andra spelarna röstar",
 	"pleaceVote": "Rösta på ",
-	"rewardpunishment": "belöning och straff"
+	"rewardpunishment": "belöning och straff",
+	"isJoker": "är Jokern",
+	"youJoker": "Du är Jokern"
 }
