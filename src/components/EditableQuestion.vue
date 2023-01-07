@@ -20,10 +20,6 @@
             <img class="button" src="../../public/img/checkmark_nobackground.png"/>
           </button>
           
-          <button class="buttonContainer" id="Wrong" v-on:click="setWrongAnswer(i)" v-bind:style="{'background-color':deleteColor[i]}" >
-            <img class="button" src="../../public/img/redcross_nobackground.png"/>
-
-          </button>
           <br>
         </div>
 
@@ -33,17 +29,22 @@
 
       </div>
 
-      <div id="saveDelete">
-        
-        <button v-on:click="sendQuestion" class="saveDeleteButton" id="saveQuestion" v-bind:style="{'background-color':SavebuttonColor}">
-          {{uiLabels.SaveQuestion}}
-        </button>
+      <div id="gridWrapper">
+        <p id="correctString"> {{ correctString }}</p>
 
-        <button v-on:click="deleteQuestion" class="saveDeleteButton" id="deleteQuestion">
-          {{uiLabels.DeleteQuestion}}
-        </button >
 
-    </div>
+        <div id="saveDelete">
+          <button v-on:click="sendQuestion" class="saveDeleteButton" id="saveQuestion" v-bind:style="{'background-color':SavebuttonColor}">
+            {{uiLabels.SaveQuestion}}
+          </button>
+
+          <button v-on:click="deleteQuestion" class="saveDeleteButton" id="deleteQuestion">
+            {{uiLabels.DeleteQuestion}}
+          </button >
+
+        </div>
+      </div>
+      
 
   </div>
 
@@ -81,6 +82,7 @@ export default{
       lang: "",
       uiLabels: {},
       i: 0,
+      correctString: ""
     }
 
   },
@@ -131,26 +133,27 @@ export default{
      
     },
     setCorrectAnswer: function(i){
-      this.selectedAnswers[i] = 'correct';
-      this.altColor[i] = "#6BA468";  
-      this.deleteColor[i] = ""; 
-      
-      this.resetColor();
-     
+      if (this.selectedAnswers[i] == 'correct') {
+        this.selectedAnswers[i] = 'incorrect';
+        this.deleteColor[i] = "#D34848"; 
+        this.altColor[i] = "";  
+        this.resetColor();     
+      }
+      else {
+        this.selectedAnswers[i] = 'correct';
+        this.altColor[i] = "#6BA468";  
+        this.deleteColor[i] = ""; 
+        this.resetColor();
+      }
+           
     },
-    setWrongAnswer: function(i){
-      this.selectedAnswers[i] = 'incorrect';
-      this.deleteColor[i] = "#D34848"; 
-      this.altColor[i] = "";  
-      this.resetColor();
-     
-     
-    },
+
     resetColor: function(){
       this.SavedQuestionColor = "#B9E6FF";
       this.SavedBorderColor = "#B9E6FF";
       this.savebuttonText = "save changes";
       this.SavebuttonColor = "orange";
+      this.correctString = this.uiLabels.correctString
     
     },
     savebutonReset: function(){
@@ -205,13 +208,21 @@ export default{
   grid-template-columns: 1fr 1fr 1fr 1fr ;
   column-gap: 3em;
 }
-
+#gridWrapper {
+  margin-top: -2em;
+  display: grid;
+  grid-template-columns: 1 fr 1fr;
+}
 #saveDelete {
+  /* background-color: red; */
+  grid-column: 2;
+  /* width: 50%; */
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  /* margin-left:50%;
   padding-right: 2em;
-  margin-top: -2em;
+  margin-top: -2em; */
 }
 
 .saveDeleteButton {
@@ -304,6 +315,16 @@ input {
   margin-left: 26%;
   margin-right: 26%;
 }
+#correctString {
+  /* background-color: green; */
+  grid-column: 1;
+  font-size: 1.4em;
+  color: white;
+  text-shadow: .08em .08em 0 #4779d6;
+  padding-top: 1em;
+
+}
+
 
 @media screen and (max-width:80em) {
 #inputAnswer {
@@ -329,6 +350,19 @@ input {
 }
 .buttonContainer {
   font-size: 2em;
+}
+#gridWrapper {
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+#correctString {
+  grid-column: 1;
+  grid-row: 1;
+}
+#saveDelete {
+  grid-column: 1;
+
+  grid-row: 2;
 }
 
 }

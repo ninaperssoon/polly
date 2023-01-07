@@ -14,17 +14,13 @@
  
   
     <div id="wrapper">
-      <div id="backButton">
-    
-          <router-link v-bind:to="'/start/'+lang"><img class="flipPic" src="../../public/img/leftfliparrow.png"/></router-link>
-      </div>
 
       <button id="addButton" v-on:click="newQuestion">
         {{uiLabels.AddQuestion}}
       </button>
 
       <div id="nextButton">
-        <router-link v-bind:to="'/createq/'+pollId+'/'+lang"><img class="flipPic" src="../../public/img/rightfliparrow.png"/></router-link>
+        <router-link v-bind:to="'/createq/'+pollId+'/'+lang"><img class="flipPic" src="../../public/img/rightarrow.png"/></router-link>
       </div>
     </div>
   
@@ -140,17 +136,17 @@ button:hover {
 }
 
 #addButton {
-  margin: 1em;
   text-decoration: none; 
   background-color:#FFF1AD;
-  padding: 0.5em;
+  padding: 1em;
   border-radius: 2em;
   border-style: outset;
   border-color: #FFF1AD;
   color: #F87575;
   font-size:1.5em;
-  bottom: 0;
-  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-style: outset;
   font-family: 'Righteous', serif;
   text-shadow: .05em .05em 0 #4779d6;
@@ -164,15 +160,13 @@ button:hover {
 #wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  margin-bottom: 3em;
-}
-#backButton{
-  grid-column: 1;
-  padding: 20 em;
+  grid-template-rows: 1em 1em;
+  row-gap: 0.1em;
 }
 
 #nextButton{
   grid-column: 3;
+  grid-row: 2;
   padding: 20 em;
 }
 

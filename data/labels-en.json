@@ -70,5 +70,6 @@
 	"pleaceVote": "Vote for ",
 	"rewardpunishment": "reward and punishment",
 	"isJoker": "is the Joker",
-	"youJoker": "You are the Joker" 
+	"youJoker": "You are the Joker", 
+	"correctString": "Remember to mark your correct answer(s)!"
 }

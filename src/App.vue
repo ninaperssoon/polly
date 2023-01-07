@@ -107,7 +107,7 @@ h1 {
 
 
 .flipPic {
-  height: 5em;
+  height: 8em;
 }
 
 .flipPic:hover {

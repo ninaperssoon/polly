@@ -64,7 +64,7 @@
   </div>
   <div id="backButton">
     
-    <router-link v-bind:to="('/create/'+lang+'/'+pollId)"><img class="flipPic" src="../../public/img/leftfliparrow.png"/></router-link>
+    <router-link v-bind:to="('/create/'+lang+'/'+pollId)"><img class="flipPic" src="../../public/img/leftarrow.png"/></router-link>
     </div>
 
   </div>
@@ -75,9 +75,7 @@
 <script>
 import io from 'socket.io-client';
 import homeButton from '@/components/HomeComponent.vue';
-//import consequence from '@/components/consequence.vue';
 import Consequence from '@/components/consequencesComponent.vue';
-//import Punishment from '@/components/PunishmentsComponent.vue';
 const socket = io();
 
 
@@ -228,7 +226,7 @@ padding: 1em;
 .nextButton {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 3em;
+  padding-top: 3em;
   padding-left: 20em;
   padding-right: 20em;
  
@@ -272,7 +270,7 @@ border-radius: 2em;
 
 #backButton{
   margin-right: 85%;
-  padding: 20 em;
+  /* padding: 20 em; */
   
 }
 

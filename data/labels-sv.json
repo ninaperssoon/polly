@@ -69,5 +69,6 @@
 	"pleaceVote": "Rösta på ",
 	"rewardpunishment": "belöning och straff",
 	"isJoker": "är Jokern",
-	"youJoker": "Du är Jokern"
+	"youJoker": "Du är Jokern",
+	"correctString": "Kom ihåg att markera det korrekta svaret/svaren!"
 }
