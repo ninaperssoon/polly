@@ -2,7 +2,10 @@
 
   <div id="myBackground">
 
+    <div class="upperGrid">
     <homeButton class="homeButton"></homeButton>
+    <button id="ft" v-on:click="rules"><img id="questionmark" src="../../public/img/frågetecken.png"> </button>
+  </div>
   
   <div class="wrapper">
 
@@ -76,6 +79,7 @@
 import io from 'socket.io-client';
 import homeButton from '@/components/HomeComponent.vue';
 import Consequence from '@/components/consequencesComponent.vue';
+import swal from 'sweetalert';
 const socket = io();
 
 
@@ -167,7 +171,26 @@ export default {
     },
     sendPollIdToH: function(){
       socket.emit("comenceQuiz",{pollId: this.pollId});
+    },
+    rules: function(){
+
+if (this.lang == "en") {
+  swal({
+  title: "How to use Rewards & Punishment ",
+text: "Here you write your rewards and punishments. They are used in the quiz when a player answers a question: they will get a reward if they answer correctly and a punishment if they answer incorrectly. Rewards and punishments are not tied to any specific questions, which means that you can slso choose to play entirely without them. Remember to save them all before moving forward!" ,
+button: "Got it!"
+})
+     }
+      else {
+        swal({
+  title: "Hur du använder belöningar och bestraffningar",
+text: "Här skriver du in dina belöningar och bestraffningar. De används i quizet när en spelare besvarar en fråga: de kommer att få en belöning om de svarar rätt och en bestraffning om de svarar fel. Belöningar och bestraffningar är inte bundna till några specifika frågor, så du kan välja att spela helt utan dem om du vill. Kom ihåg att spara dem innan du går vidare! ",
+button: "Fattar!"
+})
     }
+
+
+}
 
   }
 }
@@ -301,6 +324,31 @@ button:hover {
   box-shadow: 0 5px 15px #80B57D;
     transform: translateY(-2px);
 }
+
+.upperGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  .homeButton {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  #questionmark{
+    height: 5em;;
+   width: 5em;;
+}
+  
+
+  #ft{
+    background-color: transparent;
+    border: none;
+    grid-column: 6;
+    grid-row: 1;
+    box-shadow: none;
+  }
 @media screen and (max-width:70em) {
   .wrapper{
     grid-template-columns: 1fr;

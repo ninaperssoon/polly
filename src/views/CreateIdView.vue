@@ -10,6 +10,7 @@
   <button v-on:click="createPoll" id="pollButton">
       {{uiLabels.Continuecreate}} 
   </button>
+
 </body>
 
 </template>

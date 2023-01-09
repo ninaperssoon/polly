@@ -1,7 +1,10 @@
 <template>
 
 <div class="body">
+  <div class="upperGrid">
 <homeButton class="homeButton"></homeButton>
+<button id="ft" v-on:click="rules"><img id="questionmark" src="../../public/img/frågetecken.png"> </button>
+</div>
  
   <div id="backgroundDiv">
     <Question v-for="(question,index) in questions" 
@@ -23,8 +26,11 @@
         <router-link v-bind:to="'/createq/'+pollId+'/'+lang"><img class="flipPic" src="../../public/img/rightarrow.png"/></router-link>
       </div>
     </div>
+
+    
   
   </div>
+  
 </div>
 
 
@@ -35,6 +41,7 @@
 import io from 'socket.io-client';
 import homeButton from '@/components/HomeComponent.vue';
 import Question from '@/components/EditableQuestion.vue';
+import swal from 'sweetalert';
 
 
 const socket = io();
@@ -98,7 +105,27 @@ export default {
       console.log("det här är index: ", index);
       socket.emit("deleteQuestion",{pollId: this.pollId, index: index, q: event.q, a: event.a, s: event.selected} )
       console.log(this.questions);
+    },
+
+    rules: function(){
+
+if (this.lang == "en") {
+  swal({
+  title: "How To Create Your Quiz",
+text: "Here you write all of the questions that will be in your quiz. You can write up to 4 different possible answers, but don't forget to mark the correct one(s). Remember to save each question before moving forward!" ,
+button: "Got it!"
+})
+     }
+      else {
+        swal({
+  title: "Hur du skapar ditt quiz",
+text: "Här skriver du in alla frågor som ska vara med i quizet. Du kan skriva upp till 4 svarsalternativ, men glöm inte att klicka i rätt svarsalternativ. Kom ihåg att spara varje fråga innan du går vidare!",
+button: "Fattar!"
+})
     }
+
+
+}
   }
 }
 </script>
@@ -170,6 +197,29 @@ button:hover {
   padding: 20 em;
 }
 
+#questionmark{
+    height: 5em;;
+   width: 5em;;
+}
+  
+
+  #ft{
+    background-color: transparent;
+    border: none;
+    grid-column: 4;
+    grid-row: 1;
+  }
+
+  .upperGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  .homeButton {
+    grid-column: 1;
+    grid-row: 1;
+  }
 @media screen and (max-width:80em) {
 .flipPic {
   height: 3em;

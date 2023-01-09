@@ -36,6 +36,7 @@
 <script>
 import homeButton from '@/components/HomeComponent.vue';
 import io from 'socket.io-client';
+import swal from 'sweetalert';
 const socket = io();
 
 export default {
@@ -67,20 +68,31 @@ export default {
       }  
       if (this.idInQuizzes == false) {
         if (this.lang == "en") {
-              alert("You cannot join a quiz that doensn't exist")
+          swal({ 
+  title: "invalid QuizId",
+  text: "You cannot join a quiz that doesn't exist ",
+  icon: "warning",})
+           }
            }
             else {
-              alert("Du kan inte delta i ett quiz som inte finns")
+              swal({ 
+  title: "Felaktigt QuizId",
+  text: "Du kan inte delta i ett quiz som inte finns ",
+  icon: "warning",})
           }
-      } }
+      } 
       else {
         if (this.lang == "en") {
-              alert("Please enter your name")
+              swal({ 
+  text: "You forgot to enter your name, do it before you can play",
+  icon: "warning",})
            }
             else {
-              alert("Var god och ange ditt namn först")
+              ({  
+  text: "Du glömde fylla i ditt namn, gör det innan du kan spela",
+  icon: "warning",})
+           }
           }
-      }
      
      
   }},

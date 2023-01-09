@@ -24,6 +24,7 @@
 <script>
 import homeButton from '@/components/HomeComponent.vue';
 import io from 'socket.io-client';
+import swal from 'sweetalert';
 
 const socket = io();
 
@@ -78,16 +79,21 @@ export default {
       }
       if (this.idInQuizzes == false) {
         if (this.lang == "en") {
-              alert("You cannot host a quiz that doesn't exist")
+              swal({   title: "Invalid QuizID",
+  text: "You cannot host a quiz that doesn't exist!",
+  icon: "warning",})
            }
             else {
-              alert("Du kan inte anordna ett quiz som inte finns")
+              ({   title: "Felaktigt QuizID",
+  text: "Du kan inte anordna ett quiz som inte finns",
+  icon: "warning",})
+           }
           }
       }
     
     }
 
-  }
+  
 }
 </script>
 <style scoped>

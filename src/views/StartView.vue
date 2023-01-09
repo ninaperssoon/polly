@@ -22,15 +22,21 @@
       <router-link class="startchoice c" id="smallerbuttons" v-bind:to="'/host/'+lang">{{uiLabels.hostQuiz}}</router-link>
 
       <router-link class="startchoice d" id="smallerbuttons" v-bind:to="'/myquizzes/'+lang"> {{uiLabels.myQuizzes}}</router-link>
+
+      <button id="ft" v-on:click="rules"><img id="questionmark" src="../../public/img/frågetecken.png"> </button>
    
     </div>
+    
+    
   </div>
 
 </template>
 
 <script>
+import swal from 'sweetalert';
 import io from 'socket.io-client';
 const socket = io();
+
 
 export default {
   name: 'StartView',
@@ -61,7 +67,29 @@ export default {
     },
     toggleNav: function () {
       this.hideNav = ! this.hideNav;
+    },
+    rules: function(){
+
+      if (this.lang == "en") {
+        swal({
+        title: "HOW TO PLAY",
+  text: "Before you play your first quiz, it's good to know the following: Only one player will be (randomly) chosen to answer each question. However, before they can answer, the other players must vote for the answering player's rewards and punishments. If the player answers the quiestion correctly, they will receive the most voted reward and vice versa. If you're lucky, you can become 'the Joker' and pass your reward/punishment unto another player. When you feel finished with the question, it is the Host that will go to the next question.",
+  button: "Start To FlipFlop"
+      })
+           }
+            else {
+              swal({
+        title: "HUR DU SPELAR",
+  text: "Innan du spelar ditt första quiz är det bra att veta följande: endast en av spelarna kommer (slumpmässigt) att svara på varje fråga. Innan de kan svara måste dock de andra spelarna rösta på den svarande spelarens belöningar och bestraffningar. Om spelaren svarar rätt på frågan kommer hen att få en belöning och vice versa. Om du har tur kan du bli 'Jokern' och skicka vidare din belöning eller straff till en annan spelare. När ni känner er klara med frågan är det Värden som går vidare till nästa fråga.",
+  button: "Börja FlipFloppa!"
+      })
+          }
+      
+
     }
+    
+    
+
 
   }
 }
@@ -89,7 +117,7 @@ export default {
     display: grid;
     grid-gap: 1.2em;
     row-gap: 2em;
-    grid-template-columns: 15vw 15vw 15vw 15vw;
+    grid-template-columns: 15vw 15vw 15vw 15vw 15vw 15vw;
     grid-template-rows: 10vh 10vh 10vh 10vh;  
     justify-content: center;
     align-items: center;
@@ -112,26 +140,26 @@ export default {
     transform: translateY(-2px);
   }
   .a {
-    grid-column-start: 1 ;
-    grid-column-end: 3;
+    grid-column-start: 2 ;
+    grid-column-end: 4;
     grid-row: 1 / span 2;
   }
 
   .b {
-    grid-column-start: 3;
-    grid-column-end: 5;
+    grid-column-start: 4;
+    grid-column-end: 6;
     grid-row: 1 /span 2;
   }
 
   .c { 
-    grid-column-start: 2 ;
-    grid-column-end: 4;
+    grid-column-start: 3 ;
+    grid-column-end: 5;
     grid-row: 3;
   }
 
   .d {
-    grid-column-start: 2 ;
-    grid-column-end: 4;
+    grid-column-start: 3 ;
+    grid-column-end: 5;
     grid-row: 4;
   }
 
@@ -145,13 +173,27 @@ export default {
   height: 7vh;
   width: 7vh;
   cursor: pointer;
-  
   margin-top: 1em;
 }
 
 #navDiv {
   background-color: #A6E9A3;
 }
+
+#questionmark{
+    height: 100px;
+   width: 100px;
+}
+  
+
+  #ft{
+    background-color: transparent;
+    border: none;
+    grid-column: 6;
+    grid-row: 4;
+  }
+   
+  
 
 @import url(https://fonts.googleapis.com/css?family=Righteous);
 
@@ -206,10 +248,11 @@ h1 {
     font-size: 12vw;
   }
   #flag{
-   height: 30px;
-   width: 30px;
+   height: 4vh;
+   width: 4vh;
   }
-  
+
+ 
 
 }
 
