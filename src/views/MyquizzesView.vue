@@ -3,6 +3,9 @@
     <homeButton class="homeButton"></homeButton>
     
       <h1>{{uiLabels.myQuizzes}}</h1>
+
+
+     
   
       <div class="myQuizzes" v-for="(contain, id) in quizzes" v-bind:key="id">{{id}} 
 
@@ -21,6 +24,11 @@
       <div id="createDiv">       
         <router-link id="create" v-bind:to="('/create/'+lang)">{{uiLabels.createQuiz}}</router-link>
       </div> 
+
+      <div  class="para"> <img id="para" src="../../public/img/parasoll.png" >
+        
+      </div>
+
 
   </div>
 
@@ -156,6 +164,20 @@ export default {
   #edit {
     height: 2em;
   }
+  .para {
+    display:grid;
+    grid-template-columns: 30%;
+
+  }
+
+  #para {
+    grid-column: 1;
+    height: 20em;
+    width: 20em;
+    margin-left: 3em;
+  }
+
+
 
   #delete {
     height: 2.5em;
