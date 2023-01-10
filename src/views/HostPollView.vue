@@ -369,6 +369,7 @@ export default {
 }
 
 #buttonContainer {
+  
   margin-top: 1em;
   display: grid;
   grid-gap: 0.5em;
