@@ -23,9 +23,9 @@
 
         </div>
         <div class="card__face card__face--back" v-bind:class="{ correct: ans == uiLabels.correct}">
-        <p v-if="(this.consequence !== '')"> <span id="correctness"> {{this.ans}}! </span> <br> {{this.playingName}}{{uiLabels.s}} {{this.con}} {{uiLabels.is}} {{this.consequence}}</p>
-        <p v-else id="correctness"> {{this.ans}}! </p> 
-      </div>
+          <p v-if="(this.consequence !== '')"> <span id="correctness"> {{this.ans}}! </span> <br> {{this.playingName}}{{uiLabels.s}} {{this.con}} {{uiLabels.is}} {{this.consequence}}</p>
+          <p v-else id="correctness"> {{this.ans}}! </p> 
+        </div>
       </div>
       
       <div id="buttonContainer">  

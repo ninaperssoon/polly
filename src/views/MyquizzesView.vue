@@ -3,12 +3,12 @@
     <homeButton class="homeButton"></homeButton>
     
       <h1>{{uiLabels.myQuizzes}}</h1>
+      <p v-if="(JSON.stringify(quizzes) === '{}') ">{{uiLabels.noQuizzes}}</p>
 
 
      
   
       <div class="myQuizzes" v-for="(contain, id) in quizzes" v-bind:key="id">{{id}} 
-
           <button class="button" v-on:click="host(id)"> {{uiLabels.Host}} </button>
 
           <button class="button" v-on:click="edit(id)" >
@@ -126,6 +126,14 @@ export default {
   h1 {
     margin-top:-5em;
   }
+
+  p {
+    margin-top: 1em;
+    color: white;
+    font-weight: bold;
+    font-size:1.5em;
+  }
+  
 
 #createDiv {
   margin-top: 3em;
