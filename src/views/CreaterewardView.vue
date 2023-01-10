@@ -235,7 +235,7 @@ button:hover {
 
 .wrapper {
   display: grid;
-  grid-gap: 10px;
+  grid-gap: 0.625em;
   grid-template-columns: 1fr 1fr;
   margin-top:-5em;
 }
@@ -321,8 +321,8 @@ border-radius: 2em;
 }
 
 button:hover {
-  box-shadow: 0 5px 15px #80B57D;
-    transform: translateY(-2px);
+  box-shadow: 0 0.3em 1em #80B57D;
+    transform: translateY(-0.125em);
 }
 
 .upperGrid {

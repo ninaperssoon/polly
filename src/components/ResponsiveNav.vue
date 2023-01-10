@@ -32,7 +32,7 @@ export default {
     display: grid;
     align-items: center;
     justify-content: center;
-    border-left: 1px solid gray;
+    border-left: 0.06em solid gray;
   }
 
 @media screen and (max-width:50em) {

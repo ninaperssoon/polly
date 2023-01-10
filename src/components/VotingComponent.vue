@@ -40,8 +40,8 @@ export default {
  }
 
  button:hover{
-  box-shadow: 0 5px 15px #59615f;
-  transform: translateY(-2px);  
+  box-shadow: 0 0.3em 1em #59615f;
+  transform: translateY(-0.125em);  
  }
  #buttonContainer {
   margin-top: 1em;

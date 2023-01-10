@@ -82,8 +82,8 @@ export default {
   }
 
   #pollButton:hover {
-    box-shadow: 0 5px 15px #80B57D;
-    transform: translateY(-2px);
+    box-shadow: 0 0.3em 1em #80B57D;
+    transform: translateY(-0.125em);
     cursor: pointer;
   }
 

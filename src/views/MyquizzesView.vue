@@ -3,6 +3,9 @@
     <homeButton class="homeButton"></homeButton>
     
       <h1>{{uiLabels.myQuizzes}}</h1>
+
+
+     
   
       <div class="myQuizzes" v-for="(contain, id) in quizzes" v-bind:key="id">{{id}} 
 
@@ -21,6 +24,11 @@
       <div id="createDiv">       
         <router-link id="create" v-bind:to="('/create/'+lang)">{{uiLabels.createQuiz}}</router-link>
       </div> 
+
+      <div  class="para"> <img id="para" src="../../public/img/parasoll.png" >
+        
+      </div>
+
 
   </div>
 
@@ -96,13 +104,13 @@ export default {
   }
 
   #create:hover {
-    box-shadow: 0 5px 15px #80B57D;
-    transform: translateY(-2px);
+    box-shadow: 0 0.3em 1em #80B57D;
+    transform: translateY(-0.125em);
   }
  
 
   .button:hover {
-    transform: translateY(-2px);
+    transform: translateY(-0.125em);
   }
 
 
@@ -118,7 +126,6 @@ export default {
   h1 {
     margin-top:-5em;
   }
-  
 
 #createDiv {
   margin-top: 3em;
@@ -144,7 +151,6 @@ export default {
     font-size:1.5em;
   }
   .button {
-    margin: 1em;
     text-decoration: none; 
     background-color: transparent;
     padding: 1.2em;
@@ -158,6 +164,20 @@ export default {
   #edit {
     height: 2em;
   }
+  .para {
+    display:grid;
+    grid-template-columns: 30%;
+
+  }
+
+  #para {
+    grid-column: 1;
+    height: 20em;
+    width: 20em;
+    margin-left: 3em;
+  }
+
+
 
   #delete {
     height: 2.5em;

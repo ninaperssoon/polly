@@ -103,7 +103,7 @@ width: 4em;
   grid-column: 1;
   grid-row: 2;
   border-radius: 1em;
-  padding: 12px 20px;
+  padding: 0.75em 1.25em;
   box-sizing: border-box;
 
  
@@ -123,7 +123,7 @@ width: 4em;
 }
 
 .button:hover {
-  transform: translateY(-2px);
+  transform: translateY(-0.125em);
 }
 
 
