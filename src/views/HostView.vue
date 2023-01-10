@@ -2,22 +2,20 @@
   <div id="body">
     <homeButton class="homeButton"> </homeButton>
     <h1>{{uiLabels.hostQuiz}}</h1>
+    
     <div class="wrapper">
-
       <div id="palm1"><img class="palmtree" src="../../public/img/palmtree.gif"></div>
-
       <div class="theHost">
-       
-          <div id="host">
-            <p> {{uiLabels.writeQuizId}}: 
-            <br>
-            <input type="text" v-model="id"></p>      
-          </div>
+        <div id="host">
+          <p> {{uiLabels.writeQuizId}}: 
+          <br>
+          <input type="text" v-model="id"></p>      
+        </div>
         <button id="startQuiz" v-on:click="hostQuiz">{{uiLabels.hostQuiz}}</button> 
       </div>
-      
       <div id="palm2"><img class="palmtree" src="../../public/img/palmtree.gif"></div>
     </div>
+
   </div>
 </template>
 
@@ -90,12 +88,10 @@ export default {
            }
           }
       }
-    
     }
-
-  
 }
 </script>
+
 <style scoped>
   #body {
     margin: 0;
@@ -163,15 +159,6 @@ export default {
     transform: translateY(-0.125em);
   }
 
-  @import url(https://fonts.googleapis.com/css?family=Righteous);
-
-*, *:before, *:after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  position: relative;
-  }
-
 h1 {
   margin-bottom: 3em;
   margin-top: -5em;
@@ -191,6 +178,7 @@ h1 {
   .palmtree {
     width: 80%;
   }
+  
   @media screen and (max-width:50em) {
   .palmtree {
     width: 0%;

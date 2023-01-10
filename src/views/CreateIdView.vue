@@ -1,18 +1,16 @@
 <template>
-  
-<body>
-  <homeButton class="homeButton"></homeButton>
-  <div class="pollLink">
-    <p>{{uiLabels.Enternameyourquiz}} 
-      <br> <br>
-    <input type="text" v-model="id"> </p> 
-  </div>
-  <button v-on:click="createPoll" id="pollButton">
+  <div id="body">
+    <homeButton class="homeButton"></homeButton>
+    <div class="pollLink">
+      <p>{{uiLabels.Enternameyourquiz}} 
+        <br> <br>
+        <input type="text" v-model="id"> 
+      </p> 
+    </div>
+    <button v-on:click="createPoll" id="pollButton">
       {{uiLabels.Continuecreate}} 
-  </button>
-
-</body>
-
+    </button>
+  </div>
 </template>
 
 <script>
@@ -24,7 +22,6 @@ export default {
   name: 'CreateIdView',
   components: {
     homeButton
-    
   },
   data: function () {
     return {
@@ -55,7 +52,7 @@ export default {
 
 <style scoped>
 
-  body {
+  #body {
     margin: 0;
     height: 46.5em;
     background-color: #A6E9A3;
@@ -65,9 +62,9 @@ export default {
     top: 0;
     left: 0;
   }
+
   #pollButton {
     color:black;
-   
     text-decoration: none; 
     background-color: #FFF1AD;
     padding: 0.5em;
@@ -90,7 +87,6 @@ export default {
   .pollLink {
     margin:auto;
     font-size:1.5em;
-    
     background-color: #5C95FF;
     height: 15vw;
     width: 40vw;
@@ -102,8 +98,8 @@ export default {
     border-color: #5C95FF;
     color: #FFF1AD;
     font-weight: bold;
-
   }
+
   input {
     padding-left: 0.5em;
     padding-top: 0.25em;
@@ -114,16 +110,15 @@ export default {
     border-radius: 1em;
     border-style: outset;
   }
-  @media screen and (max-width:50em) {
-.pollLink {
-  width: 90vw;
-  height: 40vw;
-}
 
-    #pollButton {
-      font-size: 1.5em;
-    }
+@media screen and (max-width:50em) {
+  .pollLink {
+    width: 90vw;
+    height: 40vw;
   }
 
-  
+  #pollButton {
+    font-size: 1.5em;
+  }
+}
 </style>

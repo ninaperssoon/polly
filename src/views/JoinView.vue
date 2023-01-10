@@ -1,11 +1,10 @@
 <template>
 <div id="body">
   <homeButton class="homeButton"></homeButton>
+
   <section>
     <h1>{{uiLabels.joinQuiz}}</h1>
-   
     <div id="joinQuiz">
-
       <div class="box" id="name">
         <p> 
           <label>
@@ -23,14 +22,10 @@
         </label>
         </p>
       </div>
-
     </div>
-  <button id="joinbutton" v-on:click="sendName" >{{uiLabels.joinQuiz}}</button>
-
+    <button id="joinbutton" v-on:click="sendName" >{{uiLabels.joinQuiz}}</button>
   </section>
-
 </div>
-
 </template>
 
 <script>
@@ -80,21 +75,19 @@ export default {
           icon: "warning",})
         }
       }
-      } 
-      else {
-        if (this.lang == "en") {
-              swal({ 
-  text: "You forgot to enter your name, do it before you can play",
-  icon: "warning",})
-           }
-            else {
-              ({  
-  text: "Du glömde fylla i ditt namn, gör det innan du kan spela",
-  icon: "warning",})
-           }
-          }
-      
-     
+    } 
+    else {
+      if (this.lang == "en") {
+        swal({ 
+          text: "You forgot to enter your name, do it before you can play",
+          icon: "warning",})
+        }
+        else {
+        swal({  
+          text: "Du glömde fylla i ditt namn, gör det innan du kan spela",
+          icon: "warning",})
+        }
+      }   
   }},
 
   created: function () {
@@ -139,27 +132,19 @@ export default {
   #joinbutton:hover {
     box-shadow: 0 0.3em 1em #80B57D;
     transform: translateY(-0.125em);
-
-  }
-
-  button:hover {
-    cursor:pointer;
   }
 
   p {
     margin: 0.5em;
   }
 
-  *, *:before, *:after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  position: relative;
-  }
-
 h1 {
   margin-bottom: 1em;
-  }
+}
+
+section {
+  margin-top: -5em;
+}
 
   #joinQuiz {
     display: grid;
@@ -203,6 +188,7 @@ h1 {
     border-color:#5C95FF;
     border-style: outset;
   }
+
   @media screen and (max-width:50em) {
     #joinQuiz {
       grid-template-columns: 100%;

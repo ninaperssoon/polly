@@ -1,57 +1,43 @@
-
-
 <template>
-    <div id="question" v-bind:style="{'background-color':SavedQuestionColor, 'border-color':SavedBorderColor}">
-     
-      <h1>{{uiLabels.Question}} {{questionNumber +1}} </h1>
-      <input id="questionInput" type="text" v-model="q" class="input" :placeholder="uiLabels.WriteQuestionHere" v-on:keypress="resetColor()" v-bind:style="{'border-color':SavedBorderColor}">
+<div id="question" v-bind:style="{'background-color':SavedQuestionColor, 'border-color':SavedBorderColor}">
+  <h1>{{uiLabels.Question}} {{questionNumber +1}} </h1>
+  <input id="questionInput" type="text" v-model="q" class="input" :placeholder="uiLabels.WriteQuestionHere" v-on:keypress="resetColor()" v-bind:style="{'border-color':SavedBorderColor}">
+  <br> 
 
-      <br> 
-
-      <div id="inputAnswer" >
-        <div v-for="(_,i) in answers" v-bind:key="'answer' + i" class="answerLayout">
-          <input type="text"  v-model="answers[i]" class="input" id="option" :placeholder= "uiLabels.WriteAnswersHere" v-on:keypress="resetColor()" v-bind:style="{'border-color':SavedBorderColor}"> 
-
-          <button v-on:click="deleteAnswers(i)" class="buttonContainer" id="deleteAnswerButton"> 
-            <img class="button" src="../../public/img/trashcan.png"/>
-          </button> 
-
-          <button class="buttonContainer" v-on:click="setCorrectAnswer(i)" id="Right"  v-bind:style="{'background-color':altColor[i]}">
-            <img class="button" src="../../public/img/checkmark_nobackground.png"/>
-          </button>
-          
-          <br>
-        </div>
-
-        <button v-if="(i<4)"  v-on:click="addAnswer" class="buttonContainer">
-          +
-        </button>
-
-      </div>
-
-      <div id="gridWrapper">
-        <p id="correctString"> {{ correctString }}</p>
-
-
-        <div id="saveDelete">
-          <button v-on:click="sendQuestion" class="saveDeleteButton" id="saveQuestion" v-bind:style="{'background-color':SavebuttonColor}">
-            {{uiLabels.SaveQuestion}}
-          </button>
-
-          <button v-on:click="deleteQuestion" class="saveDeleteButton" id="deleteQuestion">
-            {{uiLabels.DeleteQuestion}}
-          </button >
-
-        </div>
-      </div>
+  <div id="inputAnswer" >
+    <div v-for="(_,i) in answers" v-bind:key="'answer' + i" class="answerLayout">
+      <input type="text"  v-model="answers[i]" class="input" id="option" :placeholder= "uiLabels.WriteAnswersHere" v-on:keypress="resetColor()" v-bind:style="{'border-color':SavedBorderColor}"> 
       
-
+      <button v-on:click="deleteAnswers(i)" class="buttonContainer" id="deleteAnswerButton"> 
+        <img class="button" src="../../public/img/trashcan.png"/>
+      </button> 
+      
+      <button class="buttonContainer" v-on:click="setCorrectAnswer(i)" id="Right"  v-bind:style="{'background-color':altColor[i]}">
+        <img class="button" src="../../public/img/checkmark_nobackground.png"/>
+      </button>
+      <br>
+    </div>
+    
+    <button v-if="(i<4)"  v-on:click="addAnswer" class="buttonContainer">
+       +
+    </button>
   </div>
+  <div id="gridWrapper">
+    <p id="correctString"> {{ correctString }}</p>
+    <div id="saveDelete">
+      <button v-on:click="sendQuestion" class="saveDeleteButton" id="saveQuestion" v-bind:style="{'background-color':SavebuttonColor}">
+        {{uiLabels.SaveQuestion}}
+      </button>
 
+      <button v-on:click="deleteQuestion" class="saveDeleteButton" id="deleteQuestion">
+        {{uiLabels.DeleteQuestion}}
+      </button>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
-
 import io from 'socket.io-client';
 const socket = io();
 
@@ -61,10 +47,7 @@ export default{
   props: { 
     question: Object,
     questionNumber: Number,
-      
-
   },
-
 
   data: function(){
     return{
@@ -96,8 +79,6 @@ export default{
     
     } )
   },
-  
- 
 
   methods:{
     getQuestionId: function () {
@@ -158,16 +139,12 @@ export default{
     },
     savebutonReset: function(){
       this.SavebuttonColor = "";
-     
-
       this.savebuttonText = "question saved"
     }
-
   }
 }
 
 </script>
-
 
 <style scoped>
 
@@ -214,15 +191,10 @@ export default{
   grid-template-columns: 1 fr 1fr;
 }
 #saveDelete {
-  /* background-color: red; */
   grid-column: 2;
-  /* width: 50%; */
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  /* margin-left:50%;
-  padding-right: 2em;
-  margin-top: -2em; */
 }
 
 .saveDeleteButton {
@@ -241,7 +213,6 @@ export default{
 .saveDeleteButton:hover {
   transform: translateY(-0.125em);
 }
-
 
 #deleteQuestion:hover {
   background-color: salmon;
@@ -316,15 +287,12 @@ input {
   margin-right: 26%;
 }
 #correctString {
-  /* background-color: green; */
   grid-column: 1;
   font-size: 1.4em;
   color: white;
   text-shadow: .08em .08em 0 #4779d6;
   padding-top: 1em;
-
 }
-
 
 @media screen and (max-width:80em) {
 #inputAnswer {
@@ -361,9 +329,7 @@ input {
 }
 #saveDelete {
   grid-column: 1;
-
   grid-row: 2;
 }
-
 }
 </style>

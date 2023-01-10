@@ -1,29 +1,21 @@
 <template>
-  <div>
+<div>
   <div id="consequenceBox" >
-    
-     
-        <input type="text"  class="input" v-model="c" :placeholder= "uiLabels.WriteRewardHere" v-on:keypress="resetSavebutton()" >
-        
-        <button v-on:click="sendRewards" v-bind:style="{'background-color': savedColor}" class="button" id="Savebutton">
-           {{uiLabels.Save}}
-        </button>
-        
-        <button v-on:click="deleteReward" class="delButton">
-          <img class="button" src="../../public/img/trashcan.png"/>
-        </button>
-     
-      </div>
-
-    </div>
- 
-</template>
+    <input type="text"  class="input" v-model="c" :placeholder= "uiLabels.WriteRewardHere" v-on:keypress="resetSavebutton()" >
+    <button v-on:click="sendRewards" v-bind:style="{'background-color': savedColor}" class="button" id="Savebutton">
+      {{uiLabels.Save}}
+    </button>
+    <button v-on:click="deleteReward" class="delButton">
+      <img class="button" src="../../public/img/trashcan.png"/>
+    </button>
+  </div>
+</div>
+ </template>
 
 <script>
 
 import io from 'socket.io-client';
 const socket = io();
-
 
 export default{
 name: 'RewardsComponent',
@@ -39,8 +31,6 @@ data: function(){
         uiLabels: {},
         textett : "",
         savedColor: ""
-        
-
     }
 
 },
@@ -64,12 +54,9 @@ methods:{
     resetSavebutton: function(){
       this.savedColor = "orange";
     }
-
-}
-
+  }
 }
 </script>
-
 
 <style scoped >
 #consequenceBox{
@@ -96,17 +83,15 @@ width: 4em;
   border-style:solid;
   border-radius: 0.5em;
   margin-top:0.2em;
+  box-shadow: none;
 }
 
 .input {
- 
   grid-column: 1;
   grid-row: 2;
   border-radius: 1em;
   padding: 0.75em 1.25em;
   box-sizing: border-box;
-
- 
 }
 .delButton {
   background-color: transparent;
@@ -117,6 +102,7 @@ width: 4em;
   justify-content: center;
   grid-column: 3;
   grid-row: 2;
+  box-shadow: none;
 }
 .button{
   height: 3.25em;
@@ -125,8 +111,4 @@ width: 4em;
 .button:hover {
   transform: translateY(-0.125em);
 }
-
-
-
-
 </style>

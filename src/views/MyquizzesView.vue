@@ -1,37 +1,28 @@
 <template>
-  <div id="body">
-    <homeButton class="homeButton"></homeButton>
-    
-      <h1>{{uiLabels.myQuizzes}}</h1>
-      <p v-if="(JSON.stringify(quizzes) === '{}') ">{{uiLabels.noQuizzes}}</p>
+<div id="body">
+  <homeButton class="homeButton"></homeButton>
+  <h1>{{uiLabels.myQuizzes}}</h1>
+  <p v-if="(JSON.stringify(quizzes) === '{}') ">{{uiLabels.noQuizzes}}</p>
 
+  <div class="myQuizzes" v-for="(contain, id) in quizzes" v-bind:key="id">{{id}} 
+    <button class="button" v-on:click="host(id)"> 
+      {{uiLabels.Host}} 
+    </button>
 
-     
-  
-      <div class="myQuizzes" v-for="(contain, id) in quizzes" v-bind:key="id">{{id}} 
-          <button class="button" v-on:click="host(id)"> {{uiLabels.Host}} </button>
+    <button class="button" v-on:click="edit(id)" >
+      <img id="edit"  src="../../public/img/edit.png"/>
+    </button>
 
-          <button class="button" v-on:click="edit(id)" >
-            <img id="edit"  src="../../public/img/edit.png"/>
-          </button>
-
-          <button class="button"  v-on:click="deleteQuiz(id)" >
-            <img id="delete" src="../../public/img/trashcan.png"/>
-          </button>
-          
-      </div>
-
-      <div id="createDiv">       
-        <router-link id="create" v-bind:to="('/create/'+lang)">{{uiLabels.createQuiz}}</router-link>
-      </div> 
-
-      <div  class="para"> <img id="para" src="../../public/img/parasoll.png" >
-        
-      </div>
-
+    <button class="button"  v-on:click="deleteQuiz(id)" >
+      <img id="delete" src="../../public/img/trashcan.png"/>
+    </button>
 
   </div>
-
+  <div id="createDiv">       
+    <router-link id="create" v-bind:to="('/create/'+lang)">{{uiLabels.createQuiz}}</router-link>
+  </div> 
+  <div class="para"> <img id="para" src="../../public/img/parasoll.png" ></div>
+  </div>
 </template>
 
 <script>
@@ -80,6 +71,7 @@ export default {
  
 }
 </script>
+
 <style scoped>
   #body {
     background-color: #A6E9A3 ;
@@ -106,21 +98,6 @@ export default {
   #create:hover {
     box-shadow: 0 0.3em 1em #80B57D;
     transform: translateY(-0.125em);
-  }
- 
-
-  .button:hover {
-    transform: translateY(-0.125em);
-  }
-
-
-  @import url(https://fonts.googleapis.com/css?family=Righteous);
-
-*, *:before, *:after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  position: relative;
   }
 
   h1 {
@@ -166,7 +143,6 @@ export default {
     font-size: 1em;
     color: white;
     font-weight: bold;
-
   }
 
   #edit {
@@ -175,7 +151,6 @@ export default {
   .para {
     display:grid;
     grid-template-columns: 30%;
-
   }
 
   #para {
@@ -185,8 +160,6 @@ export default {
     margin-left: 3em;
   }
 
-
-
   #delete {
     height: 2.5em;
   }
@@ -195,10 +168,7 @@ export default {
     .myQuizzes {
       width: 90%;
       grid-template-columns: 30% 25% 18% 18%;
-
     }
-
-
   }
 
 </style>

@@ -1,42 +1,27 @@
 <template>
-  <div class="body">
-  
+<div id="body">
   <header>
-   
-    <!-- <div class="logo"> punishment play: the flip. Also known as "Flip or Flop"  </div> -->
     <div class="J">
-    
-   
-    <h1 > <img id="flag" v-bind:src=uiLabels.languageFlag v-on:click="switchLanguage">   Flip or Flop!    <img id="logo" src="../../public/img/fliplogo.png">
-</h1></div>
-    
-  </header>
-  
-  
-    <div class="wrapper">
-  
-      <router-link class="startchoice a" v-bind:to="'/join/'+lang">{{uiLabels.joinQuiz}}</router-link>
-
-      <router-link class="startchoice b" v-bind:to="'/create/'+lang">{{uiLabels.createQuiz}}</router-link>
-
-      <router-link class="startchoice c" id="smallerbuttons" v-bind:to="'/host/'+lang">{{uiLabels.hostQuiz}}</router-link>
-
-      <router-link class="startchoice d" id="smallerbuttons" v-bind:to="'/myquizzes/'+lang"> {{uiLabels.myQuizzes}}</router-link>
-
-      <button id="ft" v-on:click="rules"><img id="questionmark" src="../../public/img/frågetecken.png"> </button>
-   
+      <h1 > <img id="flag" v-bind:src=uiLabels.languageFlag v-on:click="switchLanguage">   
+        Flip or Flop!    
+        <img id="logo" src="../../public/img/fliplogo.png">
+      </h1>
     </div>
-    
-    
+  </header>
+  <div class="wrapper">
+    <router-link class="startchoice a" v-bind:to="'/join/'+lang">{{uiLabels.joinQuiz}}</router-link>
+    <router-link class="startchoice b" v-bind:to="'/create/'+lang">{{uiLabels.createQuiz}}</router-link>
+    <router-link class="startchoice c" id="smallerbuttons" v-bind:to="'/host/'+lang">{{uiLabels.hostQuiz}}</router-link>
+    <router-link class="startchoice d" id="smallerbuttons" v-bind:to="'/myquizzes/'+lang"> {{uiLabels.myQuizzes}}</router-link>
+    <button id="ft" v-on:click="rules"><img id="questionmark" src="../../public/img/frågetecken.png"> </button>
   </div>
-
+</div>
 </template>
 
 <script>
 import swal from 'sweetalert';
 import io from 'socket.io-client';
 const socket = io();
-
 
 export default {
   name: 'StartView',
@@ -69,38 +54,29 @@ export default {
       this.hideNav = ! this.hideNav;
     },
     rules: function(){
-
       if (this.lang == "en") {
         swal({
-        title: "HOW TO PLAY",
-  text: "Before you play your first quiz, it's good to know the following: Only one player will be (randomly) chosen to answer each question. However, before they can answer, the other players must vote for the answering player's rewards and punishments. If the player answers the quiestion correctly, they will receive the most voted reward and vice versa.  If you're lucky, you can become 'the Joker' and pass your reward/punishment unto another player or choose to keep it yourself. When you feel finished with the question, it is the Host that will go to the next question.",
-  button: "Start To FlipFlop"
-      })
-           }
-            else {
-              swal({
-        title: "HUR DU SPELAR",
-  text: "Innan du spelar ditt första quiz är det bra att veta följande: endast en av spelarna kommer (slumpmässigt) att svara på varje fråga. Innan de kan svara måste dock de andra spelarna rösta på den svarande spelarens belöningar och bestraffningar. Om spelaren svarar rätt på frågan kommer hen att få en belöning och vice versa. Om du har tur kan du bli 'Jokern' och skicka vidare din belöning eller straff till en annan spelare eller välja att behålla den själv. När ni känner er klara med frågan är det Värden (Host) som går vidare till nästa fråga.",
-  button: "Börja FlipFloppa!"
-      })
-          }
-      
-
+          title: "HOW TO PLAY",
+          text: "Before you play your first quiz, it's good to know the following: Only one player will be (randomly) chosen to answer each question. However, before they can answer, the other players must vote for the answering player's rewards and punishments. If the player answers the quiestion correctly, they will receive the most voted reward and vice versa.  If you're lucky, you can become 'the Joker' and pass your reward/punishment unto another player or choose to keep it yourself. When you feel finished with the question, it is the Host that will go to the next question.",
+          button: "Start To FlipFlop"
+        })
+      }
+      else {
+        swal({
+          title: "HUR DU SPELAR",
+          text: "Innan du spelar ditt första quiz är det bra att veta följande: endast en av spelarna kommer (slumpmässigt) att svara på varje fråga. Innan de kan svara måste dock de andra spelarna rösta på den svarande spelarens belöningar och bestraffningar. Om spelaren svarar rätt på frågan kommer hen att få en belöning och vice versa. Om du har tur kan du bli 'Jokern' och skicka vidare din belöning eller straff till en annan spelare eller välja att behålla den själv. När ni känner er klara med frågan är det Värden (Host) som går vidare till nästa fråga.",
+          button: "Börja FlipFloppa!"
+        })
+      }
     }
-    
-    
-
-
   }
 }
 </script>
+
 <style scoped>
 
-#j{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-}
-  .body {
+
+  #body {
     margin: 0;
     background-color: #A6E9A3;
     font-family: 'Courier New', Courier, monospace;
@@ -218,10 +194,9 @@ h1 {
   }
 
 @media screen and (max-width:70em) {
-  body {
+  #body {
     overflow: auto;
   }
-
 
   .startchoice {
     margin: auto;

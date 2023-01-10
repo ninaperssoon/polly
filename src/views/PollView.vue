@@ -1,44 +1,33 @@
 <template>
-  
-  <div class="body">
-    <homeButton class="homeButton"></homeButton>
-    <div id="wrapper">
-      <!-- <h1 v-if="(voting == true)">  {{ uiLabels.watingForVotes}}</h1>  -->
-      <h2 > {{uiLabels.yourePlaying}} {{pollId}} </h2>
-
-      <div class="container">
-        <div class="scene scene--card">
-            <div class="card" v-bind:class="{ flipme: cardOne == 'flipped' }">
-      
-              <div class="card__face card__face--front">
-                <p v-if="(voting == true)">  {{ uiLabels.watingForVotes}}</p>
-                <p v-else-if="(this.question!== null)">{{this.question.q}} </p>
-                <p v-else> {{uiLabels.ReachedEndQuiz}}
-                <br><br>
-                <router-link class="button" v-bind:to="('/join/'+lang)">{{uiLabels.joinanotherquiz}}</router-link>
-                <router-link class="button" v-bind:to="('/')">{{uiLabels.Returntohomepage}}</router-link>
-                </p>
-          
-
-              </div>
-              <div class="card__face card__face--back" v-bind:class="{ correct: ans == uiLabels.correct}">
-               
-                <p v-if="(this.consequence !== '')"> <span id="correctness"> {{this.ans}}! </span> <br> <JokerComponent v-if="(this.joker == true)"> </JokerComponent> <span v-if="(this.joker == true)"> <br> {{uiLabels.youJoker}} <br> <br> {{ uiLabels.chooseCon }} {{ this.con }}: <br> {{ this.consequence }}</span> <br> <span v-if="(this.joker == false)" > <span v-if = "(this.sendedJoker== true)">{{ this.playingName }}{{uiLabels.s}}</span> <span v-else>{{uiLabels.Your}}</span> {{this.con}}{{uiLabels.is}}{{this.consequence}}</span>  </p>
-                <p v-else id="correctness"> {{this.ans}}! </p>  
-              </div>
-
-            </div>
-            <div >  
-              <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" v-if="visibleButtons"/> 
-              <VotingComponent v-bind:voting="participants" v-on:vote="submitJoker" v-if="visibleJoker" message="#eb8cb0"/>  
-            </div>
-
+<div id="body">
+  <homeButton class="homeButton"></homeButton>
+  <div id="wrapper">
+    <h2 > {{uiLabels.yourePlaying}} {{pollId}} </h2>
+    <div class="container">
+      <div class="scene scene--card">
+        <div class="card" v-bind:class="{ flipme: cardOne == 'flipped' }">
+          <div class="card__face card__face--front">
+            <p v-if="(voting == true)">  {{ uiLabels.watingForVotes}}</p>
+            <p v-else-if="(this.question!== null)">{{this.question.q}} </p>
+            <p v-else> {{uiLabels.ReachedEndQuiz}}
+              <br><br>
+              <router-link class="button" v-bind:to="('/join/'+lang)">{{uiLabels.joinanotherquiz}}</router-link>
+              <router-link class="button" v-bind:to="('/')">{{uiLabels.Returntohomepage}}</router-link>
+            </p>
+          </div>
+          <div class="card__face card__face--back" v-bind:class="{ correct: ans == uiLabels.correct}">
+            <p v-if="(this.consequence !== '')"> <span id="correctness"> {{this.ans}}! </span> <br> <JokerComponent v-if="(this.joker == true)"> </JokerComponent> <span v-if="(this.joker == true)"> <br> {{uiLabels.youJoker}} <br> <br> {{ uiLabels.chooseCon }} {{ this.con }}: <br> {{ this.consequence }}</span> <br> <span v-if="(this.joker == false)" > <span v-if = "(this.sendedJoker== true)">{{ this.playingName }}{{uiLabels.s}}</span> <span v-else>{{uiLabels.Your}}</span> {{this.con}}{{uiLabels.is}}{{this.consequence}}</span>  </p>
+            <p v-else id="correctness"> {{this.ans}}! </p>  
+          </div>
+        </div>
+        <div >  
+          <QuestionComponent v-bind:question="question" v-on:answer="submitAnswer" v-if="visibleButtons"/> 
+          <VotingComponent v-bind:voting="participants" v-on:vote="submitJoker" v-if="visibleJoker" message="#eb8cb0"/>  
         </div>
       </div>
     </div>
- 
   </div>
-
+</div>
 </template>
 
 <script>
@@ -186,33 +175,26 @@ export default {
        socket.emit("isJoker", this.pollId)
         
       }
-      
-      
     },
     submitJoker: function (vote) {
       console.log("PollView.vue, submitJoker: röstning:", vote)
-      //this.ans = this.question.s[answer.index];
       console.log("PollView.vuesubmitJoker, ans:",this.jokerAns)
       socket.emit("submitJoker", {pollId: this.pollId, name: vote.v, wor: this.jokerAns, con: this.con, consequence: this.consequence})
       this.playingName = vote.v
       this.visibleJoker = false;
       this.joker=false;
       this.sendedJoker=true;
-      
-      
     },
-    
   },
 }
 </script>
 
 <style scoped>
 
-.body {
+#body {
   height: 100%;
   width: 100%;
   position: fixed;
-
   background-image: url("https://images.template.net/104478/pink-ocean-background-pdlb9.jpg?fbclid=IwAR1f5-_NQThWwcxCzlH0jRBLgD_Zh6ER41Kue--nu1mQAA5ybx0MyEwq3E4");
   background-repeat:no-repeat;
   background-size: cover;
@@ -314,8 +296,6 @@ export default {
     width: 15%;
     height: 15%;
   }
-
-  @import url(https://fonts.googleapis.com/css?family=Righteous);
 
 *, *:before, *:after {
   margin: 0;

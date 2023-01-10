@@ -1,6 +1,6 @@
 <template>
-  <div id="homeButton">
-    <router-link to="/"><img id="homePic" src="../../public/img/fliplogo.png"/></router-link>
+<div id="homeButton">
+  <router-link to="/"><img id="homePic" src="../../public/img/fliplogo.png"/></router-link>
   </div>
 </template>
 
@@ -11,7 +11,6 @@ export default {
   props: {
       homeButton: Object
     },
-  
 }
 </script>
 <style scoped>
@@ -21,7 +20,6 @@ export default {
 }
 #homePic {
   height: 7em;
-
   cursor: pointer;
 }
 

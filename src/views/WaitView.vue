@@ -1,17 +1,13 @@
 <template>
-  <div id="body">
-
-    <div id="header">
-      <h1>{{uiLabels.Waitingforhosttostart}}<span class="dot1"> .</span><span class="dot2">.</span><span class="dot3">.</span></h1> 
-    </div>
-      
-      <div class="board" v-for="participant in participants" v-bind:key = "participant">
-        <img id="surfboard" src="../../public/img/surfboard.png">
-        <div id="text">{{participant}}</div>
-      </div>    
-  
+<div id="body">
+  <div id="header">
+    <h1>{{uiLabels.Waitingforhosttostart}}<span class="dot1"> .</span><span class="dot2">.</span><span class="dot3">.</span></h1> 
   </div>
-
+  <div class="board" v-for="participant in participants" v-bind:key = "participant">
+    <img id="surfboard" src="../../public/img/surfboard.png">
+    <div id="text">{{participant}}</div>
+  </div>    
+</div>
 </template>
 
 <script>
@@ -58,10 +54,10 @@ export default {
         this.lang = "en"
       socket.emit("switchLanguage", this.lang)
     },
-
   }
 }
 </script>
+
 <style scoped>
   #body {
     margin: auto;

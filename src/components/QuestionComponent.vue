@@ -1,15 +1,12 @@
 <template>
-<!-- <p>{{question.q}} {{question.s}}</p> -->
-
 <div id="buttonContainer" v-if="(this.question !== null)">    
- 
   <button v-for="(a,index) in question.a" v-on:click="answer(a,index)" v-bind:key="a">
     {{ a }}
   </button>
   <br>
-
 </div> 
 </template>
+
 <script>
 
 export default {
@@ -26,7 +23,8 @@ export default {
   }
 }
 </script>
-<style>
+
+<style scoped>
  button {
   color: black;
     background-color:#FFF1AD;
@@ -37,11 +35,6 @@ export default {
     height: 2em;
  }
 
- button:hover{
-  box-shadow: 0 0.3em 1em rgb(158, 100, 145);
-    transform: translateY(-0.125em);
-
- }
  #buttonContainer {
   margin-top: 1em;
   display: grid;

@@ -1,55 +1,43 @@
 <template>
-  <div class="body">
-      <homeButton class="homeButton"></homeButton>
+<div class="body">
+  <homeButton class="homeButton"></homeButton>
   <div id="wrapper">
-    <!-- <h1 v-if="(this.vote == true)"> {{ uiLabels.pleaceVote}}{{this.playingName}}{{uiLabels.s}} {{ uiLabels.rewardpunishment }} </h1> -->
     <h2> {{uiLabels.yourehosting}} {{pollId}} </h2> 
-
-
-  <div class="container">
-    
-    <div class="scene scene--card">
-      <div class="card" v-bind:class="{ flipme: cardOne == 'flipped' }">
-
-        <div class="card__face card__face--front">
-          <p v-if="(this.isJoker == true)"> <JokerComponent></JokerComponent> <br> {{ this.playingName }} {{uiLabels.isJoker}}</p>
-          <p v-else-if="(this.vote == true)"> {{ uiLabels.pleaceVote}}{{this.playingName}}{{uiLabels.s}} {{ uiLabels.rewardpunishment }} </p>
-         <p v-else-if="(this.question !== null)">{{this.question.q}} <br> {{this.playingName}} {{uiLabels.IsAswering}}</p> 
-          <p v-else>{{uiLabels.ReachedEndQuiz}}
-            <br><br>
-            <router-link class="button" id="yellow" v-bind:to="('/myquizzes/'+lang)"> {{uiLabels.Hostanotherquiz}} </router-link>
-            <router-link class="button" id="yellow" v-bind:to="('/')"> {{uiLabels.Returntohomepage}} </router-link>
-          </p>
-
+    <div class="container">
+      <div class="scene scene--card">
+        <div class="card" v-bind:class="{ flipme: cardOne == 'flipped' }">
+          
+          <div class="card__face card__face--front">
+            <p v-if="(this.isJoker == true)"> <JokerComponent></JokerComponent> <br> {{ this.playingName }} {{uiLabels.isJoker}}</p>
+            <p v-else-if="(this.vote == true)"> {{ uiLabels.pleaceVote}}{{this.playingName}}{{uiLabels.s}} {{ uiLabels.rewardpunishment }} </p>
+            <p v-else-if="(this.question !== null)">{{this.question.q}} <br> {{this.playingName}} {{uiLabels.IsAswering}}</p> 
+            <p v-else>{{uiLabels.ReachedEndQuiz}}
+              <br><br>
+              <router-link class="button" id="yellow" v-bind:to="('/myquizzes/'+lang)"> {{uiLabels.Hostanotherquiz}} </router-link>
+              <router-link class="button" id="yellow" v-bind:to="('/')"> {{uiLabels.Returntohomepage}} </router-link>
+            </p>
+          </div>
+           
+          <div class="card__face card__face--back" v-bind:class="{ correct: ans == uiLabels.correct}">
+            <p v-if="(this.consequence !== '')"> <span id="correctness"> {{this.ans}}! </span> <br> {{this.playingName}}{{uiLabels.s}} {{this.con}} {{uiLabels.is}} {{this.consequence}}</p>
+            <p v-else id="correctness"> {{this.ans}}! </p> 
+          </div>
         </div>
-        <div class="card__face card__face--back" v-bind:class="{ correct: ans == uiLabels.correct}">
-          <p v-if="(this.consequence !== '')"> <span id="correctness"> {{this.ans}}! </span> <br> {{this.playingName}}{{uiLabels.s}} {{this.con}} {{uiLabels.is}} {{this.consequence}}</p>
-          <p v-else id="correctness"> {{this.ans}}! </p> 
+        <div id="buttonContainer">  
+          <VotingComponent v-bind:voting="voteRewards" v-on:vote="submitVoteR" v-if="visibleRewards" message="#A6E9A3"/>  
+          <VotingComponent v-bind:voting="votePunishments" v-on:vote="submitVoteP" v-if="visiblePunishments" message="#F87575"/>
+        </div>
+        <div id="resetNext"> 
+          <button v-on:click="resetQuiz">
+            {{uiLabels.ResetQuiz}} 
+          </button>
+          <button v-on:click="nextQuestion" >
+            {{uiLabels.NextQuestion}} 
+          </button>
         </div>
       </div>
-      
-      <div id="buttonContainer">  
-        
-        <VotingComponent v-bind:voting="voteRewards" v-on:vote="submitVoteR" v-if="visibleRewards" message="#A6E9A3"/>  
-        <VotingComponent v-bind:voting="votePunishments" v-on:vote="submitVoteP" v-if="visiblePunishments" message="#F87575"/>
-      
-    </div>
-    <div id="resetNext"> 
-      <button v-on:click="resetQuiz">
-    {{uiLabels.ResetQuiz}} 
-  </button>
-      <button v-on:click="nextQuestion" >
-    {{uiLabels.NextQuestion}} 
-  </button>
- 
-    </div>
-    
-  
     </div>
   </div>
-
- 
-</div>
 </div>
 </template>
 
@@ -408,8 +396,6 @@ export default {
     cursor: pointer;
 
   }
-
-  @import url(https://fonts.googleapis.com/css?family=Righteous);
 
 *, *:before, *:after {
   margin: 0;

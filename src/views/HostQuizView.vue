@@ -1,22 +1,19 @@
 <template>
-  <div id="body">
-    <homeButton class="homeButton"></homeButton>
-  
-    <h1> {{uiLabels.yourehosting}}{{id}} </h1>
-     <h2> {{uiLabels.waitingForParticipants}} <span class="dot1"> .</span><span class="dot2">.</span><span class="dot3">.</span> </h2>
+<div id="body">
+  <homeButton class="homeButton"></homeButton>
 
-      <br>
+  <h1> {{uiLabels.yourehosting}}{{id}} </h1>
+  <h2> {{uiLabels.waitingForParticipants}} <span class="dot1"> .</span><span class="dot2">.</span><span class="dot3">.</span> </h2>
+  <br>
 
-      <div class="board" v-for="participant in participants" v-bind:key = "participant">
-        <img id="surfboard" src="../../public/img/surfboard.png">
-        <div id="text">{{participant}}</div>
-      </div>
+  <div class="board" v-for="participant in participants" v-bind:key = "participant">
+    <img id="surfboard" src="../../public/img/surfboard.png">
+    <div id="text">{{participant}}</div>
+  </div>
 
-      <button v-on:click="startQuiz"> {{uiLabels.startQuiz}}</button>
-      
+  <button v-on:click="startQuiz"> {{uiLabels.startQuiz}}</button>
 
-    </div>
-
+</div>
 </template>
 
 <script>
@@ -69,11 +66,10 @@ export default {
         this.lang = "en"
       socket.emit("switchLanguage", this.lang)
     },
-    
-
   }
 }
 </script>
+
 <style scoped>
   #body {
     margin: auto;
@@ -106,14 +102,11 @@ export default {
 
   button:hover {
     box-shadow: 0 0.3em 1em #4779d6;
-    transform: translateY(-0.125em);
-    cursor: pointer;
-
   }
+
   h1 {
     margin-top: -3em; 
     font-size: 4em; 
-    
   }
 
   h2 {
@@ -122,7 +115,6 @@ export default {
     font-weight: bold;
     color: #FFF1AD;
     text-shadow: .08em .08em 0 #4779d6;
-
   }
 
   #text {
@@ -131,10 +123,10 @@ export default {
     text-shadow: .08em .08em 0 black;
   }
 
-  
   .dot1 {
  animation: visibility 2s linear infinite;
 }
+
 @keyframes visibility {
  0% {
  opacity: 1;
@@ -195,6 +187,7 @@ export default {
   opacity: 0;
  }
 }
+
 @media screen and (max-width:50em) {
   h1 {
     margin-top: 0.01em;

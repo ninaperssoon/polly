@@ -1,45 +1,36 @@
 <template>
-  <div class="body">
-    <homeButton class="homeButton"></homeButton>
-    <div id="wrapper">
-   <!-- <h1 v-if="(this.vote == true)"> {{ uiLabels.pleaceVote}}{{this.playingName}}{{uiLabels.s}} {{ uiLabels.rewardpunishment }} </h1>  -->
-   <h2>{{uiLabels.yourePlaying}}{{pollId}}</h2>
-
-  <div class="container">
-    <div class="scene scene--card">
-      <div class="card" v-bind:class="{ flipme: cardOne == 'flipped' }">
+<div class="body">
+  <homeButton class="homeButton"></homeButton>
+  <div id="wrapper">
+    <h2>{{uiLabels.yourePlaying}}{{pollId}}</h2>
+    <div class="container">
+      <div class="scene scene--card">
+        <div class="card" v-bind:class="{ flipme: cardOne == 'flipped' }">
       
-        <div class="card__face card__face--front">
-          <p v-if="(this.isJoker == true)">  <JokerComponent></JokerComponent> <br> {{ this.playingName }} {{uiLabels.isJoker}} </p>
-          <p v-else-if="(this.vote == true)"> {{ uiLabels.pleaceVote}}{{this.playingName}}{{uiLabels.s}} {{ uiLabels.rewardpunishment }} </p>
-          <p v-else-if="(this.question !== null)"> {{this.playingName}} {{uiLabels.IsAswering}} <br> {{this.question.q}} </p>
-          <p v-else>{{uiLabels.ReachedEndQuiz}}
-            <br><br>
-            <router-link class="button" v-bind:to="('/join/'+lang)"> {{uiLabels.joinanotherquiz}} </router-link>
-            <router-link class="button" v-bind:to="('/')"> {{uiLabels.Returntohomepage}} </router-link>
-
-          </p>
-          
-
-        </div>
+          <div class="card__face card__face--front">
+            <p v-if="(this.isJoker == true)">  <JokerComponent></JokerComponent> <br> {{ this.playingName }} {{uiLabels.isJoker}} </p>
+            <p v-else-if="(this.vote == true)"> {{ uiLabels.pleaceVote}}{{this.playingName}}{{uiLabels.s}} {{ uiLabels.rewardpunishment }} </p>
+            <p v-else-if="(this.question !== null)"> {{this.playingName}} {{uiLabels.IsAswering}} <br> {{this.question.q}} </p>
+            <p v-else>{{uiLabels.ReachedEndQuiz}}
+              <br><br>
+              <router-link class="button" v-bind:to="('/join/'+lang)"> {{uiLabels.joinanotherquiz}} </router-link>
+              <router-link class="button" v-bind:to="('/')"> {{uiLabels.Returntohomepage}} </router-link>
+            </p>
+          </div>
         <div class="card__face card__face--back" v-bind:class="{ correct: ans == uiLabels.correct}">
-        <p v-if="(this.consequence !== '')"><span id="correctness"> {{this.ans}}! </span> <br> {{playingName}}{{uiLabels.s}} {{this.con}} {{uiLabels.is}} {{this.consequence}} </p>
-        <p v-else id="correctness"> {{this.ans}}! </p> 
-      </div>
+          <p v-if="(this.consequence !== '')"><span id="correctness"> {{this.ans}}! </span> <br> {{playingName}}{{uiLabels.s}} {{this.con}} {{uiLabels.is}} {{this.consequence}} </p>
+          <p v-else id="correctness"> {{this.ans}}! </p> 
+        </div>
       </div>
       <div id="buttonContainer">  
-              <!-- <p v-if="visibleRewards" class="textbutton" id="textbuttonflip"> Flip </p>         -->
-                <VotingComponent v-bind:voting="voting.r" v-on:vote="submitVoteR" v-if="visibleRewards" message="#A6E9A3"/> 
-                <!-- <p v-if="visiblePunishments" class="textbutton" id="textbuttonflop"> Flop</p>  -->
-                <VotingComponent v-bind:voting="voting.p" v-on:vote="submitVoteP" v-if="visiblePunishments" message="#F87575"/>
-           
-      
-      
-    </div>
-
+        <!-- <p v-if="visibleRewards" class="textbutton" id="textbuttonflip"> Flip </p>         -->
+        <VotingComponent v-bind:voting="voting.r" v-on:vote="submitVoteR" v-if="visibleRewards" message="#A6E9A3"/> 
+        <!-- <p v-if="visiblePunishments" class="textbutton" id="textbuttonflop"> Flop</p>  -->
+        <VotingComponent v-bind:voting="voting.p" v-on:vote="submitVoteP" v-if="visiblePunishments" message="#F87575"/>
+      </div>
     </div>
   </div>
-  </div>
+</div>
  
 </div>
 </template>
@@ -205,7 +196,7 @@ export default {
   margin-top: -10em;
   width: 25em;
   height: 26em;
-  perspective: 8em;
+  perspective: 125em;
 }
 
 .card {

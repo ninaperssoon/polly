@@ -3,10 +3,16 @@
 </template>
 
 <style>
+@import url(https://fonts.googleapis.com/css?family=Righteous);
 
 body {
   margin: 0;
   padding: 0;
+}
+
+button:hover {
+  cursor: pointer;
+  transform: translateY(-0.125em);
 }
 #app {
   font-family: Helvetica, Arial, sans-serif;
@@ -55,7 +61,7 @@ h1 {
   margin-top: -10em;
   width: 25em;
   height: 26em;
-  perspective: 2000px;
+  perspective: 125em;
 }
 
 .card {
@@ -75,8 +81,8 @@ h1 {
   color: white;
   backface-visibility: hidden;
   border-radius: 2em;
-  font-size: 25px;
-  line-height: 30px;
+  font-size: 1.5em;
+  line-height: 2em;
   align-items: center;
   display: flex;
   align-items: center;
@@ -91,14 +97,14 @@ h1 {
   font-weight: bold;
   padding: 5%;
   border-color: #f9e998;
-  box-shadow: 0 5px 15px #c0ac48;
+  box-shadow: 0 0.3em 1em #c0ac48;
 }
 
 .card__face--back {
   background: #F87575;
   transform: rotateY(180deg); 
   border-color: #f76868;
-  box-shadow: 0 5px 15px #bb3939 ;
+  box-shadow: 0 0.3em 0.3em #bb3939 ;
 }
 
 .flipme {

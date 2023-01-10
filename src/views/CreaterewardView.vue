@@ -1,78 +1,69 @@
 <template>
-
-  <div id="myBackground">
-
-    <div class="upperGrid">
+<div id="body">
+  <div class="upperGrid">
     <homeButton class="homeButton"></homeButton>
     <button id="ft" v-on:click="rules"><img id="questionmark" src="../../public/img/frågetecken.png"> </button>
   </div>
-  
-  <div class="wrapper">
 
-    <div class="innerWrapper"  >
-      
+  <div class="wrapper">
+    <div class="innerWrapper">
       <h1>{{uiLabels.rewards}}</h1>
       <br>
 
       <Consequence  v-for=" (reward, index) in rewards"
-      v-bind:consequence= "reward"
-      v-bind:key="reward"
-      v-on:myReward="sendReward($event, index)"
-      v-on:deleteReward="deleteReward($event, index)"
-      message ="reward"
-      class="reward"/>
+        v-bind:consequence= "reward"
+        v-bind:key="reward"
+        v-on:myReward="sendReward($event, index)"
+        v-on:deleteReward="deleteReward($event, index)"
+        message ="reward"
+        class="reward"/>
 
       <button v-on:click="newReward" class="addButton" id="addButtonReward">
         + {{uiLabels.AddReward}}
       </button> 
     </div>
-
-
+    
     <div  class="innerWrapper" >
       <h1>{{uiLabels.punishments}}</h1>
       <br>
       
       <Consequence v-for=" (punishment, index) in punishments"
-      v-bind:consequence = "punishment"
-      v-bind:key="punishment"
-      v-on:myReward="sendPunishment($event, index)"
-      v-on:deleteReward="deletePunishment($event, index)"
-      message = "punishment"
-      class="punishment" />
+        v-bind:consequence = "punishment"
+        v-bind:key="punishment"
+        v-on:myReward="sendPunishment($event, index)"
+        v-on:deleteReward="deletePunishment($event, index)"
+        message = "punishment"
+        class="punishment" />
     
       <button v-on:click="newPunishment" class="addButton" id="addButtonPunishment">
         + {{uiLabels.AddPunishment}}
       </button> 
 
-      
     </div>
   </div>
-
-
-    <div class="nextButton">
-      <div id="testButton">
-        <router-link v-bind:to="'/host/'+pollId+'/'+lang" > 
-        <button id="submitButton" v-on:click="sendPollIdToH()">
-          {{uiLabels.hostThisQuiz}}
+  
+  <div class="nextButton">
+    <div id="testButton">
+      <router-link v-bind:to="'/host/'+pollId+'/'+lang" > 
+      <button id="submitButton" v-on:click="sendPollIdToH()">
+        {{uiLabels.hostThisQuiz}}
       </button > </router-link>
-      </div>
-
-
-      <div id="saveButton">
-        <router-link v-bind:to="'/start/'+lang"> 
-        <button id="submitButton" >
+    </div>
+    
+    <div id="saveButton">
+      <router-link v-bind:to="'/start/'+lang"> 
+      <button id="submitButton" >
         {{uiLabels.SaveandExit}}
       </button> </router-link>
     </div>
   </div>
+  
   <div id="backButton">
-    
-    <router-link v-bind:to="('/create/'+lang+'/'+pollId)"><img class="flipPic" src="../../public/img/leftarrow.png"/></router-link>
-    </div>
-
+    <router-link v-bind:to="('/create/'+lang+'/'+pollId)">
+      <img class="flipPic" src="../../public/img/leftarrow.png"/>
+    </router-link>
   </div>
-
-   
+</div>
 </template>
 
 <script>
@@ -82,12 +73,10 @@ import Consequence from '@/components/consequencesComponent.vue';
 import swal from 'sweetalert';
 const socket = io();
 
-
 export default {
   name: 'CreaterewardView',
   components: {
     homeButton, 
-    //consequence,
     Consequence,
     
   },
@@ -105,7 +94,6 @@ export default {
   created: function () {
 
     this.pollId = this.$route.params.id
-    //socket.emit('joinPoll', this.pollId)
 
     this.lang = this.$route.params.lang;
     socket.emit("pageLoaded", this.lang);
@@ -172,26 +160,23 @@ export default {
     sendPollIdToH: function(){
       socket.emit("comenceQuiz",{pollId: this.pollId});
     },
-    rules: function(){
 
-if (this.lang == "en") {
-  swal({
-  title: "How to use Rewards & Punishment ",
-text: "Here you write your rewards and punishments. They are used in the quiz when a player answers a question: they will get a reward if they answer correctly and a punishment if they answer incorrectly. Rewards and punishments are not tied to any specific questions, which means that you can slso choose to play entirely without them. Remember to save them all before moving forward!" ,
-button: "Got it!"
-})
-     }
+    rules: function(){
+      if (this.lang == "en") {
+        swal({
+          title: "How to use Rewards & Punishment ",
+          text: "Here you write your rewards and punishments. They are used in the quiz when a player answers a question: they will get a reward if they answer correctly and a punishment if they answer incorrectly. Rewards and punishments are not tied to any specific questions, which means that you can slso choose to play entirely without them. Remember to save them all before moving forward!" ,
+          button: "Got it!"
+        })
+      }
       else {
         swal({
-  title: "Hur du använder belöningar och bestraffningar",
-text: "Här skriver du in dina belöningar och bestraffningar. De används i quizet när en spelare besvarar en fråga: de kommer att få en belöning om de svarar rätt och en bestraffning om de svarar fel. Belöningar och bestraffningar är inte bundna till några specifika frågor, så du kan välja att spela helt utan dem om du vill. Kom ihåg att spara dem innan du går vidare! ",
-button: "Fattar!"
-})
+          title: "Hur du använder belöningar och bestraffningar",
+          text: "Här skriver du in dina belöningar och bestraffningar. De används i quizet när en spelare besvarar en fråga: de kommer att få en belöning om de svarar rätt och en bestraffning om de svarar fel. Belöningar och bestraffningar är inte bundna till några specifika frågor, så du kan välja att spela helt utan dem om du vill. Kom ihåg att spara dem innan du går vidare! ",
+          button: "Fattar!"
+        })
+      }
     }
-
-
-}
-
   }
 }
 </script>
@@ -202,35 +187,29 @@ h1{
   font-size: 4em; 
 }
   
-#myBackground{
+#body{
   margin: auto;
-    background-color: #A6E9A3 ;
-    text-align: center;
-    width: 100%;
-    top: 0;
-    left: 0;
-    height: 100%;
-    position:fixed;
-    overflow-y: auto;
-    overflow-x: hidden;
+  background-color: #A6E9A3 ;
+  text-align: center;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100%;
+  position:fixed;
+  overflow-y: auto;
+  overflow-x: hidden;
 
 }
 
 #addButtonPunishment{
   background-color: #F87575;
-    border-color: #F87575;
+  border-color: #F87575;
     
 }
 
 #addButtonReward{
   background-color:  #5C95FF;
   border-color:  #5C95FF;
-
-}
-
-button:hover {
-  background-color: lightgreen;
-  cursor:pointer;
 }
 
 .wrapper {
@@ -241,46 +220,36 @@ button:hover {
 }
 
 .innerWrapper {
-grid-template-columns: 1fr;
-padding: 1em;
-
+  grid-template-columns: 1fr;
+  padding: 1em;
 }
-
 .nextButton {
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding-top: 3em;
   padding-left: 20em;
   padding-right: 20em;
- 
 }
 
 #testButton {
   grid-column: 1;
- 
 }
+
 #saveButton {
   grid-column: 2;
-  
 }
-
-
 .reward{
-grid-column: 1;
-grid-row: auto;
-background-color: #5C95FF;
-border-radius: 2em;
-
+  grid-column: 1;
+  grid-row: auto;
+  background-color: #5C95FF;
+  border-radius: 2em;
 }
 .punishment{
-grid-column: 2;
-grid-row: auto;
-background-color: #F87575;;
-border-radius: 2em; 
-
+  grid-column: 2;
+  grid-row: auto;
+  background-color: #F87575;;
+  border-radius: 2em; 
 }
-
-
 .addButton {
   padding: 0.5em;
   font-size: 1.5em;
@@ -290,11 +259,8 @@ border-radius: 2em;
   width: 10em;  
 }
 
-
 #backButton{
   margin-right: 85%;
-  /* padding: 20 em; */
-  
 }
 
 #backPic {
@@ -310,52 +276,53 @@ border-radius: 2em;
 }
 
 #submitButton{
-    padding: 0.5em;
-    background-color: #FFF1AD;
-    border-color: #fff1adbd;
-    color: #F87575;
-    font-size: 1.5em;
-    width: 8em;
-    border-radius: 3em;
-    font-weight: bolder;
+  padding: 0.5em;
+  background-color: #FFF1AD;
+  border-color: #fff1adbd;
+  color: #F87575;
+  font-size: 1.5em;
+  width: 8em;
+  border-radius: 3em;
+  font-weight: bolder;
 }
 
-button:hover {
+/* button:hover {
   box-shadow: 0 0.3em 1em #80B57D;
-    transform: translateY(-0.125em);
-}
+  transform: translateY(-0.125em);
+} */
 
 .upperGrid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
   }
 
-  .homeButton {
-    grid-column: 1;
-    grid-row: 1;
+.homeButton {
+  grid-column: 1;
+  grid-row: 1;
   }
 
-  #questionmark{
-    height: 5em;;
-   width: 5em;;
+#questionmark{
+  height: 5em;;
+  width: 5em;;
 }
   
 
-  #ft{
-    background-color: transparent;
-    border: none;
-    grid-column: 6;
-    grid-row: 1;
-    box-shadow: none;
-  }
+#ft{
+  background-color: transparent;
+  border: none;
+  grid-column: 6;
+  grid-row: 1;
+  box-shadow: none;
+}
+
 @media screen and (max-width:70em) {
   .wrapper{
     grid-template-columns: 1fr;
   }
   .nextButton{
     padding-left: 0em;
-  padding-right: 0em;
+    padding-right: 0em;
     grid-template-columns: 1fr;
     row-gap: 0.5em;
   }

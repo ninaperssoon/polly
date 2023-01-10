@@ -1,5 +1,5 @@
 <template>
-    <img id="imgJoker" src="https://img.freepik.com/free-icon/buffoon_318-768911.jpg"/>
+  <img id="imgJoker" src="https://img.freepik.com/free-icon/buffoon_318-768911.jpg"/>
 </template>
 
 <script>

@@ -4,8 +4,6 @@
     {{ v }}
   </button>
 </div>
-
-
 </template>
 
 <script>
@@ -40,8 +38,7 @@ export default {
  }
 
  button:hover{
-  box-shadow: 0 0.3em 1em #59615f;
-  transform: translateY(-0.125em);  
+  box-shadow: 0 0.3em 1em #59615f; 
  }
  #buttonContainer {
   margin-top: 1em;
