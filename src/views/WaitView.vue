@@ -93,7 +93,7 @@ export default {
   }
 
   #startQuiz:hover {
-    box-shadow: 0 5px 15px #0079918f;
+    box-shadow: 0 0.3em 1em #0079918f;
   }
 
   #text {

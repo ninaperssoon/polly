@@ -304,7 +304,7 @@ export default {
   margin-top: -10em;
   width: 25em;
   height: 26em;
-  perspective: 2000px;
+  perspective: 125em;
 }
 
 .card {
@@ -324,8 +324,8 @@ export default {
   color: white;
   backface-visibility: hidden;
   border-radius: 2em;
-  font-size: 25px;
-  line-height: 30px;
+  font-size: 1.5em;
+  line-height: 2em;
   align-items: center;
   display: flex;
   align-items: center;
@@ -340,14 +340,14 @@ export default {
   font-weight: bold;
   padding: 5%;
   border-color: #f9e998;
-  box-shadow: 0 5px 15px #c0ac48;
+  box-shadow: 0 0.3em 1em #c0ac48;
 }
 
 .card__face--back {
   background-color:#F87575;
   transform: rotateY(180deg); 
   border-color: #f76868;
-  box-shadow: 0 5px 15px #bb3939 ;
+  box-shadow: 0 0.3em 1em #bb3939 ;
 }
 
 /* this style is applied when the card is clicked */
@@ -368,11 +368,11 @@ export default {
 .correct {
   background-color: #5C95FF;
   border-color: #4c88f8;
-  box-shadow: 0 5px 15px #2453a9 ;
+  box-shadow: 0 0.3em 1em #2453a9 ;
 }
 
 #correctness {
-  font-size: 30px;
+  font-size: 2em;
 }
 
 .button {
@@ -389,8 +389,8 @@ export default {
   }
 
   .button:hover {
-    box-shadow: 0 5px 15px rgb(158, 100, 145);
-    transform: translateY(-2px);
+    box-shadow: 0 0.3em 1em rgb(158, 100, 145);
+    transform: translateY(-0.125em);
     cursor: pointer;
 
   }
@@ -433,12 +433,12 @@ h1 {
 
   button:hover {
     cursor:pointer;
-    box-shadow: 0 5px 15px rgb(158, 100, 145);
-    transform: translateY(-2px);
+    box-shadow: 0 0.3em 1em rgb(158, 100, 145);
+    transform: translateY(-0.125em);
   }
 
   #yellow:hover {
-    box-shadow: 0 5px 15px #90875b;
+    box-shadow: 0 0.3em 1em #90875b;
 
   }
 @media screen and (max-width:50em) {

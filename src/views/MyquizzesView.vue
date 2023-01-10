@@ -96,13 +96,13 @@ export default {
   }
 
   #create:hover {
-    box-shadow: 0 5px 15px #80B57D;
-    transform: translateY(-2px);
+    box-shadow: 0 0.3em 1em #80B57D;
+    transform: translateY(-0.125em);
   }
  
 
   .button:hover {
-    transform: translateY(-2px);
+    transform: translateY(-0.125em);
   }
 
 
@@ -118,7 +118,6 @@ export default {
   h1 {
     margin-top:-5em;
   }
-  
 
 #createDiv {
   margin-top: 3em;
@@ -144,7 +143,6 @@ export default {
     font-size:1.5em;
   }
   .button {
-    margin: 1em;
     text-decoration: none; 
     background-color: transparent;
     padding: 1.2em;

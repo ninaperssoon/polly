@@ -136,8 +136,8 @@ export default {
     text-shadow: .05em .05em 0 rgb(77, 94, 179);
   }
   .startchoice:hover {
-    box-shadow: 0 5px 15px #80B57D;
-    transform: translateY(-2px);
+    box-shadow: 0 0.3em 1em #80B57D;
+    transform: translateY(-0.125em);
   }
   .a {
     grid-column-start: 2 ;
@@ -181,8 +181,8 @@ export default {
 }
 
 #questionmark{
-    height: 100px;
-   width: 100px;
+    height: 6.25em;
+   width: 6.25em;
 }
   
 

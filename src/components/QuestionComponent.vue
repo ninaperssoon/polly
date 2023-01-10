@@ -38,8 +38,8 @@ export default {
  }
 
  button:hover{
-  box-shadow: 0 5px 15px rgb(158, 100, 145);
-    transform: translateY(-2px);
+  box-shadow: 0 0.3em 1em rgb(158, 100, 145);
+    transform: translateY(-0.125em);
 
  }
  #buttonContainer {

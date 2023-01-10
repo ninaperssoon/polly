@@ -239,7 +239,7 @@ export default{
 }
 
 .saveDeleteButton:hover {
-  transform: translateY(-2px);
+  transform: translateY(-0.125em);
 }
 
 
@@ -271,14 +271,14 @@ export default{
 }
 
 .buttonContainer:hover{
-  transform: translateY(-2px);
+  transform: translateY(-0.125em);
 
 }
 .buttonContainer {
   width: 1em;
   height: 1em;
   border-radius: 50%;
-  margin: 18px 0;
+  margin: 1.125em 0;
   background-color: transparent;
   border-style: solid;
   border-color: transparent;
