@@ -3,7 +3,7 @@
       <homeButton class="homeButton"></homeButton>
   <div id="wrapper">
     <!-- <h1 v-if="(this.vote == true)"> {{ uiLabels.pleaceVote}}{{this.playingName}}{{uiLabels.s}} {{ uiLabels.rewardpunishment }} </h1> -->
-    <h2> {{uiLabels.yourehosting}} {{pollId}} {{ voteRewards }} </h2> 
+    <h2> {{uiLabels.yourehosting}} {{pollId}} </h2> 
 
 
   <div class="container">
@@ -35,12 +35,13 @@
       
     </div>
     <div id="resetNext"> 
+      <button v-on:click="resetQuiz">
+    {{uiLabels.ResetQuiz}} 
+  </button>
       <button v-on:click="nextQuestion" >
     {{uiLabels.NextQuestion}} 
   </button>
-  <button v-on:click="resetQuiz">
-    {{uiLabels.ResetQuiz}} 
-  </button>
+ 
     </div>
     
   
