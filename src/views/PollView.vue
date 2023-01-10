@@ -22,7 +22,8 @@
 
               </div>
               <div class="card__face card__face--back" v-bind:class="{ correct: ans == uiLabels.correct}">
-                <p v-if="(this.consequence !== '')"><span v-if="(this.joker == true)"> {{uiLabels.youJoker}} <br><br></span> <span id="correctness"> {{this.ans}}! </span><br> <span v-if = "(this.sendedJoker== true)">{{ this.playingName }}{{uiLabels.s}}</span><span v-else>{{uiLabels.Your}}</span> {{this.con}}{{uiLabels.is}}{{this.consequence}} </p>
+               
+                <p v-if="(this.consequence !== '')"> <span id="correctness"> {{this.ans}}! </span> <br> <JokerComponent v-if="(this.joker == true)"> </JokerComponent> <span v-if="(this.joker == true)"> <br> {{uiLabels.youJoker}} <br> <br> {{ uiLabels.chooseCon }} {{ this.con }}: <br> {{ this.consequence }}</span> <br> <span v-if="(this.joker == false)" > <span v-if = "(this.sendedJoker== true)">{{ this.playingName }}{{uiLabels.s}}</span> <span v-else>{{uiLabels.Your}}</span> {{this.con}}{{uiLabels.is}}{{this.consequence}}</span>  </p>
                 <p v-else id="correctness"> {{this.ans}}! </p>  
               </div>
 
@@ -45,6 +46,7 @@ import QuestionComponent from '@/components/QuestionComponent.vue';
 import io from 'socket.io-client';
 import homeButton from '@/components/HomeComponent.vue';
 import VotingComponent from '@/components/VotingComponent.vue';
+import JokerComponent from '@/components/JokerComponent.vue';
 
 const socket = io();
 
@@ -53,7 +55,8 @@ export default {
   components: {
     QuestionComponent,    
     homeButton,
-    VotingComponent
+    VotingComponent,
+    JokerComponent,
   },
   data: function () {
     return {
@@ -306,6 +309,10 @@ export default {
 
   #wrapper {
     margin-top: -2em;
+  }
+  #imgJoker{
+    width: 15%;
+    height: 15%;
   }
 
   @import url(https://fonts.googleapis.com/css?family=Righteous);

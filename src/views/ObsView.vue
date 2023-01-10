@@ -10,8 +10,7 @@
       <div class="card" v-bind:class="{ flipme: cardOne == 'flipped' }">
       
         <div class="card__face card__face--front">
-
-          <p v-if="(this.isJoker == true)"> {{ this.playingName }} {{uiLabels.isJoker}} </p>
+          <p v-if="(this.isJoker == true)">  <JokerComponent></JokerComponent> <br> {{ this.playingName }} {{uiLabels.isJoker}} </p>
           <p v-else-if="(this.vote == true)"> {{ uiLabels.pleaceVote}}{{this.playingName}}{{uiLabels.s}} {{ uiLabels.rewardpunishment }} </p>
           <p v-else-if="(this.question !== null)"> {{this.playingName}} {{uiLabels.IsAswering}} <br> {{this.question.q}} </p>
           <p v-else>{{uiLabels.ReachedEndQuiz}}
@@ -49,6 +48,7 @@
 import VotingComponent from '@/components/VotingComponent.vue';
 import io from 'socket.io-client';
 import homeButton from '@/components/HomeComponent.vue';
+import JokerComponent from '@/components/JokerComponent.vue';
 
 const socket = io();
 
@@ -57,6 +57,7 @@ export default {
   components: {
     homeButton,
     VotingComponent,
+    JokerComponent,
   },
   data: function () {
     return {

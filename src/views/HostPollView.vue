@@ -12,7 +12,7 @@
       <div class="card" v-bind:class="{ flipme: cardOne == 'flipped' }">
 
         <div class="card__face card__face--front">
-          <p v-if="(this.isJoker == true)"> {{ this.playingName }} {{uiLabels.isJoker}}</p>
+          <p v-if="(this.isJoker == true)"> <JokerComponent></JokerComponent> <br> {{ this.playingName }} {{uiLabels.isJoker}}</p>
           <p v-else-if="(this.vote == true)"> {{ uiLabels.pleaceVote}}{{this.playingName}}{{uiLabels.s}} {{ uiLabels.rewardpunishment }} </p>
          <p v-else-if="(this.question !== null)">{{this.question.q}} <br> {{this.playingName}} {{uiLabels.IsAswering}}</p> 
           <p v-else>{{uiLabels.ReachedEndQuiz}}
@@ -56,6 +56,7 @@
 import io from 'socket.io-client';
 import homeButton from '@/components/HomeComponent.vue';
 import VotingComponent from '@/components/VotingComponent.vue';
+import JokerComponent from '@/components/JokerComponent.vue';
 
 const socket = io();
 
@@ -64,6 +65,7 @@ export default {
   components: {
     homeButton,
     VotingComponent,
+    JokerComponent,
   },
   data: function () {
     return {
@@ -105,25 +107,12 @@ export default {
       visiblePunishments: true,
       vote: false,
       isJoker: false,
+      amountQ: 0,
     }
   },
   created: function () {
     this.pollId = this.$route.params.id
     socket.emit('joinHostPoll', this.pollId)
-    socket.on("isVotingNeeded", (data) => {
-      this.voteNeeded = data
-      console.log("votedNeeded: ", this.voteNeeded)
-      if (this.voteNeeded.r == "yes") {
-        socket.emit("createRewardsVoting", this.pollId)
-        console.log("HostPollView.vue, socket isVoitngNeeded: started voting for Rewards")
-        this.waitningVote.r = false;
-      }
-      if (this.voteNeeded.p == "yes") {
-        socket.emit("createPunishmentsVoting", this.pollId)
-        console.log("HostPollView.vue, socket isVoitngNeeded: started voting for Punishments")
-        this.waitningVote.p = false;
-      }
-    })
     socket.on("newQuestion", q => {
       this.question = q
       this.isJoker=false
@@ -133,6 +122,23 @@ export default {
         
       }
     })
+    socket.on("isVotingNeeded", (data) => {
+      
+       
+        this.voteNeeded = data
+        console.log("votedNeeded: ", this.voteNeeded)
+        if (this.voteNeeded.r == "yes") {
+          socket.emit("createRewardsVoting", this.pollId)
+          console.log("HostPollView.vue, socket isVoitngNeeded: started voting for Rewards")
+          this.waitningVote.r = false;
+        }
+        if (this.voteNeeded.p == "yes") {
+          socket.emit("createPunishmentsVoting", this.pollId)
+          console.log("HostPollView.vue, socket isVoitngNeeded: started voting for Punishments")
+          this.waitningVote.p = false;
+        }  
+    })
+   
     socket.on("checkVoting", (data) => {
     console.log("HostPollView.vue: checkVoting: ", data)
     if(data == true){
@@ -148,6 +154,10 @@ export default {
     this.name = this.$route.params.name;
     socket.on("init", (labels) => {
       this.uiLabels = labels
+    })
+    socket.on("getQuestionAmount", (data) => {
+      this.amountQ=data.length + 1
+      console.log("HostPollView.vue, getQuestionAmount, antalet frågor: ", this.amountQ)
     })
     socket.on("getPollRewards", (data) => {
       this.allRewards = data
@@ -237,18 +247,21 @@ export default {
       if (this.cardOne !== "start") {
         this.cardOne = 'start';
       }
-      
+      if(this.questionNumber < this.amountQ ){
+        console.log("HostPollView.vue, nextQuestion, antal gånger hoppat in i denna funktion med questionNumber: ", this.questionNumber)
       if (this.voteNeeded.r == "yes") {
         socket.emit("createRewardsVoting", this.pollId)
-        console.log("HostPollView.vue, runQuestion: started voting for Rewards")
+        console.log("HostPollView.vue, nextQuestion: started voting for Rewards")
         this.waitningVote.r = false;
       }
       if (this.voteNeeded.p == "yes") {
         
         socket.emit("createPunishmentsVoting", this.pollId)
-        console.log("HostPollView.vue, runQuestion: started voting for Punishments")
+        console.log("HostPollView.vue, nextQuestion: started voting for Punishments")
         this.waitningVote.p = false;
       }
+      
+    }
     },
     resetQuiz: function () {
       socket.emit("runQuestion", { pollId: this.pollId, questionNumber: 0 });

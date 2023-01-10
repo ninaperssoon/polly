@@ -67,6 +67,7 @@ function sockets(io, socket, data) {
     socket.emit('answeringParticipant', data.getAnsParticipant(pollId));
     socket.emit("getVotingRewards", data.getVotingRewards(pollId));
     socket.emit("getVotingPunishments", data.getVotingPunishments(pollId));
+    socket.emit("getQuestionAmount", data.getAllQuestions(pollId))
     
 
   });

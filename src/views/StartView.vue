@@ -73,14 +73,14 @@ export default {
       if (this.lang == "en") {
         swal({
         title: "HOW TO PLAY",
-  text: "Before you play your first quiz, it's good to know the following: Only one player will be (randomly) chosen to answer each question. However, before they can answer, the other players must vote for the answering player's rewards and punishments. If the player answers the quiestion correctly, they will receive the most voted reward and vice versa. If you're lucky, you can become 'the Joker' and pass your reward/punishment unto another player. When you feel finished with the question, it is the Host that will go to the next question.",
+  text: "Before you play your first quiz, it's good to know the following: Only one player will be (randomly) chosen to answer each question. However, before they can answer, the other players must vote for the answering player's rewards and punishments. If the player answers the quiestion correctly, they will receive the most voted reward and vice versa.  If you're lucky, you can become 'the Joker' and pass your reward/punishment unto another player or choose to keep it yourself. When you feel finished with the question, it is the Host that will go to the next question.",
   button: "Start To FlipFlop"
       })
            }
             else {
               swal({
         title: "HUR DU SPELAR",
-  text: "Innan du spelar ditt första quiz är det bra att veta följande: endast en av spelarna kommer (slumpmässigt) att svara på varje fråga. Innan de kan svara måste dock de andra spelarna rösta på den svarande spelarens belöningar och bestraffningar. Om spelaren svarar rätt på frågan kommer hen att få en belöning och vice versa. Om du har tur kan du bli 'Jokern' och skicka vidare din belöning eller straff till en annan spelare. När ni känner er klara med frågan är det Värden som går vidare till nästa fråga.",
+  text: "Innan du spelar ditt första quiz är det bra att veta följande: endast en av spelarna kommer (slumpmässigt) att svara på varje fråga. Innan de kan svara måste dock de andra spelarna rösta på den svarande spelarens belöningar och bestraffningar. Om spelaren svarar rätt på frågan kommer hen att få en belöning och vice versa. Om du har tur kan du bli 'Jokern' och skicka vidare din belöning eller straff till en annan spelare eller välja att behålla den själv. När ni känner er klara med frågan är det Värden (Host) som går vidare till nästa fråga.",
   button: "Börja FlipFloppa!"
       })
           }

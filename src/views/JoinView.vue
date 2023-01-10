@@ -69,17 +69,17 @@ export default {
       if (this.idInQuizzes == false) {
         if (this.lang == "en") {
           swal({ 
-  title: "invalid QuizId",
-  text: "You cannot join a quiz that doesn't exist ",
-  icon: "warning",})
-           }
-           }
-            else {
-              swal({ 
-  title: "Felaktigt QuizId",
-  text: "Du kan inte delta i ett quiz som inte finns ",
-  icon: "warning",})
-          }
+          title: "invalid QuizId",
+          text: "You cannot join a quiz that doesn't exist ",
+          icon: "warning",})  
+       }
+        else {
+          swal({ 
+          title: "Felaktigt QuizId",
+          text: "Du kan inte delta i ett quiz som inte finns ",
+          icon: "warning",})
+        }
+      }
       } 
       else {
         if (this.lang == "en") {
