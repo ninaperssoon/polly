@@ -185,6 +185,7 @@ h1{
   
 #body{
   margin: auto;
+  padding-right: 1em;
   background-color: #A6E9A3 ;
   text-align: center;
   width: 100%;
