@@ -67,7 +67,7 @@ export default {
     )
     socket.on("updateQuestions", (data) =>{
       this.questions= data
-      console.log("Skickade frågor från data:",data)
+      // console.log("Skickade frågor från data:",data)
     })
     
   },
@@ -77,24 +77,19 @@ export default {
       socket.emit("anotherQuestion", {pollId: this.pollId})
     },
     newQuestion: function(){
-      console.log(this.pollId)
       socket.emit("anotherQuestion", {pollId: this.pollId})
-      console.log("NewQuestion", this.questions)
+      // console.log("NewQuestion", this.questions)
     },
     editQuestion: function(event, index){
-      console.log("editQuestion index: ", index);
+      // console.log("editQuestion index: ", index);
       socket.emit("editQuestion", {pollId: this.pollId, index: index, q: event.q, a: event.a, s: event.selected})
     }, 
     saveQuestion: function (event,index) {
       socket.emit("addQuestion", {pollId: this.pollId, index: index, q: event.q, a: event.a, s: event.selected} )                    
-      console.log(this.question) 
-      console.log(this.answers);
-      console.log(event.selected)
     },
     deleteQuestion: function(event,index){
-      console.log("det här är index: ", index);
+      // console.log("det här är index: ", index);
       socket.emit("deleteQuestion",{pollId: this.pollId, index: index, q: event.q, a: event.a, s: event.selected} )
-      console.log(this.questions);
     },
     rules: function(){
       if (this.lang == "en") {

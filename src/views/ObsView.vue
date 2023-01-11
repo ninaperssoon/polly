@@ -87,7 +87,6 @@ export default {
     socket.on("newQuestion", q =>{
       this.question = q
       this.isJoker = false;
-      console.log(this.cardOne)
       if (this.cardOne !== "start"){
         this.cardOne = 'start';       
       }
@@ -104,7 +103,7 @@ export default {
       this.uiLabels = labels
   })
   socket.on("checkVoting", (data) => {
-    console.log("ObsView.vue: checkVoting: ", data)
+    // console.log("ObsView.vue: checkVoting: ", data)
     if(data == true){
       this.vote=true
     }
@@ -115,36 +114,33 @@ export default {
 
     socket.on("getVotingRewards", (data) => {
       this.voting.r = data
-      console.log("Inkommande rötsning r:", this.voting.r)
+      // console.log("Inkommande rötsning r:", this.voting.r)
     }
     )
     socket.on("getVotingPunishments", (data) =>{
       this.voting.p = data
-      console.log("Inkommande rötsning p:", this.voting.p)
+      // console.log("Inkommande rötsning p:", this.voting.p)
      } )
     socket.on("answeringParticipant", (data) =>{
       this.playingName=data
-      console.log("answeringParticipant:  ", data)
-      console.log(this.playingName)
+      // console.log("answeringParticipant:  ", data)
       if (this.name == data){
         this.$router.push('/poll/'+this.pollId+'/'+this.lang+'/'+this.name)
       }
     })
 
     socket.on("flipUpdate", data =>{
-      console.log("flipUpdate, ObsView.vue, data:", data)
+      // console.log("flipUpdate, ObsView.vue, data:", data)
       if(typeof data.name !== 'undefined'){
         this.playingName=data.name
       }
       this.ans = data.wor === "correct"?this.uiLabels.correct:this.uiLabels.incorrect
       this.con = data.con === "punishment"?this.uiLabels.punishment2:this.uiLabels.reward
       this.consequence= data.consequence
-      console.log(this.consequence)
-      console.log(this.playingName)
       this.cardOne = 'flipped'
     })
     socket.on("Joker", data =>{
-      console.log("ObsView, Joker, data", data)
+      // console.log("ObsView, Joker, data", data)
       if (data == true){
       this.cardOne = 'start'
       this.isJoker = true
@@ -154,14 +150,12 @@ export default {
   },
   methods: {
      submitVoteR: function (vote) {
-      console.log(vote)
       socket.emit("submitVoteR", {pollId: this.pollId, vote: vote.v, index: vote.index})
       this.visibleRewards=false;
      
       
     },
     submitVoteP: function (vote) {
-      console.log(vote)
       socket.emit("submitVoteP", {pollId: this.pollId, vote: vote.v, index: vote.index})
       this.visiblePunishments=false;
   },

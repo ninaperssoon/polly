@@ -49,7 +49,6 @@ export default {
     socket.emit("getQuizzes");
     socket.on("sendQuizzes", (quizzes) => this.quizzes = quizzes);
     socket.on("isHosted", () => {
-      console.log("isHosted")
       this.$router.push('/host/'+this.id+'/'+this.lang)
     })
     socket.on("hostingDenied", () => {

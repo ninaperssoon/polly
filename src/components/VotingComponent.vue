@@ -21,7 +21,6 @@ export default {
   emits: ["vote"],
   methods: {
     vote: function (vote,index) {
-      console.log(vote,index)
       this.$emit("vote", {v: vote, index: index});
     },
   }

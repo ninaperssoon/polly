@@ -86,16 +86,14 @@ export default {
 
     socket.on("getParticipantsandHost", (data) => {
       this.participants = data
-      console.log("Mottagana participants, Poll.View.vue: getParticipants, data:", data, "particpants:",this.participants)
+      // console.log("Mottagana participants, Poll.View.vue: getParticipants, data:", data, "particpants:",this.participants)
       })
 
     socket.on("newQuestion", q =>{
-      console.log("I PollView.vue: newQuestion, q: ", q)
+      // console.log("I PollView.vue: newQuestion, q: ", q)
       this.question = q
-      console.log(this.cardOne)
       this.sendedJoker= false
       if (this.cardOne !== "start"){
-        console.log("här är jag")
         this.cardOne = 'start';
         
       }
@@ -105,11 +103,11 @@ export default {
       this.uiLabels = labels
     })
     socket.on("checkVoting",(data) => {
-      console.log("checkVoting")
+      // console.log("checkVoting")
       if(data == true){
         this.voting = true;
         this.visibleButtons=false;
-        console.log("wating for votes")
+        // console.log("wating for votes")
       }
       else{
         this.visibleButtons=true;
@@ -119,15 +117,15 @@ export default {
 
     socket.on("getVotedReward", (data) => {
       this.reward = data
-      console.log("Mottagen framröstad r:", this.reward)
+      // console.log("Mottagen framröstad r:", this.reward)
     }
     )
     socket.on("getVotedPunishment", (data) =>{
       this.punishment = data
-      console.log("Mottagen framröstad p:", this.punishment)
+      // console.log("Mottagen framröstad p:", this.punishment)
     })
     socket.on("answeringParticipant", (data) =>{
-      console.log("answeringParticipant:  ", data)
+      // console.log("answeringParticipant:  ", data)
       if (this.name !== data){
         this.$router.push('/obs/'+this.pollId+'/'+this.lang+'/'+this.name)
       }
@@ -138,9 +136,7 @@ export default {
       this.ans = data.wor === "correct"?this.uiLabels.correct:this.uiLabels.incorrect
       this.con = data.con === "punishment"?this.uiLabels.punishment2:this.uiLabels.reward
       this.consequence= data.consequence
-      console.log("flipUpdate: PollView.vue, ans: ", data.wor, " con: ", data.con)
-      console.log(this.consequence)
-      console.log(this.playingName)
+      // console.log("flipUpdate: PollView.vue, ans: ", data.wor, " con: ", data.con)
       if(typeof data.name !== 'undefined'){
         this.playingName=data.name
       }
@@ -149,7 +145,6 @@ export default {
   },
   methods: {
     submitAnswer: function (answer) {
-      console.log(answer)
       this.ans = this.question.s[answer.index];
       this.cardOne == 'start' ? (this.cardOne = 'flipped' ) : (this.cardOne = 'start' );
       
@@ -166,7 +161,6 @@ export default {
         this.jokerAns = 'incorrect'
       }
       this.visibleButtons=false;
-      console.log(this.reward)
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer.a, wor: this.ans, con: this.con, consequence: this.consequence})
       if( this.punishment || this.reward !== ''){
         const jokerNum = Math.floor(Math.random() * 4);
@@ -178,8 +172,8 @@ export default {
       }
     },
     submitJoker: function (vote) {
-      console.log("PollView.vue, submitJoker: röstning:", vote)
-      console.log("PollView.vuesubmitJoker, ans:",this.jokerAns)
+      // console.log("PollView.vue, submitJoker: röstning:", vote)
+      // console.log("PollView.vuesubmitJoker, ans:",this.jokerAns)
       socket.emit("submitJoker", {pollId: this.pollId, name: vote.v, wor: this.jokerAns, con: this.con, consequence: this.consequence})
       this.playingName = vote.v
       this.visibleJoker = false;

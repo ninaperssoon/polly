@@ -115,13 +115,11 @@ export default {
 
     socket.on("rewardUpdate", (data) =>{
       this.rewards= data
-      console.log("Skickade rewards från data:", data)
-      console.log(this.rewards)
+      // console.log("Skickade rewards från data:", data)
     })
     socket.on("punishmentUpdate", (data) =>{
       this.punishments= data
-      console.log("Skickade punishments från data:", data)
-      console.log(this.punishments)
+      // console.log("Skickade punishments från data:", data)
     })
 
 
@@ -132,15 +130,14 @@ export default {
       
     },
     sendReward: function (event, index) {
-      console.log("reward: ", event.r)
+      // console.log("reward: ", event.r)
       socket.emit("sendReward", {pollId: this.pollId, index: index, r: event.c} )
       
     },
 
     deleteReward: function(event,index){
-      console.log("det här är index: ", index);
+      // console.log("det här är index: ", index);
       socket.emit("deleteReward",{pollId: this.pollId, index: index, r: event.c} )
-      console.log(this.rewards);
        
     },
     newPunishment: function () {
@@ -149,12 +146,11 @@ export default {
     },
     sendPunishment: function (event, index) {
       socket.emit("sendPunishment", {pollId: this.pollId, index: index, p: event.c } )
-      console.log("punishment: ", event.r)
+      // console.log("punishment: ", event.r)
     },
     deletePunishment: function(event,index){
-      console.log("det här är index: ", index);
+      // console.log("det här är index: ", index);
       socket.emit("deletePunishment",{pollId: this.pollId, index: index, p: event.c} )
-      console.log(this.punishments);
        
     },
     sendPollIdToH: function(){

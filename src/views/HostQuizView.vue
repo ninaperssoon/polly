@@ -46,14 +46,14 @@ export default {
     })
     socket.on("participantUpdate", (participants) => {
       this.participants = participants
-      console.log("efter Update: ", this.participants)
+      // console.log("efter Update: ", this.participants)
     })
   },
   methods: {
     startQuiz: function() {
-      console.log("Host Started quiz", this.participants)
+      // console.log("Host Started quiz", this.participants)
       this.$router.push('/poll/'+this.id+'/'+this.lang+'/'+this.name)
-      console.log("StartQUiz Hosten är:", this.name)
+      // console.log("StartQUiz Hosten är:", this.name)
       socket.emit("startedQuiz",{ pollId: this.id, 
                                   participants: this.participants }
                                 );

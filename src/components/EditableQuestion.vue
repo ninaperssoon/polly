@@ -92,7 +92,6 @@ export default{
       this.i += 1
     },
     deleteAnswers: function(i) {
-      console.log(i)
       this.answers.splice(i,1);
       this.selectedAnswers.splice(i,1);
       this.altColor.splice(i,1);
@@ -107,7 +106,7 @@ export default{
     sendQuestion: function(){
       
       this.$emit('myquestion', {q: this.q ,a: this.answers, selected: this.selectedAnswers})
-      console.log("Edit: ",this.selectedAnswers)
+      // console.log("Edit: ",this.selectedAnswers)
       this.SavedQuestionColor = "#5C95FF"
       this.savebutonReset();
       

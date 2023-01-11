@@ -45,7 +45,7 @@ created: function () {
 methods:{
   sendRewards: function (){
     this.$emit('myReward', {c: this.c})
-    console.log("Sended reward: ", this.c)
+    // console.log("Sended reward: ", this.c)
     
   },
     deleteReward: function() {

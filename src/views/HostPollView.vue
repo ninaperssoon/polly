@@ -115,21 +115,21 @@ export default {
       
        
         this.voteNeeded = data
-        console.log("votedNeeded: ", this.voteNeeded)
+        // console.log("votedNeeded: ", this.voteNeeded)
         if (this.voteNeeded.r == "yes") {
           socket.emit("createRewardsVoting", this.pollId)
-          console.log("HostPollView.vue, socket isVoitngNeeded: started voting for Rewards")
+          // console.log("HostPollView.vue, socket isVoitngNeeded: started voting for Rewards")
           this.waitningVote.r = false;
         }
         if (this.voteNeeded.p == "yes") {
           socket.emit("createPunishmentsVoting", this.pollId)
-          console.log("HostPollView.vue, socket isVoitngNeeded: started voting for Punishments")
+          // console.log("HostPollView.vue, socket isVoitngNeeded: started voting for Punishments")
           this.waitningVote.p = false;
         }  
     })
    
     socket.on("checkVoting", (data) => {
-    console.log("HostPollView.vue: checkVoting: ", data)
+    // console.log("HostPollView.vue: checkVoting: ", data)
     if(data == true){
       this.vote=true
     }
@@ -146,7 +146,7 @@ export default {
     })
     socket.on("getQuestionAmount", (data) => {
       this.amountQ=data.length + 1
-      console.log("HostPollView.vue, getQuestionAmount, antalet frågor: ", this.amountQ)
+      // console.log("HostPollView.vue, getQuestionAmount, antalet frågor: ", this.amountQ)
     })
     socket.on("getPollRewards", (data) => {
       this.allRewards = data
@@ -158,13 +158,13 @@ export default {
     )
     socket.on("getVotingRewards", (data) => {
       this.voteRewards = data
-      console.log("HostPollView, getVotingRewards: ", this.voteRewards, data)
+      // console.log("HostPollView, getVotingRewards: ", this.voteRewards, data)
   
     }
     )
     socket.on("getVotingPunishments", (data) =>{
       this.votePunishments = data
-      console.log("HostPollView, getVotingPunishments: ", this.votePunishments, data)
+      // console.log("HostPollView, getVotingPunishments: ", this.votePunishments, data)
   })
     socket.on("flipUpdate", data => {
       this.ans = data.wor === "correct"?this.uiLabels.correct:this.uiLabels.incorrect
@@ -174,39 +174,37 @@ export default {
         this.playingName=data.name
       }
       this.cardOne = 'flipped'
-      console.log("flipUpdate")
+      // console.log("flipUpdate")
     })
     socket.on("answeringParticipant", (data) => {
       this.playingName = data
-      console.log("answeringParticipant:  ", data)
-      console.log(this.playingName)
+      // console.log("answeringParticipant:  ", data)
     })
     socket.on("voteUpdateR", (data) => {
-      console.log("tagit emot meddelande om röstR")
+      // console.log("tagit emot meddelande om röstR")
       if (data == "R-voting done") {
         socket.emit("votingDoneR", this.pollId)
-        console.log("votingDoneR")
+        // console.log("votingDoneR")
         this.waitningVote.r = true;
         if (this.waitningVote.p && this.waitningVote.r == true) {
-          console.log("votingDone")
-          socket.emit("votingDone", this.pollId)
+          // console.log("votingDone")
         }
       }
     })
     socket.on("voteUpdateP", (data) => {
-      console.log("tagit emot meddelande om röstP")
+      // console.log("tagit emot meddelande om röstP")
       if (data == "P-voting done") {
         socket.emit("votingDoneP", this.pollId)
-        console.log("votingDoneP")
+        // console.log("votingDoneP")
         this.waitningVote.p = true;
         if (this.waitningVote.p && this.waitningVote.r == true) {
-          console.log("votingDone")
+          // console.log("votingDone")
           socket.emit("votingDone", this.pollId)
         }
       }
     })
     socket.on("Joker", data =>{
-      console.log("HostPollView.vue, Joker, data", data)
+      // console.log("HostPollView.vue, Joker, data", data)
       if (data == true){
       this.cardOne = 'start'
       this.isJoker = true
@@ -217,14 +215,12 @@ export default {
   },
   methods: {
     submitVoteR: function (vote) {
-      console.log(vote)
       socket.emit("submitVoteR", {pollId: this.pollId, vote: vote.v, index: vote.index})
       this.visibleRewards=false;
      
       
     },
     submitVoteP: function (vote) {
-      console.log(vote)
       socket.emit("submitVoteP", {pollId: this.pollId, vote: vote.v, index: vote.index})
       this.visiblePunishments=false;
   },
@@ -237,16 +233,16 @@ export default {
         this.cardOne = 'start';
       }
       if(this.questionNumber < this.amountQ ){
-        console.log("HostPollView.vue, nextQuestion, antal gånger hoppat in i denna funktion med questionNumber: ", this.questionNumber)
+        // console.log("HostPollView.vue, nextQuestion, antal gånger hoppat in i denna funktion med questionNumber: ", this.questionNumber)
       if (this.voteNeeded.r == "yes") {
         socket.emit("createRewardsVoting", this.pollId)
-        console.log("HostPollView.vue, nextQuestion: started voting for Rewards")
+        // console.log("HostPollView.vue, nextQuestion: started voting for Rewards")
         this.waitningVote.r = false;
       }
       if (this.voteNeeded.p == "yes") {
         
         socket.emit("createPunishmentsVoting", this.pollId)
-        console.log("HostPollView.vue, nextQuestion: started voting for Punishments")
+        // console.log("HostPollView.vue, nextQuestion: started voting for Punishments")
         this.waitningVote.p = false;
       }
       
@@ -256,12 +252,12 @@ export default {
       socket.emit("runQuestion", { pollId: this.pollId, questionNumber: 0 });
       if (this.voteNeeded.r == "yes") {
         socket.emit("createRewardsVoting", this.pollId)
-        console.log("HostPollView.vue, resetQuiz: started voting for Rewards")
+        // console.log("HostPollView.vue, resetQuiz: started voting for Rewards")
         this.waitningVote.r = false;
       }
       if (this.voteNeeded.p == "yes") {
         socket.emit("createPunishmentsVoting", this.pollId)
-        console.log("HostPollView.vue, resetQuiz: started voting for Punishments")
+        // console.log("HostPollView.vue, resetQuiz: started voting for Punishments")
         this.waitningVote.p = false;
       }
      

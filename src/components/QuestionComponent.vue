@@ -17,7 +17,6 @@ export default {
   emits: ["answer"],
   methods: {
     answer: function (answer,index) {
-      console.log(answer,index)
       this.$emit("answer", {a: answer, index: index});
     } 
   }
