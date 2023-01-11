@@ -168,12 +168,13 @@ export default {
       this.visibleButtons=false;
       console.log(this.reward)
       socket.emit("submitAnswer", {pollId: this.pollId, answer: answer.a, wor: this.ans, con: this.con, consequence: this.consequence})
-      const jokerNum = Math.floor(Math.random() * 4);
-      if(jokerNum == 3){
-        this.joker=true;
-        this.visibleJoker = true;
-       socket.emit("isJoker", this.pollId)
-        
+      if( this.punishment || this.reward !== ''){
+        const jokerNum = Math.floor(Math.random() * 4);
+        if(jokerNum == 3){
+          this.joker=true;
+          this.visibleJoker = true;
+          socket.emit("isJoker", this.pollId) 
+        }
       }
     },
     submitJoker: function (vote) {

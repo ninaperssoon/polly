@@ -191,7 +191,9 @@ h1 {
   #logo{
     height: 1.2em;
     padding-top: 0.1em;
+
   }
+
 
 @media screen and (max-width:70em) {
   #body {
@@ -226,7 +228,10 @@ h1 {
    height: 4vh;
    width: 4vh;
   }
-
+ 
+  #ft{
+    grid-column: 5;
+  }
  
 
 }

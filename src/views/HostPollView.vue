@@ -426,7 +426,7 @@ h1 {
     border-style: outset;
     border-color: #FFF1AD;
     color: #F87575;
-    font-size:1.5em;
+    font-size: 1.5em;
     font-family: 'Righteous', serif;
     text-shadow: .05em .05em 0 #4779d6;
   }
@@ -446,6 +446,7 @@ h1 {
   margin-top: 0em;
   font-size: 9vw;
 }
+
 
 }
 </style>
