@@ -125,7 +125,7 @@ export default {
     margin-bottom: 1em;
     background-color:#5C95FF;
     display: grid;
-    grid-template-columns: 50% 17% 12% 12%;
+    grid-template-columns: 60% 13% 13% 13%;
     grid-template-rows: 1em;
     place-items: center start;
     border-style: outset;
@@ -138,7 +138,6 @@ export default {
   .button {
     text-decoration: none; 
     background-color: transparent;
-    padding: 1.2em;
     border-color: transparent;
     font-size: 1em;
     color: white;
@@ -155,8 +154,8 @@ export default {
 
   #para {
     grid-column: 1;
-    height: 20em;
-    width: 20em;
+    height: 15em;
+    /* width: 20em; */
     margin-left: 3em;
   }
 
@@ -168,7 +167,10 @@ export default {
     .myQuizzes {
       width: 90%;
       grid-template-columns: 30% 25% 18% 18%;
+
     }
+
+
   }
 
 </style>
