@@ -95,14 +95,14 @@ export default {
       if (this.lang == "en") {
         swal({
           title: "How To Create Your Quiz",
-          text: "Here you write all of the questions that will be in your quiz. You can write up to 4 different possible answers, but don't forget to mark the correct one(s). Remember to save each question before moving forward!" ,
+          text: "Here you create the questions that will be in your quiz. You can write up to 4 different possible answers, but don't forget to mark the correct one(s). Remember to save each question before moving forward!" ,
           button: "Got it!"
         })
       }
       else {
         swal({
           title: "Hur du skapar ditt quiz",
-          text: "Här skriver du in alla frågor som ska vara med i quizet. Du kan skriva upp till 4 svarsalternativ, men glöm inte att klicka i rätt svarsalternativ. Kom ihåg att spara varje fråga innan du går vidare!",
+          text: "Här skapar du frågorna som ska vara med i quizet. Du kan skriva upp till 4 svarsalternativ, men glöm inte att klicka i rätt svarsalternativ. Kom ihåg att spara varje fråga innan du går vidare!",
           button: "Fattar!"
         })
       }

@@ -160,15 +160,15 @@ export default {
     rules: function(){
       if (this.lang == "en") {
         swal({
-          title: "How to use Rewards & Punishment ",
-          text: "Here you write your rewards and punishments. They are used in the quiz when a player answers a question: they will get a reward if they answer correctly and a punishment if they answer incorrectly. Rewards and punishments are not tied to any specific questions, which means that you can slso choose to play entirely without them. Remember to save them all before moving forward!" ,
+          title: "How to use Rewards & Penalties ",
+          text: "Here you create your rewards and penalties. They are used in the quiz when a player answers a question: they will get a reward if they answer correctly and a penalty if they answer incorrectly. Rewards and penalties are not tied to specific questions, which means that you can also choose to play entirely without them. Remember to save them all before moving forward!" ,
           button: "Got it!"
         })
       }
       else {
         swal({
           title: "Hur du använder belöningar och bestraffningar",
-          text: "Här skriver du in dina belöningar och bestraffningar. De används i quizet när en spelare besvarar en fråga: de kommer att få en belöning om de svarar rätt och en bestraffning om de svarar fel. Belöningar och bestraffningar är inte bundna till några specifika frågor, så du kan välja att spela helt utan dem om du vill. Kom ihåg att spara dem innan du går vidare! ",
+          text: "Här skapar du dina belöningar och bestraffningar. De används i quizet när en spelare besvarar en fråga: de kommer att få en belöning om de svarar rätt och en bestraffning om de svarar fel. Belöningar och bestraffningar är inte bundna till några specifika frågor, så du kan välja att spela helt utan dem om du vill. Kom ihåg att spara dem innan du går vidare! ",
           button: "Fattar!"
         })
       }

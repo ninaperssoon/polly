@@ -57,8 +57,8 @@ export default {
       if (this.lang == "en") {
         swal({
           title: "HOW TO PLAY",
-          text: "Before you play your first quiz, it's good to know the following: Only one player will be (randomly) chosen to answer each question. However, before they can answer, the other players must vote for the answering player's rewards and punishments. If the player answers the quiestion correctly, they will receive the most voted reward and vice versa.  If you're lucky, you can become 'the Joker' and pass your reward/punishment unto another player or choose to keep it yourself. When you feel finished with the question, it is the Host that will go to the next question.",
-          button: "Start To FlipFlop"
+          text: "Before you play your first quiz, it's good to know the following: Only one player will be (randomly) chosen to answer each question. However, before they can answer, the other players must vote for the answering player's rewards and penalties. If the player answers the question correctly, they will receive the most voted reward and vice versa.  If you're lucky, you can become 'the Joker' and pass your reward/punishment unto another player or choose to keep it yourself. When you feel finished with the question, it is the Host that will go to the next question.",
+          button: "Start FlipFlop"
         })
       }
       else {
