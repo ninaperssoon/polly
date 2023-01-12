@@ -296,11 +296,13 @@ input {
 @media screen and (max-width:80em) {
 #inputAnswer {
   grid-template-columns: 1fr;
-  padding: 2em;
+  padding: 1em;
 }
 #question {
-  width: 100%;
+  margin-top: 1em;
+  width: 82vw;
   padding: 0em;
+  margin-left:-3em;
 }
 #questionInput {
   margin: auto;
@@ -317,6 +319,7 @@ input {
 }
 .buttonContainer {
   font-size: 2em;
+  margin: 0.4em;
 }
 #gridWrapper {
   grid-template-columns: 1fr;
@@ -329,6 +332,9 @@ input {
 #saveDelete {
   grid-column: 1;
   grid-row: 2;
+}
+#correctString {
+  font-size: 1.2em;
 }
 }
 </style>

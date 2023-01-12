@@ -155,7 +155,6 @@ export default {
   #para {
     grid-column: 1;
     height: 15em;
-    /* width: 20em; */
     margin-left: 3em;
   }
 
@@ -165,11 +164,17 @@ export default {
 
   @media screen and (max-width:50em) {
     .myQuizzes {
-      width: 90%;
-      grid-template-columns: 30% 25% 18% 18%;
+      width: 70%;
+      grid-template-columns: 40% 25% 18% 18%;
 
     }
-
+    #para {
+      height: 0em;
+    }
+#create {
+  font-size: 1.5em;
+  padding: 0.8em;
+}
 
   }
 

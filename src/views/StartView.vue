@@ -201,19 +201,27 @@ h1 {
   }
 
   .startchoice {
-    margin: auto;
-    text-decoration: none; 
-    padding: 1em;
-    border-radius: 1.5em;
-    font-size: 2em;
+    
+    padding: 0em;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .wrapper {
+    margin-top: -6em;
   }
 
  #smallerbuttons {
   font-size: 1.6em;
+  grid-column: 2 / span 4;
+  height: 12vh;
  }
 
  
   .J{
+    margin-top: 3em;
     height: 25vh;
     width: 100vw;
     display: grid;
@@ -231,6 +239,8 @@ h1 {
  
   #ft{
     grid-column: 5;
+    grid-row: 5;
+    height: 2em;
   }
  
 

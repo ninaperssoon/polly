@@ -186,6 +186,15 @@ h1 {
     width: 100%;
     height: 40%;
   }
+  h1 {
+    margin-top: 0.8em;
+  }
+  #host {
+    width: 80vw;
+    height: 20vh;
+    margin-top: -1em;
+  }
+  
   }
  
 </style>

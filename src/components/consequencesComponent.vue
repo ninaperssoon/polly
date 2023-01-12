@@ -111,4 +111,15 @@ width: 4em;
 .button:hover {
   transform: translateY(-0.125em);
 }
+@media screen and (max-width:80em) {
+  #consequenceBox{
+
+margin: 0em 0em 2em 0em ;
+height:10vh;
+width: 80vw;
+}
+.input {
+  padding: 0.1em;
+}
+}
 </style>

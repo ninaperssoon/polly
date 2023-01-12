@@ -249,7 +249,7 @@ h1{
 }
 .addButton {
   padding: 0.5em;
-  font-size: 1.5em;
+  font-size: 1.2em;
   border-radius: 3em;
   color: #FFF1AD;
   font-weight: bold;
@@ -283,11 +283,6 @@ h1{
   font-weight: bolder;
 }
 
-/* button:hover {
-  box-shadow: 0 0.3em 1em #80B57D;
-  transform: translateY(-0.125em);
-} */
-
 .upperGrid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -313,15 +308,25 @@ h1{
   box-shadow: none;
 }
 
-@media screen and (max-width:70em) {
+@media screen and (max-width:80em) {
   .wrapper{
     grid-template-columns: 1fr;
   }
   .nextButton{
     padding-left: 0em;
     padding-right: 0em;
-    grid-template-columns: 1fr;
-    row-gap: 0.5em;
+    font-size: 0.8em;
+  }
+  .wrapper {
+    grid-gap: 0em;
+  }
+  h1 {
+    margin-top:0.3em;
+    margin-bottom: 0em;
+    font-size: 3em;
+  }
+  .flipPic {
+    height: 5em;
   }
 }
 

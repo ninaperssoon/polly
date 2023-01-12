@@ -127,6 +127,7 @@ export default {
 
 #backgroundDiv{
   padding: 5em;
+  
   margin-top: -7em;
 }
 
@@ -199,11 +200,19 @@ export default {
 
 @media screen and (max-width:80em) {
 .flipPic {
-  height: 3em;
+  height: 5em;
 }
 
+
 #addButton {
-  font-size:1em;
+  font-size:1.4em;
+  padding: 1.5em;
 }
+#nextButton{
+  grid-column: 3;
+  grid-row: 1;
+  
+}
+
 }
 </style>

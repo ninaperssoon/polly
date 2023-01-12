@@ -113,12 +113,14 @@ export default {
 
 @media screen and (max-width:50em) {
   .pollLink {
+    margin-top: 20%;
     width: 90vw;
     height: 40vw;
   }
 
   #pollButton {
-    font-size: 1.5em;
+    font-size: 1.2em;
   }
+ 
 }
 </style>

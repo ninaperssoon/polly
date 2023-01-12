@@ -208,6 +208,11 @@ section {
       margin-right: 0%;
       width: 100%;
     }
+
+  h1 {
+    margin-top: 2em;
+    margin-bottom: -2em;
+  }
   }
 
 </style>
