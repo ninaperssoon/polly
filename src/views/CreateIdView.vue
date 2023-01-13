@@ -4,7 +4,7 @@
     <div class="pollLink">
       <p>{{uiLabels.Enternameyourquiz}} 
         <br> <br>
-        <input type="text" v-model="id"> 
+        <input type="text" v-model="id" v-on:keyup.enter="createPoll"> 
       </p> 
     </div>
     <button v-on:click="createPoll" id="pollButton">

@@ -9,7 +9,7 @@
         <p> 
           <label>
             {{uiLabels.EnterYourName}}
-            <input type="text" v-model="name">
+            <input type="text" v-model="name" v-on:keyup.enter="nextPlease">
           </label> 
         </p>
       </div>
@@ -18,7 +18,7 @@
         <p> 
         <label>
           {{uiLabels.writeQuizId}}: 
-          <input type="text" v-model="id">
+          <input type="text" v-model="id" id="input2" v-on:keyup.enter="sendName">
         </label>
         </p>
       </div>
@@ -50,6 +50,9 @@ export default {
     }
   },
   methods: {
+    nextPlease: function () {
+      document.getElementById('input2').focus();
+    },
   
   sendName: function() {
     if (this.name !== ""){for (const id in this.quizzes) {

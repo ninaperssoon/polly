@@ -9,7 +9,7 @@
         <div id="host">
           <p> {{uiLabels.writeQuizId}}: 
           <br>
-          <input type="text" v-model="id"></p>      
+          <input type="text" v-model="id" v-on:keyup.enter="hostQuiz"></p>      
         </div>
         <button id="startQuiz" v-on:click="hostQuiz">{{uiLabels.hostQuiz}}</button> 
       </div>

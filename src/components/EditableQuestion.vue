@@ -1,7 +1,8 @@
 <template>
 <div id="question" v-bind:style="{'background-color':SavedQuestionColor, 'border-color':SavedBorderColor}">
   <h1>{{uiLabels.Question}} {{questionNumber +1}} </h1>
-  <input id="questionInput" type="text" v-model="q" class="input" :placeholder="uiLabels.WriteQuestionHere" v-on:keypress="resetColor()" v-bind:style="{'border-color':SavedBorderColor}">
+  <input id="questionInput" type="text" v-model="q" class="input" :placeholder="uiLabels.WriteQuestionHere" v-on:keypress="resetColor()" v-bind:style="{'border-color':SavedBorderColor}"  v-on:keyup.enter="nextInput">
+
   <br> 
 
   <div id="inputAnswer" >
@@ -12,7 +13,7 @@
         <img class="button" src="../../public/img/trashcan.png"/>
       </button> 
       
-      <button class="buttonContainer" v-on:click="setCorrectAnswer(i)" id="Right"  v-bind:style="{'background-color':altColor[i]}">
+      <button class="buttonContainer" v-on:click="setCorrectAnswer(i)" id="Right"  v-bind:style="{'background-color':altColor[i], 'filter':grayScale[i], 'opacity':opacity[i]}">
         <img class="button" src="../../public/img/checkmark_nobackground.png"/>
       </button>
       <br>
@@ -25,10 +26,9 @@
   <div id="gridWrapper">
     <p id="correctString"> {{ correctString }}</p>
     <div id="saveDelete">
-      <button v-on:click="sendQuestion" class="saveDeleteButton" id="saveQuestion" v-bind:style="{'background-color':SavebuttonColor}">
+      <button  v-on:click="sendQuestion" class="saveDeleteButton" id="saveQuestion" v-bind:style="{'background-color':SavebuttonColor}">
         {{uiLabels.SaveQuestion}}
       </button>
-
       <button v-on:click="deleteQuestion" class="saveDeleteButton" id="deleteQuestion">
         {{uiLabels.DeleteQuestion}}
       </button>
@@ -39,6 +39,8 @@
 
 <script>
 import io from 'socket.io-client';
+import swal from 'sweetalert';
+
 const socket = io();
 
 
@@ -65,7 +67,10 @@ export default{
       lang: "",
       uiLabels: {},
       i: 0,
-      correctString: ""
+      correctString: "",
+      grayScale: [""],
+      opacity: [""]
+
     }
 
   },
@@ -81,6 +86,10 @@ export default{
   },
 
   methods:{
+    nextInput: function () {
+      document.getElementById('option').focus();
+
+    },
     getQuestionId: function () {
     return Math.floor(Math.random()*100000);
     },
@@ -104,11 +113,26 @@ export default{
       
       },
     sendQuestion: function(){
-      
-      this.$emit('myquestion', {q: this.q ,a: this.answers, selected: this.selectedAnswers})
+      if (this.i>0) {
+        this.$emit('myquestion', {q: this.q ,a: this.answers, selected: this.selectedAnswers})
       // console.log("Edit: ",this.selectedAnswers)
       this.SavedQuestionColor = "#5C95FF"
       this.savebutonReset();
+      }
+      else {
+        if (this.lang == "en") {
+        swal({   title: "No answer options",
+                text: "You must create atleast one answer before saving the question!",
+                icon: "warning",})
+        }
+        else {
+          swal({   title: "Inga svarsalternativ",
+                text: "Du måste skapa åtminstone ett svarsalternativ innan du kan spara frågan!",
+                icon: "warning",})
+        }
+      }
+      
+      
       
      
     },
@@ -117,13 +141,18 @@ export default{
         this.selectedAnswers[i] = 'incorrect';
         this.deleteColor[i] = "#D34848"; 
         this.altColor[i] = "";  
-        this.resetColor();     
+        this.resetColor(); 
+        this.grayScale[i] = "grayscale(100%)";
+        this.opacity[i] = "0.5";
       }
       else {
         this.selectedAnswers[i] = 'correct';
         this.altColor[i] = "#6BA468";  
         this.deleteColor[i] = ""; 
         this.resetColor();
+        this.grayScale[i] = "grayscale(0%)";
+        this.opacity[i] = "1";
+
       }
            
     },
@@ -150,6 +179,8 @@ export default{
 #Right{
   grid-column: 2;
   grid-row: 2;
+  filter: grayscale(50%);
+  opacity: 0.5;
 }
 
 #deleteAnswerButton {
@@ -227,6 +258,7 @@ export default{
   grid-row: 1;
 } 
 .answerLayout{
+  margin-top: -1em;
   display: grid;
   grid-template-columns: 10fr 4fr fr;
   row-gap: 0em;
@@ -248,7 +280,8 @@ export default{
   width: 1em;
   height: 1em;
   border-radius: 50%;
-  margin: 1.125em 0;
+  margin-top: 0.5em;
+  margin-bottom: 0.8em;
   background-color: transparent;
   border-style: solid;
   border-color: transparent;
@@ -320,6 +353,7 @@ input {
 .buttonContainer {
   font-size: 2em;
   margin: 0.4em;
+  margin-bottom:0.8em;
 }
 #gridWrapper {
   grid-template-columns: 1fr;
