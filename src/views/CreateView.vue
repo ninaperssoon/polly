@@ -99,10 +99,17 @@ export default {
           button: "Got it!"
         })
       }
-      else {
+      else if(this.lang=="sv") {
         swal({
           title: "Hur du skapar ditt quiz",
           text: "Här skapar du frågorna som ska vara med i quizet. Du kan skriva upp till 4 svarsalternativ, men glöm inte att klicka i rätt svarsalternativ. Kom ihåg att spara varje fråga innan du går vidare!",
+          button: "Fattar!"
+        })
+      }
+      else if (this.lang=="fi") {
+        swal({
+          title: "Kuinka teet quizzisi",
+          text: "Tässä teet kysymykset, jotka tulee olevan quizzisäsi. Voit kirjoittaa enintään 4 vastausvaihtoehtoja, mutta älä unohda merkata mitkä olevat oikeet. Muista tallentaa joka kysymys ennen kuin jatkat!",
           button: "Fattar!"
         })
       }
@@ -183,13 +190,17 @@ export default {
 #ft{
   background-color: transparent;
   border: none;
-  grid-column: 4;
+  grid-column: 3;
   grid-row: 1;
+}
+
+#ft:hover {
+  animation: bounce 2s ease infinite;
 }
 
 .upperGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 20% 60% 20%;
   grid-template-rows: 1fr;
 }
 

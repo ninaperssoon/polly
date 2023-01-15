@@ -165,10 +165,17 @@ export default {
           button: "Got it!"
         })
       }
-      else {
+      else if(this.lang=="sv") {
         swal({
           title: "Hur du använder belöningar och bestraffningar",
           text: "Här skapar du dina belöningar och bestraffningar. De används i quizet när en spelare besvarar en fråga: de kommer att få en belöning om de svarar rätt och en bestraffning om de svarar fel. Belöningar och bestraffningar är inte bundna till några specifika frågor, så du kan välja att spela helt utan dem om du vill. Kom ihåg att spara dem innan du går vidare! ",
+          button: "Fattar!"
+        })
+      }
+      else if(this.lang=="fi") {
+        swal({
+          title: "Kuinka käytät palkintoja ja rangaistuksija",
+          text: "Tässä luot palkintosi ja rangaistuksesi. Niitä käytetään quizzissä kun pelaaja vastaa kysymykseen: jos vastaa oikein, saa palkinnon ja jos vastaa väärin, saa rangaistuksen. Palkinnot ja rangaistukset ei ole sidottu mihinkään tiettyyn kysymykseen, niin voit pelata ilman niitä jos haluat. Muista tallentaa ne ennen kun jatkat! ",
           button: "Fattar!"
         })
       }
@@ -285,7 +292,7 @@ h1{
 
 .upperGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 20% 60% 20%;
   grid-template-rows: 1fr;
   }
 
@@ -299,13 +306,17 @@ h1{
   width: 5em;;
 }
   
-
 #ft{
   background-color: transparent;
   border: none;
-  grid-column: 6;
+  grid-column: 3;
   grid-row: 1;
   box-shadow: none;
+  
+}
+
+#ft:hover {
+  animation: bounce 2s ease infinite;
 }
 
 @media screen and (max-width:80em) {

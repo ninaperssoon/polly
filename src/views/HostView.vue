@@ -76,14 +76,22 @@ export default {
       }
       if (this.idInQuizzes == false) {
         if (this.lang == "en") {
-              swal({   title: "Invalid QuizID",
-  text: "You cannot host a quiz that doesn't exist!",
-  icon: "warning",})
+              swal({   
+                title: "Invalid QuizID",
+                text: "You cannot host a quiz that doesn't exist!",
+                icon: "warning",})
            }
-            else {
-              ({   title: "Felaktigt QuizID",
-  text: "Du kan inte anordna ett quiz som inte finns",
-  icon: "warning",})
+            else if (this.lang == "sv") {
+              swal({   
+                title: "Felaktigt QuizID",
+                text: "Du kan inte anordna ett quiz som inte finns",
+                icon: "warning",})
+           }
+           else if (this.lang == "fi") {
+              swal({   
+                title: "Väärä QuizID",
+                text: "Et voi järjestää quizzi, jota ei ole olemassa",
+                icon: "warning",})
            }
           }
       }

@@ -9,7 +9,8 @@
       
           <div class="card__face card__face--front">
             <p v-if="(this.isJoker == true)">  <JokerComponent></JokerComponent> <br> {{ this.playingName }} {{uiLabels.isJoker}} </p>
-            <p v-else-if="(this.vote == true)"> {{ uiLabels.pleaceVote}}{{this.playingName}}{{uiLabels.s}} {{ uiLabels.rewardpunishment }} </p>
+            <p v-else-if="(this.vote == true && this.lang!=='fi')"> {{ uiLabels.placeVote}}{{this.playingName}}{{uiLabels.s}} {{ uiLabels.rewardpunishment }} </p>
+            <p v-else-if="(this.vote == true && this.lang=='fi')"> {{ uiLabels.placeVote}}{{ uiLabels.rewardpunishment }}{{this.playingName}}{{uiLabels.willGet}}  </p>
             <p v-else-if="(this.question !== null)"> {{this.playingName}} {{uiLabels.IsAswering}} <br> {{this.question.q}} </p>
             <p v-else>{{uiLabels.ReachedEndQuiz}}
               <br><br>
@@ -18,7 +19,8 @@
             </p>
           </div>
         <div class="card__face card__face--back" v-bind:class="{ correct: ans == uiLabels.correct}">
-          <p v-if="(this.consequence !== '')"><span id="correctness"> {{this.ans}}! </span> <br> {{playingName}}{{uiLabels.s}} {{this.con}} {{uiLabels.is}} {{this.consequence}} </p>
+          <p v-if="(this.consequence !== '' && this.lang!=='fi')"><span id="correctness"> {{this.ans}}! </span> <br> {{playingName}}{{uiLabels.s}} {{this.con}} {{uiLabels.is}} {{this.consequence}} </p>
+          <p v-else-if="(this.consequence !== '' && this.lang=='fi')"><span id="correctness"> {{this.ans}}! </span> <br> {{playingName}}{{uiLabels.willGet}}{{this.con}}: {{this.consequence}}   </p>
           <p v-else id="correctness"> {{this.ans}}! </p> 
         </div>
       </div>

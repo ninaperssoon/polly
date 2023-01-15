@@ -71,10 +71,16 @@ export default {
           text: "You cannot join a quiz that doesn't exist ",
           icon: "warning",})  
        }
-        else {
+        else if (this.lang == "sv") {
           swal({ 
           title: "Felaktigt QuizId",
           text: "Du kan inte delta i ett quiz som inte finns ",
+          icon: "warning",})
+        }
+        else if (this.lang == "fi") {
+          swal({ 
+          title: "Väärä QuizId",
+          text: "Et voi osallistua quizziin, jota ei ole olemassa ",
           icon: "warning",})
         }
       }
@@ -85,9 +91,14 @@ export default {
           text: "You forgot to enter your name, do it before you can play",
           icon: "warning",})
         }
-        else {
+        else if (this.lang == "sv") {
         swal({  
           text: "Du glömde fylla i ditt namn, gör det innan du kan spela",
+          icon: "warning",})
+        }
+        else if (this.lang == "fi") {
+        swal({  
+          text: "Unohdit kirjoittaa nimesi, tee se ennen kuin voit pelata",
           icon: "warning",})
         }
       }   

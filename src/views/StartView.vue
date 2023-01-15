@@ -1,8 +1,22 @@
 <template>
 <div id="body">
-  <header>
-    <div class="J">
-      <h1 > <img id="flag" v-bind:src=uiLabels.languageFlag v-on:click="switchLanguage">   
+  <header id="header">
+    
+
+      <div class="dropdown">
+  <button class="dropbtn"><img id="mainFlag" v-bind:src=uiLabels.languageFlag> 
+    <br>{{ uiLabels.language }}</button>
+  <div class="dropdown-content">
+    <a href="#" v-on:click="switchLanguageEn">
+      <img id="flag" src="../../public/img/english.png"> English </a>
+    <a href="#" v-on:click="switchLanguageSv">
+      <img id="flag" src="../../public/img/svenska.png"> Svenska</a>
+    <a href="#" v-on:click="switchLanguageFi">
+      <img id="flag" src="../../public/img/suomi.png"> Suomi</a>
+  </div>
+</div>
+<div class="J">
+      <h1 >   
         Flip or Flop!    
         <img id="logo" src="../../public/img/fliplogo.png">
       </h1>
@@ -43,13 +57,23 @@ export default {
     })
   },
   methods: {
-    switchLanguage: function() {
-      if (this.lang === "en")
-        this.lang = "sv"
-      else
-        this.lang = "en"
+
+    switchLanguageSv: function() {
+      this.lang = "sv"
       socket.emit("switchLanguage", this.lang)
     },
+
+    switchLanguageEn: function() {
+      this.lang = "en"
+      socket.emit("switchLanguage", this.lang)
+    },
+
+    switchLanguageFi: function() {
+      this.lang = "fi"
+      socket.emit("switchLanguage", this.lang)
+    },
+
+
     toggleNav: function () {
       this.hideNav = ! this.hideNav;
     },
@@ -61,11 +85,18 @@ export default {
           button: "Start FlipFlop"
         })
       }
-      else {
+      else if (this.lang=="sv") {
         swal({
           title: "HUR DU SPELAR",
           text: "Innan du spelar ditt första quiz är det bra att veta följande: endast en av spelarna kommer (slumpmässigt) att svara på varje fråga. Innan de kan svara måste dock de andra spelarna rösta på den svarande spelarens belöningar och bestraffningar. Om spelaren svarar rätt på frågan kommer hen att få en belöning och vice versa. Om du har tur kan du bli 'Jokern' och skicka vidare din belöning eller straff till en annan spelare eller välja att behålla den själv. När ni känner er klara med frågan är det Värden (Host) som går vidare till nästa fråga.",
           button: "Börja FlipFloppa!"
+        })
+      }
+      else if (this.lang=="fi") {
+        swal({
+          title: "KUINKA PELAAT",
+          text: "Ennen kuin pelaat ensimmäistä quizziäsi, on hyvä tietää seuraavat asiat: vain yksi pelaajista vastaa (sattumaisesti) jokaiseen kysymykseen. Ennen kuin he voivat vastata, muiden peelajien on äänestättävä vastaavan pelaajan palkintoja ja rangaistuksija. Jos peelaja vastaa oikein kysymykseen, niin hän saa palkinnon, ja päinvastoin. Jos olet onnekas, sinusta voit tulla 'Jokeri', ja voit lähettää palkintosi tai rangaistuksesi toiselle pelaajalle. Kun olette valmiita kysymyksen kanssa, niin Juontaja (Host) etenee seuraavaan kysymykseen.",
+          button: "Aloita FlipFloppaus!"
         })
       }
     }
@@ -146,8 +177,15 @@ export default {
     padding: 0.8em;
   }
   #flag {
-  height: 7vh;
-  width: 7vh;
+  height: 3vh;
+  width: 3vh;
+  cursor: pointer;
+  margin-top: 1em;
+}
+
+#mainFlag {
+  height: 6vh;
+  width: 6vh;
   cursor: pointer;
   margin-top: 1em;
 }
@@ -168,6 +206,10 @@ export default {
     grid-column: 6;
     grid-row: 4;
   }
+
+  #ft:hover {
+  animation: bounce 2s ease infinite;
+}
    
   
 
@@ -186,6 +228,7 @@ h1 {
   font-family: 'Righteous', serif;
   font-size: 8em; 
   text-shadow: .08em .08em 0 #4779d6;
+  grid-column: 2 / span 3;
   }
 
   #logo{
@@ -193,6 +236,53 @@ h1 {
     padding-top: 0.1em;
 
   }
+
+
+
+
+  .dropbtn {
+  background-color: #A6E9A3;
+  color: white;
+  text-shadow: .08em .08em 0 #4779d6;
+  padding: 16px;
+  font-size: 16px;
+  font-family: 'Righteous', serif;
+  border:none;
+  margin-top: 1em;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  grid-column: 1;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+
+#header {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+} 
+
 
 
 @media screen and (max-width:70em) {
